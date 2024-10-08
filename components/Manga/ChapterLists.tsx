@@ -11,11 +11,14 @@ import {
 } from "@/components/ui/table";
 
 import { Pagination } from "@nextui-org/react";
+import { Chapter } from "@/types";
+import Link from "next/link";
+import { siteConfig } from "@/config/site";
 
 const CHAPTERS_PER_PAGE = 10;
 
 interface ChapterListProps {
-  lists: any[];
+  lists: Chapter[];
 }
 
 const ChapterList: FC<ChapterListProps> = ({ lists }) => {
@@ -38,9 +41,21 @@ const ChapterList: FC<ChapterListProps> = ({ lists }) => {
         </TableHeader>
         <TableBody>
           {currentChapters.map((chapter) => (
-            <TableRow key={chapter.chapter}>
-              <TableCell>Ch. {chapter.chapter}</TableCell>
-              <TableCell>{chapter.title ? chapter.title : "N/A"}</TableCell>
+            <TableRow key={chapter.chapter} className="hover:bg-default">
+              <TableCell>
+                <Link
+                  href={`${siteConfig.mangadexAPI.webURL}/chapter/${chapter.id}`}
+                >
+                  Ch. {chapter.chapter}
+                </Link>
+              </TableCell>
+              <TableCell>
+                <Link
+                  href={`${siteConfig.mangadexAPI.webURL}/chapter/${chapter.id}`}
+                >
+                  {chapter.title ? chapter.title : "N/A"}
+                </Link>
+              </TableCell>
               <TableCell>{DateCalculator(chapter.updatedAt)}</TableCell>
             </TableRow>
           ))}

@@ -12,6 +12,7 @@ export const siteConfig = {
     id: "e1e38166-20e4-4468-9370-187f985c550e",
   },
   mangadexAPI: {
+    webURL: "https://mangadex.org",
     baseURL: "https://api.mangadex.org",
     coverURL: "https://uploads.mangadex.org/covers",
     proxyUrl: "https://cors.iamneyk.workers.dev/?url=",

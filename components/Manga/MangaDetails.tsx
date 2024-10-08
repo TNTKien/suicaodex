@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
-import { Button, Chip } from "@nextui-org/react";
+import { Button, Chip, Link } from "@nextui-org/react";
 import ChapterList from "./ChapterLists";
-import axiosInstance from "@/lib/axios";
 import { ChaptersParser, MangaParser } from "@/lib/data";
 import Info from "@/public/info.json";
 import Feed from "@/public/feed.json";
@@ -13,6 +12,8 @@ export default function MangaDetails() {
   const coverURL = siteConfig.mangadexAPI.coverURL;
   const info = MangaParser(Info.data);
   const lists = ChaptersParser(Feed.data);
+  const lastestChapter = lists[0].id;
+  const oldestChapter = lists[lists.length - 1].id;
   return (
     <div className="flex flex-col md:flex-row gap-8 mb-8">
       <div className="w-full md:w-1/4">
@@ -42,10 +43,21 @@ export default function MangaDetails() {
         </div>
 
         <div className="flex gap-2">
-          <Button className="rounded-md" color="danger">
+          <Button
+            className="rounded-md"
+            color="danger"
+            as={Link}
+            href={`${siteConfig.mangadexAPI.webURL}/chapter/${lastestChapter}`}
+          >
             Đọc mới nhất
           </Button>
-          <Button className="rounded-md" variant="bordered" color="danger">
+          <Button
+            className="rounded-md"
+            variant="bordered"
+            color="danger"
+            as={Link}
+            href={`${siteConfig.mangadexAPI.webURL}/chapter/${oldestChapter}`}
+          >
             Đọc từ đầu
           </Button>
         </div>
