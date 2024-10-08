@@ -1,5 +1,8 @@
 {
   "name": "mato-reader",
+  "resolutions": {
+    "string-width": "4.2.3"
+  },
   "version": "0.0.1",
   "private": true,
   "scripts": {
