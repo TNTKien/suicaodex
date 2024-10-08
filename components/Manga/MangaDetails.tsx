@@ -1,40 +1,18 @@
 "use client";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
-import { Button, Chip, Skeleton } from "@nextui-org/react";
+import { Button, Chip } from "@nextui-org/react";
 import ChapterList from "./ChapterLists";
-import { useEffect, useState } from "react";
 import axiosInstance from "@/lib/axios";
 import { ChaptersParser, MangaParser } from "@/lib/data";
-import { Chapter, Manga } from "@/types";
+import Info from "@/public/info.json";
+import Feed from "@/public/feed.json";
 
-const MangaDetails = () => {
-  const [info, setInfo] = useState<Manga | null>(null);
-  const [lists, setLists] = useState<Chapter[]>([]);
+export default function MangaDetails() {
   const mangaID = siteConfig.mato.id;
   const coverURL = siteConfig.mangadexAPI.coverURL;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const mangaDetails = await getMangaDetails();
-        setInfo(mangaDetails);
-        const chapters = await getChapters(mangaID);
-        setLists(chapters);
-      } catch (error) {
-        console.error("Failed to fetch manga details or chapters:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (!info) {
-    return (
-      <div className="flex flex-col md:flex-row gap-8 mb-8">Loading...</div>
-    );
-  }
-
+  const info = MangaParser(Info.data);
+  const lists = ChaptersParser(Feed.data);
   return (
     <div className="flex flex-col md:flex-row gap-8 mb-8">
       <div className="w-full md:w-1/4">
@@ -75,20 +53,4 @@ const MangaDetails = () => {
       </div>
     </div>
   );
-};
-
-export default MangaDetails;
-
-async function getMangaDetails() {
-  const mangaID = siteConfig.mato.id;
-  const { data } = await axiosInstance.get(
-    `/manga/${mangaID}?&includes[]=cover_art&includes[]=author&includes[]=artist`
-  );
-  return MangaParser(data.data);
-}
-
-async function getChapters(mangaID: string) {
-  const apiURL = `${siteConfig.mangadexAPI.baseURL}/manga/${mangaID}/feed?translatedLanguage[]"=vi&order[volume]=desc&order[chapter]=desc`;
-  const { data } = await axiosInstance.get(apiURL);
-  return ChaptersParser(data.data);
 }
