@@ -38,7 +38,7 @@ export default function RootLayout({
     <html suppressHydrationWarning={true} lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link ref="og:image" href="/matologo.png" />
+        <link rel="og:image" href="/matologo.png" />
         <meta
           name="google-site-verification"
           content="22zmW8vLmhPSRHgJo2Yg_J0w09A-1ZlmJjFG6ldXdjA"
