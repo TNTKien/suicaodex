@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Mato Seihei no Slave - Sủi Cảo",
+  name: "Mato Seihei no Slave | Sủi Cảo",
   description: "Trang đọc truyện Mato Seihei no Slave",
   links: {
     github: "https://github.com/TNTKien/mato-seihei-reader",

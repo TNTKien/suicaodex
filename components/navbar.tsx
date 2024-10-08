@@ -23,10 +23,10 @@ import {
   DiscordIcon,
   HeartFilledIcon,
   SearchIcon,
-  Logo,
   FacebookIcon,
 } from "@/components/icons";
 import Image from "next/image";
+import Logo from "@/public/matologo.png";
 
 export const Navbar = () => {
   const searchInput = (
@@ -46,13 +46,12 @@ export const Navbar = () => {
   );
 
   return (
-    <NextUINavbar maxWidth="xl" position="sticky">
+    <NextUINavbar maxWidth="full" position="sticky" isBlurred>
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            {/* <Logo /> */}
-            <Image src={"/matologo.png"} alt="SUICAO" width={50} height={50} />
-            <p className="font-bold text-inherit text-lg">SUICAO</p>
+            <Image src={Logo} alt="SUICAO" className="max-w-14 h-auto" />
+            <p className="font-bold text-inherit text-lg">SuicaoDex</p>
           </NextLink>
         </NavbarBrand>
       </NavbarContent>
@@ -73,9 +72,7 @@ export const Navbar = () => {
           >
             <FacebookIcon className="text-default-500" />
           </Link>
-          <Link isExternal aria-label="Github" href={siteConfig.links.github}>
-            <GithubIcon className="text-default-500" />
-          </Link>
+
           <ThemeSwitch />
         </NavbarItem>
       </NavbarContent>

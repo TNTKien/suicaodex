@@ -113,6 +113,41 @@ export const FacebookIcon: React.FC<IconSvgProps> = ({
   );
 };
 
+export const ShareIcon: React.FC<IconSvgProps> = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 24 24"
+      width={size || width}
+      {...props}
+    >
+      <path
+        clipRule="evenodd"
+        d="M17.5 2.5a2.5 2.5 0 0 1 2.5 2.5v14.5a2.5 2.5 0 0 1-2.5 2.5H6.5a2.5 2.5 0 0 1-2.5-2.5V5a2.5 2.5 0 0 1 2.5-2.5h11zm0-2H6.5A4.5 4.5 0 0 0 2 5v14.5a4.5 4.5 0 0 0 4.5 4.5h11a4.5 4.5 0 0 0 4.5-4.5V5a4.5 4.5 0 0 0-4.5-4.5z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+      <path
+        clipRule="evenodd"
+        d="M12 15.5a.5.5 0 0 1 .5.5v4.5a.5.5 0 0 1-1 0v-4.5a.5.5 0 0 1 .5-.5z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+      <path
+        clipRule="evenodd"
+        d="M8.354 11.354a.5.5 0 0 1 .353-.853h6.586a.5.5 0 0 1 .354.853l-3.293 3.293a.5.5 0 0 1-.708 0l-3.293-3.293z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+};
+
 export const MoonFilledIcon = ({
   size = 24,
   width,

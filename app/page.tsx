@@ -1,17 +1,36 @@
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code";
-import { button as buttonStyles } from "@nextui-org/theme";
-
 import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
-import Cover from "@/ui/Cover/Cover";
+import MangaDetails from "@/components/Manga/MangaDetails";
+import axiosInstance from "@/lib/axios";
+import { ChaptersParser, MangaParser } from "@/lib/data";
 
-export default function Home() {
+export default async function Home() {
+  const info = await getMangaDetails();
+  const lists = await getChapters(siteConfig.mato.id);
+
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <Cover filename="2e418d11-579c-4078-a960-60781115efc9.jpg" />
-    </section>
+    <div>
+      <MangaDetails
+        title="Mato Seihei no Slave"
+        author={info.author}
+        artist={info.artist}
+        cover={info.cover}
+        tags={info.tags}
+        lists={lists}
+      />
+    </div>
   );
+}
+
+async function getMangaDetails() {
+  const mangaID = siteConfig.mato.id;
+  const { data } = await axiosInstance.get(
+    `/manga/${mangaID}?&includes[]=cover_art&includes[]=author&includes[]=artist`
+  );
+  return MangaParser(data.data);
+}
+
+async function getChapters(mangaID: string) {
+  const apiURL = `${siteConfig.mangadexAPI.baseURL}/manga/${mangaID}/feed?translatedLanguage[]"=vi&order[volume]=desc&order[chapter]=desc`;
+  const { data } = await axiosInstance.get(apiURL);
+  return ChaptersParser(data.data);
 }
