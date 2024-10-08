@@ -64,6 +64,9 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+        <Link isExternal aria-label="Facebook" href={siteConfig.links.facebook}>
+          <FacebookIcon className="text-default-500" />
+        </Link>
         <ThemeSwitch />
       </NavbarContent>
     </NextUINavbar>
