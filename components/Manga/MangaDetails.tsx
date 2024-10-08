@@ -31,9 +31,7 @@ const MangaDetails = () => {
 
   if (!info) {
     return (
-      <div className="flex flex-col md:flex-row gap-8 mb-8">
-        <Skeleton />
-      </div>
+      <div className="flex flex-col md:flex-row gap-8 mb-8">Loading...</div>
     );
   }
 

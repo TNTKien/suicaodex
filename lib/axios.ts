@@ -1,7 +1,7 @@
 import { siteConfig } from "@/config/site";
 import axios, { AxiosError } from "axios";
 const api = axios.create({
-  baseURL: siteConfig.mangadexAPI.baseURL,
+  baseURL: siteConfig.mangadexAPI.proxyUrl + siteConfig.mangadexAPI.baseURL,
   timeout: 10000,
 });
 
