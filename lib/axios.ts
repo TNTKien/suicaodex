@@ -4,6 +4,7 @@ const axiosInstance = axios.create({
   baseURL: siteConfig.mangadexAPI.baseURL,
   headers: {
     "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
   },
 });
 
