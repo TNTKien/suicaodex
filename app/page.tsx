@@ -3,6 +3,8 @@ import MangaDetails from "@/components/Manga/MangaDetails";
 import axiosInstance from "@/lib/axios";
 import { ChaptersParser, MangaParser } from "@/lib/data";
 
+export const runtime = "edge";
+
 export default async function Home() {
   const info = await getMangaDetails();
   const lists = await getChapters(siteConfig.mato.id);
