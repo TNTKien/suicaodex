@@ -83,13 +83,25 @@ const Homepage = () => {
         </div>
 
         <div className="flex gap-2">
-          <Button className="rounded-md" color="danger">
+          <Button
+            className="rounded-md"
+            color="danger"
+            as={Link}
+            href={`${siteConfig.mangadexAPI.webURL}/chapter/${lists[0]?.id}`}
+          >
             Đọc mới nhất
           </Button>
-          <Button className="rounded-md" variant="bordered" color="danger">
+          <Button
+            className="rounded-md"
+            variant="bordered"
+            color="danger"
+            as={Link}
+            href={`${siteConfig.mangadexAPI.webURL}/chapter/${lists[lists.length - 1]?.id}`}
+          >
             Đọc từ đầu
           </Button>
         </div>
+
         <ChapterList lists={lists} />
       </div>
     </div>

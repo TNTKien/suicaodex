@@ -36,7 +36,7 @@ const ChapterList: FC<ChapterListProps> = ({ lists }) => {
           <TableRow>
             <TableHead>Chương</TableHead>
             <TableHead>Tiêu đề</TableHead>
-            <TableHead>Cập nhật cuối</TableHead>
+            <TableHead>Cập nhật lần cuối</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
