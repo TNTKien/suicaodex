@@ -105,7 +105,7 @@ async function getMangaDetails() {
   return MangaParser(data.data);
 }
 async function getChapters(mangaID: string) {
-  const apiURL = `${siteConfig.mangadexAPI.baseURL}/manga/${mangaID}/feed?translatedLanguage[]"=vi&order[volume]=desc&order[chapter]=desc`;
+  const apiURL = `/manga/${mangaID}/feed?translatedLanguage[]"=vi&order[volume]=desc&order[chapter]=desc`;
   const { data } = await axiosInstance.get(apiURL);
   return ChaptersParser(data.data);
 }
