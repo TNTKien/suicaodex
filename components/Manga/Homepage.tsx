@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
-import { Button, Chip, Link } from "@nextui-org/react";
+import { Button, Card, Chip, Link, Skeleton } from "@nextui-org/react";
 import ChapterList from "./ChapterLists";
 import { ChaptersParser, MangaParser } from "@/lib/data";
 import Info from "@/public/info.json";
@@ -9,6 +9,7 @@ import Feed from "@/public/feed.json";
 import axiosInstance from "@/lib/axios";
 import { useEffect, useState } from "react";
 import { Chapter, Manga } from "@/types";
+import Footer from "../footer";
 
 const Homepage = () => {
   const [info, setInfo] = useState<Manga | null>(null);
@@ -35,7 +36,23 @@ const Homepage = () => {
   }, []);
 
   if (!info) {
-    return <div>Loading...</div>; // Add a loading state
+    return (
+      <div className="flex flex-col md:flex-row gap-8 mb-8">
+        <Card className="w-full md:w-1/4">
+          <Skeleton className="h-96 w-full rounded-lg bg-default" />
+        </Card>
+        <div className="w-full md:w-3/4 flex flex-col gap-4">
+          <Skeleton className="h-10 w-full rounded-lg bg-default pb-4" />
+          <Skeleton className="h-5 w-full rounded-lg bg-default pb-4" />
+          <div className="flex flex-wrap gap-1 mb-4">
+            <Skeleton className="h-5 w-20 rounded-lg bg-default" />
+            <Skeleton className="h-5 w-20 rounded-lg bg-default" />
+            <Skeleton className="h-5 w-20 rounded-lg bg-default" />
+          </div>
+          <Skeleton className="h-96 w-full rounded-lg bg-default" />
+        </div>
+      </div>
+    );
   }
 
   return (
