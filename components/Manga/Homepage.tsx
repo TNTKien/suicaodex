@@ -9,7 +9,6 @@ import Feed from "@/public/feed.json";
 import axiosInstance from "@/lib/axios";
 import { useEffect, useState } from "react";
 import { Chapter, Manga } from "@/types";
-import Footer from "../footer";
 
 const Homepage = () => {
   const [info, setInfo] = useState<Manga | null>(null);
