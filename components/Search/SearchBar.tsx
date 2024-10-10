@@ -7,6 +7,7 @@ import { Manga } from "@/types";
 import { SearchManga } from "@/lib/data";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
+import Image from "next/image";
 
 const SearchBar = () => {
   const [isFocused, setIsFocused] = useState(false);
@@ -58,9 +59,11 @@ const SearchBar = () => {
               className="flex items-start gap-2 py-2 hover:bg-default rounded-sm px-2"
               href={`/manga/${manga.id}`}
             >
-              <img
+              <Image
                 src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}`}
                 alt={manga.title}
+                width={300}
+                height={471}
                 className="w-20 h-auto rounded-sm"
               />
               <div>
