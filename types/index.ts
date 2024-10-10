@@ -10,6 +10,7 @@ export type Tag = {
 };
 
 export type Manga = {
+  id: string;
   title: string;
   altTitle: string;
   tags: Tag[];

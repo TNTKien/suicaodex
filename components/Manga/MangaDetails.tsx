@@ -99,7 +99,7 @@ const MangaDetails: FC<MangaDetailsProps> = ({ mangaID }) => {
             variant="bordered"
             color="danger"
             as={Link}
-            href={`${siteConfig.mangadexAPI.webURL}/chapter/${lists[lists.length - 1]?.id}`}
+            href={`${siteConfig.mangadexAPI.webURL}/title/${mangaID}`}
           >
             Đọc từ đầu
           </Button>

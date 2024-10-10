@@ -78,19 +78,6 @@ const ChapterList: FC<ChapterListProps> = ({ lists }) => {
           />
         </div>
       )}
-
-      {/* <div className="flex justify-center items-center mt-4">
-        <Pagination
-          isCompact
-          showControls
-          total={totalPages}
-          initialPage={1}
-          disableAnimation
-          color="danger"
-          page={currentPage}
-          onChange={(page) => setCurrentPage(page)}
-        />
-      </div> */}
     </div>
   );
 };

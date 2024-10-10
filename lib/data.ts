@@ -15,6 +15,7 @@ type Tag = {
 };
 
 type Manga = {
+  id: string;
   title: string;
   altTitle: string;
   tags: Tag[];
@@ -64,6 +65,7 @@ export function MangaParser(data: any): Manga {
   const artist = data.relationships.find((item: any) => item.type === "artist");
 
   return {
+    id: data.id,
     title: title ? title : data.attributes.title.en,
     language: language,
     altTitle: data.attributes.title.en,
@@ -82,7 +84,14 @@ export async function getMangaDetails(mangaID: string) {
 }
 
 export async function getChapters(mangaID: string, language: string) {
-  const apiURL = `/manga/${mangaID}/feed?translatedLanguage[]"=${language}&order[volume]=desc&order[chapter]=desc&includes[]=scanlation_group`;
+  const apiURL = `/manga/${mangaID}/feed?limit=150&translatedLanguage[]"=${language}&order[volume]=desc&order[chapter]=desc&includes[]=scanlation_group`;
   const { data } = await axiosInstance.get(apiURL);
   return ChaptersParser(data.data);
+}
+
+export async function SearchManga(title: string): Promise<Manga[]> {
+  const { data } = await axiosInstance.get(
+    `/manga?title=${title}&includes[]=cover_art&includes[]=author&includes[]=artist`
+  );
+  return data.data.map((item: any) => MangaParser(item));
 }
