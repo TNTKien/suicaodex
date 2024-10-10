@@ -8,13 +8,10 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 
+export const runtime = "edge";
+
 export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
-  },
   keywords: siteConfig.keywords,
-  description: siteConfig.description,
   icons: {
     icon: "/favicon.ico",
   },
