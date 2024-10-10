@@ -36,17 +36,18 @@ const ChapterList: FC<ChapterListProps> = ({ lists }) => {
           <TableRow>
             <TableHead>Chương</TableHead>
             <TableHead>Tiêu đề</TableHead>
+            <TableHead>Nhóm dịch</TableHead>
             <TableHead>Cập nhật</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {currentChapters.map((chapter) => (
-            <TableRow key={chapter.chapter} className="hover:bg-default">
+            <TableRow key={chapter.id} className="hover:bg-default">
               <TableCell>
                 <Link
                   href={`${siteConfig.mangadexAPI.webURL}/chapter/${chapter.id}`}
                 >
-                  Ch. {chapter.chapter}
+                  {chapter.chapter ? `Ch. ${chapter.chapter}` : "Oneshot"}
                 </Link>
               </TableCell>
               <TableCell>
@@ -56,13 +57,29 @@ const ChapterList: FC<ChapterListProps> = ({ lists }) => {
                   {chapter.title ? chapter.title : "N/A"}
                 </Link>
               </TableCell>
+              <TableCell>{chapter.group}</TableCell>
               <TableCell>{DateCalculator(chapter.updatedAt)}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
 
-      <div className="flex justify-center items-center mt-4">
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center mt-4">
+          <Pagination
+            isCompact
+            showControls
+            total={totalPages}
+            initialPage={1}
+            disableAnimation
+            color="danger"
+            page={currentPage}
+            onChange={(page) => setCurrentPage(page)}
+          />
+        </div>
+      )}
+
+      {/* <div className="flex justify-center items-center mt-4">
         <Pagination
           isCompact
           showControls
@@ -73,7 +90,7 @@ const ChapterList: FC<ChapterListProps> = ({ lists }) => {
           page={currentPage}
           onChange={(page) => setCurrentPage(page)}
         />
-      </div>
+      </div> */}
     </div>
   );
 };

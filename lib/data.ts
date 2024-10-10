@@ -1,8 +1,12 @@
+import { siteConfig } from "@/config/site";
+import axiosInstance from "./axios";
+
 type Chapter = {
   id: string;
   chapter: string;
   title: string;
   updatedAt: string;
+  group: string;
 };
 
 type Tag = {
@@ -11,10 +15,13 @@ type Tag = {
 };
 
 type Manga = {
+  title: string;
+  altTitle: string;
   tags: Tag[];
   cover: string;
   author: string;
   artist: string;
+  language: string;
 };
 
 export function ChaptersParser(data: any[]): Chapter[] {
@@ -24,6 +31,13 @@ export function ChaptersParser(data: any[]): Chapter[] {
       chapter: item.attributes.chapter,
       title: item.attributes.title,
       updatedAt: item.attributes.updatedAt,
+      group: item.relationships.find(
+        (item: any) => item.type === "scanlation_group"
+      )
+        ? item.relationships.find(
+            (item: any) => item.type === "scanlation_group"
+          ).attributes.name
+        : "Unknown",
     };
   });
 }
@@ -38,15 +52,37 @@ export function TagsParser(data: any[]): Tag[] {
 }
 
 export function MangaParser(data: any): Manga {
+  const title = data.attributes.altTitles.find((item: any) => item.vi)?.vi;
+  const language = data.attributes.availableTranslatedLanguages.includes("vi")
+    ? "vi"
+    : "en";
+
   const coverArt = data.relationships.find(
     (item: any) => item.type === "cover_art"
   );
   const author = data.relationships.find((item: any) => item.type === "author");
   const artist = data.relationships.find((item: any) => item.type === "artist");
+
   return {
+    title: title ? title : data.attributes.title.en,
+    language: language,
+    altTitle: data.attributes.title.en,
     tags: TagsParser(data.attributes.tags),
     cover: coverArt ? coverArt.attributes.fileName : null,
     author: author ? author.attributes.name : null,
     artist: artist ? artist.attributes.name : null,
   };
+}
+
+export async function getMangaDetails(mangaID: string) {
+  const { data } = await axiosInstance.get(
+    `/manga/${mangaID}?&includes[]=cover_art&includes[]=author&includes[]=artist`
+  );
+  return MangaParser(data.data);
+}
+
+export async function getChapters(mangaID: string, language: string) {
+  const apiURL = `/manga/${mangaID}/feed?translatedLanguage[]"=${language}&order[volume]=desc&order[chapter]=desc&includes[]=scanlation_group`;
+  const { data } = await axiosInstance.get(apiURL);
+  return ChaptersParser(data.data);
 }

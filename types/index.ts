@@ -10,10 +10,13 @@ export type Tag = {
 };
 
 export type Manga = {
+  title: string;
+  altTitle: string;
   tags: Tag[];
   cover: string;
   author: string;
   artist: string;
+  language: string;
 };
 
 export type Chapter = {
@@ -21,4 +24,5 @@ export type Chapter = {
   chapter: string;
   title: string;
   updatedAt: string;
+  group: string;
 };

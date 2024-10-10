@@ -3,12 +3,17 @@ import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { Button, Card, Chip, Link, Skeleton } from "@nextui-org/react";
 import ChapterList from "./ChapterLists";
-import { ChaptersParser, MangaParser } from "@/lib/data";
+import {
+  ChaptersParser,
+  getChapters,
+  getMangaDetails,
+  MangaParser,
+} from "@/lib/data";
 import Info from "@/public/info.json";
 import Feed from "@/public/feed.json";
-import axiosInstance from "@/lib/axios";
 import { useEffect, useState } from "react";
 import { Chapter, Manga } from "@/types";
+import MangaSkeleton from "./MangaSkeleton";
 
 const Homepage = () => {
   const [info, setInfo] = useState<Manga | null>(null);
@@ -19,9 +24,9 @@ const Homepage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const mangaDetails = await getMangaDetails();
+        const mangaDetails = await getMangaDetails(mangaID);
         setInfo(mangaDetails);
-        const chapters = await getChapters(mangaID);
+        const chapters = await getChapters(mangaID, mangaDetails.language);
         setLists(chapters);
       } catch (error) {
         console.log(error);
@@ -36,20 +41,8 @@ const Homepage = () => {
 
   if (!info) {
     return (
-      <div className="flex flex-col md:flex-row gap-8 mb-8">
-        <Card className="w-full md:w-1/4">
-          <Skeleton className="h-96 w-full rounded-lg bg-default" />
-        </Card>
-        <div className="w-full md:w-3/4 flex flex-col gap-4">
-          <Skeleton className="h-10 w-full rounded-lg bg-default pb-4" />
-          <Skeleton className="h-5 w-full rounded-lg bg-default pb-4" />
-          <div className="flex flex-wrap gap-1 mb-4">
-            <Skeleton className="h-5 w-20 rounded-lg bg-default" />
-            <Skeleton className="h-5 w-20 rounded-lg bg-default" />
-            <Skeleton className="h-5 w-20 rounded-lg bg-default" />
-          </div>
-          <Skeleton className="h-96 w-full rounded-lg bg-default" />
-        </div>
+      <div>
+        <MangaSkeleton />
       </div>
     );
   }
@@ -68,11 +61,16 @@ const Homepage = () => {
         />
       </div>
       <div className="w-full  md:w-3/4">
-        <h1 className="text-3xl md:text-5xl font-bold mb-2">
-          Mato Seihei no Slave
-        </h1>
-        <p className="text-xl text-muted-foreground mb-4">
-          {info.author}, {info.artist}
+        <h1 className="text-3xl md:text-5xl font-bold mb-2">{info.title}</h1>
+        {info.altTitle === info.title ? null : (
+          <p className="text-xl font-medium text-muted-foreground mb-4">
+            {info.altTitle}
+          </p>
+        )}
+        <p className="text-sm text-muted-foreground mb-4">
+          {info.author === info.artist
+            ? info.author
+            : `${info.author}, ${info.artist}`}
         </p>
         <div className="flex flex-wrap gap-1 mb-4">
           {info.tags.map((tag) => (
@@ -109,15 +107,3 @@ const Homepage = () => {
 };
 
 export default Homepage;
-
-async function getMangaDetails() {
-  const { data } = await axiosInstance.get(
-    `/manga/${siteConfig.mato.id}?&includes[]=cover_art&includes[]=author&includes[]=artist`
-  );
-  return MangaParser(data.data);
-}
-async function getChapters(mangaID: string) {
-  const apiURL = `/manga/${mangaID}/feed?translatedLanguage[]"=vi&order[volume]=desc&order[chapter]=desc`;
-  const { data } = await axiosInstance.get(apiURL);
-  return ChaptersParser(data.data);
-}
