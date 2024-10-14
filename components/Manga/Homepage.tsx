@@ -82,9 +82,9 @@ const Homepage = () => {
         </div>
 
         {info.description && <MangaDesc desc={info.description} />}
-        
 
-        <div className="flex gap-2">
+
+        <div className="flex gap-2 mb-2">
           <Button
             className="rounded-md"
             color="danger"
