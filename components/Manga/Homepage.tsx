@@ -14,6 +14,7 @@ import Feed from "@/public/feed.json";
 import { useEffect, useState } from "react";
 import { Chapter, Manga } from "@/types";
 import MangaSkeleton from "./MangaSkeleton";
+import MangaDesc from "./MangaDesc";
 
 const Homepage = () => {
   const [info, setInfo] = useState<Manga | null>(null);
@@ -79,6 +80,9 @@ const Homepage = () => {
             </Chip>
           ))}
         </div>
+
+        {info.description && <MangaDesc desc={info.description} />}
+        
 
         <div className="flex gap-2">
           <Button

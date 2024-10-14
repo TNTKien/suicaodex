@@ -23,6 +23,7 @@ type Manga = {
   author: string;
   artist: string;
   language: string;
+  description: string;
 };
 
 export function ChaptersParser(data: any[]): Chapter[] {
@@ -73,6 +74,7 @@ export function MangaParser(data: any): Manga {
     cover: coverArt ? coverArt.attributes.fileName : null,
     author: author ? author.attributes.name : null,
     artist: artist ? artist.attributes.name : null,
+    description: data.attributes.description.vi ? data.attributes.description.vi : data.attributes.description.en,
   };
 }
 

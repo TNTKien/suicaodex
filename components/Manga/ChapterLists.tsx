@@ -92,8 +92,16 @@ function DateCalculator(dateString: string) {
   const millisecondsInADay = 1000 * 60 * 60 * 24;
   const millisecondsInAnHour = 1000 * 60 * 60;
   const millisecondsInAMinute = 1000 * 60;
+  const millisecondsInAYear = millisecondsInADay * 365.25; // Considering leap years
+  const millisecondsInAMonth = millisecondsInADay * 30.44; // Average month length
 
-  const days = Math.floor(differenceInMilliseconds / millisecondsInADay);
+  const years = Math.floor(differenceInMilliseconds / millisecondsInAYear);
+  const months = Math.floor(
+    (differenceInMilliseconds % millisecondsInAYear) / millisecondsInAMonth
+  );
+  const days = Math.floor(
+    (differenceInMilliseconds % millisecondsInAMonth) / millisecondsInADay
+  );
   const hours = Math.floor(
     (differenceInMilliseconds % millisecondsInADay) / millisecondsInAnHour
   );
@@ -101,7 +109,11 @@ function DateCalculator(dateString: string) {
     (differenceInMilliseconds % millisecondsInAnHour) / millisecondsInAMinute
   );
 
-  if (days > 0) {
+  if (years > 0) {
+    return `${years} năm trước`;
+  } else if (months > 0) {
+    return `${months} tháng trước`;
+  } else if (days > 0) {
     return `${days} ngày trước`;
   } else if (hours > 0) {
     return `${hours} tiếng trước`;

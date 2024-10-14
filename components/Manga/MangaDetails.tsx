@@ -7,6 +7,7 @@ import { getChapters, getMangaDetails } from "@/lib/data";
 import { FC, useEffect, useState } from "react";
 import { Chapter, Manga } from "@/types";
 import MangaSkeleton from "./MangaSkeleton";
+import MangaDesc from "./MangaDesc";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -84,6 +85,8 @@ const MangaDetails: FC<MangaDetailsProps> = ({ mangaID }) => {
             </Chip>
           ))}
         </div>
+
+        {info.description && <MangaDesc desc={info.description} />}
 
         <div className="flex gap-2">
           <Button

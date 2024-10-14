@@ -18,6 +18,7 @@ export type Manga = {
   author: string;
   artist: string;
   language: string;
+  description: string;
 };
 
 export type Chapter = {

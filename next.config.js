@@ -6,10 +6,6 @@ const nextConfig = {
         protocol: "https",
         hostname: "uploads.mangadex.org",
       },
-      {
-        protocol: "https",
-        hostname: "img.upanh.tv",
-      },
     ],
   },
 };
