@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
-import { Button, Card, Chip, Link, Skeleton } from "@nextui-org/react";
+import { Button, Chip, Link } from "@nextui-org/react";
 import ChapterList from "./ChapterLists";
 import {
   ChaptersParser,
@@ -76,7 +76,7 @@ const Homepage = () => {
         <div className="flex flex-wrap gap-1 mb-4">
           {info.tags.map((tag) => (
             <Chip className="rounded-md" key={tag.id} size="sm">
-              {tag.name}
+              {tag.name.toLocaleUpperCase()}
             </Chip>
           ))}
         </div>

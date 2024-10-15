@@ -1,4 +1,3 @@
-import { siteConfig } from "@/config/site";
 import axiosInstance from "./axios";
 
 type Chapter = {
@@ -94,6 +93,13 @@ export async function getChapters(mangaID: string, language: string) {
 export async function SearchManga(title: string): Promise<Manga[]> {
   const { data } = await axiosInstance.get(
     `/manga?title=${title}&includes[]=cover_art&includes[]=author&includes[]=artist`
+  );
+  return data.data.map((item: any) => MangaParser(item));
+}
+
+export async function getLastestMangas(): Promise<Manga[]> {
+  const { data } = await axiosInstance.get(
+    `/manga?limit=10&includes[]=cover_art&includes[]=author&includes[]=artist&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica`
   );
   return data.data.map((item: any) => MangaParser(item));
 }
