@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
-import { Button, Chip, Link} from "@nextui-org/react";
+import { Button, Chip, Link } from "@nextui-org/react";
 import ChapterList from "./ChapterLists";
 import { getChapters, getMangaDetails } from "@/lib/data";
 import { FC, useEffect, useState } from "react";
