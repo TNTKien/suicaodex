@@ -65,6 +65,7 @@ const SearchBar = () => {
                 width={300}
                 height={471}
                 className="w-20 h-auto rounded-sm"
+                placeholder="empty"
               />
               <div>
                 <p className="text-lg text-wrap font-semibold">{manga.title}</p>
