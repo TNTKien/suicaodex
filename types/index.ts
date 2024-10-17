@@ -28,3 +28,8 @@ export type Chapter = {
   updatedAt: string;
   group: string;
 };
+
+export type LastestManga = {
+  info: Manga;
+  lastestChap: Chapter[];
+}

@@ -1,3 +1,4 @@
+import { get } from "http";
 import axiosInstance from "./axios";
 
 type Chapter = {
@@ -25,6 +26,11 @@ type Manga = {
   description: string;
 };
 
+type LastestManga = {
+  info: Manga;
+  lastestChap: Chapter[];
+}
+
 export function ChaptersParser(data: any[]): Chapter[] {
   return data.map((item) => {
     return {
@@ -36,8 +42,8 @@ export function ChaptersParser(data: any[]): Chapter[] {
         (item: any) => item.type === "scanlation_group"
       )
         ? item.relationships.find(
-            (item: any) => item.type === "scanlation_group"
-          ).attributes.name
+          (item: any) => item.type === "scanlation_group"
+        ).attributes.name
         : "Unknown",
     };
   });
@@ -57,7 +63,6 @@ export function MangaParser(data: any): Manga {
   const language = data.attributes.availableTranslatedLanguages.includes("vi")
     ? "vi"
     : "en";
-
   const coverArt = data.relationships.find(
     (item: any) => item.type === "cover_art"
   );
@@ -77,29 +82,65 @@ export function MangaParser(data: any): Manga {
   };
 }
 
+export async function getCoverArt(mangaID: string) {
+  const { data } = await axiosInstance.get(`/cover?manga[]=${mangaID}`);
+  return data.data[0].attributes.fileName;
+}
+
 export async function getMangaDetails(mangaID: string) {
-  const { data } = await axiosInstance.get(
-    `/manga/${mangaID}?&includes[]=cover_art&includes[]=author&includes[]=artist`
-  );
+  const { data } = await axiosInstance.get(`/manga/${mangaID}`, {
+    params: {
+      includes: ['cover_art', 'author', 'artist'],
+    }
+  });
   return MangaParser(data.data);
 }
 
-export async function getChapters(mangaID: string, language: string) {
-  const apiURL = `/manga/${mangaID}/feed?limit=150&translatedLanguage[]"=${language}&order[volume]=desc&order[chapter]=desc&includes[]=scanlation_group`;
-  const { data } = await axiosInstance.get(apiURL);
+export async function getChapters(mangaID: string, language: string, limit: number) {
+  const order = {
+    volume: 'desc',
+    chapter: 'desc'
+  }
+  const finalOrderQuery: { [key: string]: string } = {};
+
+  // { "order[rating]": "desc", "order[followedCount]": "desc" }
+  for (const [key, value] of Object.entries(order)) {
+    finalOrderQuery[`order[${key}]`] = value;
+  };
+
+  const { data } = await axiosInstance.get(`/manga/${mangaID}/feed`, {
+    params: {
+      limit: limit,
+      translatedLanguage: [language],
+      includes: ['scanlation_group'],
+      contentRating: ['safe', 'suggestive', 'erotica', 'pornographic'],
+      ...finalOrderQuery
+    }
+  });
   return ChaptersParser(data.data);
 }
 
+
 export async function SearchManga(title: string): Promise<Manga[]> {
-  const { data } = await axiosInstance.get(
-    `/manga?title=${title}&includes[]=cover_art&includes[]=author&includes[]=artist`
+  const { data } = await axiosInstance.get(`/manga?title=${title}`, {
+    params: {
+      includes: ['cover_art', 'author', 'artist'],
+    }
+  }
   );
   return data.data.map((item: any) => MangaParser(item));
 }
 
-export async function getLastestMangas(): Promise<Manga[]> {
+export async function getLastestMangas(): Promise<LastestManga[]> {
   const { data } = await axiosInstance.get(
-    `/manga?limit=10&includes[]=cover_art&includes[]=author&includes[]=artist&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica`
+    `/manga?limit=10&includes[]=cover_art&includes[]=author&includes[]=artist&availableTranslatedLanguage[]=vi&hasAvailableChapters=true&order[latestUploadedChapter]=desc`
   );
-  return data.data.map((item: any) => MangaParser(item));
+
+  const lastestManga = data.data.map(async (item: any) => {
+    const info = MangaParser(item);
+    const lastestChap = await getChapters(item.id, info.language, 3);
+    return { info, lastestChap };
+  });
+
+  return Promise.all(lastestManga);
 }

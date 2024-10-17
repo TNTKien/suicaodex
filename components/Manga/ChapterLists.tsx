@@ -14,6 +14,7 @@ import { Pagination } from "@nextui-org/react";
 import { Chapter } from "@/types";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import { formatTimeToNow } from "@/lib/utils";
 
 const CHAPTERS_PER_PAGE = 10;
 
@@ -58,7 +59,12 @@ const ChapterList: FC<ChapterListProps> = ({ lists }) => {
                 </Link>
               </TableCell>
               <TableCell>{chapter.group}</TableCell>
-              <TableCell>{DateCalculator(chapter.updatedAt)}</TableCell>
+              {/* <TableCell>{DateCalculator(chapter.updatedAt)}</TableCell> */}
+              <TableCell>
+                <time dateTime={new Date(chapter.updatedAt).toDateString()}>
+                  {formatTimeToNow(new Date(chapter.updatedAt))}
+                </time>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -83,43 +89,3 @@ const ChapterList: FC<ChapterListProps> = ({ lists }) => {
 };
 
 export default ChapterList;
-
-function DateCalculator(dateString: string) {
-  const givenDate = new Date(dateString);
-  const currentDate = new Date();
-  const differenceInMilliseconds = currentDate.getTime() - givenDate.getTime();
-
-  const millisecondsInADay = 1000 * 60 * 60 * 24;
-  const millisecondsInAnHour = 1000 * 60 * 60;
-  const millisecondsInAMinute = 1000 * 60;
-  const millisecondsInAYear = millisecondsInADay * 365.25; // Considering leap years
-  const millisecondsInAMonth = millisecondsInADay * 30.44; // Average month length
-
-  const years = Math.floor(differenceInMilliseconds / millisecondsInAYear);
-  const months = Math.floor(
-    (differenceInMilliseconds % millisecondsInAYear) / millisecondsInAMonth
-  );
-  const days = Math.floor(
-    (differenceInMilliseconds % millisecondsInAMonth) / millisecondsInADay
-  );
-  const hours = Math.floor(
-    (differenceInMilliseconds % millisecondsInADay) / millisecondsInAnHour
-  );
-  const minutes = Math.floor(
-    (differenceInMilliseconds % millisecondsInAnHour) / millisecondsInAMinute
-  );
-
-  if (years > 0) {
-    return `${years} năm trước`;
-  } else if (months > 0) {
-    return `${months} tháng trước`;
-  } else if (days > 0) {
-    return `${days} ngày trước`;
-  } else if (hours > 0) {
-    return `${hours} tiếng trước`;
-  } else if (minutes > 0) {
-    return `${minutes} phút trước`;
-  } else {
-    return `vừa xong`;
-  }
-}

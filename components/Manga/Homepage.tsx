@@ -27,7 +27,7 @@ const Homepage = () => {
       try {
         const mangaDetails = await getMangaDetails(mangaID);
         setInfo(mangaDetails);
-        const chapters = await getChapters(mangaID, mangaDetails.language);
+        const chapters = await getChapters(mangaID, mangaDetails.language, 150);
         setLists(chapters);
       } catch (error) {
         console.log(error);
@@ -82,7 +82,6 @@ const Homepage = () => {
         </div>
 
         {info.description && <MangaDesc desc={info.description} />}
-
 
         <div className="flex gap-2 mb-2">
           <Button

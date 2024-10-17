@@ -24,7 +24,7 @@ const MangaDetails: FC<MangaDetailsProps> = ({ mangaID }) => {
       try {
         const mangaDetails = await getMangaDetails(mangaID);
         setInfo(mangaDetails);
-        const chapters = await getChapters(mangaID, mangaDetails.language);
+        const chapters = await getChapters(mangaID, mangaDetails.language, 150);
         setLists(chapters);
       } catch (error) {
         setFetchFailed(true);
