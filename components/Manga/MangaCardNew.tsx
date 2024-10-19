@@ -29,7 +29,7 @@ const MangaCardNew = ({ manga, chapter }: MangaCardProps) => {
               className="object-cover"
               height={200}
               shadow="md"
-              src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
+              src={`${siteConfig.mangadexAPI.proxyUrl}${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
               width="100%"
               isZoomed
               radius="sm"

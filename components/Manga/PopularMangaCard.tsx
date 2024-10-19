@@ -26,7 +26,7 @@ const PopularMangaCard = ({ manga }: PopularMangaCardProps) => {
         className="z-0 object-cover "
         height={324}
         width="100%"
-        src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
+        src={`${siteConfig.mangadexAPI.proxyUrl}${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
         radius="sm"
       />
       <CardFooter className="absolute z-10 !items-start bg-black/40 bottom-0 border-default-600 dark:border-default-100 text-white">
@@ -41,7 +41,7 @@ const PopularMangaCard = ({ manga }: PopularMangaCardProps) => {
               height={300}
               width="100%"
               shadow="md"
-              src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
+              src={`${siteConfig.mangadexAPI.proxyUrl}${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
               isZoomed
               radius="sm"
             />
