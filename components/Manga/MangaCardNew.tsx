@@ -30,7 +30,7 @@ const MangaCardNew = ({ manga, chapter }: MangaCardProps) => {
               alt={manga.title}
               className="object-cover"
               height={200}
-              width={512}
+              width={640}
               priority={true}
               shadow="md"
               src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
