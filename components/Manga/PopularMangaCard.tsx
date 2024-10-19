@@ -6,6 +6,7 @@ import { Card, CardFooter, Chip, Image } from "@nextui-org/react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import NextImage from "next/image";
 
 interface PopularMangaCardProps {
   manga: Manga;
@@ -21,12 +22,13 @@ const PopularMangaCard = ({ manga }: PopularMangaCardProps) => {
       radius="sm"
     >
       <Image
+        as={NextImage}
         removeWrapper
         alt={manga.title}
-        className="z-0 object-cover "
+        className="z-0 object-cover w-auto"
         height={324}
-        width="100%"
-        src={`${siteConfig.mangadexAPI.proxyUrl}${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
+        width={512}
+        src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}`}
         radius="sm"
       />
       <CardFooter className="absolute z-10 !items-start bg-black/40 bottom-0 border-default-600 dark:border-default-100 text-white">
@@ -36,12 +38,14 @@ const PopularMangaCard = ({ manga }: PopularMangaCardProps) => {
             className="relative col-span-6 md:col-span-2"
           >
             <Image
+              as={NextImage}
               alt={manga.title}
               className="hidden md:flex h-full w-full object-cover"
               height={300}
-              width="100%"
+              width={512}
+              priority={true}
               shadow="md"
-              src={`${siteConfig.mangadexAPI.proxyUrl}${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
+              src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
               isZoomed
               radius="sm"
             />

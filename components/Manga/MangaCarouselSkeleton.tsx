@@ -4,7 +4,7 @@ export default function MangaCarouselSkeleton() {
   return (
     <Card
       isBlurred
-      className="border-none bg-background/60 dark:bg-default-100/50 w-full"
+      className="border-none bg-background/60 dark:bg-default-100/50 w-full h-[324]"
       shadow="sm"
     >
       <CardBody>
