@@ -38,6 +38,10 @@ export default function RootLayout({
           name="google-site-verification"
           content="22zmW8vLmhPSRHgJo2Yg_J0w09A-1ZlmJjFG6ldXdjA"
         />
+        <meta
+          property="og:image"
+          content="/2e418d11-579c-4078-a960-60781115efc9.jpg"
+        />
       </head>
       <body
         className={clsx(
@@ -49,7 +53,7 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
-            <main className="container mx-auto px-4 py-8">{children}</main>
+            <main className="container mx-auto px-4 py-4">{children}</main>
           </div>
         </Providers>
       </body>

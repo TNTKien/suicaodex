@@ -132,9 +132,14 @@ export async function SearchManga(title: string): Promise<Manga[]> {
 }
 
 export async function getLastestMangas(): Promise<LastestManga[]> {
-  const { data } = await axiosInstance.get(
-    `/manga?limit=10&includes[]=cover_art&includes[]=author&includes[]=artist&availableTranslatedLanguage[]=vi&hasAvailableChapters=true&order[latestUploadedChapter]=desc`
-  );
+  const { data } = await axiosInstance.get(`/manga?`, {
+    params: {
+      limit: 9,
+      includes: ['cover_art', 'author', 'artist'],
+      availableTranslatedLanguage: ['vi'],
+      hasAvailableChapters: 'true',
+    }
+  });
 
   const lastestManga = data.data.map(async (item: any) => {
     const info = MangaParser(item);
@@ -143,4 +148,53 @@ export async function getLastestMangas(): Promise<LastestManga[]> {
   });
 
   return Promise.all(lastestManga);
+}
+
+export async function getPopularMangas(): Promise<Manga[]> {
+  const { data } = await axiosInstance.get(`/manga?`, {
+    params: {
+      limit: 10,
+      includes: ['cover_art', 'author', 'artist'],
+      hasAvailableChapters: 'true',
+      availableTranslatedLanguage: ['vi'],
+      order: {
+        followedCount: 'desc'
+      },
+      createdAtSince: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().slice(0, 19)
+    }
+  });
+
+  return data.data.map((item: any) => MangaParser(item));
+}
+
+export async function getTopFollowedMangas(): Promise<Manga[]> {
+  const { data } = await axiosInstance.get(`/manga?`, {
+    params: {
+      limit: 5,
+      includes: ['cover_art', 'author', 'artist'],
+      hasAvailableChapters: 'true',
+      availableTranslatedLanguage: ['vi'],
+      order: {
+        followedCount: 'desc'
+      }
+    }
+  });
+
+  return data.data.map((item: any) => MangaParser(item));
+}
+
+export async function getTopRatedMangas(): Promise<Manga[]> {
+  const { data } = await axiosInstance.get(`/manga?`, {
+    params: {
+      limit: 5,
+      includes: ['cover_art', 'author', 'artist'],
+      hasAvailableChapters: 'true',
+      availableTranslatedLanguage: ['vi'],
+      order: {
+        rating: 'desc'
+      }
+    }
+  });
+
+  return data.data.map((item: any) => MangaParser(item));
 }
