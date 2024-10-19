@@ -32,6 +32,9 @@ const LastestMangas: FC = () => {
           <LatestSkeleton />
           <LatestSkeleton />
           <LatestSkeleton />
+          <LatestSkeleton />
+          <LatestSkeleton />
+          <LatestSkeleton />
         </div>
       </>
     );

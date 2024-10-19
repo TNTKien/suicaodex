@@ -10,7 +10,7 @@ export default function LatestSkeleton() {
       <CardBody>
         <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-start justify-center">
           <div className="relative col-span-6 md:col-span-4">
-            <Skeleton className="h-48 rounded-lg bg-default-300" />
+            <Skeleton className="h-[200] rounded-lg bg-default-300" />
           </div>
           <div className="flex flex-col col-span-6 md:col-span-8 gap-2">
             <div className="flex justify-between items-start">

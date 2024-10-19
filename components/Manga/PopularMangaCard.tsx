@@ -29,6 +29,7 @@ const PopularMangaCard = ({ manga }: PopularMangaCardProps) => {
         height={324}
         width={512}
         src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}`}
+        priority={true}
         radius="sm"
       />
       <CardFooter className="absolute z-10 !items-start bg-black/40 bottom-0 border-default-600 dark:border-default-100 text-white">
