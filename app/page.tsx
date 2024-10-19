@@ -1,5 +1,4 @@
 import LeaderBoard from "@/components/LeaderBoard/LeaderBoard";
-import Homepage from "@/components/Manga/Homepage";
 import LastestMangas from "@/components/Manga/LastestMangas";
 import MangaCarousel from "@/components/Manga/MangaCarousel";
 import { siteConfig } from "@/config/site";

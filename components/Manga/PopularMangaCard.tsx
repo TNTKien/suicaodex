@@ -1,3 +1,5 @@
+"use client";
+
 import { siteConfig } from "@/config/site";
 import { Manga } from "@/types";
 import { Card, CardFooter, Chip, Image } from "@nextui-org/react";
