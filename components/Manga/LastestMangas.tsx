@@ -27,7 +27,7 @@ const LastestMangas: FC = () => {
   if (mangas.length === 0) {
     return (
       <>
-        <h1 className="text-2xl font-semibold pb-2">Mới cập nhật</h1>
+        <h1 className="text-2xl font-semibold pb-2 mt-4">Mới cập nhật</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           <LatestSkeleton />
           <LatestSkeleton />
@@ -50,7 +50,7 @@ const LastestMangas: FC = () => {
 
   return (
     <>
-      <h1 className="text-2xl font-semibold pb-2">Mới cập nhật</h1>
+      <h1 className="text-2xl font-semibold pb-2 mt-4">Mới cập nhật</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
         {mangas.map((manga) => (

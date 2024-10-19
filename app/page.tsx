@@ -17,9 +17,9 @@ export default function Home() {
   return (
     <>
       <MangaCarousel />
-      <Spacer y={4} />
+      {/* <Spacer y={4} /> */}
       <LastestMangas />
-      <Spacer y={4} />
+      {/* <Spacer y={4} /> */}
       <LeaderBoard />
     </>
   );
