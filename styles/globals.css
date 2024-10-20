@@ -30,6 +30,8 @@
 }
 
 .embla {
+  border-radius: 6px;
+  overflow: hidden;
   max-width: fit-content;
   margin: auto;
   --slide-height: 19rem;
@@ -45,6 +47,7 @@
   margin-left: calc(var(--slide-spacing) * -1);
 }
 .embla__slide {
+  border-radius: 6px;
   transform: translate3d(0, 0, 0);
   flex: 0 0 var(--slide-size);
   min-width: 0;

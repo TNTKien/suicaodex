@@ -27,7 +27,7 @@ const LastestMangas: FC = () => {
   if (mangas.length === 0) {
     return (
       <>
-        <h1 className="text-2xl font-semibold pb-2 mt-4">Mới cập nhật</h1>
+        <h1 className="text-2xl font-semibold pb-2 mt-3 px-1">Mới cập nhật</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           <LatestSkeleton />
           <LatestSkeleton />
@@ -41,21 +41,14 @@ const LastestMangas: FC = () => {
   }
 
   if (fetchFailed) {
-    return (
-      <div className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <h1 className="text-3xl font-bold">Không tìm thấy trang yêu cầu</h1>
-        <p className="text-muted-foreground">
-          Bấm vào <Link href="/">đây</Link> để quay lại trang chủ
-        </p>
-      </div>
-    );
+    return <></>;
   }
 
   return (
     <>
-      <h1 className="text-2xl font-semibold pb-2 mt-4">Mới cập nhật</h1>
+      <h1 className="text-2xl font-semibold pb-2 mt-3 px-1">Mới cập nhật</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+      <div className="px-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
         {mangas.map((manga) => (
           <MangaCardNew
             key={manga.info.id}

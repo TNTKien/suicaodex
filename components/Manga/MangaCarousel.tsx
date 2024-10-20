@@ -32,31 +32,34 @@ const MangaCarousel: FC = () => {
   if (mangas.length === 0) {
     return (
       <>
-        <h1 className="text-2xl font-semibold pb-2">Tiêu điểm</h1>
-        <MangaCarouselSkeleton />
+        <h1 className="text-2xl font-semibold pb-1 px-1">Tiêu điểm</h1>
+        <div className="p-1">
+          <MangaCarouselSkeleton />
+        </div>
       </>
     );
   }
 
   if (fetchFailed) {
     return (
-      <div className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <h1 className="text-3xl font-bold">Không tìm thấy trang yêu cầu</h1>
-        <p className="text-muted-foreground">
-          Bấm vào <Link href="/">đây</Link> để quay lại trang chủ
-        </p>
-      </div>
+      // <div className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+      //   <h1 className="text-3xl font-bold">Không tìm thấy trang yêu cầu</h1>
+      //   <p className="text-muted-foreground">
+      //     Bấm vào <Link href="/">đây</Link> để quay lại trang chủ
+      //   </p>
+      // </div>
+      <></>
     );
   }
 
   return (
     <>
-      <h1 className="text-2xl font-semibold pb-2">Tiêu điểm</h1>
+      <h1 className="text-2xl font-semibold pb-1 px-1">Tiêu điểm</h1>
 
-      <div className="embla" ref={emblaRef}>
+      <div className="embla p-1" ref={emblaRef}>
         <div className="embla__container">
           {mangas.map((manga) => (
-            <div className="embla__slide " key={manga.id}>
+            <div className="embla__slide" key={manga.id}>
               <PopularMangaCard key={manga.id} manga={manga} />
             </div>
           ))}

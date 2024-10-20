@@ -12,7 +12,7 @@ export default function MangaCarouselSkeleton() {
           <div className="relative col-span-6 md:col-span-2">
             <Skeleton className="h-[300] rounded-lg bg-default-300" />
           </div>
-          <div className="flex flex-col col-span-6 md:col-span-8 gap-2">
+          <div className="hidden md:flex flex-col col-span-6 md:col-span-8 gap-2">
             <div className="flex justify-between items-start">
               <Skeleton className="w-3/4 rounded-lg">
                 <div className="h-3 w-full rounded-lg bg-default-200"></div>

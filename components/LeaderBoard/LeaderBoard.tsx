@@ -29,13 +29,13 @@ const LeaderBoard = () => {
   }, []);
 
   if (fetchFailed) {
-    return <div></div>;
+    return <></>;
   }
 
   if (followedMangas.length === 0 || ratingMangas.length === 0) {
     return (
       <>
-        <h1 className="text-2xl font-semibold pb-2 mt-4">Bảng xếp hạng</h1>
+        <h1 className="text-2xl font-semibold pb-2 mt-4 px-1">Bảng xếp hạng</h1>
         <Tabs aria-label="Options" className="mb-4">
           <Tab key="follow" title="Theo dõi"></Tab>
           <Tab key="rating" title="Đánh giá"></Tab>
@@ -48,8 +48,8 @@ const LeaderBoard = () => {
 
   return (
     <>
-      <h1 className="text-2xl font-semibold pb-2 mt-4">Bảng xếp hạng</h1>
-      <Tabs aria-label="Options">
+      <h1 className="text-2xl font-semibold pb-2 mt-4 px-1">Bảng xếp hạng</h1>
+      <Tabs aria-label="Options" className="px-1">
         <Tab key="follow" title="Theo dõi">
           <Follow manga={followedMangas} />
         </Tab>
