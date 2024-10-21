@@ -23,7 +23,7 @@ const SearchBar = () => {
       setActiveSearch([]);
       return false;
     }
-    SearchManga(e.target.value).then((data) => {
+    SearchManga(e.target.value, true).then((data) => {
       return setActiveSearch(data);
     });
   };

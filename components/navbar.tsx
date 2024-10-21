@@ -14,6 +14,7 @@ import { DiscordIcon, SearchIcon, FacebookIcon } from "@/components/icons";
 import Image from "next/image";
 import Logo from "@/public/matologo.png";
 import SearchBar from "@/components/Search/SearchBar";
+import SearchSection from "./Search/SearchSection";
 
 export const Navbar = () => {
   return (
@@ -31,8 +32,8 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        <NavbarItem className="hidden md:flex">
-          <SearchBar />
+        <NavbarItem className="hidden sm:flex">
+          <SearchSection />
         </NavbarItem>
         <NavbarItem className="hidden sm:flex gap-2">
           <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
@@ -51,6 +52,10 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+        <NavbarItem>
+          <SearchSection />
+        </NavbarItem>
+
         <Link isExternal aria-label="Facebook" href={siteConfig.links.facebook}>
           <FacebookIcon className="text-default-500" />
         </Link>

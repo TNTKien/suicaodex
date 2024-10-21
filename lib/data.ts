@@ -145,11 +145,17 @@ export async function getChapters(mangaID: string, language: string, limit: numb
 }
 
 
-export async function SearchManga(title: string): Promise<Manga[]> {
+export async function SearchManga(title: string, adultContent: boolean): Promise<Manga[]> {
+  const searchParams = {
+    includes: ['cover_art', 'author', 'artist'],
+    contentRating: ['safe', 'suggestive', 'erotica'],
+  }
+  if (adultContent) {
+    searchParams.contentRating.push('pornographic');
+  }
+
   const { data } = await axiosInstance.get(`/manga?title=${title}`, {
-    params: {
-      includes: ['cover_art', 'author', 'artist'],
-    }
+    params: searchParams
   }
   );
   return data.data.map((item: any) => MangaParser(item));
