@@ -59,7 +59,6 @@ const SearchSection = () => {
               <ModalHeader>Tìm kiếm</ModalHeader>
               <ModalBody>
                 <Input
-                  autoFocus
                   placeholder="Nhập từ khoá..."
                   variant="bordered"
                   onChange={handleSearch}
