@@ -2,11 +2,12 @@
 
 import { siteConfig } from "@/config/site";
 import { Manga } from "@/types";
-import { Card, CardFooter, Chip, Image } from "@nextui-org/react";
+import { Card, CardFooter, Image } from "@nextui-org/react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import NextImage from "next/image";
+import MangaTags from "../MangaTags/TagsChip";
 
 interface PopularMangaCardProps {
   manga: Manga;
@@ -68,11 +69,11 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
                     : `${manga.author}, ${manga.artist}`}
                 </p>
                 <div className="hidden md:flex flex-wrap gap-1 mb-4">
-                  {manga.tags.map((tag) => (
-                    <Chip className="rounded-md" key={tag.id} size="sm">
-                      {tag.name.toLocaleUpperCase()}
-                    </Chip>
-                  ))}
+                  <MangaTags
+                    tags={manga.tags}
+                    contentRating={manga.contentRating}
+                    status={manga.status}
+                  />
                 </div>
                 {/* {manga.description && <MangaDesc desc={manga.description} />} */}
                 {manga.description && (

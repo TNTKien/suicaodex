@@ -24,6 +24,8 @@ type Manga = {
   artist: string;
   language: string;
   description: string;
+  contentRating: string;
+  status: string;
 };
 
 type LastestManga = {
@@ -59,11 +61,6 @@ export function TagsParser(data: any[]): Tag[] {
 }
 
 export function MangaParser(data: any): Manga {
-  // const title = data.attributes.altTitles.find((item: any) => item.vi)?.vi;
-  // const language = data.attributes.availableTranslatedLanguages.includes("vi")
-  //   ? "vi"
-  //   : "en";
-
   // const titleVi = data.attributes.altTitles.find((item: any) => item.vi)?.vi;
   // let title = titleVi
   //   ? titleVi
@@ -91,6 +88,8 @@ export function MangaParser(data: any): Manga {
   );
   const author = data.relationships.find((item: any) => item.type === "author");
   const artist = data.relationships.find((item: any) => item.type === "artist");
+  const contentRating = data.attributes.contentRating;
+  const status = data.attributes.status;
 
   return {
     id: data.id,
@@ -102,6 +101,8 @@ export function MangaParser(data: any): Manga {
     author: author ? author.attributes.name : null,
     artist: artist ? artist.attributes.name : null,
     description: data.attributes.description.vi ? data.attributes.description.vi : data.attributes.description.en,
+    contentRating: contentRating,
+    status: status,
   };
 }
 

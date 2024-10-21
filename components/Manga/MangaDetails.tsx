@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
-import { Button, Chip, Link } from "@nextui-org/react";
+import { Button, Link } from "@nextui-org/react";
 import ChapterList from "./ChapterLists";
 import { getChapters, getMangaDetails } from "@/lib/data";
 import { FC, useEffect, useState } from "react";
 import { Chapter, Manga } from "@/types";
 import MangaSkeleton from "./MangaSkeleton";
 import MangaDesc from "./MangaDesc";
+import MangaTags from "../MangaTags/TagsChip";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -79,11 +80,11 @@ const MangaDetails: FC<MangaDetailsProps> = ({ mangaID }) => {
             : `${info.author}, ${info.artist}`}
         </p>
         <div className="flex flex-wrap gap-1 mb-4">
-          {info.tags.map((tag) => (
-            <Chip className="rounded-md" key={tag.id} size="sm">
-              {tag.name.toLocaleUpperCase()}
-            </Chip>
-          ))}
+          <MangaTags
+            tags={info.tags}
+            contentRating={info.contentRating}
+            status={info.status}
+          />
         </div>
 
         {info.description && <MangaDesc desc={info.description} />}
