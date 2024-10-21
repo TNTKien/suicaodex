@@ -59,10 +59,33 @@ export function TagsParser(data: any[]): Tag[] {
 }
 
 export function MangaParser(data: any): Manga {
-  const title = data.attributes.altTitles.find((item: any) => item.vi)?.vi;
+  // const title = data.attributes.altTitles.find((item: any) => item.vi)?.vi;
+  // const language = data.attributes.availableTranslatedLanguages.includes("vi")
+  //   ? "vi"
+  //   : "en";
+
+  // const titleVi = data.attributes.altTitles.find((item: any) => item.vi)?.vi;
+  // let title = titleVi
+  //   ? titleVi
+  //   : data.attributes.altTitles.find((item: any) => item.en)?.en;
+  // if (!title) {
+  //   title = data.attributes.altTitles.length > 0
+  //     ? data.attributes.altTitles[0][Object.keys(data.attributes.altTitles[0])[0]]
+  //     : data.attributes.title[Object.keys(data.attributes.title)[0]];
+  // }
+
+  const titleVi = data.attributes.altTitles.find((item: any) => item.vi)?.vi;
+  let title = titleVi
+    ? titleVi
+    : data.attributes.title[Object.keys(data.attributes.title)[0]];
+  if (!title) {
+    title = data.attributes.altTitles.find((item: any) => item.en)?.en;
+  }
+
   const language = data.attributes.availableTranslatedLanguages.includes("vi")
     ? "vi"
     : "en";
+
   const coverArt = data.relationships.find(
     (item: any) => item.type === "cover_art"
   );
@@ -71,9 +94,9 @@ export function MangaParser(data: any): Manga {
 
   return {
     id: data.id,
-    title: title ? title : data.attributes.title.en,
+    title: title,
     language: language,
-    altTitle: data.attributes.title.en,
+    altTitle: data.attributes.title.en || title,
     tags: TagsParser(data.attributes.tags),
     cover: coverArt ? coverArt.attributes.fileName : null,
     author: author ? author.attributes.name : null,
@@ -170,7 +193,7 @@ export async function getPopularMangas(): Promise<Manga[]> {
 export async function getTopFollowedMangas(): Promise<Manga[]> {
   const { data } = await axiosInstance.get(`/manga?`, {
     params: {
-      limit: 5,
+      limit: 7,
       includes: ['cover_art', 'author', 'artist'],
       hasAvailableChapters: 'true',
       availableTranslatedLanguage: ['vi'],
@@ -186,7 +209,7 @@ export async function getTopFollowedMangas(): Promise<Manga[]> {
 export async function getTopRatedMangas(): Promise<Manga[]> {
   const { data } = await axiosInstance.get(`/manga?`, {
     params: {
-      limit: 5,
+      limit: 7,
       includes: ['cover_art', 'author', 'artist'],
       hasAvailableChapters: 'true',
       availableTranslatedLanguage: ['vi'],
@@ -195,6 +218,30 @@ export async function getTopRatedMangas(): Promise<Manga[]> {
       }
     }
   });
+
+  return data.data.map((item: any) => MangaParser(item));
+}
+
+export async function getStaffPickMangas(): Promise<Manga[]> {
+  const StaffPickID = await axiosInstance.get(`/list/805ba886-dd99-4aa4-b460-4bd7c7b71352`)
+    .then(res => res.data.data.relationships
+      .filter((item: any) => item.type === 'manga')
+      .map((item: any) => item.id)
+    );
+
+  const { data } = await axiosInstance.get(`/manga?`, {
+    params: {
+      limit: 7,
+      includes: ['cover_art', 'author', 'artist'],
+      hasAvailableChapters: 'true',
+      availableTranslatedLanguage: ['vi'],
+      ids: StaffPickID,
+      order: {
+        rating: 'desc'
+      }
+    }
+  });
+
 
   return data.data.map((item: any) => MangaParser(item));
 }

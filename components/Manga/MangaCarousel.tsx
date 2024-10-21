@@ -60,7 +60,7 @@ const MangaCarousel: FC = () => {
         <div className="embla__container">
           {mangas.map((manga) => (
             <div className="embla__slide" key={manga.id}>
-              <PopularMangaCard key={manga.id} manga={manga} />
+              <PopularMangaCard key={manga.id} manga={manga} priority={true} />
             </div>
           ))}
         </div>

@@ -10,9 +10,10 @@ import NextImage from "next/image";
 
 interface PopularMangaCardProps {
   manga: Manga;
+  priority?: boolean;
 }
 
-const PopularMangaCard = ({ manga }: PopularMangaCardProps) => {
+const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
   return (
     <Card
       isFooterBlurred
@@ -29,7 +30,7 @@ const PopularMangaCard = ({ manga }: PopularMangaCardProps) => {
         height={324}
         width={512}
         src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}`}
-        priority={true}
+        priority={priority || false}
         radius="md"
       />
       <CardFooter className="absolute z-10 !items-start bg-black/40 bottom-0 border-default-600 dark:border-default-100 text-white">
@@ -44,7 +45,7 @@ const PopularMangaCard = ({ manga }: PopularMangaCardProps) => {
               className="hidden md:flex h-full w-full object-cover"
               height={300}
               width={512}
-              priority={true}
+              priority={priority || false}
               shadow="md"
               src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
               isZoomed
