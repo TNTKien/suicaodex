@@ -15,7 +15,7 @@ interface MangaCardProps {
 const MangaCardNew = ({ manga, chapter }: MangaCardProps) => {
   return (
     <Card
-      isBlurred
+      isHoverable
       className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
       shadow="sm"
       radius="sm"
