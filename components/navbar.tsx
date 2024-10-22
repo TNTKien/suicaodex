@@ -13,7 +13,6 @@ import { ThemeSwitch } from "@/components/theme-switch";
 import { DiscordIcon, SearchIcon, FacebookIcon } from "@/components/icons";
 import Image from "next/image";
 import Logo from "@/public/matologo.png";
-import SearchBar from "@/components/Search/SearchBar";
 import SearchSection from "./Search/SearchSection";
 
 export const Navbar = () => {
@@ -52,10 +51,6 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <NavbarItem>
-          <SearchSection />
-        </NavbarItem>
-
         <Link isExternal aria-label="Facebook" href={siteConfig.links.facebook}>
           <FacebookIcon className="text-default-500" />
         </Link>

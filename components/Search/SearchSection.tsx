@@ -11,12 +11,17 @@ import {
   Input,
   Checkbox,
   Divider,
+  Link,
+  Listbox,
+  ListboxItem,
 } from "@nextui-org/react";
 import { SearchIcon } from "../icons";
 import { useState } from "react";
 import { Manga } from "@/types";
 import { SearchManga } from "@/lib/data";
 import PopularMangaCard from "../Manga/PopularMangaCard";
+import SearchResCard from "./SearchResCard";
+import { set } from "date-fns";
 
 const SearchSection = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -40,10 +45,19 @@ const SearchSection = () => {
         startContent={
           <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
         }
-        className="bg-default-200 text-foreground-500 md:w-52 justify-start"
+        className="bg-default-200 text-foreground-500 justify-start"
       >
         Tìm kiếm...
       </Button>
+
+      {/* <Button
+        onPress={onOpen}
+        isIconOnly
+        className="flex bg-transparent md:hidden"
+      >
+        <SearchIcon />
+      </Button> */}
+
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
@@ -56,14 +70,13 @@ const SearchSection = () => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader>Tìm kiếm</ModalHeader>
-              <ModalBody>
+              <ModalHeader className="grid grid-cols-1 gap-3 border-b-1">
+                <h2 className="text-2xl font-bold">Tìm kiếm</h2>
                 <Input
                   placeholder="Nhập từ khoá..."
                   variant="bordered"
                   onChange={handleSearch}
                 />
-
                 <div className="flex justify-between">
                   <Checkbox
                     classNames={{
@@ -75,16 +88,49 @@ const SearchSection = () => {
                   >
                     R18
                   </Checkbox>
-                  {/* <Button size="sm" onPress={() => setActiveSearch([])}>
-                    Clear
-                  </Button> */}
+                  <div className="flex items-center">
+                    <Button
+                      color="primary"
+                      size="md"
+                      variant="light"
+                      onPress={() => {
+                        alert("Lêu lêu bị lừa!!! Đã code được đâu mà bấm =)))");
+                      }}
+                      className="underline"
+                    >
+                      Tìm kiếm nâng cao
+                    </Button>
+                    <Button
+                      color="danger"
+                      size="md"
+                      variant="light"
+                      onPress={() => {
+                        setActiveSearch([]);
+                      }}
+                    >
+                      Xoá
+                    </Button>
+                  </div>
                 </div>
-                <Divider />
-
-                <div className="grid grid-cols-1 gap-4 max-h-full mb-2">
-                  {activeSearch.map((manga) => (
-                    <PopularMangaCard key={manga.id} manga={manga} />
-                  ))}
+              </ModalHeader>
+              <ModalBody>
+                <div className="grid grid-cols-1 gap-4 max-h-full mb-1">
+                  <Listbox
+                    items={activeSearch}
+                    aria-label="Search Results"
+                    emptyContent="Không có kết quả."
+                  >
+                    {(item) => (
+                      <ListboxItem
+                        key={item.id}
+                        href={`/manga/${item.id}`}
+                        textValue="Manga"
+                        className="hover:rounded-xl"
+                      >
+                        <SearchResCard manga={item} />
+                      </ListboxItem>
+                    )}
+                  </Listbox>
                 </div>
               </ModalBody>
             </>
