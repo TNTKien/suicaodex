@@ -18,7 +18,7 @@ import { Manga } from "@/types";
 import { SearchManga } from "@/lib/data";
 import SearchResCard from "./SearchResCard";
 
-const SearchSection = () => {
+const SearchMobile = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [activeSearch, setActiveSearch] = useState<Manga[]>([]);
   const [isR18, setIsR18] = useState(false);
@@ -40,7 +40,7 @@ const SearchSection = () => {
         startContent={
           <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
         }
-        className="bg-default-200 text-foreground-500 justify-start"
+        className="bg-default-200 text-foreground-500 justify-start w-full"
       >
         Tìm kiếm...
       </Button>
@@ -128,4 +128,4 @@ const SearchSection = () => {
   );
 };
 
-export default SearchSection;
+export default SearchMobile;

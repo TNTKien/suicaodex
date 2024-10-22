@@ -16,7 +16,7 @@ const MangaCardNew = ({ manga, chapter }: MangaCardProps) => {
   return (
     <Card
       isHoverable
-      className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
+      className="border-none bg-background/60 dark:bg-default-100/50"
       shadow="sm"
       radius="sm"
     >
