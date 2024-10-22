@@ -149,6 +149,9 @@ export async function SearchManga(title: string, adultContent: boolean): Promise
   const searchParams = {
     includes: ['cover_art', 'author', 'artist'],
     contentRating: ['safe', 'suggestive', 'erotica'],
+    order: {
+      relevance: 'desc'
+    }
   }
   if (adultContent) {
     searchParams.contentRating.push('pornographic');
