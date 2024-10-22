@@ -72,7 +72,7 @@ const SearchResCard = ({ manga, priority }: SearchResCardProps) => {
 
                 {manga.description && (
                   <ReactMarkdown
-                    className="hidden md:line-clamp-6 text-muted-foreground"
+                    className="hidden md:line-clamp-5 text-muted-foreground"
                     remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
                     components={{
                       a: ({ href, children }) => (
