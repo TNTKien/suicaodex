@@ -114,7 +114,7 @@ const SearchSection = () => {
                         textValue="Manga"
                         className="hover:rounded-xl"
                       >
-                        <SearchResCard manga={item} />
+                        <SearchResCard manga={item} priority={true} />
                       </ListboxItem>
                     )}
                   </Listbox>
