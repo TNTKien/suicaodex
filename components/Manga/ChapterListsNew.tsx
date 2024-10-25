@@ -110,18 +110,20 @@ const ChapterListNew: FC<ChapterListProps> = ({ lists }) => {
       radius="md"
       //   shadow="none"
       bottomContent={
-        <div className="flex w-full justify-center">
-          <Pagination
-            disableAnimation
-            isCompact
-            showControls
-            color="danger"
-            showShadow
-            page={page}
-            total={pages}
-            onChange={(page) => setPage(page)}
-          />
-        </div>
+        pages > 1 ? (
+          <div className="flex w-full justify-center">
+            <Pagination
+              disableAnimation
+              isCompact
+              showControls
+              color="danger"
+              showShadow
+              page={page}
+              total={pages}
+              onChange={(page) => setPage(page)}
+            />
+          </div>
+        ) : null
       }
       bottomContentPlacement="outside"
     >
