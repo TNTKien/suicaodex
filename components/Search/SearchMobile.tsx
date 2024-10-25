@@ -60,6 +60,7 @@ const SearchMobile = () => {
               <ModalHeader className="grid grid-cols-1 gap-3 border-b-1">
                 <h2 className="text-2xl font-bold">Tìm kiếm</h2>
                 <Input
+                  autoFocus // eslint-disable-line jsx-a11y/no-autofocus
                   placeholder="Nhập từ khoá..."
                   variant="bordered"
                   onChange={handleSearch}
