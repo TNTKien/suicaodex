@@ -54,26 +54,6 @@ const ChapterListNew: FC<ChapterListProps> = ({ lists }) => {
     },
   ];
 
-  const classNames = React.useMemo(
-    () => ({
-      //   wrapper: ["max-h-[382px]", "max-w-3xl"],
-      //   th: ["bg-transparent", "text-default-500", "border-b", "border-divider"],
-      td: [
-        // changing the rows border radius
-        // first
-        "group-data-[first=true]:first:before:rounded-none",
-        "group-data-[first=true]:last:before:rounded-none",
-        // middle
-        "group-data-[middle=true]:before:rounded-none",
-        // last
-        "group-data-[last=true]:first:before:rounded-none",
-        "group-data-[last=true]:last:before:rounded-none",
-      ],
-      tr: ["hover:bg-default"],
-    }),
-    []
-  );
-
   const renderCell = useCallback((chapter: Chapter, columnKey: React.Key) => {
     switch (columnKey) {
       case "chapter":
@@ -104,11 +84,11 @@ const ChapterListNew: FC<ChapterListProps> = ({ lists }) => {
   return (
     <Table
       aria-label="Danh dách chương truyện"
-      classNames={classNames}
       // layout="fixed"
-      isStriped
+      // isStriped
+      // shadow="none"
+      // selectionMode="multiple"
       radius="md"
-      //   shadow="none"
       bottomContent={
         pages > 1 ? (
           <div className="flex w-full justify-center">
@@ -136,7 +116,7 @@ const ChapterListNew: FC<ChapterListProps> = ({ lists }) => {
       </TableHeader>
       <TableBody emptyContent={"Truyện chưa có chương nào!"} items={items}>
         {(item) => (
-          <TableRow key={item.id}>
+          <TableRow className="border-b-1 hover:bg-default/50" key={item.id}>
             {(columnKey) => (
               <TableCell>{renderCell(item, columnKey)}</TableCell>
             )}
