@@ -1,0 +1,148 @@
+"use client";
+
+import React, { FC, useCallback, useState } from "react";
+
+import {
+  Divider,
+  getKeyValue,
+  Pagination,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from "@nextui-org/react";
+import { Chapter } from "@/types";
+import Link from "next/link";
+import { siteConfig } from "@/config/site";
+import { formatTimeToNow } from "@/lib/utils";
+
+interface ChapterListProps {
+  lists: Chapter[];
+}
+
+const ChapterListNew: FC<ChapterListProps> = ({ lists }) => {
+  const [page, setPage] = React.useState(1);
+  const rowsPerPage = 10;
+
+  const pages = Math.ceil(lists.length / rowsPerPage);
+
+  const items = React.useMemo(() => {
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+
+    return lists.slice(start, end);
+  }, [page, lists]);
+
+  const columns = [
+    {
+      key: "chapter",
+      label: "CHƯƠNG",
+    },
+    {
+      key: "title",
+      label: "TIÊU ĐỀ",
+    },
+    {
+      key: "group",
+      label: "NHÓM DỊCH",
+    },
+    {
+      key: "updatedAt",
+      label: "CẬP NHẬT",
+    },
+  ];
+
+  const classNames = React.useMemo(
+    () => ({
+      //   wrapper: ["max-h-[382px]", "max-w-3xl"],
+      //   th: ["bg-transparent", "text-default-500", "border-b", "border-divider"],
+      td: [
+        // changing the rows border radius
+        // first
+        "group-data-[first=true]:first:before:rounded-none",
+        "group-data-[first=true]:last:before:rounded-none",
+        // middle
+        "group-data-[middle=true]:before:rounded-none",
+        // last
+        "group-data-[last=true]:first:before:rounded-none",
+        "group-data-[last=true]:last:before:rounded-none",
+      ],
+      tr: ["hover:bg-default"],
+    }),
+    []
+  );
+
+  const renderCell = useCallback((chapter: Chapter, columnKey: React.Key) => {
+    switch (columnKey) {
+      case "chapter":
+        return (
+          <Link href={`${siteConfig.mangadexAPI.webURL}/chapter/${chapter.id}`}>
+            {chapter.chapter ? chapter.chapter : "Oneshot"}
+          </Link>
+        );
+      case "title":
+        return (
+          <Link href={`${siteConfig.mangadexAPI.webURL}/chapter/${chapter.id}`}>
+            {chapter.title ? chapter.title : "N/A"}
+          </Link>
+        );
+      case "group":
+        return chapter.group ? chapter.group : "N/A";
+      case "updatedAt":
+        return (
+          <time dateTime={new Date(chapter.updatedAt).toDateString()}>
+            {formatTimeToNow(new Date(chapter.updatedAt))}
+          </time>
+        );
+      default:
+        return null;
+    }
+  }, []);
+
+  return (
+    <Table
+      aria-label="Danh dách chương truyện"
+      classNames={classNames}
+      // layout="fixed"
+      isStriped
+      radius="md"
+      //   shadow="none"
+      bottomContent={
+        <div className="flex w-full justify-center">
+          <Pagination
+            disableAnimation
+            isCompact
+            showControls
+            color="danger"
+            showShadow
+            page={page}
+            total={pages}
+            onChange={(page) => setPage(page)}
+          />
+        </div>
+      }
+      bottomContentPlacement="outside"
+    >
+      <TableHeader columns={columns}>
+        {(column) => (
+          <TableColumn className="text-wrap" key={column.key}>
+            {column.label}
+          </TableColumn>
+        )}
+      </TableHeader>
+      <TableBody emptyContent={"Truyện chưa có chương nào!"} items={items}>
+        {(item) => (
+          <TableRow key={item.id}>
+            {(columnKey) => (
+              <TableCell>{renderCell(item, columnKey)}</TableCell>
+            )}
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
+  );
+};
+
+export default ChapterListNew;

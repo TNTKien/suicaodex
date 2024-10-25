@@ -9,6 +9,7 @@ import { Chapter, Manga } from "@/types";
 import MangaSkeleton from "./MangaSkeleton";
 import MangaDesc from "./MangaDesc";
 import MangaTags from "../MangaTags/TagsChip";
+import { NotFound } from "../notFound";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -36,14 +37,7 @@ const MangaDetails: FC<MangaDetailsProps> = ({ mangaID }) => {
   }, []);
 
   if (fetchFailed) {
-    return (
-      <div className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <h1 className="text-3xl font-bold">Không tìm thấy trang yêu cầu</h1>
-        <p className="text-muted-foreground">
-          Bấm vào <Link href="/">đây</Link> để quay lại trang chủ
-        </p>
-      </div>
-    );
+    return <NotFound />;
   }
 
   if (!info) {

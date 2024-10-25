@@ -5,7 +5,6 @@ import { Chapter, Manga } from "@/types";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import Link from "next/link";
 import NextImage from "next/image";
-import { formatTimeToNow } from "@/lib/utils";
 
 interface MangaCardProps {
   manga: Manga;
@@ -49,7 +48,7 @@ const MangaCardNew = ({ manga, chapter }: MangaCardProps) => {
                   </h4>
                 </Link>
 
-                <p className="text-small text-foreground/80">
+                <p className="text-small line-clamp-1 text-foreground/80">
                   {manga.author === manga.artist
                     ? manga.author
                     : `${manga.author}, ${manga.artist}`}
@@ -81,14 +80,6 @@ const MangaCardNew = ({ manga, chapter }: MangaCardProps) => {
           </div>
         </div>
       </CardBody>
-      {/* <CardFooter className="text-sm flex flex-col items-end  bg-black/40 bottom-0 border-default-600 dark:border-default-100">
-        <time
-          dateTime={new Date(chapter[0].updatedAt).toDateString()}
-          className="text-[11px] italic line-clamp-1"
-        >
-          {formatTimeToNow(new Date(chapter[0].updatedAt))}
-        </time>
-      </CardFooter> */}
     </Card>
   );
 };

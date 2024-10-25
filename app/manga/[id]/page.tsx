@@ -1,4 +1,5 @@
 import MangaDetails from "@/components/Manga/MangaDetails";
+import MangaDetailsNew from "@/components/Manga/MangaDetailsNew";
 import { getMangaDetails } from "@/lib/data";
 import { Metadata } from "next";
 
@@ -27,7 +28,8 @@ export async function generateMetadata({
 export default function Page({ params }: pageProps) {
   return (
     <div>
-      <MangaDetails mangaID={params.id} />
+      {/* <MangaDetails mangaID={params.id} /> */}
+      <MangaDetailsNew mangaID={params.id} />
     </div>
   );
 }
