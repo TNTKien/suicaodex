@@ -21,6 +21,7 @@ export type Manga = {
   description: string;
   contentRating: string;
   status: string;
+  raw?: string;
 };
 
 export type Chapter = {

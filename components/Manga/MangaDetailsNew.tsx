@@ -2,7 +2,10 @@
 
 import { siteConfig } from "@/config/site";
 import {
+  Accordion,
+  AccordionItem,
   Button,
+  ButtonGroup,
   Card,
   CardBody,
   CardFooter,
@@ -113,65 +116,30 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
           </CardHeader>
 
           <CardFooter className="bottom-0 flex flex-col bg-inherit items-start gap-2 z-10">
-            {/* <div className="flex flex-wrap gap-1">
-              <MangaTags
-                tags={info.tags}
-                contentRating={info.contentRating}
-                status={info.status}
-              />
-            </div> */}
-
             {info.description && <MangaDesc desc={info.description} />}
 
-            <div className="flex gap-2">
+            <ButtonGroup fullWidth radius="sm" color="danger" variant="faded">
               <Button
-                className="rounded-md"
-                color="danger"
                 as={Link}
                 href={`${siteConfig.mangadexAPI.webURL}/chapter/${lists[0]?.id}`}
               >
                 Đọc mới nhất
               </Button>
               <Button
-                className="rounded-md"
-                variant="bordered"
-                color="danger"
                 as={Link}
                 href={`${siteConfig.mangadexAPI.webURL}/title/${mangaID}`}
               >
                 Đọc từ đầu
               </Button>
-            </div>
+              {info.raw && (
+                <Button as={Link} href={info.raw}>
+                  Raw
+                </Button>
+              )}
+            </ButtonGroup>
           </CardFooter>
         </Card>
-        <div className="flex flex-row gap-2">
-          {/* <Card className="hidden md:flex w-2/3" shadow="sm">
-            <CardHeader className="flex gap-3">
-              <div className="flex gap-2">
-              <Button
-                className="rounded-md"
-                color="danger"
-                as={Link}
-                href={`${siteConfig.mangadexAPI.webURL}/chapter/${lists[0]?.id}`}
-              >
-                Đọc mới nhất
-              </Button>
-              <Button
-                className="rounded-md"
-                variant="bordered"
-                color="danger"
-                as={Link}
-                href={`${siteConfig.mangadexAPI.webURL}/title/${mangaID}`}
-              >
-                Đọc từ đầu
-              </Button>
-            </div>
-            </CardHeader>
-
-            <CardBody>
-              {info.description && <MangaDesc desc={info.description} />}
-            </CardBody>
-          </Card> */}
+        <div className="flex flex-col md:flex-row gap-2">
           <ChapterListNew lists={lists} />
         </div>
       </div>

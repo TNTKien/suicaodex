@@ -3,6 +3,8 @@
 import React, { FC, useCallback, useState } from "react";
 
 import {
+  Card,
+  CardBody,
   Divider,
   getKeyValue,
   Pagination,
@@ -82,48 +84,56 @@ const ChapterListNew: FC<ChapterListProps> = ({ lists }) => {
   }, []);
 
   return (
-    <Table
-      aria-label="Danh dách chương truyện"
-      // layout="fixed"
-      // isStriped
-      // shadow="none"
-      // selectionMode="multiple"
-      radius="md"
-      bottomContent={
-        pages > 1 ? (
-          <div className="flex w-full justify-center">
-            <Pagination
-              disableAnimation
-              isCompact
-              showControls
-              color="danger"
-              showShadow
-              page={page}
-              total={pages}
-              onChange={(page) => setPage(page)}
-            />
-          </div>
-        ) : null
-      }
-      bottomContentPlacement="outside"
-    >
-      <TableHeader columns={columns}>
-        {(column) => (
-          <TableColumn className="text-wrap" key={column.key}>
-            {column.label}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody emptyContent={"Truyện chưa có chương nào!"} items={items}>
-        {(item) => (
-          <TableRow className="border-b-1 hover:bg-default/50" key={item.id}>
-            {(columnKey) => (
-              <TableCell>{renderCell(item, columnKey)}</TableCell>
+    <Card fullWidth shadow="sm">
+      <CardBody>
+        <Table
+          removeWrapper
+          aria-label="Danh dách chương truyện"
+          // layout="fixed"
+          // isStriped
+          // shadow="none"
+          // selectionMode="multiple"
+          radius="md"
+          bottomContent={
+            pages > 1 ? (
+              <div className="flex w-full justify-center">
+                <Pagination
+                  disableAnimation
+                  isCompact
+                  showControls
+                  color="danger"
+                  showShadow
+                  page={page}
+                  total={pages}
+                  onChange={(page) => setPage(page)}
+                />
+              </div>
+            ) : null
+          }
+          bottomContentPlacement="outside"
+        >
+          <TableHeader columns={columns}>
+            {(column) => (
+              <TableColumn className="text-wrap" key={column.key}>
+                {column.label}
+              </TableColumn>
             )}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+          </TableHeader>
+          <TableBody emptyContent={"Truyện chưa có chương nào!"} items={items}>
+            {(item) => (
+              <TableRow
+                className="border-b-1 hover:bg-default/50"
+                key={item.id}
+              >
+                {(columnKey) => (
+                  <TableCell>{renderCell(item, columnKey)}</TableCell>
+                )}
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </CardBody>
+    </Card>
   );
 };
 

@@ -26,6 +26,7 @@ type Manga = {
   description: string;
   contentRating: string;
   status: string;
+  raw?: string;
 };
 
 type LastestManga = {
@@ -103,6 +104,7 @@ export function MangaParser(data: any): Manga {
     description: data.attributes.description.vi ? data.attributes.description.vi : data.attributes.description.en,
     contentRating: contentRating,
     status: status,
+    raw: data.attributes.links.raw ? data.attributes.links.raw : null,
   };
 }
 
