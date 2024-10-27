@@ -79,6 +79,27 @@ export const DiscordIcon: React.FC<IconSvgProps> = ({
   );
 };
 
+export const LinkIcon: React.FC<IconSvgProps> = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 24 24"
+      width={size || width}
+      {...props}
+    >
+      <path
+        d="M13.5 10.5H10.5V6H6V18H18V13.5H13.5V10.5ZM18 18H6V6H10.5V10.5H13.5V13.5H18V18Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};
+
 export const TwitterIcon: React.FC<IconSvgProps> = ({
   size = 24,
   width,

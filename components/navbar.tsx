@@ -14,18 +14,25 @@ import NextLink from "next/link";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import { DiscordIcon, FacebookIcon } from "@/components/icons";
+import { DiscordIcon, FacebookIcon, GithubIcon } from "@/components/icons";
 import Image from "next/image";
 import Logo from "@/public/matologo.png";
 import SearchSection from "./Search/SearchSection";
 import { useState } from "react";
 import SearchMobile from "./Search/SearchMobile";
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
+import { Link2, LinkIcon } from "lucide-react";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const items = [
+    {
+      key: "matoseihei",
+      label: "Mato Seihei no Slave",
+      href: `/manga/${siteConfig.mato.id}`,
+      icon: Link2,
+    },
     {
       key: "facebook",
       label: "Facebook",
@@ -63,6 +70,9 @@ export const Navbar = () => {
         <NavbarItem className="hidden sm:flex gap-2">
           <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
             <DiscordIcon className="text-default-500" />
+          </Link>
+          <Link href={`/manga/${siteConfig.mato.id}`}>
+            <GithubIcon className="text-default-500" />
           </Link>
           <Link
             isExternal
