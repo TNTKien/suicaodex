@@ -58,7 +58,7 @@ const ChapterList: FC<ChapterListProps> = ({ lists }) => {
                   {chapter.title ? chapter.title : "N/A"}
                 </Link>
               </TableCell>
-              <TableCell>{chapter.group}</TableCell>
+              <TableCell>{chapter.group.name}</TableCell>
               {/* <TableCell>{DateCalculator(chapter.updatedAt)}</TableCell> */}
               <TableCell>
                 <time dateTime={new Date(chapter.updatedAt).toDateString()}>
