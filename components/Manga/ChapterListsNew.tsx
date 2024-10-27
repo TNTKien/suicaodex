@@ -59,19 +59,11 @@ const ChapterListNew: FC<ChapterListProps> = ({ lists }) => {
   const renderCell = useCallback((chapter: Chapter, columnKey: React.Key) => {
     switch (columnKey) {
       case "chapter":
-        return (
-          <Link href={`${siteConfig.mangadexAPI.webURL}/chapter/${chapter.id}`}>
-            {chapter.chapter ? chapter.chapter : "Oneshot"}
-          </Link>
-        );
+        return <p>{chapter.chapter ? chapter.chapter : "Oneshot"}</p>;
       case "title":
-        return (
-          <Link href={`${siteConfig.mangadexAPI.webURL}/chapter/${chapter.id}`}>
-            {chapter.title ? chapter.title : "N/A"}
-          </Link>
-        );
+        return <p>{chapter.title ? chapter.title : "N/A"}</p>;
       case "group":
-        return chapter.group ? chapter.group : "N/A";
+        return chapter.group.name ? chapter.group.name : "N/A";
       case "updatedAt":
         return (
           <time dateTime={new Date(chapter.updatedAt).toDateString()}>
@@ -122,6 +114,8 @@ const ChapterListNew: FC<ChapterListProps> = ({ lists }) => {
           <TableBody emptyContent={"Truyện chưa có chương nào!"} items={items}>
             {(item) => (
               <TableRow
+                as={Link}
+                href={`/chapter/${item.id}`}
                 className="border-b-1 hover:bg-default/50"
                 key={item.id}
               >

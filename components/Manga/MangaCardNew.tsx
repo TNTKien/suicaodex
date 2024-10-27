@@ -60,7 +60,7 @@ const MangaCardNew = ({ manga, chapter }: MangaCardProps) => {
               {chapter.map((c) => (
                 <Link
                   key={c.id}
-                  href={`${siteConfig.mangadexAPI.webURL}/chapter/${c.id}`}
+                  href={`/chapter/${c.id}`}
                   className="flex p-1 hover:underline w-full"
                 >
                   <div className="flex items-center">

@@ -1,12 +1,22 @@
-import { get } from "http";
+
 import axiosInstance from "./axios";
+import { siteConfig } from "@/config/site";
 
 type Chapter = {
   id: string;
   chapter: string;
   title: string;
   updatedAt: string;
-  group: string;
+  group: {
+    id: string;
+    name: string;
+  }
+  language?: string;
+  pages?: string[];
+  manga?: {
+    id: string;
+    title: string;
+  };
 };
 
 type Tag = {
@@ -34,20 +44,28 @@ type LastestManga = {
   lastestChap: Chapter[];
 }
 
+type ChapterAggregate = {
+  id: string;
+  chapter: string;
+}
+
+
+
 export function ChaptersParser(data: any[]): Chapter[] {
   return data.map((item) => {
+    const groupData = item.relationships.find(
+      (item: any) => item.type === "scanlation_group"
+    );
     return {
       id: item.id,
       chapter: item.attributes.chapter,
       title: item.attributes.title,
       updatedAt: item.attributes.updatedAt,
-      group: item.relationships.find(
-        (item: any) => item.type === "scanlation_group"
-      )
-        ? item.relationships.find(
-          (item: any) => item.type === "scanlation_group"
-        ).attributes.name
-        : "Unknown",
+      language: item.attributes.translatedLanguage,
+      group: groupData ? {
+        id: groupData.id,
+        name: groupData.attributes.name,
+      } : { id: null, name: null }
     };
   });
 }
@@ -62,16 +80,6 @@ export function TagsParser(data: any[]): Tag[] {
 }
 
 export function MangaParser(data: any): Manga {
-  // const titleVi = data.attributes.altTitles.find((item: any) => item.vi)?.vi;
-  // let title = titleVi
-  //   ? titleVi
-  //   : data.attributes.altTitles.find((item: any) => item.en)?.en;
-  // if (!title) {
-  //   title = data.attributes.altTitles.length > 0
-  //     ? data.attributes.altTitles[0][Object.keys(data.attributes.altTitles[0])[0]]
-  //     : data.attributes.title[Object.keys(data.attributes.title)[0]];
-  // }
-
   const titleVi = data.attributes.altTitles.find((item: any) => item.vi)?.vi;
   let title = titleVi
     ? titleVi
@@ -138,7 +146,7 @@ export async function getChapters(mangaID: string, language: string, limit: numb
     params: {
       limit: limit,
       translatedLanguage: [language],
-      includes: ['scanlation_group'],
+      includes: ['scanlation_group', 'manga'],
       contentRating: ['safe', 'suggestive', 'erotica', 'pornographic'],
       ...finalOrderQuery
     }
@@ -256,4 +264,59 @@ export async function getStaffPickMangas(): Promise<Manga[]> {
 
 
   return data.data.map((item: any) => MangaParser(item));
+}
+
+export async function getChapterbyID(id: string): Promise<Chapter> {
+  const { data } = await axiosInstance.get(`/chapter/${id}`, {
+    params: {
+      includes: ['scanlation_group', 'manga'],
+    }
+  });
+  const chapter = ChaptersParser([data.data])[0];
+  const manga = () => {
+    const mangaData = data.data.relationships.find((item: any) => item.type === 'manga');
+    const titleVi = mangaData.attributes.altTitles.find((item: any) => item.vi)?.vi;
+    let title = titleVi
+      ? titleVi
+      : mangaData.attributes.title[Object.keys(mangaData.attributes.title)[0]];
+    if (!title) {
+      title = mangaData.attributes.altTitles.find((item: any) => item.en)?.en;
+    }
+    return {
+      id: mangaData.id,
+      title: title,
+    }
+  }
+
+  const { data: atHomeData } = await axiosInstance.get(`/at-home/server/${id}`);
+  const base_url = siteConfig.mangadexAPI.imgURL;
+  const hash = atHomeData.chapter.hash;
+  const pages = atHomeData.chapter.data.map((item: string) => `${base_url}/data/${hash}/${item}`);
+
+  return { ...chapter, manga: manga(), pages };
+}
+
+export async function getChapterAggregate(mangaID: string, language: string, group: string): Promise<ChapterAggregate[]> {
+  const { data } = await axiosInstance.get(`/manga/${mangaID}/aggregate`, {
+    params: {
+      translatedLanguage: [language],
+      groups: [group],
+    }
+  });
+
+  const chapterList: ChapterAggregate[] = [];
+
+  for (const volumeKey in data.volumes) {
+    const volume = data.volumes[volumeKey];
+
+    for (const chapterKey in volume.chapters) {
+      const chapter = volume.chapters[chapterKey];
+      chapterList.push({
+        id: chapter.id,
+        chapter: chapter.chapter
+      });
+    }
+  }
+
+  return chapterList.sort((a, b) => parseFloat(a.chapter) - parseFloat(b.chapter));
 }

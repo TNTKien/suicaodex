@@ -2,19 +2,14 @@
 
 import { siteConfig } from "@/config/site";
 import {
-  Accordion,
-  AccordionItem,
   Button,
   ButtonGroup,
   Card,
-  CardBody,
   CardFooter,
   CardHeader,
-  Divider,
   Image,
   Link,
 } from "@nextui-org/react";
-import ChapterList from "./ChapterLists";
 import { getChapters, getMangaDetails } from "@/lib/data";
 import { FC, useEffect, useState } from "react";
 import { Chapter, Manga } from "@/types";
@@ -43,6 +38,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
         const chapters = await getChapters(mangaID, mangaDetails.language, 150);
         setLists(chapters);
       } catch (error) {
+        console.log(error);
         setFetchFailed(true);
       }
     };
@@ -119,17 +115,17 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
             {info.description && <MangaDesc desc={info.description} />}
 
             <ButtonGroup fullWidth radius="sm" color="danger" variant="faded">
-              <Button
-                as={Link}
-                href={`${siteConfig.mangadexAPI.webURL}/chapter/${lists[0]?.id}`}
-              >
-                Đọc mới nhất
-              </Button>
+              {lists[0]?.id && (
+                <Button as={Link} href={`/chapter/${lists[0]?.id}`}>
+                  Đọc mới nhất
+                </Button>
+              )}
+
               <Button
                 as={Link}
                 href={`${siteConfig.mangadexAPI.webURL}/title/${mangaID}`}
               >
-                Đọc từ đầu
+                MangaDex
               </Button>
               {info.raw && (
                 <Button as={Link} href={info.raw}>

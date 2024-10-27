@@ -29,10 +29,25 @@ export type Chapter = {
   chapter: string;
   title: string;
   updatedAt: string;
-  group: string;
+  group: {
+    id: string;
+    name: string;
+  }
+  language?: string;
+  pages?: string[];
+  manga?: {
+    id: string;
+    title: string;
+  };
 };
 
 export type LastestManga = {
   info: Manga;
   lastestChap: Chapter[];
 }
+
+export type ChapterAggregate = {
+  id: string;
+  chapter: string;
+}
+
