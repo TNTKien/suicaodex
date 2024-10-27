@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import NextImage from "next/image";
 import { NotFound } from "../notFound";
 import { ChapterNav } from "./ChapterNav";
+import { ChevronUp } from "lucide-react";
+import { ChapterInfo } from "./ChapterInfo";
 
 interface ChapterViewProps {
   chapterID: string;
@@ -57,6 +59,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
 
   return (
     <div className="flex flex-col gap-2">
+      <ChapterInfo chapterData={chapterData} />
       {chapterAggregate && (
         <ChapterNav
           chapterData={chapterData}
@@ -80,8 +83,16 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
         ))}
       </div>
 
+      {chapterAggregate && (
+        <ChapterNav
+          chapterData={chapterData}
+          chapterAggregate={chapterAggregate}
+        />
+      )}
+
       {/* <Button
         radius="none"
+        isIconOnly
         onPress={() => {
           window.scrollTo({
             top: 0,
@@ -89,7 +100,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
           });
         }}
       >
-        Back to top
+        <ChevronUp />
       </Button> */}
     </div>
   );
