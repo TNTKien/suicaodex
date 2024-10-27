@@ -83,25 +83,26 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
         ))}
       </div>
 
-      {chapterAggregate && (
+      {/* {chapterAggregate && (
         <ChapterNav
           chapterData={chapterData}
           chapterAggregate={chapterAggregate}
         />
-      )}
-
-      {/* <Button
-        radius="none"
-        isIconOnly
-        onPress={() => {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
-        }}
-      >
-        <ChevronUp />
-      </Button> */}
+      )} */}
+      <div className="flex items-end justify-end">
+        <Button
+          radius="none"
+          isIconOnly
+          onPress={() => {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
+          <ChevronUp />
+        </Button>
+      </div>
     </div>
   );
 };
