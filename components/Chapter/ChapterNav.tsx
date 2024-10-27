@@ -59,35 +59,6 @@ export const ChapterNav = ({
           <MoveLeft />
         </Button>
 
-        {/* <Dropdown type="listbox" closeOnSelect radius="sm">
-          <DropdownTrigger>
-            <Button>
-              {chapterData.chapter ? `Ch. ${chapterData.chapter}` : "Oneshot"}
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu
-            aria-label="Chapter List"
-            className="w-full max-h-[300] overflow-auto"
-            selectionMode="single"
-            selectedKeys={[chapterData.id]}
-          >
-            {chapterAggregate.map((chapter) => (
-              <DropdownItem
-                key={chapter.id}
-                href={`/chapter/${chapter.id}`}
-                textValue={`Chapter ${chapter.chapter}`}
-              >
-                {chapter.chapter !== "none"
-                  ? `Ch. ${chapter.chapter}`
-                  : "Oneshot"}
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
-        </Dropdown> */}
-        {/* <Button isDisabled>
-          {chapterData.chapter ? `Ch. ${chapterData.chapter}` : "Oneshot"}
-        </Button> */}
-
         <Autocomplete
           size="md"
           radius="none"
@@ -101,6 +72,15 @@ export const ChapterNav = ({
           }))}
           defaultSelectedKey={chapterData.id}
           disabledKeys={[chapterData.id]}
+          isClearable={false}
+          selectorButtonProps={{
+            disableAnimation: true,
+            radius: "none",
+          }}
+          popoverProps={{
+            radius: "none",
+            shadow: "sm",
+          }}
         >
           {(item) => (
             <AutocompleteItem

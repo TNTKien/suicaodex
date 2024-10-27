@@ -59,9 +59,9 @@ const ChapterListNew: FC<ChapterListProps> = ({ lists }) => {
   const renderCell = useCallback((chapter: Chapter, columnKey: React.Key) => {
     switch (columnKey) {
       case "chapter":
-        return <p>{chapter.chapter ? chapter.chapter : "Oneshot"}</p>;
+        return chapter.chapter ? chapter.chapter : "Oneshot";
       case "title":
-        return <p>{chapter.title ? chapter.title : "N/A"}</p>;
+        return chapter.title ? chapter.title : "N/A";
       case "group":
         return chapter.group.name ? chapter.group.name : "N/A";
       case "updatedAt":
