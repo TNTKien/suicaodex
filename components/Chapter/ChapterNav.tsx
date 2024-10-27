@@ -28,7 +28,7 @@ export const ChapterNav = ({
       : chapterData.id;
 
   return (
-    <ButtonGroup size="md" className="gap-1" fullWidth radius="none">
+    <ButtonGroup size="md" className="gap-1" fullWidth radius="sm">
       <Button
         as={Link}
         isIconOnly

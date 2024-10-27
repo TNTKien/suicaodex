@@ -91,7 +91,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
       )} */}
       <div className="flex items-end justify-end">
         <Button
-          radius="none"
+          radius="sm"
           isIconOnly
           onPress={() => {
             window.scrollTo({
