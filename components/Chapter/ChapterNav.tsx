@@ -2,11 +2,16 @@ import { Chapter, ChapterAggregate } from "@/types";
 import { Button, ButtonGroup } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import {
+  Accordion,
+  AccordionItem,
+  Autocomplete,
+  AutocompleteItem,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/react";
+import { is } from "date-fns/locale";
 import { MoveLeft, MoveRight, Users } from "lucide-react";
 
 interface ChapterNavProps {
@@ -79,9 +84,41 @@ export const ChapterNav = ({
             ))}
           </DropdownMenu>
         </Dropdown> */}
-        <Button isDisabled>
+        {/* <Button isDisabled>
           {chapterData.chapter ? `Ch. ${chapterData.chapter}` : "Oneshot"}
-        </Button>
+        </Button> */}
+
+        <Autocomplete
+          size="md"
+          radius="none"
+          aria-label={
+            chapterData.chapter ? `Ch. ${chapterData.chapter}` : "Oneshot"
+          }
+          defaultItems={chapterAggregate.map((chapter) => ({
+            key: chapter.id,
+            value: chapter.chapter ? `Ch. ${chapter.chapter}` : "Oneshot",
+            label: chapter.chapter ? `Ch. ${chapter.chapter}` : "Oneshot",
+          }))}
+          defaultSelectedKey={chapterData.id}
+          disabledKeys={[chapterData.id]}
+        >
+          {(item) => (
+            <AutocompleteItem
+              key={item.key}
+              value={item.value}
+              href={`/chapter/${item.key}`}
+            >
+              {item.label}
+            </AutocompleteItem>
+          )}
+          {/* {chapterAggregate.map((chapter) => (
+            <AutocompleteItem key={chapter.id} value={chapter.id}>
+              {chapter.chapter !== "none"
+                ? `Ch. ${chapter.chapter}`
+                : "Oneshot"}
+            </AutocompleteItem>
+          ))} */}
+        </Autocomplete>
 
         <Button
           as={Link}
