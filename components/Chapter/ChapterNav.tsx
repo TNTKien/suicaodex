@@ -35,11 +35,7 @@ export const ChapterNav = ({
   return (
     <>
       <div className="flex flex-col items-start">
-        <Link
-          showAnchorIcon
-          href={`/manga/${chapterData?.manga?.id}`}
-          color="danger"
-        >
+        <Link href={`/manga/${chapterData?.manga?.id}`} color="danger">
           {chapterData?.manga?.title}
         </Link>
         <p>{chapterData?.title}</p>
@@ -58,7 +54,7 @@ export const ChapterNav = ({
           <MoveLeft />
         </Button>
 
-        <Dropdown type="listbox" closeOnSelect radius="sm">
+        {/* <Dropdown type="listbox" closeOnSelect radius="sm">
           <DropdownTrigger>
             <Button>
               {chapterData.chapter ? `Ch. ${chapterData.chapter}` : "Oneshot"}
@@ -82,7 +78,10 @@ export const ChapterNav = ({
               </DropdownItem>
             ))}
           </DropdownMenu>
-        </Dropdown>
+        </Dropdown> */}
+        <Button isDisabled>
+          {chapterData.chapter ? `Ch. ${chapterData.chapter}` : "Oneshot"}
+        </Button>
 
         <Button
           as={Link}
