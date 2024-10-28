@@ -11,7 +11,6 @@ import {
 } from "@nextui-org/navbar";
 import { Link } from "@nextui-org/link";
 import NextLink from "next/link";
-
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { DiscordIcon, FacebookIcon, GithubIcon } from "@/components/icons";
@@ -21,9 +20,13 @@ import SearchSection from "./Search/SearchSection";
 import { useState } from "react";
 import SearchMobile from "./Search/SearchMobile";
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
-import { Link2, LinkIcon } from "lucide-react";
+import { Link2 } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { SignIn } from "./Session/SignIn";
 
 export const Navbar = () => {
+  const { data: session } = useSession();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const items = [
@@ -55,6 +58,10 @@ export const Navbar = () => {
       isBlurred
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
             <Image src={Logo} alt="SuicaoDex" className="max-w-14 h-auto" />
@@ -83,22 +90,20 @@ export const Navbar = () => {
           </Link>
           <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem className="hidden sm:flex">
+        <NavbarItem className="hidden sm:flex gap-2 place-items-center">
           <SearchSection />
+          <SignIn />
         </NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <ThemeSwitch />
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
+        <SignIn />
       </NavbarContent>
+
       <NavbarMenu>
         <NavbarMenuItem>
           <SearchMobile />
-
           <Listbox items={items} aria-label="Find me">
             {(item) => (
               <ListboxItem
