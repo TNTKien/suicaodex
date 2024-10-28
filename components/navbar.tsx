@@ -21,12 +21,9 @@ import { useState } from "react";
 import SearchMobile from "./Search/SearchMobile";
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
 import { Link2 } from "lucide-react";
-import { useSession } from "next-auth/react";
 import { SignIn } from "./Session/SignIn";
 
 export const Navbar = () => {
-  const { data: session } = useSession();
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const items = [

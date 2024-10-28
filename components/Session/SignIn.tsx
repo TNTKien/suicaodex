@@ -8,24 +8,50 @@ import { Tooltip } from "@nextui-org/react";
 
 export function SignIn() {
   const { data: session } = useSession();
-  if (!session)
-    return (
-      <Tooltip
-        content="Đăng nhập bằng Discord"
-        size="sm"
-        placement="bottom-end"
-        radius="sm"
-        closeDelay={200}
-      >
-        <Button
-          variant="flat"
-          color="primary"
-          isIconOnly
-          onPress={() => signIn("discord")}
+
+  return (
+    <>
+      {session ? (
+        <UserNav />
+      ) : (
+        <Tooltip
+          content="Đăng nhập bằng Discord"
+          size="sm"
+          placement="bottom-end"
+          radius="sm"
+          closeDelay={200}
         >
-          <LogInIcon />
-        </Button>
-      </Tooltip>
-    );
-  return <UserNav />;
+          <Button
+            variant="flat"
+            color="primary"
+            isIconOnly
+            onPress={() => signIn("discord")}
+          >
+            <LogInIcon />
+          </Button>
+        </Tooltip>
+      )}
+    </>
+  );
+
+  //   if (!session)
+  //     return (
+  //       <Tooltip
+  //         content="Đăng nhập bằng Discord"
+  //         size="sm"
+  //         placement="bottom-end"
+  //         radius="sm"
+  //         closeDelay={200}
+  //       >
+  //         <Button
+  //           variant="flat"
+  //           color="primary"
+  //           isIconOnly
+  //           onPress={() => signIn("discord")}
+  //         >
+  //           <LogInIcon />
+  //         </Button>
+  //       </Tooltip>
+  //     );
+  //   return <UserNav />;
 }
