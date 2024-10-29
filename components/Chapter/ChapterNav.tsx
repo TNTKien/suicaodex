@@ -110,7 +110,7 @@ export const ChapterNav = ({
         </DropdownTrigger>
 
         <DropdownMenu
-          className="h-[300px] overflow-scroll"
+          className="max-h-[300px] overflow-scroll"
           aria-label="Chapter List"
           variant="faded"
           defaultSelectedKeys={[chapterData.id]}
