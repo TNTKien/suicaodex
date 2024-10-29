@@ -45,8 +45,11 @@ type LastestManga = {
 }
 
 type ChapterAggregate = {
-  id: string;
-  chapter: string;
+  vol: string;
+  chapters: {
+    id: string;
+    chapter: string;
+  }[]
 }
 
 
@@ -306,17 +309,37 @@ export async function getChapterAggregate(mangaID: string, language: string, gro
 
   const chapterList: ChapterAggregate[] = [];
 
+  const result: ChapterAggregate[] = [];
+
   for (const volumeKey in data.volumes) {
     const volume = data.volumes[volumeKey];
+    const chaptersArray = [];
 
     for (const chapterKey in volume.chapters) {
       const chapter = volume.chapters[chapterKey];
-      chapterList.push({
-        id: chapter.id,
+
+      chaptersArray.push({
+        id: chapter.id,   // Lấy trường `id`
         chapter: chapter.chapter
       });
     }
+
+    chaptersArray.sort((a, b) =>
+      b.chapter.localeCompare(a.chapter, undefined, { numeric: true })
+    );
+
+    result.push({
+      vol: volumeKey,
+      chapters: chaptersArray
+    });
   }
 
-  return chapterList.sort((a, b) => parseFloat(a.chapter) - parseFloat(b.chapter));
+
+  result.sort((a, b) => {
+    if (a.vol === "none") return -1;
+    if (b.vol === "none") return 1;
+    return b.vol.localeCompare(a.vol, undefined, { numeric: true });
+  });
+
+  return result;
 }

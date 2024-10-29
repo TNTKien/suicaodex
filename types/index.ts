@@ -47,7 +47,10 @@ export type LastestManga = {
 }
 
 export type ChapterAggregate = {
-  id: string;
-  chapter: string;
+  vol: string;
+  chapters: {
+    id: string;
+    chapter: string;
+  }[]
 }
 

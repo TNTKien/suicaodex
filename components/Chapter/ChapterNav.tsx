@@ -1,8 +1,16 @@
 import { Chapter, ChapterAggregate } from "@/types";
 import { Button, ButtonGroup } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
-import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
-import { MoveLeft, MoveRight } from "lucide-react";
+import {
+  Autocomplete,
+  AutocompleteItem,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownSection,
+  DropdownTrigger,
+} from "@nextui-org/react";
+import { ChevronDownIcon, MoveLeft, MoveRight } from "lucide-react";
 
 interface ChapterNavProps {
   chapterData: Chapter;
@@ -13,19 +21,32 @@ export const ChapterNav = ({
   chapterData,
   chapterAggregate,
 }: ChapterNavProps) => {
-  const currentChapterIndex = chapterAggregate.findIndex(
-    (chapter) => chapter.id === chapterData.id
+  const currentVolIndex = chapterAggregate.findIndex((aggregate) =>
+    aggregate.chapters.some((chapter) => chapter.id === chapterData.id)
   );
 
-  const prevChapter =
-    currentChapterIndex > 0
-      ? chapterAggregate[currentChapterIndex - 1].id
-      : chapterData.id;
+  const currentChapterIndex = chapterAggregate[
+    currentVolIndex
+  ].chapters.findIndex((chapter) => chapter.id === chapterData.id);
 
-  const nextChapter =
-    currentChapterIndex < chapterAggregate.length - 1
-      ? chapterAggregate[currentChapterIndex + 1].id
-      : chapterData.id;
+  const prevChapter = chapterAggregate[currentVolIndex].chapters[
+    currentChapterIndex + 1
+  ]?.id
+    ? chapterAggregate[currentVolIndex].chapters[currentChapterIndex + 1]?.id
+    : chapterAggregate[currentVolIndex + 1]?.chapters[0]?.id;
+
+  const nextChapter = chapterAggregate[currentVolIndex].chapters[
+    currentChapterIndex - 1
+  ]?.id
+    ? chapterAggregate[currentVolIndex].chapters[currentChapterIndex - 1]?.id
+    : chapterAggregate[currentVolIndex - 1]?.chapters.at(-1)?.id;
+
+  const vol_label =
+    chapterAggregate[currentVolIndex].vol !== "none"
+      ? `Vol. ${chapterAggregate[currentVolIndex].vol}`
+      : "No Volume";
+  const chapter_label =
+    chapterData.chapter !== null ? `Ch. ${chapterData.chapter}` : "Oneshot";
 
   return (
     <ButtonGroup size="md" className="gap-1" fullWidth radius="sm">
@@ -33,12 +54,12 @@ export const ChapterNav = ({
         as={Link}
         isIconOnly
         href={`/chapter/${prevChapter}`}
-        isDisabled={prevChapter === chapterData.id}
+        isDisabled={!prevChapter}
       >
         <MoveLeft />
       </Button>
 
-      <Autocomplete
+      {/* <Autocomplete
         size="md"
         radius="none"
         aria-label={
@@ -74,13 +95,46 @@ export const ChapterNav = ({
             {item.label}
           </AutocompleteItem>
         )}
-      </Autocomplete>
+      </Autocomplete> */}
+      <Button isDisabled>
+        {vol_label} - {chapter_label}
+      </Button>
+      <Dropdown placement="bottom-end" radius="sm">
+        <DropdownTrigger>
+          <Button isIconOnly>
+            <ChevronDownIcon />
+          </Button>
+        </DropdownTrigger>
 
+        <DropdownMenu
+          className="max-h-[300] overflow-scroll"
+          aria-label="Chapter List"
+          variant="faded"
+          defaultSelectedKeys={[chapterData.id]}
+          selectionMode="single"
+        >
+          {chapterAggregate.map((chAgg) => (
+            <DropdownSection
+              title={chAgg.vol !== "none" ? `Vol. ${chAgg.vol}` : "No Volume"}
+              key={chAgg.vol}
+              showDivider={chapterAggregate.length > 1}
+            >
+              {chAgg.chapters.map((chapter) => (
+                <DropdownItem key={chapter.id} href={`/chapter/${chapter.id}`}>
+                  {chapter.chapter !== "none"
+                    ? `Ch. ${chapter.chapter}`
+                    : "Oneshot"}
+                </DropdownItem>
+              ))}
+            </DropdownSection>
+          ))}
+        </DropdownMenu>
+      </Dropdown>
       <Button
         as={Link}
         isIconOnly
         href={`/chapter/${nextChapter}`}
-        isDisabled={nextChapter === chapterData.id}
+        isDisabled={!nextChapter}
       >
         <MoveRight />
       </Button>
