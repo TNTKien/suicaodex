@@ -9,6 +9,9 @@ import {
   DropdownMenu,
   DropdownSection,
   DropdownTrigger,
+  Listbox,
+  ListboxItem,
+  ListboxSection,
 } from "@nextui-org/react";
 import { ChevronDownIcon, MoveLeft, MoveRight } from "lucide-react";
 
@@ -99,12 +102,7 @@ export const ChapterNav = ({
       <Button isDisabled>
         {vol_label} - {chapter_label}
       </Button>
-      <Dropdown
-        placement="bottom-end"
-        radius="sm"
-        className="h-[250]"
-        type="listbox"
-      >
+      <Dropdown placement="bottom-end" radius="sm" type="listbox">
         <DropdownTrigger>
           <Button isIconOnly>
             <ChevronDownIcon />
@@ -112,7 +110,7 @@ export const ChapterNav = ({
         </DropdownTrigger>
 
         <DropdownMenu
-          className="h-[250] overflow-scroll"
+          className="h-[300px] overflow-scroll"
           aria-label="Chapter List"
           variant="faded"
           defaultSelectedKeys={[chapterData.id]}
