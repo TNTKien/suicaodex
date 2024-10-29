@@ -99,7 +99,12 @@ export const ChapterNav = ({
       <Button isDisabled>
         {vol_label} - {chapter_label}
       </Button>
-      <Dropdown placement="bottom-end" radius="sm">
+      <Dropdown
+        placement="bottom-end"
+        radius="sm"
+        className="h-[250]"
+        type="listbox"
+      >
         <DropdownTrigger>
           <Button isIconOnly>
             <ChevronDownIcon />
@@ -112,6 +117,7 @@ export const ChapterNav = ({
           variant="faded"
           defaultSelectedKeys={[chapterData.id]}
           selectionMode="single"
+          disabledKeys={[chapterData.id]}
         >
           {chapterAggregate.map((chAgg) => (
             <DropdownSection
