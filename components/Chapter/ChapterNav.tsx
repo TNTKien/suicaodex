@@ -117,11 +117,11 @@ export const ChapterNav = ({
           selectionMode="single"
           disabledKeys={[chapterData.id]}
         >
-          {chapterAggregate.map((chAgg) => (
+          {chapterAggregate.map((chAgg, index) => (
             <DropdownSection
               title={chAgg.vol !== "none" ? `Vol. ${chAgg.vol}` : "No Volume"}
               key={chAgg.vol}
-              showDivider={chapterAggregate.length > 1}
+              showDivider={index !== chapterAggregate.length - 1}
             >
               {chAgg.chapters.map((chapter) => (
                 <DropdownItem key={chapter.id} href={`/chapter/${chapter.id}`}>
