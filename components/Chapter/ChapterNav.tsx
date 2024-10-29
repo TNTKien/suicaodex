@@ -13,7 +13,7 @@ import {
   ListboxItem,
   ListboxSection,
 } from "@nextui-org/react";
-import { ChevronDownIcon, MoveLeft, MoveRight } from "lucide-react";
+import { ChevronDownIcon, MoveLeft, MoveRight, Settings2 } from "lucide-react";
 
 interface ChapterNavProps {
   chapterData: Chapter;
@@ -62,43 +62,6 @@ export const ChapterNav = ({
         <MoveLeft />
       </Button>
 
-      {/* <Autocomplete
-        size="md"
-        radius="none"
-        aria-label={
-          chapterData.chapter !== "none"
-            ? `Ch. ${chapterData.chapter}`
-            : "Oneshot"
-        }
-        defaultItems={chapterAggregate.map((chapter) => ({
-          key: chapter.id,
-          value:
-            chapter.chapter !== "none" ? `Ch. ${chapter.chapter}` : "Oneshot",
-          label:
-            chapter.chapter !== "none" ? `Ch. ${chapter.chapter}` : "Oneshot",
-        }))}
-        defaultSelectedKey={chapterData.id}
-        disabledKeys={[chapterData.id]}
-        isClearable={false}
-        selectorButtonProps={{
-          disableAnimation: true,
-          radius: "none",
-        }}
-        popoverProps={{
-          radius: "none",
-          shadow: "sm",
-        }}
-      >
-        {(item) => (
-          <AutocompleteItem
-            key={item.key}
-            value={item.value}
-            href={`/chapter/${item.key}`}
-          >
-            {item.label}
-          </AutocompleteItem>
-        )}
-      </Autocomplete> */}
       <Button isDisabled>
         {vol_label} - {chapter_label}
       </Button>
@@ -134,6 +97,9 @@ export const ChapterNav = ({
           ))}
         </DropdownMenu>
       </Dropdown>
+      {/* <Button isIconOnly>
+        <Settings2 />
+      </Button> */}
       <Button
         as={Link}
         isIconOnly

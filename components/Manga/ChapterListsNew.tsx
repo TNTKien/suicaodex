@@ -116,7 +116,7 @@ const ChapterListNew: FC<ChapterListProps> = ({ lists }) => {
               <TableRow
                 as={Link}
                 href={`/chapter/${item.id}`}
-                className="border-b-1 hover:bg-default/50"
+                className={`${items.length > 1 ? "border-b-1" : ""} hover:bg-default/50`}
                 key={item.id}
               >
                 {(columnKey) => (
