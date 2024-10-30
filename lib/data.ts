@@ -63,6 +63,26 @@ type ChapterAggregate = {
   }[]
 }
 
+type MangaStats = {
+  rating: {
+    bayesian: number;
+    distribution: {
+      '1': number;
+      '2': number;
+      '3': number;
+      '4': number;
+      '5': number;
+      '6': number;
+      '7': number;
+      '8': number;
+      '9': number;
+      '10': number;
+    }
+    max: number;
+  },
+  follows: number;
+}
+
 
 
 export function ChaptersParser(data: any[]): Chapter[] {
@@ -390,4 +410,36 @@ export function groupChaptersByVolume(chapters: Chapter[]): Volume[] {
 
   // Convert the volume map to an array of volumes
   return sortedVolumeMap.map((vol) => volumeMap[vol]);
+}
+
+export function MangaStatsParser(data: any, id: string): MangaStats {
+  const distribution = data.statistics[id].rating.distribution;
+
+  // Find the max value in the distribution
+  const max = Math.max(...Object.values(distribution) as number[]);
+
+  return {
+    rating: {
+      bayesian: data.statistics[id].rating.bayesian,
+      distribution: {
+        '1': distribution['1'],
+        '2': distribution['2'],
+        '3': distribution['3'],
+        '4': distribution['4'],
+        '5': distribution['5'],
+        '6': distribution['6'],
+        '7': distribution['7'],
+        '8': distribution['8'],
+        '9': distribution['9'],
+        '10': distribution['10'],
+      },
+      max: max,
+    },
+    follows: data.statistics[id].follows,
+  };
+}
+
+export async function getMangaRating(mangaID: string): Promise<MangaStats> {
+  const { data } = await axiosInstance.get(`/statistics/manga/${mangaID}`);
+  return MangaStatsParser(data, mangaID);
 }
