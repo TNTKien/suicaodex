@@ -14,7 +14,7 @@ export const ChapterCard = ({ chapters }: ChapterCardProps) => {
     return (
       <Listbox aria-label="Volume">
         <ListboxSection
-          title={chapters.chapter ? `Ch. ${chapters.chapter}` : "Oneshot"}
+          title={chapters.chapter ? `Chapter ${chapters.chapter}` : "Oneshot"}
           classNames={{
             heading: "text-md font-semibold",
             group: "pl-4",
