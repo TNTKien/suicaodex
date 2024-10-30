@@ -26,7 +26,7 @@ export const ChapterCard = ({ chapters }: ChapterCardProps) => {
               key={c.id}
               href={`/chapter/${c.id}`}
               description={
-                <div className="flex flex-row items-end gap-1">
+                <div className="flex flex-row items-center gap-1">
                   <Users size={20} />
                   <p className="text-sm">
                     {c.group.name ? c.group.name : "No Group"}
@@ -66,7 +66,7 @@ export const ChapterCard = ({ chapters }: ChapterCardProps) => {
         textValue="Volume"
         aria-label="Volume"
         description={
-          <div className="flex flex-row items-end gap-1">
+          <div className="flex flex-row gap-1 items-center">
             <Users size={20} />
             <p className="text-sm">
               {chapters.group[0].group.name
