@@ -5,20 +5,26 @@ import {
   Button,
   ButtonGroup,
   Card,
+  CardBody,
   CardFooter,
   CardHeader,
   Image,
   Link,
 } from "@nextui-org/react";
-import { getChapters, getMangaDetails } from "@/lib/data";
+import {
+  getChapters,
+  getMangaDetails,
+  groupChaptersByVolume,
+} from "@/lib/data";
 import { FC, useEffect, useState } from "react";
-import { Chapter, Manga } from "@/types";
+import { Chapter, Manga, Volume } from "@/types";
 import MangaSkeleton from "./MangaSkeleton";
 import MangaDesc from "./MangaDesc";
 import MangaTags from "../MangaTags/TagsChip";
 import { NotFound } from "../notFound";
 import ChapterListNew from "./ChapterListsNew";
 import NextImage from "next/image";
+import { ChapterVolume } from "../Chapter/ChapterTable/ChapterVolume";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -27,6 +33,7 @@ interface MangaDetailsProps {
 const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
   const [info, setInfo] = useState<Manga | null>(null);
   const [lists, setLists] = useState<Chapter[]>([]);
+  const [volume, setVolume] = useState<Volume[]>([]);
   const [fetchFailed, setFetchFailed] = useState(false);
   const coverURL = siteConfig.mangadexAPI.coverURL;
 
@@ -37,6 +44,10 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
         setInfo(mangaDetails);
         const chapters = await getChapters(mangaID, mangaDetails.language, 150);
         setLists(chapters);
+        // console.log(chapters);
+
+        const volumes = groupChaptersByVolume(chapters);
+        setVolume(volumes);
       } catch (error) {
         console.log(error);
         setFetchFailed(true);
@@ -61,7 +72,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
   return (
     <div className="flex flex-col md:flex-row gap-2 mb-8">
       <div className="w-full flex flex-col gap-2">
-        <Card radius="md" shadow="sm" className="flex flex-col rounded-t-none">
+        <Card radius="md" shadow="sm" className="flex flex-col rounded-t-none ">
           <Image
             as={NextImage}
             removeWrapper
@@ -135,9 +146,45 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
             </ButtonGroup>
           </CardFooter>
         </Card>
-        <div className="flex flex-col md:flex-row gap-2">
-          <ChapterListNew lists={lists} />
-        </div>
+        {/* <Card className="flex flex-col md:flex-row gap-2">
+          <Card className="w-full md:w-1/2 bg-inherit" shadow="none">
+            <CardBody className="flex flex-col gap-2">
+              {lists[0]?.id && (
+                <Button
+                  as={Link}
+                  href={`/chapter/${lists[0]?.id}`}
+                  radius="sm"
+                  variant="faded"
+                  color="danger"
+                  size="md"
+                >
+                  Đọc mới nhất
+                </Button>
+              )}
+              <ButtonGroup
+                fullWidth
+                radius="sm"
+                variant="faded"
+                size="md"
+                color="danger"
+              >
+                <Button
+                  as={Link}
+                  href={`${siteConfig.mangadexAPI.webURL}/title/${mangaID}`}
+                >
+                  MangaDex
+                </Button>
+                {info.raw && (
+                  <Button as={Link} href={info.raw}>
+                    Raw
+                  </Button>
+                )}
+              </ButtonGroup>
+            </CardBody>
+          </Card>
+          <ChapterVolume volume={volume} />
+        </Card> */}
+        <ChapterVolume volume={volume} />
       </div>
     </div>
   );

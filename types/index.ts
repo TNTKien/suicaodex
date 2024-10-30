@@ -26,6 +26,7 @@ export type Manga = {
 
 export type Chapter = {
   id: string;
+  vol: string;
   chapter: string;
   title: string;
   updatedAt: string;
@@ -39,6 +40,16 @@ export type Chapter = {
     id: string;
     title: string;
   };
+};
+
+export type ChapterGroup = {
+  chapter: string;
+  group: Chapter[];
+};
+
+export type Volume = {
+  vol: string;
+  chapters: ChapterGroup[];
 };
 
 export type LastestManga = {

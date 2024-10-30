@@ -4,6 +4,7 @@ import { siteConfig } from "@/config/site";
 
 type Chapter = {
   id: string;
+  vol: string;
   chapter: string;
   title: string;
   updatedAt: string;
@@ -17,6 +18,16 @@ type Chapter = {
     id: string;
     title: string;
   };
+};
+
+type ChapterGroup = {
+  chapter: string;
+  group: Chapter[];
+};
+
+type Volume = {
+  vol: string;
+  chapters: ChapterGroup[];
 };
 
 type Tag = {
@@ -61,6 +72,7 @@ export function ChaptersParser(data: any[]): Chapter[] {
     );
     return {
       id: item.id,
+      vol: item.attributes.volume,
       chapter: item.attributes.chapter,
       title: item.attributes.title,
       updatedAt: item.attributes.updatedAt,
@@ -342,4 +354,40 @@ export async function getChapterAggregate(mangaID: string, language: string, gro
   });
 
   return result;
+}
+
+export function groupChaptersByVolume(chapters: Chapter[]): Volume[] {
+  const volumeMap: { [key: string]: Volume } = {};
+
+  chapters.forEach((chapter) => {
+    const { vol, chapter: chapNum } = chapter;
+
+    // Create the volume if it doesn't exist
+    if (!volumeMap[vol]) {
+      volumeMap[vol] = { vol, chapters: [] };
+    }
+
+    // Find or create the chapter group within the volume
+    let chapterGroup = volumeMap[vol].chapters.find(
+      (group) => group.chapter === chapNum
+    );
+
+    if (!chapterGroup) {
+      chapterGroup = { chapter: chapNum, group: [] };
+      volumeMap[vol].chapters.push(chapterGroup);
+    }
+
+    // Add the chapter to the chapter group
+    chapterGroup.group.push(chapter);
+  });
+  //Sort the volume by volume number, from highest to lowest, if the volume is not a number, it will be placed at the start
+
+  const sortedVolumeMap = Object.keys(volumeMap).sort((a, b) => {
+    if (a === "null") return -1;
+    if (b === "null") return 1;
+    return b.localeCompare(a, undefined, { numeric: true });
+  });
+
+  // Convert the volume map to an array of volumes
+  return sortedVolumeMap.map((vol) => volumeMap[vol]);
 }
