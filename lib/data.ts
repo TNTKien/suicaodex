@@ -191,6 +191,28 @@ export async function getChapters(mangaID: string, language: string, limit: numb
   return ChaptersParser(data.data);
 }
 
+export async function getFirstChapter(mangaID: string, language: string) {
+  const order = {
+    volume: 'asc',
+    chapter: 'asc'
+  }
+  const finalOrderQuery: { [key: string]: string } = {};
+  for (const [key, value] of Object.entries(order)) {
+    finalOrderQuery[`order[${key}]`] = value;
+  };
+
+  const { data } = await axiosInstance.get(`/manga/${mangaID}/feed`, {
+    params: {
+      limit: 1,
+      translatedLanguage: [language],
+      includes: ['scanlation_group', 'manga'],
+      contentRating: ['safe', 'suggestive', 'erotica', 'pornographic'],
+      ...finalOrderQuery
+    }
+  });
+  return ChaptersParser(data.data)[0];
+}
+
 
 export async function SearchManga(title: string, adultContent: boolean): Promise<Manga[]> {
   const searchParams = {

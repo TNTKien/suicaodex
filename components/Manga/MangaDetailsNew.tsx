@@ -2,6 +2,7 @@
 
 import { siteConfig } from "@/config/site";
 import {
+  Badge,
   Button,
   ButtonGroup,
   Card,
@@ -12,6 +13,7 @@ import {
 } from "@nextui-org/react";
 import {
   getChapters,
+  getFirstChapter,
   getMangaDetails,
   getMangaRating,
   groupChaptersByVolume,
@@ -25,7 +27,13 @@ import { NotFound } from "../notFound";
 import NextImage from "next/image";
 import { ChapterVolume } from "../Chapter/ChapterTable/ChapterVolume";
 import { MangaRating } from "./MangaRating";
-import { Archive, BookOpenCheck, LibraryBig } from "lucide-react";
+import {
+  Archive,
+  BookOpen,
+  BookOpenCheck,
+  BookOpenText,
+  LibraryBig,
+} from "lucide-react";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -36,6 +44,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
   const [lists, setLists] = useState<Chapter[]>([]);
   const [volume, setVolume] = useState<Volume[]>([]);
   const [rating, setRating] = useState<MangaStats | null>(null);
+  const [firstChapter, setFirstChapter] = useState<Chapter | null>(null);
   const [fetchFailed, setFetchFailed] = useState(false);
   const coverURL = siteConfig.mangadexAPI.coverURL;
 
@@ -50,6 +59,8 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
         setVolume(volumes);
         const stats = await getMangaRating(mangaID);
         setRating(stats);
+        const first = await getFirstChapter(mangaID, mangaDetails.language);
+        setFirstChapter(first);
       } catch (error) {
         console.log(error);
         setFetchFailed(true);
@@ -132,23 +143,40 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
           <div className="w-full md:w-1/2 max-h-fit rounded-lg shadow-small bg-content1">
             <div className="flex flex-col gap-2 p-3">
               {lists[0]?.id && (
-                <Button
-                  as={Link}
-                  href={
-                    lists[0]?.externalUrl
-                      ? lists[0]?.externalUrl
-                      : `/chapter/${lists[0]?.id}`
-                  }
-                  isExternal={lists[0]?.externalUrl ? true : false}
-                  radius="sm"
+                <ButtonGroup
                   variant="faded"
                   color="danger"
                   size="md"
-                  startContent={<BookOpenCheck />}
-                  className="font-semibold"
+                  fullWidth
+                  radius="sm"
                 >
-                  Đọc mới nhất
-                </Button>
+                  <Button
+                    as={Link}
+                    href={
+                      lists[0]?.externalUrl
+                        ? lists[0]?.externalUrl
+                        : `/chapter/${lists[0]?.id}`
+                    }
+                    isExternal={lists[0]?.externalUrl ? true : false}
+                    startContent={<BookOpenCheck />}
+                    className="font-semibold"
+                  >
+                    Đọc mới nhất
+                  </Button>
+                  <Button
+                    startContent={<BookOpenText />}
+                    as={Link}
+                    href={
+                      firstChapter?.externalUrl
+                        ? firstChapter?.externalUrl
+                        : `/chapter/${firstChapter?.id}`
+                    }
+                    isExternal={firstChapter?.externalUrl ? true : false}
+                    className="font-semibold"
+                  >
+                    Đọc từ đầu
+                  </Button>
+                </ButtonGroup>
               )}
               <ButtonGroup
                 fullWidth

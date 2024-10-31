@@ -1,15 +1,49 @@
 "use client";
 
 import { Volume } from "@/types";
-import { Accordion, AccordionItem } from "@nextui-org/react";
+import {
+  Accordion,
+  AccordionItem,
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+  Link,
+} from "@nextui-org/react";
 import { ChapterCard } from "./ChapterCard";
 import { ListTree, ListX } from "lucide-react";
+import NotFoundImg from "@/public/404.png";
+import Image from "next/image";
 
 interface ChapterVolumeProps {
   volume: Volume[];
 }
 
 export const ChapterVolume = ({ volume }: ChapterVolumeProps) => {
+  if (volume.length === 0)
+    return (
+      <Card className="w-full rounded-lg">
+        <CardHeader className="flex gap-3">
+          <Button
+            fullWidth
+            radius="sm"
+            variant="faded"
+            color="danger"
+            className="font-semibold"
+            startContent={<ListX />}
+            isDisabled
+          >
+            Truyện chưa có chapter nào!
+          </Button>
+        </CardHeader>
+
+        <CardBody className="items-center justify-center">
+          <Image src={NotFoundImg} alt="not found" />
+        </CardBody>
+      </Card>
+    );
   return (
     <Accordion
       variant="shadow"
@@ -17,7 +51,7 @@ export const ChapterVolume = ({ volume }: ChapterVolumeProps) => {
       selectionMode="multiple"
       defaultExpandedKeys={["0", "1"]}
       aria-label="Volume"
-      className="shadow-small max-h-fit rounded-lg"
+      className="shadow-small rounded-lg"
       itemClasses={{
         heading: "font-semibold",
       }}
