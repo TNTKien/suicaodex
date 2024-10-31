@@ -7,21 +7,27 @@ import {
   Button,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
-  Divider,
-  Link,
 } from "@nextui-org/react";
 import { ChapterCard } from "./ChapterCard";
 import { ListTree, ListX } from "lucide-react";
 import NotFoundImg from "@/public/404.png";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 interface ChapterVolumeProps {
   volume: Volume[];
 }
 
 export const ChapterVolume = ({ volume }: ChapterVolumeProps) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  if (!isLoaded) return null;
+
   if (volume.length === 0)
     return (
       <Card className="w-full rounded-lg">
@@ -44,6 +50,7 @@ export const ChapterVolume = ({ volume }: ChapterVolumeProps) => {
         </CardBody>
       </Card>
     );
+
   return (
     <Accordion
       variant="shadow"

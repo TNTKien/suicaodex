@@ -11,7 +11,7 @@ export function SignIn() {
 
   return (
     <>
-      {session ? (
+      {!!session ? (
         <UserNav />
       ) : (
         <Tooltip
@@ -33,25 +33,4 @@ export function SignIn() {
       )}
     </>
   );
-
-  //   if (!session)
-  //     return (
-  //       <Tooltip
-  //         content="Đăng nhập bằng Discord"
-  //         size="sm"
-  //         placement="bottom-end"
-  //         radius="sm"
-  //         closeDelay={200}
-  //       >
-  //         <Button
-  //           variant="flat"
-  //           color="primary"
-  //           isIconOnly
-  //           onPress={() => signIn("discord")}
-  //         >
-  //           <LogInIcon />
-  //         </Button>
-  //       </Tooltip>
-  //     );
-  //   return <UserNav />;
 }

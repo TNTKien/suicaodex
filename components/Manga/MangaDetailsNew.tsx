@@ -2,7 +2,6 @@
 
 import { siteConfig } from "@/config/site";
 import {
-  Badge,
   Button,
   ButtonGroup,
   Card,
@@ -27,13 +26,7 @@ import { NotFound } from "../notFound";
 import NextImage from "next/image";
 import { ChapterVolume } from "../Chapter/ChapterTable/ChapterVolume";
 import { MangaRating } from "./MangaRating";
-import {
-  Archive,
-  BookOpen,
-  BookOpenCheck,
-  BookOpenText,
-  LibraryBig,
-} from "lucide-react";
+import { Archive, BookOpenCheck, BookOpenText, LibraryBig } from "lucide-react";
 
 interface MangaDetailsProps {
   mangaID: string;
