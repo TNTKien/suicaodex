@@ -56,6 +56,7 @@ export type Volume = {
 export type LastestManga = {
   info: Manga;
   lastestChap: Chapter[];
+  total?: number;
 }
 
 export type ChapterAggregate = {

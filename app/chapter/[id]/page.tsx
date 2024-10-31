@@ -1,5 +1,4 @@
 import ChapterView from "@/components/Chapter/ChapterView";
-import ChapterTest from "@/components/Chapter/ChapterView";
 import { getChapterbyID } from "@/lib/data";
 import { Metadata } from "next";
 

@@ -54,6 +54,7 @@ type Manga = {
 type LastestManga = {
   info: Manga;
   lastestChap: Chapter[];
+  total?: number;
 }
 
 type ChapterAggregate = {
@@ -250,6 +251,32 @@ export async function getLastestMangas(): Promise<LastestManga[]> {
   });
 
   return Promise.all(lastestManga);
+}
+
+export async function getLatestMangas(limit: number, offset: number): Promise<LastestManga[]> {
+  const { data } = await axiosInstance.get(`/manga?`, {
+    params: {
+      limit: limit,
+      offset: offset,
+      includes: ['cover_art', 'author', 'artist'],
+      availableTranslatedLanguage: ['vi'],
+      hasAvailableChapters: 'true',
+    }
+  });
+
+  const lastestManga = data.data.map(async (item: any) => {
+    const info = MangaParser(item);
+    const lastestChap = await getChapters(item.id, info.language, 3);
+    return { info, lastestChap };
+  });
+
+  const total = data.total;
+
+  return Promise.all(lastestManga).then((res) => {
+    return res.map((item, index) => {
+      return { ...item, total: total }
+    });
+  });
 }
 
 export async function getPopularMangas(): Promise<Manga[]> {
