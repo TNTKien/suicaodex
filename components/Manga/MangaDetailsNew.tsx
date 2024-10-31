@@ -5,12 +5,10 @@ import {
   Button,
   ButtonGroup,
   Card,
-  CardBody,
   CardFooter,
   CardHeader,
   Image,
   Link,
-  Progress,
 } from "@nextui-org/react";
 import {
   getChapters,
@@ -24,18 +22,10 @@ import MangaSkeleton from "./MangaSkeleton";
 import MangaDesc from "./MangaDesc";
 import MangaTags from "../MangaTags/TagsChip";
 import { NotFound } from "../notFound";
-import ChapterListNew from "./ChapterListsNew";
 import NextImage from "next/image";
 import { ChapterVolume } from "../Chapter/ChapterTable/ChapterVolume";
-import { se } from "date-fns/locale";
 import { MangaRating } from "./MangaRating";
-import {
-  Archive,
-  BookOpenCheck,
-  Library,
-  LibraryBig,
-  LibrarySquare,
-} from "lucide-react";
+import { Archive, BookOpenCheck, LibraryBig } from "lucide-react";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -136,72 +126,20 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
 
           <CardFooter className="bottom-0 flex flex-col bg-inherit items-start gap-2 z-10">
             {info.description && <MangaDesc desc={info.description} />}
-
-            {/* <ButtonGroup fullWidth radius="sm" color="danger" variant="faded">
-              {lists[0]?.id && (
-                <Button as={Link} href={`/chapter/${lists[0]?.id}`}>
-                  Đọc mới nhất
-                </Button>
-              )}
-
-              <Button
-                as={Link}
-                href={`${siteConfig.mangadexAPI.webURL}/title/${mangaID}`}
-              >
-                MangaDex
-              </Button>
-              {info.raw && (
-                <Button as={Link} href={info.raw}>
-                  Raw
-                </Button>
-              )}
-            </ButtonGroup> */}
           </CardFooter>
         </Card>
         <div className="flex flex-col md:flex-row gap-2">
-          {/* <Card className="w-full md:w-1/2 max-h-fit" shadow="sm">
-            <CardBody className="flex flex-col gap-2">
-              {lists[0]?.id && (
-                <Button
-                  as={Link}
-                  href={`/chapter/${lists[0]?.id}`}
-                  radius="sm"
-                  variant="faded"
-                  color="danger"
-                  size="md"
-                >
-                  Đọc mới nhất
-                </Button>
-              )}
-              <ButtonGroup
-                fullWidth
-                radius="sm"
-                variant="faded"
-                size="md"
-                color="danger"
-              >
-                <Button
-                  as={Link}
-                  href={`${siteConfig.mangadexAPI.webURL}/title/${mangaID}`}
-                >
-                  MangaDex
-                </Button>
-                {info.raw && (
-                  <Button as={Link} href={info.raw}>
-                    Raw
-                  </Button>
-                )}
-              </ButtonGroup>
-
-              {rating && <MangaRating stats={rating} />}
-            </CardBody>
-          </Card> */}
           <div className="w-full md:w-1/2 max-h-fit rounded-lg shadow-small bg-content1">
             <div className="flex flex-col gap-2 p-3">
               {lists[0]?.id && (
                 <Button
                   as={Link}
-                  href={`/chapter/${lists[0]?.id}`}
+                  href={
+                    lists[0]?.externalUrl
+                      ? lists[0]?.externalUrl
+                      : `/chapter/${lists[0]?.id}`
+                  }
+                  isExternal={lists[0]?.externalUrl ? true : false}
                   radius="sm"
                   variant="faded"
                   color="danger"
@@ -224,6 +162,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
                   as={Link}
                   href={`${siteConfig.mangadexAPI.webURL}/title/${mangaID}`}
                   className="font-semibold"
+                  isExternal={true}
                 >
                   MangaDex
                 </Button>
@@ -233,6 +172,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
                     as={Link}
                     href={info.raw}
                     className="font-semibold"
+                    isExternal={true}
                   >
                     Raw
                   </Button>
@@ -244,7 +184,6 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
           </div>
           <ChapterVolume volume={volume} />
         </div>
-        {/* <ChapterVolume volume={volume} /> */}
       </div>
     </div>
   );

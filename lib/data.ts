@@ -97,6 +97,7 @@ export function ChaptersParser(data: any[]): Chapter[] {
       chapter: item.attributes.chapter,
       title: item.attributes.title,
       updatedAt: item.attributes.updatedAt,
+      externalUrl: item.attributes.externalUrl,
       language: item.attributes.translatedLanguage,
       group: groupData ? {
         id: groupData.id,

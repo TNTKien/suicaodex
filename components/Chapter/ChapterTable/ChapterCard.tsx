@@ -3,7 +3,7 @@
 import { formatTimeToNow } from "@/lib/utils";
 import { ChapterGroup } from "@/types";
 import { Listbox, ListboxItem, ListboxSection } from "@nextui-org/react";
-import { CornerDownRight, Users } from "lucide-react";
+import { CornerDownRight, ExternalLink, Users } from "lucide-react";
 
 interface ChapterCardProps {
   chapters: ChapterGroup;
@@ -24,7 +24,8 @@ export const ChapterCard = ({ chapters }: ChapterCardProps) => {
             <ListboxItem
               className="bg-default/30 mb-2"
               key={c.id}
-              href={`/chapter/${c.id}`}
+              href={c.externalUrl ? c.externalUrl : `/chapter/${c.id}`}
+              target={c.externalUrl ? "_blank" : "_self"}
               description={
                 <div className="flex flex-row items-center gap-1">
                   <Users size={20} />
@@ -45,11 +46,14 @@ export const ChapterCard = ({ chapters }: ChapterCardProps) => {
                 </time>
               }
             >
-              <p className="font-semibold text-sm md:text-base">
-                {chapters.chapter
-                  ? `${c.title ? c.title : "Ch. " + chapters.chapter}`
-                  : "Oneshot"}
-              </p>
+              <div className="flex flex-row gap-1 items-center">
+                <p className="font-semibold text-sm md:text-base">
+                  {chapters.chapter
+                    ? `${c.title ? c.title : "Ch. " + chapters.chapter}`
+                    : "Oneshot"}
+                </p>
+                {c.externalUrl && <ExternalLink size={18} />}
+              </div>
             </ListboxItem>
           ))}
         </ListboxSection>
@@ -61,7 +65,12 @@ export const ChapterCard = ({ chapters }: ChapterCardProps) => {
     <Listbox aria-label="Volume">
       <ListboxItem
         className="bg-default/30"
-        href={`/chapter/${chapters.group[0].id}`}
+        href={
+          chapters.group[0].externalUrl
+            ? chapters.group[0].externalUrl
+            : `/chapter/${chapters.group[0].id}`
+        }
+        target={chapters.group[0].externalUrl ? "_blank" : "_self"}
         key={chapters.group[0].id}
         textValue="Volume"
         aria-label="Volume"
@@ -84,12 +93,15 @@ export const ChapterCard = ({ chapters }: ChapterCardProps) => {
           </time>
         }
       >
-        <p className="font-semibold text-sm md:text-base">
-          {chapters.chapter
-            ? `Ch. ${chapters.chapter}
+        <div className="flex flex-row gap-1 items-center">
+          <p className="font-semibold text-sm md:text-base">
+            {chapters.chapter
+              ? `Ch. ${chapters.chapter}
           ${chapters.group[0].title ? ` - ${chapters.group[0].title}` : ""}`
-            : "Oneshot"}
-        </p>
+              : "Oneshot"}
+          </p>
+          {chapters.group[0].externalUrl && <ExternalLink size={18} />}
+        </div>
       </ListboxItem>
     </Listbox>
   );
