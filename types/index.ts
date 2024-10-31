@@ -30,6 +30,7 @@ export type Chapter = {
   chapter: string;
   title: string;
   updatedAt: string;
+  externalUrl?: string;
   group: {
     id: string;
     name: string;

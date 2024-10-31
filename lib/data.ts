@@ -8,6 +8,7 @@ type Chapter = {
   chapter: string;
   title: string;
   updatedAt: string;
+  externalUrl?: string;
   group: {
     id: string;
     name: string;
@@ -147,7 +148,7 @@ export function MangaParser(data: any): Manga {
     description: data.attributes.description.vi ? data.attributes.description.vi : data.attributes.description.en,
     contentRating: contentRating,
     status: status,
-    raw: data.attributes.links.raw ? data.attributes.links.raw : null,
+    raw: (data.attributes.links && data.attributes.links.raw) ? data.attributes.links.raw : null,
   };
 }
 
