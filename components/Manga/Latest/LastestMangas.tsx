@@ -3,7 +3,7 @@
 import { getLastestMangas } from "@/lib/data";
 import { LastestManga } from "@/types";
 import { FC, useEffect, useState } from "react";
-import MangaCardNew from "./MangaCardNew";
+import MangaCardNew from "../MangaCardNew";
 import LatestSkeleton from "./LatestSkeleton";
 import { Link } from "@nextui-org/link";
 import { ArrowBigRightIcon, MoveRight } from "lucide-react";

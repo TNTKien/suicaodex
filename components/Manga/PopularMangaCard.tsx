@@ -7,7 +7,7 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import NextImage from "next/image";
-import MangaTags from "../MangaTags/TagsChip";
+import MangaTags from "./Detail/MangaTags/TagsChip";
 
 interface PopularMangaCardProps {
   manga: Manga;

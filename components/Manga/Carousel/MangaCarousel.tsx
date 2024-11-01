@@ -2,9 +2,8 @@
 
 import { getPopularMangas } from "@/lib/data";
 import { Manga } from "@/types";
-import Link from "next/link";
 import { FC, useEffect, useState } from "react";
-import PopularMangaCard from "./PopularMangaCard";
+import PopularMangaCard from "../PopularMangaCard";
 import MangaCarouselSkeleton from "./MangaCarouselSkeleton";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
@@ -41,15 +40,7 @@ const MangaCarousel: FC = () => {
   }
 
   if (fetchFailed) {
-    return (
-      // <div className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      //   <h1 className="text-3xl font-bold">Không tìm thấy trang yêu cầu</h1>
-      //   <p className="text-muted-foreground">
-      //     Bấm vào <Link href="/">đây</Link> để quay lại trang chủ
-      //   </p>
-      // </div>
-      <></>
-    );
+    return null;
   }
 
   return (

@@ -10,7 +10,7 @@ import { Tab, Tabs } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import Follow from "./Follow";
 import Rating from "./Rating";
-import MangaCarouselSkeleton from "../Manga/MangaCarouselSkeleton";
+import MangaCarouselSkeleton from "../Manga/Carousel/MangaCarouselSkeleton";
 
 const LeaderBoard = () => {
   const [followedMangas, setFollowedMangas] = useState<Manga[]>([]);

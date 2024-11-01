@@ -12,13 +12,7 @@ import {
   Spinner,
 } from "@nextui-org/react";
 import { ChapterCard } from "./ChapterCard";
-import {
-  AlertTriangle,
-  LibraryBig,
-  ListTree,
-  ListX,
-  Loader,
-} from "lucide-react";
+import { AlertTriangle, ListTree, ListX } from "lucide-react";
 import NotFoundImg from "@/public/404.png";
 import Image from "next/image";
 import { useEffect, useState } from "react";

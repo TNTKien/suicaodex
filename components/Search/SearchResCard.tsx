@@ -6,7 +6,7 @@ import { Card, CardFooter, Image } from "@nextui-org/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import NextImage from "next/image";
-import MangaTags from "../MangaTags/TagsChip";
+import MangaTags from "../Manga/Detail/MangaTags/TagsChip";
 
 interface SearchResCardProps {
   manga: Manga;

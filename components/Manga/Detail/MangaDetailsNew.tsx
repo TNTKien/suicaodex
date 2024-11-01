@@ -15,19 +15,17 @@ import {
   getFirstChapter,
   getMangaDetails,
   getMangaRating,
-  groupChaptersByVolume,
 } from "@/lib/data";
 import { FC, useEffect, useState } from "react";
-import { Chapter, Manga, MangaStats, Volume } from "@/types";
-import MangaSkeleton from "./MangaSkeleton";
-import MangaDesc from "./MangaDesc";
-import MangaTags from "../MangaTags/TagsChip";
-import { NotFound } from "../notFound";
-import NextImage from "next/image";
-import { ChapterVolume } from "../Chapter/ChapterTable/ChapterVolume";
-import { MangaRating } from "./MangaRating";
+import { Chapter, Manga, MangaStats } from "@/types";
 import { Archive, BookOpenCheck, BookOpenText, LibraryBig } from "lucide-react";
-import { ChapterVolumeNew } from "../Chapter/ChapterTable/ChapterVolumeNew";
+import NextImage from "next/image";
+import { MangaRating } from "./MangaRating";
+import { ChapterVolumeNew } from "@/components/Chapter/ChapterTable/ChapterVolumeNew";
+import MangaSkeleton from "./MangaSkeleton";
+import { NotFound } from "@/components/notFound";
+import MangaTags from "./MangaTags/TagsChip";
+import MangaDesc from "./MangaDesc";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -81,7 +79,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
             as={NextImage}
             removeWrapper
             src={`${coverURL}/${mangaID}/${info.cover}.512.jpg`}
-            alt="Mato Seihei no Slave"
+            alt={`Ảnh bìa ${info.title}`}
             width={134}
             height={230}
             className="absolute w-full object-cover z-0 max-h-[230] blur-sm brightness-50"
@@ -93,7 +91,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
                 as={NextImage}
                 removeWrapper
                 src={`${coverURL}/${mangaID}/${info.cover}.512.jpg`}
-                alt="Mato Seihei no Slave"
+                alt={`Ảnh bìa ${info.title}`}
                 height={300}
                 width={200}
                 className="object-cover z-0"
@@ -201,7 +199,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
               {rating && <MangaRating stats={rating} />}
             </div>
           </div>
-          {/* <ChapterVolume volume={volume} /> */}
+
           <ChapterVolumeNew
             mangaID={mangaID}
             language={info.language}

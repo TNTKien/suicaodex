@@ -3,7 +3,7 @@
 import { getLatestMangas } from "@/lib/data";
 import { LastestManga } from "@/types";
 import { useEffect, useState } from "react";
-import LatestSkeleton from "../LatestSkeleton";
+import LatestSkeleton from "./LatestSkeleton";
 import MangaCardNew from "../MangaCardNew";
 import { Pagination } from "@nextui-org/react";
 

@@ -2,16 +2,11 @@ import { Chapter, ChapterAggregate } from "@/types";
 import { Button, ButtonGroup } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import {
-  Autocomplete,
-  AutocompleteItem,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownSection,
   DropdownTrigger,
-  Listbox,
-  ListboxItem,
-  ListboxSection,
 } from "@nextui-org/react";
 import { ChevronDownIcon, MoveLeft, MoveRight, Settings2 } from "lucide-react";
 

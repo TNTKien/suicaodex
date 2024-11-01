@@ -82,7 +82,9 @@ const SearchMobile = () => {
                       size="md"
                       variant="light"
                       onPress={() => {
-                        alert("Lêu lêu bị lừa!!! Đã code được đâu mà bấm =)))");
+                        alert(
+                          "Tính năng đang phát triển, để tạm đây cho đỡ trống 🐧"
+                        );
                       }}
                       className="underline"
                     >

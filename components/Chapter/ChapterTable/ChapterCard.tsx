@@ -2,7 +2,7 @@
 
 import { formatTimeToNow } from "@/lib/utils";
 import { ChapterGroup } from "@/types";
-import { Chip, Listbox, ListboxItem, ListboxSection } from "@nextui-org/react";
+import { Listbox, ListboxItem, ListboxSection } from "@nextui-org/react";
 import { CornerDownRight, ExternalLink, Users } from "lucide-react";
 
 interface ChapterCardProps {

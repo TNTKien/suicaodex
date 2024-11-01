@@ -2,7 +2,7 @@
 
 import { siteConfig } from "@/config/site";
 import { Chapter, Manga } from "@/types";
-import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardBody, Image } from "@nextui-org/react";
 import Link from "next/link";
 import NextImage from "next/image";
 

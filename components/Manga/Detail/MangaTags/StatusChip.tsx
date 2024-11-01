@@ -1,5 +1,4 @@
 import { Chip } from "@nextui-org/react";
-import { Dot } from "lucide-react";
 
 interface StatusChipProps {
   status: string;

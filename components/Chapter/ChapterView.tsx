@@ -83,13 +83,13 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
         ))}
       </div>
 
-      {/* {chapterAggregate && (
+      {chapterAggregate && (
         <ChapterNav
           chapterData={chapterData}
           chapterAggregate={chapterAggregate}
         />
-      )} */}
-      <div className="flex items-end justify-end">
+      )}
+      {/* <div className="flex items-end justify-end">
         <Button
           radius="sm"
           isIconOnly
@@ -102,7 +102,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
         >
           <ChevronUp />
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

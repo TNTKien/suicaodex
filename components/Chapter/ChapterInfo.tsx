@@ -15,7 +15,7 @@ export const ChapterInfo = ({ chapterData }: ChapterInfoProps) => {
       <p>{chapterData?.title}</p>
       <div className="flex flex-row gap-1">
         <Users size="20" />
-        <p>{chapterData?.group.name}</p>
+        <p>{chapterData?.group.name ? chapterData?.group.name : "No Group"}</p>
       </div>
     </div>
   );
