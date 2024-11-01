@@ -2,12 +2,11 @@
 
 import { getChapterAggregate, getChapterbyID } from "@/lib/data";
 import { Chapter, ChapterAggregate } from "@/types";
-import { Button, Image, Spinner } from "@nextui-org/react";
+import { Image, Spinner } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import NextImage from "next/image";
 import { NotFound } from "../notFound";
 import { ChapterNav } from "./ChapterNav";
-import { ChevronUp } from "lucide-react";
 import { ChapterInfo } from "./ChapterInfo";
 
 interface ChapterViewProps {
@@ -89,20 +88,6 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
           chapterAggregate={chapterAggregate}
         />
       )}
-      {/* <div className="flex items-end justify-end">
-        <Button
-          radius="sm"
-          isIconOnly
-          onPress={() => {
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth",
-            });
-          }}
-        >
-          <ChevronUp />
-        </Button>
-      </div> */}
     </div>
   );
 };
