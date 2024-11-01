@@ -19,6 +19,7 @@ type Chapter = {
     id: string;
     title: string;
   };
+
 };
 
 type ChapterGroup = {
@@ -49,6 +50,7 @@ type Manga = {
   contentRating: string;
   status: string;
   raw?: string;
+  finalChapter?: string;
 };
 
 type LastestManga = {
@@ -103,7 +105,7 @@ export function ChaptersParser(data: any[]): Chapter[] {
       group: groupData ? {
         id: groupData.id,
         name: groupData.attributes.name,
-      } : { id: null, name: null }
+      } : { id: null, name: null },
     };
   });
 }
@@ -151,6 +153,7 @@ export function MangaParser(data: any): Manga {
     contentRating: contentRating,
     status: status,
     raw: (data.attributes.links && data.attributes.links.raw) ? data.attributes.links.raw : null,
+    finalChapter: data.attributes.lastChapter ? data.attributes.lastChapter : null,
   };
 }
 
@@ -190,6 +193,33 @@ export async function getChapters(mangaID: string, language: string, limit: numb
     }
   });
   return ChaptersParser(data.data);
+}
+
+export async function getChapterVolume(mangaID: string, language: string, limit: number, offset: number): Promise<{ chapters: Chapter[], total: number }> {
+  const order = {
+    volume: 'desc',
+    chapter: 'desc'
+  }
+  const finalOrderQuery: { [key: string]: string } = {};
+
+  // { "order[rating]": "desc", "order[followedCount]": "desc" }
+  for (const [key, value] of Object.entries(order)) {
+    finalOrderQuery[`order[${key}]`] = value;
+  };
+
+  const { data } = await axiosInstance.get(`/manga/${mangaID}/feed`, {
+    params: {
+      limit: limit,
+      offset: offset,
+      translatedLanguage: [language],
+      includes: ['scanlation_group', 'manga'],
+      contentRating: ['safe', 'suggestive', 'erotica', 'pornographic'],
+      ...finalOrderQuery
+    }
+  });
+  const total = data.total;
+
+  return { chapters: ChaptersParser(data.data), total };
 }
 
 export async function getFirstChapter(mangaID: string, language: string) {

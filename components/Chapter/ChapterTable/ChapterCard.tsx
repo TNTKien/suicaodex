@@ -2,14 +2,15 @@
 
 import { formatTimeToNow } from "@/lib/utils";
 import { ChapterGroup } from "@/types";
-import { Listbox, ListboxItem, ListboxSection } from "@nextui-org/react";
+import { Chip, Listbox, ListboxItem, ListboxSection } from "@nextui-org/react";
 import { CornerDownRight, ExternalLink, Users } from "lucide-react";
 
 interface ChapterCardProps {
   chapters: ChapterGroup;
+  finalChapter?: string;
 }
 
-export const ChapterCard = ({ chapters }: ChapterCardProps) => {
+export const ChapterCard = ({ chapters, finalChapter }: ChapterCardProps) => {
   if (chapters.group.length > 1) {
     return (
       <Listbox aria-label="Volume">
@@ -40,7 +41,7 @@ export const ChapterCard = ({ chapters }: ChapterCardProps) => {
               endContent={
                 <time
                   dateTime={new Date(c.updatedAt).toDateString()}
-                  className="text-sm font-light"
+                  className="text-sm font-light w-1/3 text-end line-clamp-2"
                 >
                   {formatTimeToNow(new Date(c.updatedAt))}
                 </time>
@@ -53,6 +54,11 @@ export const ChapterCard = ({ chapters }: ChapterCardProps) => {
                     : "Oneshot"}
                 </p>
                 {c.externalUrl && <ExternalLink size={18} />}
+                {!!c.chapter && c.chapter === finalChapter && (
+                  <span className="bg-green-500 dark:bg-green-400 rounded-sm text-xs px-1 text-white font-semibold">
+                    END
+                  </span>
+                )}
               </div>
             </ListboxItem>
           ))}
@@ -77,7 +83,7 @@ export const ChapterCard = ({ chapters }: ChapterCardProps) => {
         description={
           <div className="flex flex-row gap-1 items-center">
             <Users size={20} />
-            <p className="text-sm">
+            <p className="text-sm line-clamp-1">
               {chapters.group[0].group.name
                 ? chapters.group[0].group.name
                 : "No Group"}
@@ -87,20 +93,25 @@ export const ChapterCard = ({ chapters }: ChapterCardProps) => {
         endContent={
           <time
             dateTime={new Date(chapters.group[0].updatedAt).toDateString()}
-            className="text-sm font-light"
+            className="text-sm font-light w-1/3 text-end line-clamp-2"
           >
             {formatTimeToNow(new Date(chapters.group[0].updatedAt))}
           </time>
         }
       >
         <div className="flex flex-row gap-1 items-center">
-          <p className="font-semibold text-sm md:text-base">
+          <p className="font-semibold text-sm md:text-base line-clamp-1">
             {chapters.chapter
               ? `Ch. ${chapters.chapter}
           ${chapters.group[0].title ? ` - ${chapters.group[0].title}` : ""}`
               : "Oneshot"}
           </p>
           {chapters.group[0].externalUrl && <ExternalLink size={18} />}
+          {!!chapters.chapter && chapters.chapter === finalChapter && (
+            <span className="bg-green-500 dark:bg-green-400 rounded-sm text-xs px-1 text-white font-semibold">
+              END
+            </span>
+          )}
         </div>
       </ListboxItem>
     </Listbox>

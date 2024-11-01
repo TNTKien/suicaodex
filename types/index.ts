@@ -22,6 +22,7 @@ export type Manga = {
   contentRating: string;
   status: string;
   raw?: string;
+  finalChapter?: string;
 };
 
 export type Chapter = {
@@ -85,5 +86,10 @@ export type MangaStats = {
     max: number;
   },
   follows: number;
+}
+
+export type ChapterVolume = {
+  chapters: Chapter[];
+  total: number;
 }
 

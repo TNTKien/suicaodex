@@ -27,6 +27,7 @@ import NextImage from "next/image";
 import { ChapterVolume } from "../Chapter/ChapterTable/ChapterVolume";
 import { MangaRating } from "./MangaRating";
 import { Archive, BookOpenCheck, BookOpenText, LibraryBig } from "lucide-react";
+import { ChapterVolumeNew } from "../Chapter/ChapterTable/ChapterVolumeNew";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -35,7 +36,6 @@ interface MangaDetailsProps {
 const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
   const [info, setInfo] = useState<Manga | null>(null);
   const [lists, setLists] = useState<Chapter[]>([]);
-  const [volume, setVolume] = useState<Volume[]>([]);
   const [rating, setRating] = useState<MangaStats | null>(null);
   const [firstChapter, setFirstChapter] = useState<Chapter | null>(null);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -46,10 +46,8 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
       try {
         const mangaDetails = await getMangaDetails(mangaID);
         setInfo(mangaDetails);
-        const chapters = await getChapters(mangaID, mangaDetails.language, 150);
+        const chapters = await getChapters(mangaID, mangaDetails.language, 1);
         setLists(chapters);
-        const volumes = groupChaptersByVolume(chapters);
-        setVolume(volumes);
         const stats = await getMangaRating(mangaID);
         setRating(stats);
         const first = await getFirstChapter(mangaID, mangaDetails.language);
@@ -203,7 +201,13 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
               {rating && <MangaRating stats={rating} />}
             </div>
           </div>
-          <ChapterVolume volume={volume} />
+          {/* <ChapterVolume volume={volume} /> */}
+          <ChapterVolumeNew
+            mangaID={mangaID}
+            language={info.language}
+            limit={100}
+            finalChapter={info.finalChapter}
+          />
         </div>
       </div>
     </div>
