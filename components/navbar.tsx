@@ -15,16 +15,21 @@ import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { DiscordIcon, FacebookIcon, GithubIcon } from "@/components/icons";
 import Image from "next/image";
-import Logo from "@/public/matologo.png";
+import SuicaoDex from "@/public/SuicaoDex.png";
+import SuicaoDexDark from "@/public/SuicaoDex-Dark.png";
 import SearchSection from "./Search/SearchSection";
 import { useState } from "react";
 import SearchMobile from "./Search/SearchMobile";
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
 import { Link2 } from "lucide-react";
 import { SignIn } from "./Session/SignIn";
+import { useTheme } from "next-themes";
+import { useIsSSR } from "@react-aria/ssr";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme } = useTheme();
+  const isSSR = useIsSSR();
 
   const items = [
     {
@@ -61,8 +66,15 @@ export const Navbar = () => {
         />
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Image src={Logo} alt="SuicaoDex" className="max-w-14 h-auto" />
-            <p className="font-bold text-inherit text-lg">SuicaoDex</p>
+            <Image
+              src={theme === "light" || isSSR ? SuicaoDex : SuicaoDexDark}
+              alt="SuicaoDex"
+              className="max-w-40 h-auto"
+              priority
+              quality={100}
+            />
+
+            {/* <p className="font-bold text-inherit text-lg">SuicaoDex</p> */}
           </NextLink>
         </NavbarBrand>
       </NavbarContent>
