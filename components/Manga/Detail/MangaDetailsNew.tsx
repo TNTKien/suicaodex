@@ -9,6 +9,11 @@ import {
   CardHeader,
   Image,
   Link,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
 } from "@nextui-org/react";
 import {
   getChapters,
@@ -73,6 +78,40 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
 
   return (
     <div className="flex flex-col md:flex-row gap-2 mb-8">
+      <Modal
+        defaultOpen={info.contentRating === "pornographic"}
+        backdrop="blur"
+        isDismissable={false}
+        isKeyboardDismissDisabled={true}
+        hideCloseButton
+        placement="center"
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-row gap-1">
+                CẢNH BÁO
+              </ModalHeader>
+              <ModalBody>
+                <p>
+                  Truyện có yếu tố{" "}
+                  <span className="text-danger font-semibold">18+</span>, bạn có
+                  chắc chắn muốn xem?
+                </p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" as={Link} href="/">
+                  Không
+                </Button>
+                <Button color="primary" onPress={onClose}>
+                  Chắc chắn
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+
       <div className="w-full flex flex-col gap-2">
         <Card radius="sm" shadow="sm" className="flex flex-col rounded-t-none ">
           <Image
