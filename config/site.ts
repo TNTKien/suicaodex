@@ -8,7 +8,7 @@ export const siteConfig = {
   links: {
     github: "https://github.com/TNTKien/mato-seihei-reader",
     discord: "https://discord.gg/dongmoe",
-    facebook: "https://www.facebook.com/m1zuchi",
+    facebook: "https://www.facebook.com/suicaodex",
   },
   mato: {
     id: "e1e38166-20e4-4468-9370-187f985c550e",
