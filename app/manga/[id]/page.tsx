@@ -1,4 +1,5 @@
 import MangaDetailsNew from "@/components/Manga/Detail/MangaDetailsNew";
+import { siteConfig } from "@/config/site";
 import { getMangaDetails } from "@/lib/data";
 import { Metadata } from "next";
 
@@ -16,6 +17,22 @@ export async function generateMetadata({
     return {
       title: `${mangaDetails.title} | SuicaoDex`,
       description: `Đọc truyện ${mangaDetails.title} | SuicaoDex`,
+      keywords: [
+        `Manga`,
+        `${mangaDetails.title}`,
+        "SuicaoDex",
+        `${mangaDetails.altTitle}`,
+      ],
+      openGraph: {
+        title: `${mangaDetails.title} | SuicaoDex`,
+        description: `Đọc truyện ${mangaDetails.title} | SuicaoDex`,
+        images: [
+          {
+            url: `${siteConfig.mangadexAPI.coverURL}/${mangaDetails.id}/${mangaDetails.cover}`,
+            alt: mangaDetails.title,
+          },
+        ],
+      },
     };
   } catch (error) {
     return {
