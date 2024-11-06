@@ -17,6 +17,7 @@ import { useState } from "react";
 import { Manga } from "@/types";
 import { SearchManga } from "@/lib/data";
 import SearchResCard from "./SearchResCard";
+import Link from "next/link";
 
 const SearchSection = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -30,6 +31,7 @@ const SearchSection = () => {
     }
     const r18 = isR18 ? true : false;
     SearchManga(e.target.value, r18).then((data) => {
+      // console.log(data);
       return setActiveSearch(data);
     });
   };
@@ -78,15 +80,13 @@ const SearchSection = () => {
                   </Checkbox>
                   <div className="flex items-center">
                     <Button
+                      as={Link}
                       color="primary"
                       size="md"
                       variant="light"
-                      onPress={() => {
-                        alert(
-                          "Tính năng đang phát triển, để tạm đây cho đỡ trống 🐧"
-                        );
-                      }}
+                      href="/advanced-search"
                       className="underline"
+                      onPress={onClose}
                     >
                       Tìm kiếm nâng cao
                     </Button>

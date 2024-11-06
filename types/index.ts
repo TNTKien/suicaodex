@@ -93,3 +93,12 @@ export type ChapterVolume = {
   total: number;
 }
 
+export type Author = {
+  id: string;
+  name: string;
+}
+
+export type TagsGroup = {
+  group: string;
+  tags: Tag[];
+}

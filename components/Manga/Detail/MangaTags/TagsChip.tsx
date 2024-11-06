@@ -15,7 +15,7 @@ const MangaTags = ({ tags, contentRating, status }: MangaTagsProps) => {
       <StatusChip status={status} />
       <ContentRatingChip rating={contentRating} />
       {tags.map((tag) => (
-        <Chip className="uppercase" radius="sm" key={tag.id} size="sm">
+        <Chip className="uppercase text-xs" radius="sm" key={tag.id} size="sm">
           {tag.name}
         </Chip>
       ))}

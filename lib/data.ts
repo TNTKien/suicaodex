@@ -50,6 +50,7 @@ type Manga = {
   contentRating: string;
   status: string;
   raw?: string;
+
   finalChapter?: string;
 };
 
@@ -85,6 +86,16 @@ type MangaStats = {
     max: number;
   },
   follows: number;
+}
+
+type Author = {
+  id: string;
+  name: string;
+}
+
+type TagsGroup = {
+  group: string;
+  tags: Tag[];
 }
 
 
@@ -523,4 +534,74 @@ export function MangaStatsParser(data: any, id: string): MangaStats {
 export async function getMangaRating(mangaID: string): Promise<MangaStats> {
   const { data } = await axiosInstance.get(`/statistics/manga/${mangaID}`);
   return MangaStatsParser(data, mangaID);
+}
+
+export async function SearchAuthor(author: string): Promise<Author[]> {
+  const { data } = await axiosInstance.get(`/author?name=${author}`);
+  return data.data.map((item: any) => {
+    return {
+      id: item.id,
+      name: item.attributes.name,
+    }
+  });
+}
+
+export async function AdvancedSearchManga(title: string, offset: number, limit: number, content: string[], status: string[], include_tags: string[], exclude_tags: string[], author: string[], graphic: string[]): Promise<Manga[]> {
+  const searchParams: { [key: string]: any } = {
+    title: title,
+    limit: limit,
+    offset: offset,
+    includes: ['cover_art', 'author', 'artist'],
+    availableTranslatedLanguage: ['vi', 'en'],
+  }
+
+  if (content.length > 0) {
+    searchParams['contentRating'] = content;
+  }
+  if (status.length > 0) {
+    searchParams['status'] = status;
+  }
+  if (include_tags.length > 0) {
+    searchParams['includedTags'] = include_tags;
+  }
+  if (exclude_tags.length > 0) {
+    searchParams['excludedTags'] = exclude_tags;
+  }
+  if (author.length > 0) {
+    searchParams['authors'] = author;
+  }
+  if (graphic.length > 0) {
+    searchParams['publicationDemographic'] = graphic;
+  }
+
+  const { data } = await axiosInstance.get(`/manga?`, {
+    params: searchParams
+  });
+
+  return data.data.map((item: any) => MangaParser(item));
+}
+
+export async function getTagsGroup(): Promise<TagsGroup[]> {
+  const { data } = await axiosInstance.get(`/manga/tag`);
+  const tagsMap: Record<string, Tag[]> = {};
+
+  data.data.forEach((tagItem: any) => {
+    const group = tagItem.attributes.group;
+    const tag: Tag = {
+      id: tagItem.id,
+      name: tagItem.attributes.name.en
+    };
+
+    if (!tagsMap[group]) {
+      tagsMap[group] = [];
+    }
+    tagsMap[group].push(tag);
+  });
+
+  const tagsGroups: TagsGroup[] = Object.keys(tagsMap).map(group => ({
+    group,
+    tags: tagsMap[group]
+  }));
+
+  return tagsGroups;
 }
