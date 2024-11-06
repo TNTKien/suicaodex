@@ -110,7 +110,7 @@ export const TagsDropdown = ({ onTagsSelected }: TagsDropdownProps) => {
         onOpenChange={onOpenChange}
         placement="center"
         radius="sm"
-        className="max-w-full max-h-[450]"
+        className="max-w-full max-h-[450px]"
         scrollBehavior="inside"
         hideCloseButton
         isDismissable={false}
