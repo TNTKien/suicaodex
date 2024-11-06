@@ -21,7 +21,7 @@ import SearchSection from "./Search/SearchSection";
 import { useState } from "react";
 import SearchMobile from "./Search/SearchMobile";
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
-import { Link2 } from "lucide-react";
+import { Link2, ScanSearch } from "lucide-react";
 import { SignIn } from "./Session/SignIn";
 import { useTheme } from "next-themes";
 import { useIsSSR } from "@react-aria/ssr";
@@ -32,6 +32,12 @@ export const Navbar = () => {
   const isSSR = useIsSSR();
 
   const items = [
+    {
+      key: "advanced-search",
+      label: "Tìm kiếm nâng cao",
+      href: "/advanced-search",
+      icon: ScanSearch,
+    },
     {
       key: "matoseihei",
       label: "Mato Seihei no Slave",

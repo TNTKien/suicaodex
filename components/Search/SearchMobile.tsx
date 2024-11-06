@@ -11,6 +11,7 @@ import {
   Checkbox,
   Listbox,
   ListboxItem,
+  Link,
 } from "@nextui-org/react";
 import { SearchIcon } from "../icons";
 import { useState } from "react";
@@ -78,14 +79,12 @@ const SearchMobile = () => {
                   </Checkbox>
                   <div className="flex items-center">
                     <Button
+                      as={Link}
+                      href="/advanced-search"
                       color="primary"
                       size="md"
                       variant="light"
-                      onPress={() => {
-                        alert(
-                          "Tính năng đang phát triển, để tạm đây cho đỡ trống 🐧"
-                        );
-                      }}
+                      onPress={onClose}
                       className="underline"
                     >
                       Tìm kiếm nâng cao
