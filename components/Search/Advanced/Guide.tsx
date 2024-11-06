@@ -67,17 +67,21 @@ export default function Guide() {
                     title="Giới hạn nội dung"
                   >
                     <p>
-                      4 Mức <span className="text-danger">"sếch"</span> của
-                      truyện: <span className="text-success">"0 (Safe)"</span>
+                      4 Mức{" "}
+                      <span className="text-danger">&quot;sếch&quot;</span> của
+                      truyện:{" "}
+                      <span className="text-success">&quot;0 (Safe)&quot;</span>
                       {" - "}
                       <span className="text-warning">
-                        "Hơi hơi (Suggestive)"
+                        &quot;Hơi hơi (Suggestive)&quot;
                       </span>
                       {" - "}
-                      <span className="text-red-400">"Suýt nổ (Erotica)"</span>
+                      <span className="text-red-400">
+                        &quot;Suýt nổ (Erotica)&quot;
+                      </span>
                       {" - "}
                       <span className="text-red-600">
-                        "Bùng lổ (Pornographic)"
+                        &quot;Bùng lổ (Pornographic)&quot;
                       </span>
                     </p>
                     <p>Mặc định: Safe → Erotica</p>
