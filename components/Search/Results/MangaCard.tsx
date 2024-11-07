@@ -49,7 +49,7 @@ export const MangaCard = ({ manga }: MangaCardProps) => {
 
           {manga.description && (
             <ReactMarkdown
-              className=" line-clamp-4 md:line-clamp-5 text-muted-foreground text-base"
+              className="line-clamp-3 md:line-clamp-5 text-muted-foreground text-sm"
               remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
               components={{
                 a: ({ href, children }) => (
