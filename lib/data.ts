@@ -552,7 +552,7 @@ export async function AdvancedSearchManga(title: string, offset: number, limit: 
     limit: limit,
     offset: offset,
     includes: ['cover_art', 'author', 'artist'],
-    availableTranslatedLanguage: ['vi', 'en'],
+    //availableTranslatedLanguage: ['vi', 'en'],
   }
 
   if (content.length > 0) {
