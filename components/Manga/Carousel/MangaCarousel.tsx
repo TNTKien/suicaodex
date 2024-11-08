@@ -7,6 +7,7 @@ import PopularMangaCard from "../PopularMangaCard";
 import MangaCarouselSkeleton from "./MangaCarouselSkeleton";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import { Flame } from "lucide-react";
 
 const MangaCarousel: FC = () => {
   const [mangas, setMangas] = useState<Manga[]>([]);

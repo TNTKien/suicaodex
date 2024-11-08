@@ -5,7 +5,11 @@ import { LastestManga } from "@/types";
 import { useEffect, useState } from "react";
 import LatestSkeleton from "./LatestSkeleton";
 import MangaCardNew from "../MangaCardNew";
-import { Pagination } from "@nextui-org/react";
+import { Pagination, Tab, Tabs } from "@nextui-org/react";
+import { LayoutGrid, StretchHorizontal } from "lucide-react";
+import { MangaTabCard } from "../MangaTab/MangaTabCard";
+import { GridCover } from "../MangaTab/GridCover";
+import TabSkeleton from "../MangaTab/TabSkeleton";
 
 interface LatestProps {
   page: number;
@@ -33,17 +37,38 @@ export default function Latest({ page, limit }: LatestProps) {
 
   if (mangas.length === 0) {
     return (
-      <>
-        <h1 className="text-2xl font-semibold pb-2 mt-3 px-1">Mới cập nhật</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-          <LatestSkeleton />
-          <LatestSkeleton />
-          <LatestSkeleton />
-          <LatestSkeleton />
-          <LatestSkeleton />
-          <LatestSkeleton />
+      <div className="flex flex-col min-h-screen justify-between">
+        <div>
+          <div className="justify-between px-1 mt-3">
+            <h1 className="text-2xl font-semibold">Mới cập nhật</h1>
+          </div>
+          <div className="flex flex-col place-items-end -mt-10">
+            <Tabs
+              aria-label="Options"
+              classNames={{
+                tabList: "rounded-md",
+                cursor: "rounded-md",
+                panel: "w-full",
+              }}
+              className="px-1"
+            >
+              <Tab key="grid-card" title={<StretchHorizontal />}></Tab>
+              <Tab key="grid-cover" title={<LayoutGrid />}></Tab>
+            </Tabs>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-3 px-1">
+            <TabSkeleton />
+            <TabSkeleton />
+            <TabSkeleton />
+            <TabSkeleton />
+            <TabSkeleton />
+            <TabSkeleton />
+            <TabSkeleton />
+            <TabSkeleton />
+            <TabSkeleton />
+          </div>
         </div>
-      </>
+      </div>
     );
   }
 
@@ -52,34 +77,50 @@ export default function Latest({ page, limit }: LatestProps) {
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <h1 className="text-2xl font-semibold mt-3 px-1">Mới cập nhật</h1>
+    <div className="flex flex-col min-h-screen justify-between">
+      <div>
+        <div className="justify-between px-1 mt-3">
+          <h1 className="text-2xl font-semibold">Mới cập nhật</h1>
+        </div>
 
-      <div className="px-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-        {mangas.map((manga) => (
-          <MangaCardNew
-            key={manga.info.id}
-            manga={manga.info}
-            chapter={manga.lastestChap}
-          />
-        ))}
+        {/* Tabs */}
+        <div className="flex flex-col place-items-end -mt-10">
+          <Tabs
+            aria-label="Options"
+            classNames={{
+              tabList: "rounded-md",
+              cursor: "rounded-md",
+              panel: "w-full",
+            }}
+            className="px-1"
+          >
+            <Tab key="grid-card" title={<StretchHorizontal />}>
+              <MangaTabCard mangas={mangas} />
+            </Tab>
+            <Tab key="grid-cover" title={<LayoutGrid />}>
+              <GridCover manga={mangas} />
+            </Tab>
+          </Tabs>
+        </div>
       </div>
 
-      {!!mangas[0].total && (
-        <Pagination
-          total={Math.ceil(mangas[0].total / limit)}
-          initialPage={page}
-          color="danger"
-          showControls
-          radius="sm"
-          className="self-center"
-          showShadow
-          onChange={(p) => {
-            window.location.href = `/latest?page=${p}`;
-          }}
-          // isCompact
-        />
-      )}
+      {/* Pagination */}
+      <div className="self-center">
+        {!!mangas[0].total && (
+          <Pagination
+            total={Math.ceil(mangas[0].total / limit)}
+            initialPage={page}
+            color="danger"
+            showControls
+            radius="sm"
+            showShadow
+            onChange={(p) => {
+              window.location.href = `/latest?page=${p}`;
+            }}
+            // isCompact
+          />
+        )}
+      </div>
     </div>
   );
 }

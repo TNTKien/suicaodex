@@ -61,7 +61,7 @@ const LeaderBoard = () => {
 
   return (
     <>
-      <h1 className="text-2xl font-semibold pb-2 mt-4 px-1">Bảng xếp hạng</h1>
+      <h1 className="text-2xl font-semibold pb-2 mt-1 px-1">Bảng xếp hạng</h1>
       <Tabs aria-label="Options" className="px-1">
         <Tab key="follow" title="Theo dõi">
           <Follow manga={followedMangas} />

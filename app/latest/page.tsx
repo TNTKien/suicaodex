@@ -26,7 +26,7 @@ export default function Page({ searchParams }: pageProps) {
 
 const getSearchParams = ({ searchParams }: pageProps) => {
   const pageParams = searchParams["page"] ?? "1";
-  const limitParams = searchParams["limit"] ?? "21";
+  const limitParams = searchParams["limit"] ?? "24";
 
   const page = pageParams
     ? typeof pageParams === "string"

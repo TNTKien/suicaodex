@@ -4,8 +4,9 @@ export default function LatestSkeleton() {
   return (
     <Card
       isBlurred
-      className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
+      className="bg-background/60 dark:bg-default-100/50 max-w-[610px]"
       shadow="sm"
+      radius="sm"
     >
       <CardBody>
         <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-start justify-center">

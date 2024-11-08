@@ -278,7 +278,7 @@ export async function SearchManga(title: string, adultContent: boolean): Promise
 export async function getLastestMangas(): Promise<LastestManga[]> {
   const { data } = await axiosInstance.get(`/manga?`, {
     params: {
-      limit: 9,
+      limit: 12,
       includes: ['cover_art', 'author', 'artist'],
       availableTranslatedLanguage: ['vi'],
       hasAvailableChapters: 'true',
