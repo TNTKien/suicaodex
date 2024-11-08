@@ -14,6 +14,8 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Progress,
+  Spinner,
 } from "@nextui-org/react";
 import {
   getChapters,
@@ -31,6 +33,7 @@ import MangaSkeleton from "./MangaSkeleton";
 import { NotFound } from "@/components/notFound";
 import MangaTags from "./MangaTags/TagsChip";
 import MangaDesc from "./MangaDesc";
+import MangaDetailSkeleton from "./MangaDetailSkeleton";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -69,11 +72,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
   }
 
   if (!info) {
-    return (
-      <div>
-        <MangaSkeleton />
-      </div>
-    );
+    return <MangaDetailSkeleton />;
   }
 
   return (
