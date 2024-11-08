@@ -51,6 +51,7 @@ export const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
                   <Link
                     href={`/chapter/${c.id}`}
                     className="flex hover:underline"
+                    key={c.id}
                   >
                     <p className="shrink-0">
                       {c.chapter ? `Ch.${c.chapter}` : "Oneshot"}

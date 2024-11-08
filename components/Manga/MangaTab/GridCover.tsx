@@ -48,6 +48,7 @@ export const GridCover = ({ manga }: GridCoverProps) => {
               <Link
                 href={`/chapter/${c.id}`}
                 className="flex text-sm md:text-base hover:underline"
+                key={c.id}
               >
                 <p className="shrink-0">
                   {c.chapter ? `Ch.${c.chapter}` : "Oneshot"}
