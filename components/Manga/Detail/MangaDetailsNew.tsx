@@ -135,6 +135,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
                 className="object-cover z-0"
                 shadow="md"
                 radius="sm"
+                priority
               />
 
               <div className="flex flex-col items-start gap-2 z-10 top-1 sm:text-white">
