@@ -19,6 +19,7 @@ export const GridCover = ({ manga }: GridCoverProps) => {
             shadow="sm"
             radius="none"
             className="rounded-md dark:rounded-b-none"
+            key={manga.info.id}
           >
             <Link href={`/manga/${manga.info.id}`}>
               <Image

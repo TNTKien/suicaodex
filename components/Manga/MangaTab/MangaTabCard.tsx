@@ -13,7 +13,13 @@ export const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
       {mangas.map((manga) => (
-        <Card className="rounded-md" shadow="sm" isHoverable radius="none">
+        <Card
+          className="rounded-md"
+          shadow="sm"
+          isHoverable
+          radius="none"
+          key={manga.info.id}
+        >
           <CardBody className="flex flex-row gap-3 p-2">
             <Link href={`/manga/${manga.info.id}`}>
               <Image
