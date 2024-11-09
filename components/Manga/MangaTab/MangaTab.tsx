@@ -12,21 +12,25 @@ import TabSkeleton from "./TabSkeleton";
 const MangaTab: FC = () => {
   const [mangas, setMangas] = useState<LastestManga[]>([]);
   const [fetchFailed, setFetchFailed] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const latestMangas = await getLastestMangas();
         setMangas(latestMangas);
       } catch (error) {
         setFetchFailed(true);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
-  if (mangas.length === 0) {
+  if (isLoading) {
     return (
       <>
         <div className="justify-between px-1 pb-2 mt-3">

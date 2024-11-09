@@ -3,13 +3,12 @@
 import { getLatestMangas } from "@/lib/data";
 import { LastestManga } from "@/types";
 import { useEffect, useState } from "react";
-import LatestSkeleton from "./LatestSkeleton";
-import MangaCardNew from "../MangaCardNew";
 import { Pagination, Tab, Tabs } from "@nextui-org/react";
 import { LayoutGrid, StretchHorizontal } from "lucide-react";
 import { MangaTabCard } from "../MangaTab/MangaTabCard";
 import { GridCover } from "../MangaTab/GridCover";
 import TabSkeleton from "../MangaTab/TabSkeleton";
+import { useRouter } from "next/navigation";
 
 interface LatestProps {
   page: number;
@@ -17,25 +16,30 @@ interface LatestProps {
 }
 
 export default function Latest({ page, limit }: LatestProps) {
+  const router = useRouter();
   const offset = (page - 1) * limit;
 
   const [mangas, setMangas] = useState<LastestManga[]>([]);
   const [fetchFailed, setFetchFailed] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const latestMangas = await getLatestMangas(limit, offset);
         setMangas(latestMangas);
       } catch (error) {
         setFetchFailed(true);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [page]);
 
-  if (mangas.length === 0) {
+  if (isLoading) {
     return (
       <div className="flex flex-col min-h-screen justify-between">
         <div>
@@ -115,8 +119,9 @@ export default function Latest({ page, limit }: LatestProps) {
             radius="sm"
             showShadow
             onChange={(p) => {
-              window.location.href = `/latest?page=${p}`;
+              router.push(`/latest?page=${p}`);
             }}
+
             // isCompact
           />
         )}

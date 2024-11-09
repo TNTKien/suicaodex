@@ -31,7 +31,8 @@ export const GridCover = ({ manga }: GridCoverProps) => {
                 alt={manga.info.title}
                 width={200}
                 height={320}
-                loading="eager"
+                //loading="eager"
+                priority={true}
               />
             </Link>
 
