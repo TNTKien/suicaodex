@@ -31,6 +31,7 @@ export const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
                 height={364}
                 width={256}
                 quality={100}
+                loading="eager"
               />
             </Link>
 

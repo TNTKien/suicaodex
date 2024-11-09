@@ -66,7 +66,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
         />
       )}
 
-      <div className="flex flex-col min-h-screen gap-2 items-center justify-center">
+      <div className="flex flex-col gap-2 items-center justify-center">
         {chapterData?.pages?.map((page, index) => (
           <Image
             as={NextImage}
