@@ -50,7 +50,7 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
               shadow="md"
               src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
               isZoomed
-              radius="none"
+              radius="sm"
             />
           </Link>
 

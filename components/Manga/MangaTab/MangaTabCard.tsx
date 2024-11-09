@@ -27,7 +27,7 @@ export const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
                 as={NextImage}
                 src={`${siteConfig.mangadexAPI.coverURL}/${manga.info.id}/${manga.info.cover}.256.jpg`}
                 alt={manga.info.title}
-                className="object-cover max-h-[200px] max-w-[133px] rounded-md"
+                className="object-cover max-h-[200px] max-w-[133px] rounded-md "
                 height={364}
                 width={256}
                 quality={100}

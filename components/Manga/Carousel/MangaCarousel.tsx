@@ -8,10 +8,13 @@ import MangaCarouselSkeleton from "./MangaCarouselSkeleton";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { Flame } from "lucide-react";
+import { Divider } from "@nextui-org/react";
+import { is } from "date-fns/locale";
 
 const MangaCarousel: FC = () => {
   const [mangas, setMangas] = useState<Manga[]>([]);
   const [fetchFailed, setFetchFailed] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [emblaRef] = useEmblaCarousel({ loop: true, containScroll: false }, [
     Autoplay(),
   ]);
@@ -23,20 +26,25 @@ const MangaCarousel: FC = () => {
         setMangas(popularMangas);
       } catch (error) {
         setFetchFailed(true);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
-  if (mangas.length === 0) {
+  if (isLoading) {
     return (
-      <>
-        <h1 className="text-2xl font-semibold pb-1 px-1">Tiêu điểm</h1>
+      <div className="pb-2">
+        <div className="flex flex-col pb-1 px-1 gap-0.5">
+          <Divider className="w-9 h-1 bg-danger" />
+          <h1 className="text-2xl font-extrabold uppercase">Tiêu điểm</h1>
+        </div>
         <div className="p-1">
           <MangaCarouselSkeleton />
         </div>
-      </>
+      </div>
     );
   }
 
@@ -45,8 +53,11 @@ const MangaCarousel: FC = () => {
   }
 
   return (
-    <>
-      <h1 className="text-2xl font-semibold pb-1 px-1">Tiêu điểm</h1>
+    <div className="pb-2">
+      <div className="flex flex-col pb-1 px-1 gap-0.5">
+        <Divider className="w-9 h-1 bg-danger" />
+        <h1 className="text-2xl font-extrabold uppercase">Tiêu điểm</h1>
+      </div>
 
       <div className="embla p-1" ref={emblaRef}>
         <div className="embla__container">
@@ -57,7 +68,7 @@ const MangaCarousel: FC = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

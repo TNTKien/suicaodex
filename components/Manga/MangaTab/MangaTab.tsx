@@ -4,7 +4,7 @@ import { getLastestMangas } from "@/lib/data";
 import { LastestManga } from "@/types";
 import { FC, useEffect, useState } from "react";
 import { ChevronsRight, LayoutGrid, StretchHorizontal } from "lucide-react";
-import { Tab, Tabs } from "@nextui-org/react";
+import { Divider, Tab, Tabs } from "@nextui-org/react";
 import { GridCover } from "./GridCover";
 import { MangaTabCard } from "./MangaTabCard";
 import TabSkeleton from "./TabSkeleton";
@@ -32,15 +32,17 @@ const MangaTab: FC = () => {
 
   if (isLoading) {
     return (
-      <>
-        <div className="justify-between px-1 pb-2 mt-3">
-          <h1 className="text-2xl font-semibold">Mới cập nhật</h1>
+      <div className="min-h-screen">
+        <div className="justify-between flex flex-col px-1 pb-2 mt-3">
+          <Divider className="w-9 h-1 bg-danger" />
+          <h1 className="text-2xl font-extrabold uppercase">Mới cập nhật</h1>
         </div>
         <div className="flex flex-col place-items-end -mt-12">
           <Tabs
             aria-label="Options"
             classNames={{
               tabList: "rounded-md",
+              tab: "px-1.5 py-2",
               cursor: "rounded-md",
               panel: "w-full",
             }}
@@ -62,7 +64,7 @@ const MangaTab: FC = () => {
           <TabSkeleton />
           <TabSkeleton />
         </div>
-      </>
+      </div>
     );
   }
 
@@ -71,15 +73,17 @@ const MangaTab: FC = () => {
   }
 
   return (
-    <>
-      <div className="justify-between px-1 pb-2 mt-3">
-        <h1 className="text-2xl font-semibold">Mới cập nhật</h1>
+    <div className="flex flex-col">
+      <div className="justify-between flex flex-col px-1 pb-2 mt-3">
+        <Divider className="w-9 h-1 bg-danger" />
+        <h1 className="text-2xl font-extrabold uppercase">Mới cập nhật</h1>
       </div>
       <div className="flex flex-col place-items-end -mt-12">
         <Tabs
           aria-label="Options"
           classNames={{
             tabList: "rounded-md",
+            tab: "px-1.5 py-2",
             cursor: "rounded-md",
             panel: "w-full",
           }}
@@ -94,7 +98,7 @@ const MangaTab: FC = () => {
           <Tab key="more" title={<ChevronsRight />} href="/latest"></Tab>
         </Tabs>
       </div>
-    </>
+    </div>
   );
 };
 

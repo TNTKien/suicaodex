@@ -3,7 +3,7 @@
 import { getLatestMangas } from "@/lib/data";
 import { LastestManga } from "@/types";
 import { useEffect, useState } from "react";
-import { Pagination, Tab, Tabs } from "@nextui-org/react";
+import { Divider, Pagination, Tab, Tabs } from "@nextui-org/react";
 import { LayoutGrid, StretchHorizontal } from "lucide-react";
 import { MangaTabCard } from "../MangaTab/MangaTabCard";
 import { GridCover } from "../MangaTab/GridCover";
@@ -43,14 +43,16 @@ export default function Latest({ page, limit }: LatestProps) {
     return (
       <div className="flex flex-col min-h-screen justify-between">
         <div>
-          <div className="justify-between px-1 mt-3">
-            <h1 className="text-2xl font-semibold">Mới cập nhật</h1>
+          <div className="flex flex-col px-1 mt-3">
+            <Divider className="w-9 h-1 bg-danger" />
+            <h1 className="text-2xl font-extrabold uppercase">Mới cập nhật</h1>
           </div>
           <div className="flex flex-col place-items-end -mt-10">
             <Tabs
               aria-label="Options"
               classNames={{
                 tabList: "rounded-md",
+                tab: "px-1.5 py-2",
                 cursor: "rounded-md",
                 panel: "w-full",
               }}
@@ -83,8 +85,9 @@ export default function Latest({ page, limit }: LatestProps) {
   return (
     <div className="flex flex-col min-h-screen justify-between">
       <div>
-        <div className="justify-between px-1 mt-3">
-          <h1 className="text-2xl font-semibold">Mới cập nhật</h1>
+        <div className="flex flex-col px-1 mt-3">
+          <Divider className="w-9 h-1 bg-danger" />
+          <h1 className="text-2xl font-extrabold uppercase">Mới cập nhật</h1>
         </div>
 
         {/* Tabs */}
@@ -93,6 +96,7 @@ export default function Latest({ page, limit }: LatestProps) {
             aria-label="Options"
             classNames={{
               tabList: "rounded-md",
+              tab: "px-1.5 py-2",
               cursor: "rounded-md",
               panel: "w-full",
             }}

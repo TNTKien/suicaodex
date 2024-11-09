@@ -7,6 +7,7 @@ import MangaCardNew from "../MangaCardNew";
 import LatestSkeleton from "./LatestSkeleton";
 import { Link } from "@nextui-org/link";
 import { ArrowBigRightIcon, MoveRight } from "lucide-react";
+import { Divider } from "@nextui-org/react";
 
 const LastestMangas: FC = () => {
   const [mangas, setMangas] = useState<LastestManga[]>([]);
@@ -29,7 +30,10 @@ const LastestMangas: FC = () => {
     return (
       <>
         <div className="flex flex-row justify-between px-1 text-2xl font-semibold pb-2 mt-3">
-          <h1>Mới cập nhật</h1>
+          <div className="flex flex-col">
+            <Divider className="w-9 h-1 bg-danger" />
+            <h1 className="text-2xl font-black uppercase">Mới cập nhật</h1>
+          </div>
           <Link
             href="/latest"
             color="foreground"

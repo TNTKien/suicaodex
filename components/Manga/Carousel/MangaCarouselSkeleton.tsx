@@ -4,8 +4,9 @@ export default function MangaCarouselSkeleton() {
   return (
     <Card
       isBlurred
-      className="border-none bg-background/60 dark:bg-default-100/50 w-full h-[324px]"
+      className="border-none bg-background/60 dark:bg-default-100/50 w-full h-[324px] rounded-md"
       shadow="sm"
+      radius="none"
     >
       <CardBody>
         <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-start justify-center">
@@ -15,7 +16,7 @@ export default function MangaCarouselSkeleton() {
           <div className="flex flex-col col-span-6 md:col-span-8 gap-2">
             <div className="flex justify-between items-start">
               <Skeleton className="w-3/4 rounded-lg">
-                <div className="h-3 w-full rounded-lg bg-default-200"></div>
+                <div className="h-8 w-full rounded-lg bg-default-200"></div>
               </Skeleton>
             </div>
             <div className="flex justify-between items-start">
