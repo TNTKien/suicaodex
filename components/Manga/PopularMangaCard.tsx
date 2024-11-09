@@ -19,9 +19,9 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
     <Card
       isFooterBlurred
       isBlurred
-      className="border-none bg-background/60 dark:bg-default-100/50 w-ful max-w-full max-h-[324]"
+      className="border-none rounded-md bg-background/60 dark:bg-default-100/50 w-ful max-w-full max-h-[324]"
       shadow="sm"
-      radius="md"
+      radius="none"
     >
       <Image
         as={NextImage}
@@ -43,14 +43,14 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
             <Image
               as={NextImage}
               alt={manga.title}
-              className="hidden md:flex h-full w-full object-cover"
+              className="hidden md:flex h-full w-full object-cover rounded-md"
               height={300}
               width={512}
               priority={priority || false}
               shadow="md"
               src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
               isZoomed
-              radius="sm"
+              radius="none"
             />
           </Link>
 
