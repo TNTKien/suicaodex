@@ -4,5 +4,5 @@ import Discord from "next-auth/providers/discord"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [Discord],
-    //adapter: D1Adapter(),
+    //adapter: D1Adapter(process.env.DATABASE_ID),
 })

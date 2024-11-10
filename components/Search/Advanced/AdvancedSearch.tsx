@@ -9,6 +9,7 @@ import { useState } from "react";
 import ResultTab from "../Results/ResultTab";
 import { TagsDropdown } from "./TagsDropdown";
 import Guide from "./Guide";
+import { Divider } from "@nextui-org/react";
 
 interface AdvancedSearchProps {
   page: number;
@@ -47,7 +48,11 @@ export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
 
   return (
     <div className="flex flex-col gap-8 px-1">
-      <h1 className="text-2xl font-semibold ">Tìm kiếm nâng cao</h1>
+      {/* <h1 className="text-2xl font-semibold ">Tìm kiếm nâng cao</h1> */}
+      <div className="flex flex-col">
+        <Divider className="w-9 h-1 bg-danger" />
+        <h1 className="text-2xl font-extrabold uppercase">Tìm kiếm nâng cao</h1>
+      </div>
 
       {/* Title input & toggle button */}
       <div className="flex gap-2">
