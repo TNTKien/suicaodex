@@ -59,12 +59,12 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
   return (
     <div className="flex flex-col gap-2">
       <ChapterInfo chapterData={chapterData} />
-      {chapterAggregate && (
+      {/* {chapterAggregate && (
         <ChapterNav
           chapterData={chapterData}
           chapterAggregate={chapterAggregate}
         />
-      )}
+      )} */}
 
       <div className="flex flex-col gap-2 items-center justify-center">
         {chapterData?.pages?.map((page, index) => (
