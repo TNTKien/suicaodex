@@ -51,7 +51,7 @@ export const ChapterNav = ({
       <Button
         as={Link}
         isIconOnly
-        href={`/chapter/${prevChapter}`}
+        href={prevChapter ? `/chapter/${prevChapter}` : ``}
         isDisabled={!prevChapter}
       >
         <MoveLeft />
@@ -98,7 +98,7 @@ export const ChapterNav = ({
       <Button
         as={Link}
         isIconOnly
-        href={`/chapter/${nextChapter}`}
+        href={nextChapter ? `/chapter/${nextChapter}` : ``}
         isDisabled={!nextChapter}
       >
         <MoveRight />
