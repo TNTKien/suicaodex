@@ -6,9 +6,6 @@ module.exports = {
   generateRobotsTxt: true,
   sitemapSize: 7000,
   robotsTxtOptions: {
-    additionalSitemaps: [
-      `${url}/manga-sitemap.xml`,
-      `${url}/chapter-sitemap.xml`,
-    ],
+    additionalSitemaps: [`${url}/manga-sitemap.xml`],
   },
 };
