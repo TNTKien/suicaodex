@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "next build && npm run generate-sitemap",
+    "build": "next build && npm run generate:sitemap",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix",
     "pages:build": "npx @cloudflare/next-on-pages",
