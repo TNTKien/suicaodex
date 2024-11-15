@@ -15,14 +15,19 @@ interface GridCardProps {
 
 export const GridCard = ({ manga }: GridCardProps) => {
   return (
-    <Card key={manga.id} radius="sm" shadow="sm">
+    <Card
+      key={manga.id}
+      radius="none"
+      shadow="sm"
+      className="rounded-md dark:rounded-b-none"
+    >
       <Link href={`/manga/${manga.id}`}>
         <Image
           removeWrapper
           as={NextImage}
           src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
           alt={manga.title}
-          className="z-0 object-cover w-full h-auto rounded-sm"
+          className="z-0 object-cover w-full h-auto rounded-sm dark:rounded-b-none"
           height={300}
           width={200}
         />

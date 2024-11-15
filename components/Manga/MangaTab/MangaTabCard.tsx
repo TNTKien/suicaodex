@@ -9,7 +9,7 @@ interface MangaTabCardProps {
   mangas: LastestManga[];
 }
 
-export const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
+const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
       {mangas.map((manga) => (
@@ -27,11 +27,10 @@ export const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
                 as={NextImage}
                 src={`${siteConfig.mangadexAPI.coverURL}/${manga.info.id}/${manga.info.cover}.256.jpg`}
                 alt={manga.info.title}
-                className="object-cover max-h-[200px] max-w-[133px] rounded-md "
+                className="object-cover max-h-[200px] max-w-[133px] rounded-md"
                 height={364}
                 width={256}
                 quality={100}
-                //loading="eager"
                 priority={true}
               />
             </Link>
@@ -74,3 +73,5 @@ export const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
     </div>
   );
 };
+
+export default MangaTabCard;

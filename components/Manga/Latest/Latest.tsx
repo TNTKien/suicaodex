@@ -5,10 +5,10 @@ import { LastestManga } from "@/types";
 import { useEffect, useState } from "react";
 import { Divider, Pagination, Tab, Tabs } from "@nextui-org/react";
 import { LayoutGrid, StretchHorizontal } from "lucide-react";
-import { MangaTabCard } from "../MangaTab/MangaTabCard";
 import { GridCover } from "../MangaTab/GridCover";
 import TabSkeleton from "../MangaTab/TabSkeleton";
 import { useRouter } from "next/navigation";
+import MangaTabCard from "../MangaTab/MangaTabCard";
 
 interface LatestProps {
   page: number;

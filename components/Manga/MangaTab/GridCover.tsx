@@ -25,13 +25,11 @@ export const GridCover = ({ manga }: GridCoverProps) => {
               <Image
                 removeWrapper
                 className="z-0 object-cover w-full h-auto rounded-md dark:rounded-b-none"
-                isZoomed
                 as={NextImage}
                 src={`${siteConfig.mangadexAPI.coverURL}/${manga.info.id}/${manga.info.cover}.512.jpg`}
                 alt={manga.info.title}
                 width={200}
                 height={320}
-                //loading="eager"
                 priority={true}
               />
             </Link>

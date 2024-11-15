@@ -104,7 +104,7 @@ export const ChapterNav = ({
             {/* {vol_label} - {chapter_label} */}
             {chapter_label}
           </Button>
-          <Dropdown radius="sm" type="listbox">
+          <Dropdown radius="sm" type="listbox" isKeyboardDismissDisabled>
             <DropdownTrigger>
               <Button
                 isIconOnly
