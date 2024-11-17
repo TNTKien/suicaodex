@@ -1,5 +1,5 @@
 import { Chapter, ChapterAggregate } from "@/types";
-import { Button, ButtonGroup } from "@nextui-org/button";
+import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import {
   Card,
@@ -11,12 +11,12 @@ import {
   DropdownTrigger,
 } from "@nextui-org/react";
 import {
-  ChevronDownIcon,
   ChevronsUp,
   ChevronUp,
+  MoveHorizontal,
   MoveLeft,
   MoveRight,
-  Settings2,
+  MoveVertical,
 } from "lucide-react";
 
 import { twMerge } from "tailwind-merge";
@@ -26,11 +26,15 @@ import useScrollOffset from "../hook/useScrollOffset";
 interface ChapterNavProps {
   chapterData: Chapter;
   chapterAggregate: ChapterAggregate[];
+  toggleFitMode: () => void;
+  fitMode: "width" | "height";
 }
 
 export const ChapterNav = ({
   chapterData,
   chapterAggregate,
+  toggleFitMode,
+  fitMode,
 }: ChapterNavProps) => {
   const currentVolIndex = chapterAggregate.findIndex((aggregate) =>
     aggregate.chapters.some((chapter) => chapter.id === chapterData.id)
@@ -67,22 +71,24 @@ export const ChapterNav = ({
       radius="none"
       className={twMerge(
         `fixed bottom-0 left-1/2 transform -translate-x-1/2 z-10 mx-auto flex w-full translate-y-0 items-center justify-center transition-all duration-500 sm:rounded-lg sm:w-auto sm:-translate-y-2`,
+        //isAtBottom && "translate-y-full sm:translate-y-full",
         scrollDirection === "down" &&
           !isAtBottom &&
           "translate-y-full sm:translate-y-full"
       )}
     >
       <CardBody className="flex flex-row gap-1 rounded-md p-1">
+        {/* // change fit mode btn */}
         <Button
           isIconOnly
           className="rounded-md"
           size="lg"
-          onPress={() => {
-            alert("Tính năng đang phát triển!");
-          }}
+          onPress={toggleFitMode}
         >
-          <Settings2 />
+          {fitMode === "width" ? <MoveHorizontal /> : <MoveVertical />}
         </Button>
+
+        {/* // prevChapter btn */}
         <Button
           className="rounded-md"
           as={Link}
@@ -95,6 +101,7 @@ export const ChapterNav = ({
           <MoveLeft />
         </Button>
 
+        {/* // chapter list dropdown */}
         <div className="flex flex-row gap-0 w-full">
           <Button
             className="rounded-l-md rounded-r-none justify-start line-clamp-1 px-3"
@@ -147,49 +154,7 @@ export const ChapterNav = ({
           </Dropdown>
         </div>
 
-        {/* <ButtonGroup size="lg" radius="sm" fullWidth className="rounded-md">
-          <Button className="rounded-l-md justify-start line-clamp-1 px-3">
-            {chapter_label}
-          </Button>
-          <Dropdown placement="bottom-end" radius="sm" type="listbox">
-            <DropdownTrigger>
-              <Button isIconOnly>
-                <ChevronUp />
-              </Button>
-            </DropdownTrigger>
-
-            <DropdownMenu
-              className="max-h-[300px] overflow-scroll"
-              aria-label="Chapter List"
-              variant="faded"
-              defaultSelectedKeys={[chapterData.id]}
-              selectionMode="single"
-              disabledKeys={[chapterData.id]}
-            >
-              {chapterAggregate.map((chAgg, index) => (
-                <DropdownSection
-                  title={
-                    chAgg.vol !== "none" ? `Vol. ${chAgg.vol}` : "No Volume"
-                  }
-                  key={chAgg.vol}
-                  showDivider={index !== chapterAggregate.length - 1}
-                >
-                  {chAgg.chapters.map((chapter) => (
-                    <DropdownItem
-                      key={chapter.id}
-                      href={`/chapter/${chapter.id}`}
-                    >
-                      {chapter.chapter !== "none"
-                        ? `Ch. ${chapter.chapter}`
-                        : "Oneshot"}
-                    </DropdownItem>
-                  ))}
-                </DropdownSection>
-              ))}
-            </DropdownMenu>
-          </Dropdown>
-        </ButtonGroup> */}
-
+        {/* // nextChapter btn */}
         <Button
           as={Link}
           isIconOnly
@@ -201,6 +166,8 @@ export const ChapterNav = ({
         >
           <MoveRight />
         </Button>
+
+        {/* // back to top btn */}
         <Button
           radius="sm"
           isIconOnly

@@ -62,8 +62,8 @@ export const Navbar = () => {
     <NextUINavbar
       onMenuOpenChange={setIsMenuOpen}
       maxWidth="full"
-      position="sticky"
       isBlurred
+      shouldHideOnScroll
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarMenuToggle

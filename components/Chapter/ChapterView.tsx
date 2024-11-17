@@ -2,12 +2,12 @@
 
 import { getChapterAggregate, getChapterbyID } from "@/lib/data";
 import { Chapter, ChapterAggregate } from "@/types";
-import { Image, Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import NextImage from "next/image";
 import { NotFound } from "../notFound";
 import { ChapterNav } from "./ChapterNav";
 import { ChapterInfo } from "./ChapterInfo";
+import { LongStrip } from "./Reader/LongStrip";
 
 interface ChapterViewProps {
   chapterID: string;
@@ -19,6 +19,15 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
     ChapterAggregate[] | null
   >(null);
   const [fetchFailed, setFetchFailed] = useState(false);
+  const [fitMode, setFitMode] = useState<"width" | "height">("width");
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const toggleFitMode = () => {
+    setFitMode((prevMode) => {
+      const newMode = prevMode === "width" ? "height" : "width";
+      return newMode;
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,33 +68,22 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
   return (
     <div className="flex flex-col gap-2">
       <ChapterInfo chapterData={chapterData} />
-      {/* {chapterAggregate && (
-        <ChapterNav
-          chapterData={chapterData}
-          chapterAggregate={chapterAggregate}
-        />
-      )} */}
 
-      <div className="flex flex-col gap-2 items-center justify-center">
-        {chapterData?.pages?.map((page, index) => (
-          <Image
-            as={NextImage}
-            key={index}
-            src={page}
-            alt={`Page ${index}`}
-            className="w-full h-auto"
-            width={1500}
-            height={0}
-            radius="none"
-            quality={100}
-          />
-        ))}
-      </div>
+      {!!chapterData.pages && (
+        <LongStrip
+          pages={chapterData.pages}
+          fitMode={fitMode}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
 
       {chapterAggregate && (
         <ChapterNav
           chapterData={chapterData}
           chapterAggregate={chapterAggregate}
+          toggleFitMode={toggleFitMode}
+          fitMode={fitMode}
         />
       )}
     </div>
