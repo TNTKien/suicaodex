@@ -39,7 +39,7 @@ export const LongStrip = ({
   useEffect(() => {
     const pageElement = document.getElementById(`page-${currentPage}`);
     if (pageElement) {
-      pageElement.scrollIntoView({ behavior: "instant" });
+      pageElement.scrollIntoView({ behavior: "auto" });
     }
   }, [fitMode]);
 
@@ -47,7 +47,7 @@ export const LongStrip = ({
     const pageIndex = Array.isArray(value) ? value[0] : value;
     const pageElement = document.getElementById(`page-${pageIndex - 1}`);
     if (pageElement) {
-      pageElement.scrollIntoView({ behavior: "instant" });
+      pageElement.scrollIntoView({ behavior: "auto" });
     }
   };
 
