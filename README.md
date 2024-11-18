@@ -1,6 +1,7 @@
-# P
+# Preview
 
 # A Manga Website using [MangaDex API](https://api.mangadex.org/docs/).
+
 Please note that all data belongs to MangaDex, this project is for entertainment purposes only.
 
 ## How to Use
@@ -20,6 +21,7 @@ bun dev
 ```
 
 ### Deployments
+
 This project is setup to deploy on [Cloudflare Pages](https://pages.cloudflare.com/). Remember to change Compatibility flags to `nodejs_compat` in both development and production environments in order to make it work, you can find this in Cloudflare page's Settings section.
 
 ### Setup pnpm (optional)
