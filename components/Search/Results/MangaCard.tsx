@@ -39,7 +39,7 @@ export const MangaCard = ({ manga }: MangaCardProps) => {
               ? manga.author
               : `${manga.author}, ${manga.artist}`}
           </p>
-          <div className="flex flex-wrap gap-1 mt-1">
+          <div className="hidden sm:flex flex-wrap gap-1 mt-1">
             <MangaTags
               tags={manga.tags}
               contentRating={manga.contentRating}

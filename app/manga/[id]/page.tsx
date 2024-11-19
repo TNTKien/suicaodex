@@ -1,6 +1,8 @@
+import { auth } from "@/auth";
 import MangaDetailsNew from "@/components/Manga/Detail/MangaDetailsNew";
 import { siteConfig } from "@/config/site";
 import { getMangaDetails } from "@/lib/data";
+import { getUserLib } from "@/lib/db";
 import { Metadata } from "next";
 
 interface pageProps {
@@ -41,6 +43,12 @@ export async function generateMetadata({
   }
 }
 
-export default function Page({ params }: pageProps) {
-  return <MangaDetailsNew mangaID={params.id} />;
+export default async function Page({ params }: pageProps) {
+  const session = await auth();
+  // if (!!session && !!session.user) {
+  //   const userLib = session.user.id ? await getUserLib(session.user.id) : null;
+  //   console.log(userLib);
+  // }
+
+  return <MangaDetailsNew mangaID={params.id} session={session} />;
 }
