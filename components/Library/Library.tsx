@@ -17,7 +17,6 @@ import NoTitle from "./NoTitle";
 import { getUserLib } from "@/lib/db";
 import { getMangaByIDs } from "@/lib/data";
 import { MangaCard } from "../Search/Results/MangaCard";
-import TabSkeleton from "../Manga/MangaTab/TabSkeleton";
 
 interface LibraryProps {
   session?: any;
@@ -86,14 +85,6 @@ export const Library = ({ session }: LibraryProps) => {
           onSelectionChange={(key) => setSelected(key.toString())}
         >
           <Tab key="follow" title={<BookmarkCheck />}>
-            {/* {followingManga.length > 0 && (
-              <div className="flex flex-col gap-2">
-                {followingManga.map((manga) => (
-                  <MangaCard key={manga.id} manga={manga} />
-                ))}
-              </div>
-            )} */}
-
             {isLoading ? (
               <Card shadow="sm" radius="none" className="rounded-md w-full">
                 <CardBody className="flex flex-row gap-3 p-2">

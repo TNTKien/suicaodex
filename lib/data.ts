@@ -648,12 +648,24 @@ export async function getTagsGroup(): Promise<TagsGroup[]> {
 
 export async function getMangaByIDs(ids: string[]): Promise<Manga[]> {
   if (ids.length === 0) return [];
-  const { data } = await axiosInstance.get(`/manga`, {
-    params: {
-      ids: ids,
-      includes: ["cover_art", "author", "artist"],
-    },
-  });
 
-  return data.data.map((item: any) => MangaParser(item));
+  const chunkSize = 100;
+  const chunks = [];
+  for (let i = 0; i < ids.length; i += chunkSize) {
+    chunks.push(ids.slice(i, i + chunkSize));
+  }
+
+  const requests = chunks.map((chunk) =>
+    axiosInstance.get(`/manga`, {
+      params: {
+        ids: chunk,
+        includes: ["cover_art", "author", "artist"],
+      },
+    })
+  );
+
+  const responses = await Promise.all(requests);
+  const mangas = responses.flatMap((response) => response.data.data);
+
+  return mangas.map((item: any) => MangaParser(item));
 }

@@ -25,6 +25,7 @@ import {
   BellRing,
   BookmarkCheck,
   ChevronsUpDown,
+  CircleHelp,
   ListCheck,
   ListPlus,
   NotebookPen,
@@ -34,6 +35,7 @@ import { useMemo, useState, useEffect } from "react";
 import SignInModal from "./SignInModal";
 import { getLibType, updateUserLib } from "@/lib/db";
 import { useToast } from "@/components/hook/use-toast";
+import { set } from "date-fns";
 
 interface LibModalProps {
   manga: Manga;
@@ -49,11 +51,13 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
   const [isGetNoitification, setIsGetNotification] = useState(false);
 
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
+  const [originalKeys, setOriginalKeys] = useState<Selection>(new Set());
 
   useEffect(() => {
     const fetchDefaultType = async () => {
       const defaultType = await getLibType(session.user.id, manga.id);
       setSelectedKeys(new Set([defaultType]));
+      setOriginalKeys(new Set([defaultType]));
     };
     fetchDefaultType();
   }, [session.user.id, manga.id]);
@@ -89,7 +93,7 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
 
   const { toast } = useToast();
 
-  const handleLib = async () => {
+  const handleLib = async (onClose: () => void) => {
     const type = Array.from(selectedKeys)[0] as
       | "completed"
       | "reading"
@@ -98,12 +102,13 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
       | "none";
 
     const res = await updateUserLib(session.user.id, manga.id, type);
-    return toast({
+    toast({
       className: "font-semibold text-2xl",
       variant: res.status === 200 ? "default" : "destructive",
       title: `${res.status === 200 ? "✅ " : "⚠️ "}` + res.message,
       description: "Cái chuông bấm cho vui thôi chứ chưa dùng được đâu 🐧",
     });
+    onClose();
   };
 
   return (
@@ -131,6 +136,9 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
           backdrop:
             "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-5",
         }}
+        isDismissable={false}
+        isKeyboardDismissDisabled={true}
+        hideCloseButton
       >
         <ModalContent>
           {(onClose) => (
@@ -207,6 +215,22 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
                         )}
                       </Button>
                     </div>
+                    <div className="hidden sm:flex flex-col gap-2">
+                      <p className="font-semibold">Hướng dẫn:</p>
+
+                      <p className="font-light">
+                        - Chọn một trong các mục bên trên để thêm.
+                      </p>
+                      <p className="font-light">
+                        - Chọn &quot;Không&quot; để xoá truyện khỏi Thư viện.
+                      </p>
+                      <p className="font-light">
+                        - Nhấn chuông để nhận thông báo khi có chap mới.
+                      </p>
+                      <p className="font-light">
+                        - Câu trên cho oai thôi chứ chưa có thông báo đâu 🐧
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div className="flex flex-row gap-2 sm:hidden">
@@ -259,23 +283,39 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
                     )}
                   </Button>
                 </div>
+                <div className="flex flex-col gap-2 sm:hidden">
+                  <p className="font-semibold">Hướng dẫn:</p>
+
+                  <p className="font-light">
+                    - Chọn một trong các mục bên trên để thêm.
+                  </p>
+                  <p className="font-light">
+                    - Chọn &quot;Không&quot; để xoá truyện khỏi Thư viện.
+                  </p>
+                  <p className="font-light">
+                    - Nhấn chuông để nhận thông báo khi có chap mới.
+                  </p>
+                  <p className="font-light">
+                    - Câu trên cho oai thôi chứ chưa có thông báo đâu 🐧
+                  </p>
+                </div>
               </ModalBody>
               <ModalFooter className="flex flex-col gap-2">
                 <Button
                   color="danger"
                   className="font-semibold"
-                  onPress={() => {
-                    handleLib();
-                    onClose();
-                  }}
+                  onPress={() => handleLib(onClose)}
                   radius="sm"
                 >
-                  Thêm
+                  Cập nhật
                 </Button>
                 <Button
                   variant="flat"
                   className="font-semibold"
-                  onPress={onClose}
+                  onPress={() => {
+                    setSelectedKeys(originalKeys);
+                    onClose();
+                  }}
                   radius="sm"
                 >
                   Huỷ
