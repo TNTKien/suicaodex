@@ -34,8 +34,9 @@ import NextImage from "next/image";
 import { useMemo, useState, useEffect } from "react";
 import SignInModal from "./SignInModal";
 import { getLibType, updateUserLib } from "@/lib/db";
-import { useToast } from "@/components/hook/use-toast";
-import { set } from "date-fns";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useTheme } from "next-themes";
 
 interface LibModalProps {
   manga: Manga;
@@ -43,6 +44,7 @@ interface LibModalProps {
 }
 
 export const LibModal = ({ manga, session }: LibModalProps) => {
+  const { theme } = useTheme();
   if (!session) return <SignInModal />;
 
   const coverURL = siteConfig.mangadexAPI.coverURL;
@@ -91,8 +93,6 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
       (variant) => variant.key === Array.from(selectedKeys)[0]
     ) || BtnVariants[0];
 
-  const { toast } = useToast();
-
   const handleLib = async (onClose: () => void) => {
     const type = Array.from(selectedKeys)[0] as
       | "completed"
@@ -102,13 +102,13 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
       | "none";
 
     const res = await updateUserLib(session.user.id, manga.id, type);
-    toast({
-      className: "font-semibold text-2xl",
-      variant: res.status === 200 ? "default" : "destructive",
-      title: `${res.status === 200 ? "✅ " : "⚠️ "}` + res.message,
-      description: "Cái chuông bấm cho vui thôi chứ chưa dùng được đâu 🐧",
-    });
-    onClose();
+
+    if (res.status === 200) {
+      toast.success(res.message);
+    } else {
+      toast.error(res.message);
+    }
+    return onClose();
   };
 
   return (
@@ -325,6 +325,7 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
           )}
         </ModalContent>
       </Modal>
+      <ToastContainer theme={theme} />
     </>
   );
 };

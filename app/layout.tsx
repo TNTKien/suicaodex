@@ -5,7 +5,6 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
-import { Toaster } from "@/components/ui/Toaster";
 
 export const runtime = "nodejs";
 
@@ -53,7 +52,6 @@ export default function RootLayout({
           <div className="relative flex flex-col h-screen">
             <Navbar />
             <main className="container mx-auto px-4 py-4">{children}</main>
-            <Toaster />
           </div>
         </Providers>
       </body>

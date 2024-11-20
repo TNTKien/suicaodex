@@ -27,7 +27,6 @@
     "@nextui-org/system": "2.2.6",
     "@nextui-org/theme": "2.2.11",
     "@prisma/client": "^5.22.0",
-    "@radix-ui/react-toast": "^1.2.2",
     "@react-aria/ssr": "3.9.4",
     "@react-aria/visually-hidden": "3.8.12",
     "axios": "^1.7.7",
@@ -48,6 +47,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.1",
+    "react-toastify": "^10.0.6",
     "remark-gfm": "^4.0.0",
     "sharp": "^0.33.5"
   },

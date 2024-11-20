@@ -31,7 +31,10 @@ export async function updateUserLib(
     });
 
     if (!user) {
-      return { message: "User not found", status: 404 };
+      return {
+        message: "Vui lòng đăng nhập lại để sử dụng tính năng này!",
+        status: 404,
+      };
     }
 
     const updateData: any = {

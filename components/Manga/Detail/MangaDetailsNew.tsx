@@ -178,6 +178,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                   size="md"
                   fullWidth
                   radius="sm"
+                  className="-mt-2"
                 >
                   <Button
                     as={Link}
