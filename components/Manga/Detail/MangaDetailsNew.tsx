@@ -52,11 +52,11 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
       try {
         const mangaDetails = await getMangaDetails(mangaID);
         setInfo(mangaDetails);
-        const chapters = await getChapters(mangaID, mangaDetails.language, 1);
+        const chapters = await getChapters(mangaID, "vi", 1);
         setLists(chapters);
         const stats = await getMangaRating(mangaID);
         setRating(stats);
-        const first = await getFirstChapter(mangaID, mangaDetails.language);
+        const first = await getFirstChapter(mangaID, "vi");
         setFirstChapter(first);
       } catch (error) {
         console.log(error);
@@ -241,7 +241,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
 
           <ChapterVolumeNew
             mangaID={mangaID}
-            language={info.language}
+            language="vi"
             limit={100}
             finalChapter={info.finalChapter}
           />
