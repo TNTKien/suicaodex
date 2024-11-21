@@ -8,8 +8,8 @@ interface pageProps {
 }
 
 export const metadata: Metadata = {
-  title: "Tìm kiếm nâng cao | SuicaoDex",
-  description: "Tìm kiếm nâng cao | SuicaoDex",
+  title: "Tìm kiếm nâng cao - SuicaoDex",
+  description: "Công cụ tìm kiếm nâng cao",
   keywords: ["Tìm kiếm nâng cao", "Nâng cao", "Tìm kiếm", "Manga", "SuicaoDex"],
 };
 
