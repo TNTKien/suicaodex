@@ -32,12 +32,7 @@ export async function generateMetadata({
         description: mangaDetails.description
           ? mangaDetails.description
           : `Đọc truyện ${mangaDetails.title} | SuicaoDex`,
-        images: [
-          {
-            url: `${siteConfig.mangadexAPI.coverURL}/${mangaDetails.id}/${mangaDetails.cover}`,
-            alt: mangaDetails.title,
-          },
-        ],
+        images: `${siteConfig.mangadexAPI.ogURL}/${mangaDetails.id}`,
       },
     };
   } catch (error) {

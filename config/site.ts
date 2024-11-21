@@ -19,5 +19,6 @@ export const siteConfig = {
     coverURL: "https://uploads.mangadex.org/covers",
     imgURL: "https://uploads.mangadex.org",
     proxyUrl: "https://cors.suicaodex.com/?url=",
+    ogURL: "https://og.mangadex.org/og-image/manga",
   },
 };
