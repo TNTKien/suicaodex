@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "SuicaoDex - Trang chủ",
+  name: "Trang chủ - SuicaoDex",
   description: "SuicaoDex - Trang web truyện tranh đầu hàng VN",
   keywords:
     "mato seihei no slave, suicaodex, manga, truyện tranh, đọc truyện, suicao, sủi cảo, đọc truyện online, ma đô",
@@ -20,5 +20,8 @@ export const siteConfig = {
     imgURL: "https://uploads.mangadex.org",
     proxyUrl: "https://cors.suicaodex.com/?url=",
     ogURL: "https://og.mangadex.org/og-image/manga",
+  },
+  domains: {
+    suicaodex: "https://suicaodex.com",
   },
 };

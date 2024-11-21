@@ -13,7 +13,9 @@ export async function generateMetadata({
   const { page } = getSearchParams({ searchParams });
   return {
     title:
-      page === 1 ? "Mới cập nhật | SuicaoDex" : `Trang ${page} | SuicaoDex`,
+      page === 1
+        ? "Mới cập nhật - SuicaoDex"
+        : `Trang ${page} - Mới cập nhật - SuicaoDex`,
     description: "Manga mới cập nhật",
     keywords: ["Mới cập nhật", "Manga"],
   };
