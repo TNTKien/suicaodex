@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  openGraph: {
+    images: "/SuicaoHan.webp",
+  },
 };
 
 export default function Home() {
