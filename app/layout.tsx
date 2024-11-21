@@ -36,7 +36,7 @@ export default function RootLayout({
           name="google-site-verification"
           content="22zmW8vLmhPSRHgJo2Yg_J0w09A-1ZlmJjFG6ldXdjA"
         />
-        <meta property="og:image" content="/SuicaoHan.webp" />
+        {/* <meta property="og:image" content="/SuicaoHan.webp" /> */}
       </head>
       <body
         className={clsx(
