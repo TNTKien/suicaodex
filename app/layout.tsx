@@ -36,10 +36,6 @@ export default function RootLayout({
           name="google-site-verification"
           content="22zmW8vLmhPSRHgJo2Yg_J0w09A-1ZlmJjFG6ldXdjA"
         />
-        {/* <meta
-          property="og:image"
-          content="/2e418d11-579c-4078-a960-60781115efc9.jpg"
-        /> */}
       </head>
       <body
         className={clsx(
