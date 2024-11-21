@@ -18,6 +18,6 @@ export const siteConfig = {
     baseURL: "https://api.mangadex.org",
     coverURL: "https://uploads.mangadex.org/covers",
     imgURL: "https://uploads.mangadex.org",
-    proxyUrl: "https://cors.suicaodex.live/?url=",
+    proxyUrl: "https://cors.suicaodex.com/?url=",
   },
 };
