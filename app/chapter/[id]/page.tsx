@@ -1,4 +1,5 @@
 import ChapterView from "@/components/Chapter/ChapterView";
+import { siteConfig } from "@/config/site";
 import { getChapterbyID } from "@/lib/data";
 import { Metadata } from "next";
 
@@ -17,10 +18,24 @@ export async function generateMetadata({
       ? `Ch. ${chapterData.chapter}`
       : "Oneshot";
 
-    const mangaTitle = chapterData.manga?.title || "";
+    const title = [
+      chapterData.manga?.title,
+      chapterInx,
+      chapterData.title,
+      "SuicaoDex",
+    ]
+      .filter((x) => x)
+      .join(" - ");
+
     return {
-      title: `${chapterInx} - ${mangaTitle} | SuicaoDex`,
-      description: `Đọc ${chapterInx} - ${mangaTitle} | SuicaoDex`,
+      title: title,
+      description: `Đọc ngay ${title}`,
+      openGraph: {
+        title: title,
+        siteName: "SuicaoDex",
+        description: `Đọc ngay ${title}`,
+        images: `${siteConfig.mangadexAPI.ogURL}/${chapterData.manga?.id}`,
+      },
     };
   } catch (error) {
     return {
