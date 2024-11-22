@@ -7,14 +7,14 @@ import PopularMangaCard from "../PopularMangaCard";
 import MangaCarouselSkeleton from "./MangaCarouselSkeleton";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { Flame } from "lucide-react";
 import { Divider } from "@nextui-org/react";
-import { is } from "date-fns/locale";
+import Maintenance from "@/components/maintenance";
 
 const MangaCarousel: FC = () => {
   const [mangas, setMangas] = useState<Manga[]>([]);
   const [fetchFailed, setFetchFailed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMaintenance, setIsMaintenance] = useState(false);
   const [emblaRef] = useEmblaCarousel({ loop: true, containScroll: false }, [
     Autoplay(),
   ]);
@@ -24,7 +24,10 @@ const MangaCarousel: FC = () => {
       try {
         const popularMangas = await getPopularMangas();
         setMangas(popularMangas);
-      } catch (error) {
+      } catch (error: any) {
+        if (error.status === 503) {
+          setIsMaintenance(true);
+        }
         setFetchFailed(true);
       } finally {
         setIsLoading(false);
@@ -33,6 +36,10 @@ const MangaCarousel: FC = () => {
 
     fetchData();
   }, []);
+
+  if (isMaintenance) {
+    return <Maintenance />;
+  }
 
   if (isLoading) {
     return (
