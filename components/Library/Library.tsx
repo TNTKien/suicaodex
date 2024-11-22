@@ -14,7 +14,7 @@ import { Album, BookmarkCheck, ListCheck, NotebookPen } from "lucide-react";
 import { use, useEffect, useState } from "react";
 import SignInAlert from "./SignInAlert";
 import NoTitle from "./NoTitle";
-import { getUserLib } from "@/lib/db";
+import { getUserLibrary } from "@/lib/db";
 import { getMangaByIDs } from "@/lib/data";
 import { MangaCard } from "../Search/Results/MangaCard";
 
@@ -44,11 +44,18 @@ export const Library = ({ session }: LibraryProps) => {
     const fetchLib = async () => {
       setIsLoading(true);
       try {
-        const res = await getUserLib(session.user.id);
-        const following = await getMangaByIDs(res?.followingMangaIDs || []);
-        const reading = await getMangaByIDs(res?.readingMangaIDs || []);
-        const plan = await getMangaByIDs(res?.planMangaIDs || []);
-        const completed = await getMangaByIDs(res?.completedMangaIDs || []);
+        const lib = await getUserLibrary(session.user.id);
+
+        const following = await getMangaByIDs(lib.FOLLOWING);
+        const reading = await getMangaByIDs(lib.READING);
+        const plan = await getMangaByIDs(lib.PLAN);
+        const completed = await getMangaByIDs(lib.COMPLETED);
+
+        // const res = await getUserLib(session.user.id);
+        // const following = await getMangaByIDs(res?.followingMangaIDs || []);
+        // const reading = await getMangaByIDs(res?.readingMangaIDs || []);
+        // const plan = await getMangaByIDs(res?.planMangaIDs || []);
+        // const completed = await getMangaByIDs(res?.completedMangaIDs || []);
 
         setFollowingManga(following);
         setReadingManga(reading);

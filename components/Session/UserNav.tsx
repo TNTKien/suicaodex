@@ -6,7 +6,14 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/react";
-import { BellDot, Library, LogOut, Settings2, User } from "lucide-react";
+import {
+  BellDot,
+  History,
+  Library,
+  LogOut,
+  Settings2,
+  User,
+} from "lucide-react";
 
 export function UserNav() {
   const { data: session } = useSession();
@@ -44,6 +51,9 @@ export function UserNav() {
         </DropdownItem>
         <DropdownItem href="/my-library" startContent={<Library />}>
           Thư viện
+        </DropdownItem>
+        <DropdownItem href="/in-progress" startContent={<History />}>
+          Lịch sử đọc
         </DropdownItem>
         <DropdownItem
           href="/in-progress"

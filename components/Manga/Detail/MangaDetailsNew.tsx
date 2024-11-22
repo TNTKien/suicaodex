@@ -51,11 +51,11 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
       try {
         const mangaDetails = await getMangaDetails(mangaID);
         setInfo(mangaDetails);
-        const chapters = await getChapters(mangaID, mangaDetails.language, 1);
+        const chapters = await getChapters(mangaID, "vi", 1);
         setLists(chapters);
         const stats = await getMangaRating(mangaID);
         setRating(stats);
-        const first = await getFirstChapter(mangaID, mangaDetails.language);
+        const first = await getFirstChapter(mangaID, "vi");
         setFirstChapter(first);
       } catch (error) {
         console.log(error);
@@ -121,6 +121,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
             height={230}
             className="absolute w-full object-cover z-0 max-h-[230] blur-sm brightness-50"
             radius="none"
+            priority
           />
           <CardHeader>
             <div className="items-start flex flex-col sm:flex-row gap-4">
@@ -169,7 +170,11 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
         <div className="flex flex-col md:flex-row gap-2">
           <div className="w-full md:w-1/2 max-h-fit rounded-lg shadow-small bg-content1">
             <div className="flex flex-col gap-2 p-3">
-              <LibModal manga={info} session={session} />
+              <LibModal
+                manga={info}
+                session={session}
+                latestChapter={lists[0]}
+              />
 
               {lists[0]?.id && (
                 <ButtonGroup
@@ -243,7 +248,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
 
           <ChapterVolumeNew
             mangaID={mangaID}
-            language={info.language}
+            language="vi"
             limit={100}
             finalChapter={info.finalChapter}
           />

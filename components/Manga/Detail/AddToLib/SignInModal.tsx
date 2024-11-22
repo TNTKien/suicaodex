@@ -1,7 +1,6 @@
 import { DiscordIcon } from "@/components/icons";
 import {
   Button,
-  Image,
   Modal,
   ModalBody,
   ModalContent,
@@ -10,6 +9,9 @@ import {
 } from "@nextui-org/react";
 import { ListPlus } from "lucide-react";
 import { signIn } from "next-auth/react";
+import { ToastContainer } from "react-toastify";
+import Guide from "@/public/guide.png";
+import Image from "next/image";
 
 export default function SignInModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -41,7 +43,7 @@ export default function SignInModal() {
                 <p className=" font-semibold text-center">
                   Đăng nhập để sử dụng tính năng này nha!
                 </p>
-                <Image src="/guide.png" disableSkeleton isBlurred />
+                <Image src={Guide} alt="đăng nhập đi cha" />
               </ModalBody>
               <ModalFooter className="flex flex-col gap-2">
                 <Button
@@ -66,6 +68,7 @@ export default function SignInModal() {
           )}
         </ModalContent>
       </Modal>
+      <ToastContainer />
     </>
   );
 }

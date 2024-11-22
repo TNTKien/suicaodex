@@ -660,6 +660,7 @@ export async function getMangaByIDs(ids: string[]): Promise<Manga[]> {
       params: {
         ids: chunk,
         includes: ["cover_art", "author", "artist"],
+        contentRating: ["safe", "suggestive", "erotica", "pornographic"],
       },
     })
   );

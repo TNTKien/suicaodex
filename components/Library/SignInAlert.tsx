@@ -1,7 +1,9 @@
 "use client";
-import { Button, Image } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { DiscordIcon } from "../icons";
 import { signIn } from "next-auth/react";
+import Guide from "@/public/guide.png";
+import Image from "next/image";
 
 export default function SignInAlert() {
   return (
@@ -9,7 +11,7 @@ export default function SignInAlert() {
       <p className="font-semibold text-center text-2xl">
         Đăng nhập để sử dụng tính năng này nha!
       </p>
-      <Image src="/guide.png" disableSkeleton isBlurred />
+      <Image src={Guide} alt="đăng nhập đi cha" priority />
       <Button
         color="danger"
         className="font-semibold"

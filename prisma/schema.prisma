@@ -16,10 +16,9 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  followingMangaIDs String[]
-  readingMangaIDs String[]
-  planMangaIDs String[]
-  completedMangaIDs String[]
+  library       Library?        @relation("UserLibrary")
+
+  notifications Notify[]     @relation("toUser")
 
   // Optional for WebAuthn support
   Authenticator Authenticator[]
@@ -27,7 +26,51 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
+
+model Library {
+  id      String  @id @default(cuid())
+  userId  String  @unique
+  user    User    @relation("UserLibrary", fields: [userId], references: [id], onDelete: Cascade)
+  mangas  LibraryManga[] // Liên kết n-n với bảng Manga qua bảng trung gian
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Manga {
+  mangadexId       String       @id // Dùng mangadexId làm ID chính
+  latestChapterId  String
+
+  libraries        LibraryManga[] // Liên kết n-n qua bảng trung gian
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model LibraryManga {
+  id        String   @id @default(cuid()) // ID duy nhất cho bảng trung gian
+  libraryId String
+  mangaId   String
+  category  Category // Loại manga trong thư viện
+
+  library   Library  @relation(fields: [libraryId], references: [id], onDelete: Cascade)
+  manga     Manga    @relation(fields: [mangaId], references: [mangadexId], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Notify {
+  id        Int        @id @default(autoincrement())
+  toUserId  String
+  content   String
+  isRead    Boolean    @default(false)
+  createdAt DateTime   @default(now())
+
+  toUser User @relation("toUser", fields: [toUserId], references: [id])
+
+  @@index([toUserId])
+}
+
 model Account {
   userId            String
   type              String
@@ -47,6 +90,13 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@id([provider, providerAccountId])
+}
+
+enum Category {
+  FOLLOWING
+  READING
+  PLAN
+  COMPLETED
 }
  
 model Session {

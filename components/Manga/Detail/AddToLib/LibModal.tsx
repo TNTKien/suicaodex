@@ -1,7 +1,7 @@
 "use client";
 
 import { siteConfig } from "@/config/site";
-import { Manga } from "@/types";
+import { Chapter, Manga } from "@/types";
 import { Button } from "@nextui-org/button";
 import {
   Dropdown,
@@ -21,11 +21,10 @@ import {
 
 import {
   Album,
-  BellPlus,
+  BellOff,
   BellRing,
   BookmarkCheck,
   ChevronsUpDown,
-  CircleHelp,
   ListCheck,
   ListPlus,
   NotebookPen,
@@ -33,52 +32,56 @@ import {
 import NextImage from "next/image";
 import { useMemo, useState, useEffect } from "react";
 import SignInModal from "./SignInModal";
-import { getLibType, updateUserLib } from "@/lib/db";
+import { getMangaCategory, updateMangaCategory } from "@/lib/db";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "next-themes";
+import { set } from "date-fns";
 
 interface LibModalProps {
   manga: Manga;
   session?: any;
+  latestChapter: Chapter;
 }
 
-export const LibModal = ({ manga, session }: LibModalProps) => {
+export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
   const { theme } = useTheme();
   if (!session) return <SignInModal />;
 
   const coverURL = siteConfig.mangadexAPI.coverURL;
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const isMobile = window.innerWidth < 640;
-  const [isGetNoitification, setIsGetNotification] = useState(false);
 
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
   const [originalKeys, setOriginalKeys] = useState<Selection>(new Set());
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchDefaultType = async () => {
-      const defaultType = await getLibType(session.user.id, manga.id);
-      setSelectedKeys(new Set([defaultType]));
-      setOriginalKeys(new Set([defaultType]));
+      //onst defaultType = await getLibType(session.user.id, manga.id);
+      const defaultCategory = await getMangaCategory(session.user.id, manga.id);
+
+      setSelectedKeys(new Set([defaultCategory]));
+      setOriginalKeys(new Set([defaultCategory]));
     };
     fetchDefaultType();
   }, [session.user.id, manga.id]);
 
   const dropdownItems = [
-    { key: "none", value: "Không" },
-    { key: "following", value: "Theo dõi" },
-    { key: "reading", value: "Đang đọc" },
-    { key: "plan", value: "Để dành đọc sau" },
-    { key: "completed", value: "Đã đọc xong" },
+    { key: "NONE", value: "Không" },
+    { key: "FOLLOWING", value: "Theo dõi" },
+    { key: "READING", value: "Đang đọc" },
+    { key: "PLAN", value: "Để dành đọc sau" },
+    { key: "COMPLETED", value: "Đã đọc xong" },
   ];
 
   const BtnVariants = [
     { key: "loading", value: "", icon: <Spinner color="white" size="md" /> },
-    { key: "none", value: "Thêm vào Thư viện", icon: <ListPlus /> },
-    { key: "following", value: "Đang theo dõi", icon: <BookmarkCheck /> },
-    { key: "reading", value: "Đang đọc", icon: <Album /> },
-    { key: "plan", value: "Để dành đọc sau", icon: <NotebookPen /> },
-    { key: "completed", value: "Đã đọc xong", icon: <ListCheck /> },
+    { key: "NONE", value: "Thêm vào Thư viện", icon: <ListPlus /> },
+    { key: "FOLLOWING", value: "Đang theo dõi", icon: <BookmarkCheck /> },
+    { key: "READING", value: "Đang đọc", icon: <Album /> },
+    { key: "PLAN", value: "Để dành đọc sau", icon: <NotebookPen /> },
+    { key: "COMPLETED", value: "Đã đọc xong", icon: <ListCheck /> },
   ];
 
   const selectedValue = useMemo(
@@ -94,21 +97,34 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
     ) || BtnVariants[0];
 
   const handleLib = async (onClose: () => void) => {
-    const type = Array.from(selectedKeys)[0] as
-      | "completed"
-      | "reading"
-      | "plan"
-      | "following"
-      | "none";
+    setIsLoading(true);
+    try {
+      const type = Array.from(selectedKeys)[0] as
+        | "COMPLETED"
+        | "READING"
+        | "PLAN"
+        | "FOLLOWING"
+        | "NONE";
 
-    const res = await updateUserLib(session.user.id, manga.id, type);
+      const res = await updateMangaCategory(
+        session.user.id,
+        manga.id,
+        type,
+        latestChapter?.id || "none"
+      );
 
-    if (res.status === 200) {
-      toast.success(res.message);
-    } else {
-      toast.error(res.message);
+      if (res.status === 200 || res.status === 201) {
+        toast.success(res.message);
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Có lỗi xảy ra, vui lòng thử lại sau!");
+    } finally {
+      setIsLoading(false);
+      return onClose();
     }
-    return onClose();
   };
 
   return (
@@ -195,23 +211,17 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
                       <Button
                         isIconOnly
                         radius="sm"
-                        variant="flat"
-                        isDisabled={Array.from(selectedKeys)[0] === "none"}
+                        isDisabled={Array.from(selectedKeys)[0] !== "FOLLOWING"}
                         color={
-                          Array.from(selectedKeys)[0] === "none" ||
-                          !isGetNoitification
-                            ? "default"
-                            : "danger"
-                        }
-                        onPress={() =>
-                          setIsGetNotification(!isGetNoitification)
+                          Array.from(selectedKeys)[0] === "FOLLOWING"
+                            ? "danger"
+                            : "default"
                         }
                       >
-                        {Array.from(selectedKeys)[0] === "none" ||
-                        !isGetNoitification ? (
-                          <BellPlus />
-                        ) : (
+                        {Array.from(selectedKeys)[0] === "FOLLOWING" ? (
                           <BellRing />
+                        ) : (
+                          <BellOff />
                         )}
                       </Button>
                     </div>
@@ -222,10 +232,16 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
                         - Chọn một trong các mục bên trên để thêm.
                       </p>
                       <p className="font-light">
-                        - Chọn &quot;Không&quot; để xoá truyện khỏi Thư viện.
+                        - Chọn{" "}
+                        <span className="font-semibold">
+                          &quot;Theo dõi&quot;
+                        </span>{" "}
+                        để nhận thông báo khi có chap mới.
                       </p>
                       <p className="font-light">
-                        - Nhấn chuông để nhận thông báo khi có chap mới.
+                        - Chọn{" "}
+                        <span className="font-semibold">&quot;Không&quot;</span>{" "}
+                        để xoá truyện khỏi Thư viện.
                       </p>
                       <p className="font-light">
                         - Câu trên cho oai thôi chứ chưa có thông báo đâu 🐧
@@ -265,21 +281,17 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
                   <Button
                     isIconOnly
                     radius="sm"
-                    variant="flat"
-                    isDisabled={Array.from(selectedKeys)[0] === "none"}
+                    isDisabled={Array.from(selectedKeys)[0] !== "FOLLOWING"}
                     color={
-                      Array.from(selectedKeys)[0] === "none" ||
-                      !isGetNoitification
-                        ? "default"
-                        : "danger"
+                      Array.from(selectedKeys)[0] === "FOLLOWING"
+                        ? "danger"
+                        : "default"
                     }
-                    onPress={() => setIsGetNotification(!isGetNoitification)}
                   >
-                    {Array.from(selectedKeys)[0] === "none" ||
-                    !isGetNoitification ? (
-                      <BellPlus />
-                    ) : (
+                    {Array.from(selectedKeys)[0] === "FOLLOWING" ? (
                       <BellRing />
+                    ) : (
+                      <BellOff />
                     )}
                   </Button>
                 </div>
@@ -290,10 +302,14 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
                     - Chọn một trong các mục bên trên để thêm.
                   </p>
                   <p className="font-light">
-                    - Chọn &quot;Không&quot; để xoá truyện khỏi Thư viện.
+                    - Chọn{" "}
+                    <span className="font-semibold">&quot;Theo dõi&quot;</span>{" "}
+                    để nhận thông báo khi có chap mới.
                   </p>
                   <p className="font-light">
-                    - Nhấn chuông để nhận thông báo khi có chap mới.
+                    - Chọn{" "}
+                    <span className="font-semibold">&quot;Không&quot;</span> để
+                    xoá truyện khỏi Thư viện.
                   </p>
                   <p className="font-light">
                     - Câu trên cho oai thôi chứ chưa có thông báo đâu 🐧
@@ -306,6 +322,7 @@ export const LibModal = ({ manga, session }: LibModalProps) => {
                   className="font-semibold"
                   onPress={() => handleLib(onClose)}
                   radius="sm"
+                  isLoading={isLoading}
                 >
                   Cập nhật
                 </Button>

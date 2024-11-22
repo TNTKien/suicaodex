@@ -2,7 +2,6 @@ import { auth } from "@/auth";
 import MangaDetailsNew from "@/components/Manga/Detail/MangaDetailsNew";
 import { siteConfig } from "@/config/site";
 import { getMangaDetails } from "@/lib/data";
-import { getUserLib } from "@/lib/db";
 import { Metadata } from "next";
 
 interface pageProps {
