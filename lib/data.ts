@@ -1,4 +1,3 @@
-
 import axiosInstance from "./axios";
 import { siteConfig } from "@/config/site";
 
@@ -12,14 +11,13 @@ type Chapter = {
   group: {
     id: string;
     name: string;
-  }
+  };
   language?: string;
   pages?: string[];
   manga?: {
     id: string;
     title: string;
   };
-
 };
 
 type ChapterGroup = {
@@ -58,47 +56,45 @@ type LastestManga = {
   info: Manga;
   lastestChap: Chapter[];
   total?: number;
-}
+};
 
 type ChapterAggregate = {
   vol: string;
   chapters: {
     id: string;
     chapter: string;
-  }[]
-}
+  }[];
+};
 
 type MangaStats = {
   rating: {
     bayesian: number;
     distribution: {
-      '1': number;
-      '2': number;
-      '3': number;
-      '4': number;
-      '5': number;
-      '6': number;
-      '7': number;
-      '8': number;
-      '9': number;
-      '10': number;
-    }
+      "1": number;
+      "2": number;
+      "3": number;
+      "4": number;
+      "5": number;
+      "6": number;
+      "7": number;
+      "8": number;
+      "9": number;
+      "10": number;
+    };
     max: number;
-  },
+  };
   follows: number;
-}
+};
 
 type Author = {
   id: string;
   name: string;
-}
+};
 
 type TagsGroup = {
   group: string;
   tags: Tag[];
-}
-
-
+};
 
 export function ChaptersParser(data: any[]): Chapter[] {
   return data.map((item) => {
@@ -113,10 +109,12 @@ export function ChaptersParser(data: any[]): Chapter[] {
       updatedAt: item.attributes.updatedAt,
       externalUrl: item.attributes.externalUrl,
       language: item.attributes.translatedLanguage,
-      group: groupData ? {
-        id: groupData.id,
-        name: groupData.attributes.name,
-      } : { id: null, name: null },
+      group: groupData
+        ? {
+            id: groupData.id,
+            name: groupData.attributes.name,
+          }
+        : { id: null, name: null },
     };
   });
 }
@@ -160,11 +158,18 @@ export function MangaParser(data: any): Manga {
     cover: coverArt ? coverArt.attributes.fileName : null,
     author: author ? author.attributes.name : null,
     artist: artist ? artist.attributes.name : null,
-    description: data.attributes.description.vi ? data.attributes.description.vi : data.attributes.description.en,
+    description: data.attributes.description.vi
+      ? data.attributes.description.vi
+      : data.attributes.description.en,
     contentRating: contentRating,
     status: status,
-    raw: (data.attributes.links && data.attributes.links.raw) ? data.attributes.links.raw : null,
-    finalChapter: data.attributes.lastChapter ? data.attributes.lastChapter : null,
+    raw:
+      data.attributes.links && data.attributes.links.raw
+        ? data.attributes.links.raw
+        : null,
+    finalChapter: data.attributes.lastChapter
+      ? data.attributes.lastChapter
+      : null,
   };
 }
 
@@ -176,57 +181,66 @@ export async function getCoverArt(mangaID: string) {
 export async function getMangaDetails(mangaID: string) {
   const { data } = await axiosInstance.get(`/manga/${mangaID}`, {
     params: {
-      includes: ['cover_art', 'author', 'artist'],
-    }
+      includes: ["cover_art", "author", "artist"],
+    },
   });
   return MangaParser(data.data);
 }
 
-export async function getChapters(mangaID: string, language: string, limit: number) {
+export async function getChapters(
+  mangaID: string,
+  language: string,
+  limit: number
+) {
   const order = {
-    volume: 'desc',
-    chapter: 'desc'
-  }
+    volume: "desc",
+    chapter: "desc",
+  };
   const finalOrderQuery: { [key: string]: string } = {};
 
   // { "order[rating]": "desc", "order[followedCount]": "desc" }
   for (const [key, value] of Object.entries(order)) {
     finalOrderQuery[`order[${key}]`] = value;
-  };
+  }
 
   const { data } = await axiosInstance.get(`/manga/${mangaID}/feed`, {
     params: {
       limit: limit,
       translatedLanguage: [language],
-      includes: ['scanlation_group', 'manga'],
-      contentRating: ['safe', 'suggestive', 'erotica', 'pornographic'],
-      ...finalOrderQuery
-    }
+      includes: ["scanlation_group", "manga"],
+      contentRating: ["safe", "suggestive", "erotica", "pornographic"],
+      ...finalOrderQuery,
+    },
   });
   return ChaptersParser(data.data);
 }
 
-export async function getChapterVolume(mangaID: string, language: string, limit: number, offset: number): Promise<{ chapters: Chapter[], total: number }> {
+export async function getChapterVolume(
+  mangaID: string,
+  language: string,
+  limit: number,
+  offset: number
+): Promise<{ chapters: Chapter[]; total: number }> {
   const order = {
-    volume: 'desc',
-    chapter: 'desc'
-  }
+    volume: "desc",
+    chapter: "desc",
+  };
   const finalOrderQuery: { [key: string]: string } = {};
 
   // { "order[rating]": "desc", "order[followedCount]": "desc" }
   for (const [key, value] of Object.entries(order)) {
     finalOrderQuery[`order[${key}]`] = value;
-  };
+  }
 
   const { data } = await axiosInstance.get(`/manga/${mangaID}/feed`, {
     params: {
       limit: limit,
       offset: offset,
       translatedLanguage: [language],
-      includes: ['scanlation_group', 'manga'],
-      contentRating: ['safe', 'suggestive', 'erotica', 'pornographic'],
-      ...finalOrderQuery
-    }
+      includes: ["scanlation_group", "manga"],
+      contentRating: ["safe", "suggestive", "erotica", "pornographic"],
+      ...finalOrderQuery,
+    },
   });
   const total = data.total;
 
@@ -235,43 +249,44 @@ export async function getChapterVolume(mangaID: string, language: string, limit:
 
 export async function getFirstChapter(mangaID: string, language: string) {
   const order = {
-    volume: 'asc',
-    chapter: 'asc'
-  }
+    volume: "asc",
+    chapter: "asc",
+  };
   const finalOrderQuery: { [key: string]: string } = {};
   for (const [key, value] of Object.entries(order)) {
     finalOrderQuery[`order[${key}]`] = value;
-  };
+  }
 
   const { data } = await axiosInstance.get(`/manga/${mangaID}/feed`, {
     params: {
       limit: 1,
       translatedLanguage: [language],
-      includes: ['scanlation_group', 'manga'],
-      contentRating: ['safe', 'suggestive', 'erotica', 'pornographic'],
-      ...finalOrderQuery
-    }
+      includes: ["scanlation_group", "manga"],
+      contentRating: ["safe", "suggestive", "erotica", "pornographic"],
+      ...finalOrderQuery,
+    },
   });
   return ChaptersParser(data.data)[0];
 }
 
-
-export async function SearchManga(title: string, adultContent: boolean): Promise<Manga[]> {
+export async function SearchManga(
+  title: string,
+  adultContent: boolean
+): Promise<Manga[]> {
   const searchParams = {
-    includes: ['cover_art', 'author', 'artist'],
-    contentRating: ['safe', 'suggestive', 'erotica'],
+    includes: ["cover_art", "author", "artist"],
+    contentRating: ["safe", "suggestive", "erotica"],
     order: {
-      relevance: 'desc'
-    }
-  }
+      relevance: "desc",
+    },
+  };
   if (adultContent) {
-    searchParams.contentRating.push('pornographic');
+    searchParams.contentRating.push("pornographic");
   }
 
   const { data } = await axiosInstance.get(`/manga?title=${title}`, {
-    params: searchParams
-  }
-  );
+    params: searchParams,
+  });
   return data.data.map((item: any) => MangaParser(item));
 }
 
@@ -279,10 +294,10 @@ export async function getLastestMangas(): Promise<LastestManga[]> {
   const { data } = await axiosInstance.get(`/manga?`, {
     params: {
       limit: 12,
-      includes: ['cover_art', 'author', 'artist'],
-      availableTranslatedLanguage: ['vi'],
-      hasAvailableChapters: 'true',
-    }
+      includes: ["cover_art", "author", "artist"],
+      availableTranslatedLanguage: ["vi"],
+      hasAvailableChapters: "true",
+    },
   });
 
   const lastestManga = data.data.map(async (item: any) => {
@@ -294,15 +309,18 @@ export async function getLastestMangas(): Promise<LastestManga[]> {
   return Promise.all(lastestManga);
 }
 
-export async function getLatestMangas(limit: number, offset: number): Promise<LastestManga[]> {
+export async function getLatestMangas(
+  limit: number,
+  offset: number
+): Promise<LastestManga[]> {
   const { data } = await axiosInstance.get(`/manga?`, {
     params: {
       limit: limit,
       offset: offset,
-      includes: ['cover_art', 'author', 'artist'],
-      availableTranslatedLanguage: ['vi'],
-      hasAvailableChapters: 'true',
-    }
+      includes: ["cover_art", "author", "artist"],
+      availableTranslatedLanguage: ["vi"],
+      hasAvailableChapters: "true",
+    },
   });
 
   const lastestManga = data.data.map(async (item: any) => {
@@ -315,7 +333,7 @@ export async function getLatestMangas(limit: number, offset: number): Promise<La
 
   return Promise.all(lastestManga).then((res) => {
     return res.map((item, index) => {
-      return { ...item, total: total }
+      return { ...item, total: total };
     });
   });
 }
@@ -324,14 +342,16 @@ export async function getPopularMangas(): Promise<Manga[]> {
   const { data } = await axiosInstance.get(`/manga?`, {
     params: {
       limit: 10,
-      includes: ['cover_art', 'author', 'artist'],
-      hasAvailableChapters: 'true',
-      availableTranslatedLanguage: ['vi'],
+      includes: ["cover_art", "author", "artist"],
+      hasAvailableChapters: "true",
+      availableTranslatedLanguage: ["vi"],
       order: {
-        followedCount: 'desc'
+        followedCount: "desc",
       },
-      createdAtSince: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().slice(0, 19)
-    }
+      createdAtSince: new Date(new Date().setDate(new Date().getDate() - 30))
+        .toISOString()
+        .slice(0, 19),
+    },
   });
 
   return data.data.map((item: any) => MangaParser(item));
@@ -341,13 +361,13 @@ export async function getTopFollowedMangas(): Promise<Manga[]> {
   const { data } = await axiosInstance.get(`/manga?`, {
     params: {
       limit: 7,
-      includes: ['cover_art', 'author', 'artist'],
-      hasAvailableChapters: 'true',
-      availableTranslatedLanguage: ['vi'],
+      includes: ["cover_art", "author", "artist"],
+      hasAvailableChapters: "true",
+      availableTranslatedLanguage: ["vi"],
       order: {
-        followedCount: 'desc'
-      }
-    }
+        followedCount: "desc",
+      },
+    },
   });
 
   return data.data.map((item: any) => MangaParser(item));
@@ -357,38 +377,39 @@ export async function getTopRatedMangas(): Promise<Manga[]> {
   const { data } = await axiosInstance.get(`/manga?`, {
     params: {
       limit: 7,
-      includes: ['cover_art', 'author', 'artist'],
-      hasAvailableChapters: 'true',
-      availableTranslatedLanguage: ['vi'],
+      includes: ["cover_art", "author", "artist"],
+      hasAvailableChapters: "true",
+      availableTranslatedLanguage: ["vi"],
       order: {
-        rating: 'desc'
-      }
-    }
+        rating: "desc",
+      },
+    },
   });
 
   return data.data.map((item: any) => MangaParser(item));
 }
 
 export async function getStaffPickMangas(): Promise<Manga[]> {
-  const StaffPickID = await axiosInstance.get(`/list/805ba886-dd99-4aa4-b460-4bd7c7b71352`)
-    .then(res => res.data.data.relationships
-      .filter((item: any) => item.type === 'manga')
-      .map((item: any) => item.id)
+  const StaffPickID = await axiosInstance
+    .get(`/list/805ba886-dd99-4aa4-b460-4bd7c7b71352`)
+    .then((res) =>
+      res.data.data.relationships
+        .filter((item: any) => item.type === "manga")
+        .map((item: any) => item.id)
     );
 
   const { data } = await axiosInstance.get(`/manga?`, {
     params: {
       limit: 7,
-      includes: ['cover_art', 'author', 'artist'],
-      hasAvailableChapters: 'true',
-      availableTranslatedLanguage: ['vi'],
+      includes: ["cover_art", "author", "artist"],
+      hasAvailableChapters: "true",
+      availableTranslatedLanguage: ["vi"],
       ids: StaffPickID,
       order: {
-        rating: 'desc'
-      }
-    }
+        rating: "desc",
+      },
+    },
   });
-
 
   return data.data.map((item: any) => MangaParser(item));
 }
@@ -396,13 +417,17 @@ export async function getStaffPickMangas(): Promise<Manga[]> {
 export async function getChapterbyID(id: string): Promise<Chapter> {
   const { data } = await axiosInstance.get(`/chapter/${id}`, {
     params: {
-      includes: ['scanlation_group', 'manga'],
-    }
+      includes: ["scanlation_group", "manga"],
+    },
   });
   const chapter = ChaptersParser([data.data])[0];
   const manga = () => {
-    const mangaData = data.data.relationships.find((item: any) => item.type === 'manga');
-    const titleVi = mangaData.attributes.altTitles.find((item: any) => item.vi)?.vi;
+    const mangaData = data.data.relationships.find(
+      (item: any) => item.type === "manga"
+    );
+    const titleVi = mangaData.attributes.altTitles.find(
+      (item: any) => item.vi
+    )?.vi;
     let title = titleVi
       ? titleVi
       : mangaData.attributes.title[Object.keys(mangaData.attributes.title)[0]];
@@ -412,23 +437,29 @@ export async function getChapterbyID(id: string): Promise<Chapter> {
     return {
       id: mangaData.id,
       title: title,
-    }
-  }
+    };
+  };
 
   const { data: atHomeData } = await axiosInstance.get(`/at-home/server/${id}`);
   const base_url = siteConfig.mangadexAPI.imgURL;
   const hash = atHomeData.chapter.hash;
-  const pages = atHomeData.chapter.data.map((item: string) => `${base_url}/data/${hash}/${item}`);
+  const pages = atHomeData.chapter.data.map(
+    (item: string) => `${base_url}/data/${hash}/${item}`
+  );
 
   return { ...chapter, manga: manga(), pages };
 }
 
-export async function getChapterAggregate(mangaID: string, language: string, group: string): Promise<ChapterAggregate[]> {
+export async function getChapterAggregate(
+  mangaID: string,
+  language: string,
+  group: string
+): Promise<ChapterAggregate[]> {
   const { data } = await axiosInstance.get(`/manga/${mangaID}/aggregate`, {
     params: {
       translatedLanguage: [language],
       groups: [group],
-    }
+    },
   });
 
   const chapterList: ChapterAggregate[] = [];
@@ -443,8 +474,8 @@ export async function getChapterAggregate(mangaID: string, language: string, gro
       const chapter = volume.chapters[chapterKey];
 
       chaptersArray.push({
-        id: chapter.id,   // Lấy trường `id`
-        chapter: chapter.chapter
+        id: chapter.id, // Lấy trường `id`
+        chapter: chapter.chapter,
       });
     }
 
@@ -454,10 +485,9 @@ export async function getChapterAggregate(mangaID: string, language: string, gro
 
     result.push({
       vol: volumeKey,
-      chapters: chaptersArray
+      chapters: chaptersArray,
     });
   }
-
 
   result.sort((a, b) => {
     if (a.vol === "none") return -1;
@@ -508,22 +538,22 @@ export function MangaStatsParser(data: any, id: string): MangaStats {
   const distribution = data.statistics[id].rating.distribution;
 
   // Find the max value in the distribution
-  const max = Math.max(...Object.values(distribution) as number[]);
+  const max = Math.max(...(Object.values(distribution) as number[]));
 
   return {
     rating: {
       bayesian: data.statistics[id].rating.bayesian,
       distribution: {
-        '1': distribution['1'],
-        '2': distribution['2'],
-        '3': distribution['3'],
-        '4': distribution['4'],
-        '5': distribution['5'],
-        '6': distribution['6'],
-        '7': distribution['7'],
-        '8': distribution['8'],
-        '9': distribution['9'],
-        '10': distribution['10'],
+        "1": distribution["1"],
+        "2": distribution["2"],
+        "3": distribution["3"],
+        "4": distribution["4"],
+        "5": distribution["5"],
+        "6": distribution["6"],
+        "7": distribution["7"],
+        "8": distribution["8"],
+        "9": distribution["9"],
+        "10": distribution["10"],
       },
       max: max,
     },
@@ -542,40 +572,50 @@ export async function SearchAuthor(author: string): Promise<Author[]> {
     return {
       id: item.id,
       name: item.attributes.name,
-    }
+    };
   });
 }
 
-export async function AdvancedSearchManga(title: string, offset: number, limit: number, content: string[], status: string[], include_tags: string[], exclude_tags: string[], author: string[], graphic: string[]): Promise<Manga[]> {
+export async function AdvancedSearchManga(
+  title: string,
+  offset: number,
+  limit: number,
+  content: string[],
+  status: string[],
+  include_tags: string[],
+  exclude_tags: string[],
+  author: string[],
+  graphic: string[]
+): Promise<Manga[]> {
   const searchParams: { [key: string]: any } = {
     title: title,
     limit: limit,
     offset: offset,
-    includes: ['cover_art', 'author', 'artist'],
+    includes: ["cover_art", "author", "artist"],
     //availableTranslatedLanguage: ['vi', 'en'],
-  }
+  };
 
   if (content.length > 0) {
-    searchParams['contentRating'] = content;
+    searchParams["contentRating"] = content;
   }
   if (status.length > 0) {
-    searchParams['status'] = status;
+    searchParams["status"] = status;
   }
   if (include_tags.length > 0) {
-    searchParams['includedTags'] = include_tags;
+    searchParams["includedTags"] = include_tags;
   }
   if (exclude_tags.length > 0) {
-    searchParams['excludedTags'] = exclude_tags;
+    searchParams["excludedTags"] = exclude_tags;
   }
   if (author.length > 0) {
-    searchParams['authors'] = author;
+    searchParams["authors"] = author;
   }
   if (graphic.length > 0) {
-    searchParams['publicationDemographic'] = graphic;
+    searchParams["publicationDemographic"] = graphic;
   }
 
   const { data } = await axiosInstance.get(`/manga?`, {
-    params: searchParams
+    params: searchParams,
   });
 
   return data.data.map((item: any) => MangaParser(item));
@@ -589,7 +629,7 @@ export async function getTagsGroup(): Promise<TagsGroup[]> {
     const group = tagItem.attributes.group;
     const tag: Tag = {
       id: tagItem.id,
-      name: tagItem.attributes.name.en
+      name: tagItem.attributes.name.en,
     };
 
     if (!tagsMap[group]) {
@@ -598,10 +638,35 @@ export async function getTagsGroup(): Promise<TagsGroup[]> {
     tagsMap[group].push(tag);
   });
 
-  const tagsGroups: TagsGroup[] = Object.keys(tagsMap).map(group => ({
+  const tagsGroups: TagsGroup[] = Object.keys(tagsMap).map((group) => ({
     group,
-    tags: tagsMap[group]
+    tags: tagsMap[group],
   }));
 
   return tagsGroups;
+}
+
+export async function getMangaByIDs(ids: string[]): Promise<Manga[]> {
+  if (ids.length === 0) return [];
+
+  const chunkSize = 100;
+  const chunks = [];
+  for (let i = 0; i < ids.length; i += chunkSize) {
+    chunks.push(ids.slice(i, i + chunkSize));
+  }
+
+  const requests = chunks.map((chunk) =>
+    axiosInstance.get(`/manga`, {
+      params: {
+        ids: chunk,
+        includes: ["cover_art", "author", "artist"],
+        contentRating: ["safe", "suggestive", "erotica", "pornographic"],
+      },
+    })
+  );
+
+  const responses = await Promise.all(requests);
+  const mangas = responses.flatMap((response) => response.data.data);
+
+  return mangas.map((item: any) => MangaParser(item));
 }

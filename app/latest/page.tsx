@@ -1,4 +1,5 @@
 import Latest from "@/components/Manga/Latest/Latest";
+import { siteConfig } from "@/config/site";
 import { Metadata } from "next";
 
 interface pageProps {
@@ -18,6 +19,9 @@ export async function generateMetadata({
         : `Trang ${page} - Mới cập nhật - SuicaoDex`,
     description: "Manga mới cập nhật",
     keywords: ["Mới cập nhật", "Manga"],
+    openGraph: {
+      images: `${siteConfig.domains.suicaodex}/SuicaoHan.webp`,
+    },
   };
 }
 

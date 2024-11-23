@@ -35,7 +35,7 @@ export type Chapter = {
   group: {
     id: string;
     name: string;
-  }
+  };
   language?: string;
   pages?: string[];
   manga?: {
@@ -58,47 +58,55 @@ export type LastestManga = {
   info: Manga;
   lastestChap: Chapter[];
   total?: number;
-}
+};
 
 export type ChapterAggregate = {
   vol: string;
   chapters: {
     id: string;
     chapter: string;
-  }[]
-}
+  }[];
+};
 
 export type MangaStats = {
   rating: {
     bayesian: number;
     distribution: {
-      '1': number;
-      '2': number;
-      '3': number;
-      '4': number;
-      '5': number;
-      '6': number;
-      '7': number;
-      '8': number;
-      '9': number;
-      '10': number;
-    }
+      "1": number;
+      "2": number;
+      "3": number;
+      "4": number;
+      "5": number;
+      "6": number;
+      "7": number;
+      "8": number;
+      "9": number;
+      "10": number;
+    };
     max: number;
-  },
+  };
   follows: number;
-}
+};
 
 export type ChapterVolume = {
   chapters: Chapter[];
   total: number;
-}
+};
 
 export type Author = {
   id: string;
   name: string;
-}
+};
 
 export type TagsGroup = {
   group: string;
   tags: Tag[];
-}
+};
+
+export type ReadingHistory = {
+  mangaTitle: string;
+  chapterId: string;
+  chapter: string;
+  chapterTitle: string;
+  cover: string;
+};

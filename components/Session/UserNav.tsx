@@ -6,7 +6,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/react";
-import { LogOut } from "lucide-react";
+import { History, LogOut } from "lucide-react";
 
 export function UserNav() {
   const { data: session } = useSession();
@@ -35,6 +35,15 @@ export function UserNav() {
         >
           <p className="font-semibold">{session.user?.name}</p>
           <p className="font-light text-sm">{session.user?.email}</p>
+        </DropdownItem>
+        <DropdownItem
+          key="history"
+          href="/history"
+          startContent={<History />}
+          textValue="History"
+          showDivider
+        >
+          Lịch sử đọc truyện
         </DropdownItem>
         <DropdownItem
           key="logout"

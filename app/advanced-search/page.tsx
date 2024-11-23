@@ -1,4 +1,5 @@
 import { AdvancedSearch } from "@/components/Search/Advanced/AdvancedSearch";
+import { siteConfig } from "@/config/site";
 import { Metadata } from "next";
 
 interface pageProps {
@@ -11,6 +12,9 @@ export const metadata: Metadata = {
   title: "Tìm kiếm nâng cao - SuicaoDex",
   description: "Công cụ tìm kiếm nâng cao",
   keywords: ["Tìm kiếm nâng cao", "Nâng cao", "Tìm kiếm", "Manga", "SuicaoDex"],
+  openGraph: {
+    images: `${siteConfig.domains.suicaodex}/SuicaoHan.webp`,
+  },
 };
 
 export default function Page({ searchParams }: pageProps) {

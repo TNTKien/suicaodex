@@ -2,7 +2,7 @@
 
 import { signIn, useSession } from "next-auth/react";
 
-import { LogIn } from "lucide-react";
+import { History, LogIn } from "lucide-react";
 import { UserNav } from "./UserNav";
 import {
   Avatar,
@@ -62,6 +62,15 @@ export function SignIn() {
                 Hãy đăng nhập ngay để sử<br></br>dụng toàn bộ chức năng nhé!
               </p>
             </DropdownItem> */}
+            <DropdownItem
+              key="history"
+              href="/history"
+              startContent={<History />}
+              textValue="History"
+              showDivider
+            >
+              Lịch sử đọc truyện
+            </DropdownItem>
             <DropdownItem
               key="signin"
               startContent={<LogIn />}
