@@ -1,5 +1,9 @@
-# A Manga Website using [MangaDex API](https://api.mangadex.org/docs/).
+# A Website using [MangaDex API](https://api.mangadex.org/docs/).
 Please note that all data belongs to MangaDex, this project is for entertainment purposes only.
+
+I know my code sucks, but it works btw.
+
+Feel free to blame me as much as you want, you can find me on [Facebook](https://www.facebook.com/suicaodex) or create an issue [here](https://github.com/TNTKien/suicaodex/issues/new).
 
 ## How to Use
 
