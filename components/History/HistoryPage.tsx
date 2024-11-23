@@ -74,7 +74,12 @@ export const HistoryPage = () => {
             ? `${chapterIndex} - ${history[mangaId].chapterTitle}`
             : chapterIndex;
           return (
-            <Card className="rounded-md" shadow="sm" radius="none">
+            <Card
+              className="rounded-md"
+              shadow="sm"
+              radius="none"
+              key={mangaId}
+            >
               <CardBody className="flex flex-row gap-3 p-2">
                 <Link href={`/manga/${mangaId}`}>
                   <Image

@@ -58,10 +58,6 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
     fetchData();
   }, []);
 
-  if (fetchFailed) {
-    return <NotFound />;
-  }
-
   const { addHistory } = useReadingHistory();
 
   useEffect(() => {
@@ -75,6 +71,10 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
       });
     }
   }, [chapterData, addHistory, cover]);
+
+  if (fetchFailed) {
+    return <NotFound />;
+  }
 
   if (!chapterData) {
     return (
