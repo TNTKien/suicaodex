@@ -5,8 +5,10 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Link,
 } from "@nextui-org/react";
-import { History, LogOut } from "lucide-react";
+import { Bug, History, Link2, LogOut, ScanSearch } from "lucide-react";
+import { siteConfig } from "@/config/site";
 
 export function UserNav() {
   const { data: session } = useSession();
@@ -37,13 +39,43 @@ export function UserNav() {
           <p className="font-light text-sm">{session.user?.email}</p>
         </DropdownItem>
         <DropdownItem
+          key="mato"
+          href={`/manga/${siteConfig.mato.id}`}
+          startContent={<Link2 />}
+          textValue="Mato"
+        >
+          Mato Seihei no Slave
+        </DropdownItem>
+        <DropdownItem
+          key="advanded-search"
+          href="/advanded-search"
+          startContent={<ScanSearch />}
+          textValue="Advanced Search"
+        >
+          Tìm kiếm nâng cao
+        </DropdownItem>
+        <DropdownItem
           key="history"
           href="/history"
           startContent={<History />}
           textValue="History"
-          showDivider
         >
           Lịch sử đọc truyện
+        </DropdownItem>
+        <DropdownItem
+          key="github"
+          startContent={<Bug />}
+          textValue="Github"
+          showDivider
+        >
+          <Link
+            href={siteConfig.links.issues}
+            isExternal
+            color="foreground"
+            className="text-small"
+          >
+            Góp ý/Phản hồi
+          </Link>
         </DropdownItem>
         <DropdownItem
           key="logout"

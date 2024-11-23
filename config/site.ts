@@ -6,7 +6,8 @@ export const siteConfig = {
   keywords:
     "mato seihei no slave, suicaodex, manga, truyện tranh, đọc truyện, suicao, sủi cảo, đọc truyện online, ma đô",
   links: {
-    github: "https://github.com/TNTKien/mato-seihei-reader",
+    github: "https://github.com/TNTKien/suicaodex",
+    issues: "https://github.com/TNTKien/suicaodex/issues",
     discord: "https://discord.gg/dongmoe",
     facebook: "https://www.facebook.com/suicaodex",
   },

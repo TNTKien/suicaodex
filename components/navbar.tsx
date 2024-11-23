@@ -93,7 +93,7 @@ export const Navbar = () => {
           <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
             <DiscordIcon className="text-default-500" />
           </Link>
-          <Link href={`/manga/${siteConfig.mato.id}`}>
+          <Link href={siteConfig.links.github} isExternal aria-label="Github">
             <GithubIcon className="text-default-500" />
           </Link>
           <Link

@@ -2,7 +2,7 @@
 
 import { signIn, useSession } from "next-auth/react";
 
-import { History, LogIn } from "lucide-react";
+import { Bug, History, Link2, LogIn, ScanSearch } from "lucide-react";
 import { UserNav } from "./UserNav";
 import {
   Avatar,
@@ -10,7 +10,9 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Link,
 } from "@nextui-org/react";
+import { siteConfig } from "@/config/site";
 
 export function SignIn() {
   const { data: session } = useSession();
@@ -20,26 +22,6 @@ export function SignIn() {
       {!!session ? (
         <UserNav />
       ) : (
-        // <Tooltip
-        //   content="Đăng nhập bằng Discord"
-        //   size="sm"
-        //   placement="bottom-end"
-        //   radius="sm"
-        //   closeDelay={200}
-        // >
-        //   <Button
-        //     variant="flat"
-        //     color="primary"
-        //     className="ring-2 ring-default ring-offset-background ring-offset-2"
-        //     isIconOnly
-        //     radius="full"
-        //     onPress={() => signIn("discord")}
-        //     size="sm"
-        //   >
-        //     <LogInIcon size={24} />
-        //     {/* <AvatarIcon /> */}
-        //   </Button>
-        // </Tooltip>
         <Dropdown placement="bottom-end" shadow="sm">
           <DropdownTrigger>
             <Avatar
@@ -51,25 +33,44 @@ export function SignIn() {
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
-            {/* <DropdownItem
-              key="profile"
-              className="h-14 gap-2"
-              showDivider
-              textValue="Profile"
+            <DropdownItem
+              key="mato"
+              href={`/manga/${siteConfig.mato.id}`}
+              startContent={<Link2 />}
+              textValue="Mato"
             >
-              <p className="font-semibold">Bạn chưa đăng nhập</p>
-              <p className="font-light text-sm">
-                Hãy đăng nhập ngay để sử<br></br>dụng toàn bộ chức năng nhé!
-              </p>
-            </DropdownItem> */}
+              Mato Seihei no Slave
+            </DropdownItem>
+            <DropdownItem
+              key="advanded-search"
+              href="/advanded-search"
+              startContent={<ScanSearch />}
+              textValue="Advanced Search"
+            >
+              Tìm kiếm nâng cao
+            </DropdownItem>
             <DropdownItem
               key="history"
               href="/history"
               startContent={<History />}
               textValue="History"
-              showDivider
             >
               Lịch sử đọc truyện
+            </DropdownItem>
+            <DropdownItem
+              key="github"
+              startContent={<Bug />}
+              textValue="Github"
+              showDivider
+            >
+              <Link
+                href={siteConfig.links.issues}
+                isExternal
+                color="foreground"
+                className="text-small"
+              >
+                Góp ý/Phản hồi
+              </Link>
             </DropdownItem>
             <DropdownItem
               key="signin"
