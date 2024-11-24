@@ -1,8 +1,6 @@
 # Preview
 
-# A Manga Website using [MangaDex API](https://api.mangadex.org/docs/).
-
-Please note that all data belongs to MangaDex, this project is for entertainment purposes only.
+Preview version of SuicaoDex, may have a lot of bugs.
 
 ## How to Use
 
@@ -14,6 +12,10 @@ You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `bun`:
 bun install
 ```
 
+### Environment Variables
+
+This project uses [AuthJS](https://authjs.dev/) with Discord Provider, Prisma and PostgreSQL for authentication and some features, please follow the instructions on the their websites to setup environment variables.
+
 ### Run the development server
 
 ```bash
@@ -22,7 +24,11 @@ bun dev
 
 ### Deployments
 
-This project is setup to deploy on [Cloudflare Pages](https://pages.cloudflare.com/). Remember to change Compatibility flags to `nodejs_compat` in both development and production environments in order to make it work, you can find this in Cloudflare page's Settings section.
+~~This project is setup to deploy on [Cloudflare Pages](https://pages.cloudflare.com/). Remember to change Compatibility flags to `nodejs_compat` in both development and production environments in order to make it work, you can find this in Cloudflare page's Settings section.~~
+
+Edge runtime liemhaihondaitao.
+Preview version may work at local.
+Deployments? Who knows `¯\_(ツ)_/¯`
 
 ### Setup pnpm (optional)
 
