@@ -27,7 +27,7 @@ bun dev
 ~~This project is setup to deploy on [Cloudflare Pages](https://pages.cloudflare.com/). Remember to change Compatibility flags to `nodejs_compat` in both development and production environments in order to make it work, you can find this in Cloudflare page's Settings section.~~
 
 Edge runtime liemhaihondaitao.
-Preview version may work at local.
+Preview version may work fine locally.
 Deployments? Who knows `¯\_(ツ)_/¯`
 
 ### Setup pnpm (optional)
