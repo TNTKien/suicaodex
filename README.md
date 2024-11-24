@@ -1,4 +1,5 @@
 # A Website using [MangaDex API](https://api.mangadex.org/docs/).
+
 Please note that all data belongs to MangaDex, this project is for entertainment purposes only.
 
 I know my code sucks, but it works btw.
@@ -15,6 +16,10 @@ You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `bun`:
 bun install
 ```
 
+### AuthJS
+
+This project uses [AuthJS](https://authjs.dev/) with Discord Provider for authentication, please follow the instructions on the website to setup environment variables.
+
 ### Run the development server
 
 ```bash
@@ -22,6 +27,7 @@ bun dev
 ```
 
 ### Deployments
+
 This project is setup to deploy on [Cloudflare Pages](https://pages.cloudflare.com/). Remember to change Compatibility flags to `nodejs_compat` in both development and production environments in order to make it work, you can find this in Cloudflare page's Settings section.
 
 ### Setup pnpm (optional)
