@@ -42,8 +42,8 @@ export function SignIn() {
               Mato Seihei no Slave
             </DropdownItem>
             <DropdownItem
-              key="advanded-search"
-              href="/advanded-search"
+              key="advanced-search"
+              href="/advanced-search"
               startContent={<ScanSearch />}
               textValue="Advanced Search"
             >
