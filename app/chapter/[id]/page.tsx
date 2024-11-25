@@ -34,7 +34,7 @@ export async function generateMetadata({
         title: title,
         siteName: "SuicaoDex",
         description: `Đọc ngay ${title}`,
-        images: `${siteConfig.mangadexAPI.ogURL}/${chapterData.manga?.id}`,
+        images: `${siteConfig.mangadexAPI.ogURL}/chapter/${params.id}`,
       },
     };
   } catch (error) {
