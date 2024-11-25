@@ -179,7 +179,7 @@ export async function getCoverArt(mangaID: string) {
 }
 
 export async function getMangaDetails(mangaID: string) {
-  const { data } = await axiosInstance.get(`/manga/${mangaID}`, {
+  const { data } = await axiosInstance.get(`/manga/${mangaID}?`, {
     params: {
       includes: ["cover_art", "author", "artist"],
     },
@@ -203,7 +203,7 @@ export async function getChapters(
     finalOrderQuery[`order[${key}]`] = value;
   }
 
-  const { data } = await axiosInstance.get(`/manga/${mangaID}/feed`, {
+  const { data } = await axiosInstance.get(`/manga/${mangaID}/feed?`, {
     params: {
       limit: limit,
       translatedLanguage: [language],
@@ -232,7 +232,7 @@ export async function getChapterVolume(
     finalOrderQuery[`order[${key}]`] = value;
   }
 
-  const { data } = await axiosInstance.get(`/manga/${mangaID}/feed`, {
+  const { data } = await axiosInstance.get(`/manga/${mangaID}/feed?`, {
     params: {
       limit: limit,
       offset: offset,
@@ -257,7 +257,7 @@ export async function getFirstChapter(mangaID: string, language: string) {
     finalOrderQuery[`order[${key}]`] = value;
   }
 
-  const { data } = await axiosInstance.get(`/manga/${mangaID}/feed`, {
+  const { data } = await axiosInstance.get(`/manga/${mangaID}/feed?`, {
     params: {
       limit: 1,
       translatedLanguage: [language],
@@ -415,7 +415,7 @@ export async function getStaffPickMangas(): Promise<Manga[]> {
 }
 
 export async function getChapterbyID(id: string): Promise<Chapter> {
-  const { data } = await axiosInstance.get(`/chapter/${id}`, {
+  const { data } = await axiosInstance.get(`/chapter/${id}?`, {
     params: {
       includes: ["scanlation_group", "manga"],
     },
@@ -455,7 +455,7 @@ export async function getChapterAggregate(
   language: string,
   group: string
 ): Promise<ChapterAggregate[]> {
-  const { data } = await axiosInstance.get(`/manga/${mangaID}/aggregate`, {
+  const { data } = await axiosInstance.get(`/manga/${mangaID}/aggregate?`, {
     params: {
       translatedLanguage: [language],
       groups: [group],
@@ -656,7 +656,7 @@ export async function getMangaByIDs(ids: string[]): Promise<Manga[]> {
   }
 
   const requests = chunks.map((chunk) =>
-    axiosInstance.get(`/manga`, {
+    axiosInstance.get(`/manga?`, {
       params: {
         ids: chunk,
         includes: ["cover_art", "author", "artist"],
