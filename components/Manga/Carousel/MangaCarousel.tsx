@@ -10,11 +10,14 @@ import Autoplay from "embla-carousel-autoplay";
 import { Divider } from "@nextui-org/react";
 import Maintenance from "@/components/maintenance";
 
+import Incomming from "@/components/incoming";
+
 const MangaCarousel: FC = () => {
   const [mangas, setMangas] = useState<Manga[]>([]);
   const [fetchFailed, setFetchFailed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isMaintenance, setIsMaintenance] = useState(false);
+  const [isMaintenance2, setIsMaintenance2] = useState(false);
   const [emblaRef] = useEmblaCarousel({ loop: true, containScroll: false }, [
     Autoplay(),
   ]);
@@ -27,7 +30,10 @@ const MangaCarousel: FC = () => {
       } catch (error: any) {
         if (error.status === 503) {
           setIsMaintenance(true);
+        } else if (error.status === 403) {
+          setIsMaintenance2(true);
         }
+
         setFetchFailed(true);
       } finally {
         setIsLoading(false);
@@ -39,6 +45,10 @@ const MangaCarousel: FC = () => {
 
   if (isMaintenance) {
     return <Maintenance />;
+  }
+
+  if (isMaintenance2) {
+    return <Incomming />;
   }
 
   if (isLoading) {
