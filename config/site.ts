@@ -19,7 +19,7 @@ export const siteConfig = {
     baseURL: "https://api.mangadex.org",
     coverURL: "https://uploads.mangadex.org/covers",
     imgURL: "https://uploads.mangadex.org",
-    proxyUrl: "https://afangshop.com/proxy/?url=",
+    proxyUrl: "https://cors.suicaodex.com/?url=",
     ogURL: "https://og.mangadex.org/og-image",
   },
   domains: {
