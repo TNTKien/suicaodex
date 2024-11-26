@@ -8,22 +8,22 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 const formatDistanceLocale = {
-  lessThanXSeconds: 'vừa xong',
-  xSeconds: 'vừa xong',
-  halfAMinute: 'vừa xong',
-  lessThanXMinutes: '{{count}} phút',
-  xMinutes: '{{count}} phút',
-  aboutXHours: '{{count}} giờ',
-  xHours: '{{count}} giờ',
-  xDays: '{{count}} ngày',
-  aboutXWeeks: '{{count}} tuần',
-  xWeeks: '{{count}} tuần',
-  aboutXMonths: '{{count}} tháng',
-  xMonths: '{{count}} tháng',
-  aboutXYears: '{{count}} năm',
-  xYears: '{{count}} năm',
-  overXYears: '{{count}} năm',
-  almostXYears: '{{count}} năm',
+  lessThanXSeconds: "vừa xong",
+  xSeconds: "vừa xong",
+  halfAMinute: "vừa xong",
+  lessThanXMinutes: "{{count}} phút",
+  xMinutes: "{{count}} phút",
+  aboutXHours: "{{count}} giờ",
+  xHours: "{{count}} giờ",
+  xDays: "{{count}} ngày",
+  aboutXWeeks: "{{count}} tuần",
+  xWeeks: "{{count}} tuần",
+  aboutXMonths: "{{count}} tháng",
+  xMonths: "{{count}} tháng",
+  aboutXYears: "{{count}} năm",
+  xYears: "{{count}} năm",
+  overXYears: "{{count}} năm",
+  almostXYears: "{{count}} năm",
 };
 
 function formatDistance(token: string, count: number, options?: any): string {
