@@ -31,7 +31,7 @@ export async function GET(request: Request) {
     const response = await fetch(proxyRequest);
 
     // Create a new response to inject CORS headers
-    const proxyResponse = new Response(response.body, {
+    const proxyResponse = new Response(JSON.stringify(await response.json()), {
       status: response.status,
       statusText: response.statusText,
       headers: {
@@ -39,11 +39,18 @@ export async function GET(request: Request) {
         "Access-Control-Allow-Origin": "*", // Inject CORS headers
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Content-Type": "application/json", // Ensure the response is JSON
       },
     });
 
     return proxyResponse;
   } catch (error) {
-    return new Response("Error fetching the target URL", { status: 500 });
+    return new Response(
+      JSON.stringify({ error: "Error fetching the target URL" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 }
