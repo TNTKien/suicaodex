@@ -43,9 +43,9 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
             data.language,
             data.group.id
           );
+          setChapterAggregate(list);
           const coverArt = await getCoverArt(data.manga.id);
           setCover(coverArt);
-          setChapterAggregate(list);
         } else {
           throw new Error("Manga data is undefined");
         }
