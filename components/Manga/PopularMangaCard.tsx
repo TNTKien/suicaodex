@@ -30,7 +30,7 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
         className="z-0 object-cover w-auto"
         height={324}
         width={512}
-        src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}`}
+        src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
         priority={priority || false}
         radius="md"
       />
