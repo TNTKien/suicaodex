@@ -116,7 +116,7 @@ const SearchMobile = () => {
                         textValue="Manga"
                         className="hover:rounded-xl"
                       >
-                        <SearchResCard manga={item} priority={true} />
+                        <SearchResCard manga={item} />
                       </ListboxItem>
                     )}
                   </Listbox>

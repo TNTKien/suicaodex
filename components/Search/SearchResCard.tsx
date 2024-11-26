@@ -2,7 +2,7 @@
 
 import { siteConfig } from "@/config/site";
 import { Manga } from "@/types";
-import { Card, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardBody, Image } from "@nextui-org/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import NextImage from "next/image";
@@ -10,86 +10,56 @@ import MangaTags from "../Manga/Detail/MangaTags/TagsChip";
 
 interface SearchResCardProps {
   manga: Manga;
-  priority?: boolean;
 }
 
-const SearchResCard = ({ manga, priority }: SearchResCardProps) => {
+const SearchResCard = ({ manga }: SearchResCardProps) => {
   return (
-    <Card
-      isFooterBlurred
-      isBlurred
-      className="border-none bg-background/60 dark:bg-default-100/50 w-ful max-w-full max-h-[324]"
-      shadow="sm"
-      radius="md"
-    >
-      <Image
-        as={NextImage}
-        removeWrapper
-        alt={manga.title}
-        className="z-0 object-cover w-auto"
-        height={324}
-        width={512}
-        src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
-        priority={priority || false}
-        radius="md"
-      />
-      <CardFooter className="absolute z-10 !items-start bg-black/40 bottom-0 border-default-600 dark:border-default-100 text-white">
-        <div className="grid grid-cols-6 md:grid-cols-12 md:gap-4 items-start">
-          <div className="relative col-span-6 md:col-span-2">
-            <Image
-              as={NextImage}
-              alt={manga.title}
-              className="hidden md:flex h-full w-full object-cover"
-              height={300}
-              width={512}
-              priority={priority || false}
-              shadow="md"
-              src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
-              isZoomed
-              radius="sm"
+    <Card key={manga.id} radius="sm" shadow="sm">
+      <CardBody className="flex flex-row gap-3 p-1.5">
+        <Image
+          removeWrapper
+          as={NextImage}
+          src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.256.jpg`}
+          alt={manga.title}
+          className="object-cover max-h-[200px] max-w-[133px] rounded-sm"
+          height={364}
+          width={256}
+          quality={100}
+        />
+
+        <div className="flex flex-col gap-1">
+          <h4 className="font-bold text-xl line-clamp-2">{manga.title}</h4>
+
+          <p className="text-sm -mt-2">
+            {manga.author === manga.artist
+              ? manga.author
+              : `${manga.author}, ${manga.artist}`}
+          </p>
+          <div className="hidden sm:flex flex-wrap gap-1 mt-1">
+            <MangaTags
+              tags={manga.tags}
+              contentRating={manga.contentRating}
+              status={manga.status}
             />
           </div>
 
-          <div className="flex flex-col col-span-6 md:col-span-10">
-            <div className="flex justify-between items-start">
-              <div className="flex flex-col gap-0">
-                <h4 className="font-bold text-2xl text-ellipsis line-clamp-1 md:line-clamp-2">
-                  {manga.title}
-                </h4>
-
-                <p className="text-small mb-2">
-                  {manga.author === manga.artist
-                    ? manga.author
-                    : `${manga.author}, ${manga.artist}`}
-                </p>
-                <div className="hidden md:flex flex-wrap gap-1 mb-4">
-                  <MangaTags
-                    tags={manga.tags}
-                    contentRating={manga.contentRating}
-                    status={manga.status}
-                  />
-                </div>
-
-                {manga.description && (
-                  <ReactMarkdown
-                    className="hidden md:line-clamp-5 text-muted-foreground"
-                    remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
-                    components={{
-                      a: ({ href, children }) => (
-                        <span style={{ textDecoration: "underline" }}>
-                          {children}
-                        </span>
-                      ),
-                    }}
-                  >
-                    {manga.description}
-                  </ReactMarkdown>
-                )}
-              </div>
-            </div>
-          </div>
+          {manga.description && (
+            <ReactMarkdown
+              className="line-clamp-3 md:line-clamp-5 text-muted-foreground text-sm"
+              remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
+              components={{
+                a: ({ href, children }) => (
+                  <span style={{ textDecoration: "underline" }}>
+                    {children}
+                  </span>
+                ),
+              }}
+            >
+              {manga.description}
+            </ReactMarkdown>
+          )}
         </div>
-      </CardFooter>
+      </CardBody>
     </Card>
   );
 };
