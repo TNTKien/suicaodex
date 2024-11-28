@@ -30,7 +30,7 @@ const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
                 className="object-cover max-h-[200px] max-w-[133px] rounded-md"
                 height={364}
                 width={256}
-                quality={100}
+                quality={85}
                 priority={true}
               />
             </Link>
