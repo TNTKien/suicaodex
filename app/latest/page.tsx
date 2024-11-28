@@ -20,7 +20,7 @@ export async function generateMetadata({
     description: "Manga mới cập nhật",
     keywords: ["Mới cập nhật", "Manga"],
     openGraph: {
-      images: `${siteConfig.domains.suicaodex}/SuicaoHan.webp`,
+      images: `${siteConfig.suicaodex.domain}/SuicaoHan.webp`,
     },
   };
 }

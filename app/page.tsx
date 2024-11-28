@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: siteConfig.keywords,
   openGraph: {
-    images: `${siteConfig.domains.suicaodex}/SuicaoHan.webp`,
+    images: `${siteConfig.suicaodex.domain}/SuicaoHan.webp`,
   },
 };
 

@@ -20,6 +20,10 @@ bun install
 
 This project uses [AuthJS](https://authjs.dev/) with Discord Provider for authentication, please follow the instructions on the website to setup environment variables.
 
+### CORS
+
+MangaDex API requires CORS, you can use your own proxy server or use built-in proxy of SuicaoDex (that may make the website overload). See `/lib/axios.ts` and `/config/site.ts` for more information.
+
 ### Run the development server
 
 ```bash
