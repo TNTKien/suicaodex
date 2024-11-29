@@ -74,12 +74,12 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
     () =>
       dropdownItems.find((item) => item.key === Array.from(selectedKeys)[0])
         ?.value || "",
-    [selectedKeys],
+    [selectedKeys]
   );
 
   const selectedBtnVariant =
     BtnVariants.find(
-      (variant) => variant.key === Array.from(selectedKeys)[0],
+      (variant) => variant.key === Array.from(selectedKeys)[0]
     ) || BtnVariants[0];
 
   useEffect(() => {
@@ -92,7 +92,7 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
     };
 
     fetchDefaultType();
-  }, [session.user.id, manga.id]);
+  }, [session, manga.id]);
 
   if (!session) return <SignInModal />;
 
@@ -110,7 +110,7 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
         session.user.id,
         manga.id,
         type,
-        latestChapter?.id || "none",
+        latestChapter?.id || "none"
       );
 
       if (res.status === 200 || res.status === 201) {
