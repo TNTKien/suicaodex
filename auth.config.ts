@@ -5,4 +5,5 @@ import Discord from "next-auth/providers/discord";
 // Notice this is only an object, not a full Auth.js instance
 export default {
   providers: [Discord],
+  trustHost: true,
 } satisfies NextAuthConfig;
