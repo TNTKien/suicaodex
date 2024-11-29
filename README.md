@@ -16,9 +16,9 @@ You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `bun`:
 bun install
 ```
 
-### AuthJS
+### Environment Variables
 
-This project uses [AuthJS](https://authjs.dev/) with Discord Provider for authentication, please follow the instructions on the website to setup environment variables.
+This project uses [AuthJS](https://authjs.dev/) with Discord Provider, Prisma and MySQL for authentication and some features, please follow the instructions on the their websites to setup environment variables.
 
 ### CORS
 
@@ -32,7 +32,9 @@ bun dev
 
 ### Deployments
 
-This project is setup to deploy on [Cloudflare Pages](https://pages.cloudflare.com/). Remember to change Compatibility flags to `nodejs_compat` in both development and production environments in order to make it work, you can find this in Cloudflare page's Settings section.
+~~This project is setup to deploy on [Cloudflare Pages](https://pages.cloudflare.com/). Remember to change Compatibility flags to `nodejs_compat` in both development and production environments in order to make it work, you can find this in Cloudflare page's Settings section.~~ Edge runtime liemhaihondaitao.
+
+Since this commit, SuicaoDex will not work on Cloudflare Pages. I'm not sure if it can be deployed on Vercel or other platforms, try it yourself `¯\_(ツ)_/¯`. Btw, it may work fine locally.
 
 ### Setup pnpm (optional)
 
