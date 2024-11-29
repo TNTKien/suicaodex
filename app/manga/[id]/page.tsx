@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import MangaDetailsNew from "@/components/Manga/Detail/MangaDetailsNew";
 import { siteConfig } from "@/config/site";
 import { getMangaDetails } from "@/lib/data";
@@ -43,6 +44,7 @@ export async function generateMetadata({
   }
 }
 
-export default function Page({ params }: pageProps) {
-  return <MangaDetailsNew mangaID={params.id} />;
+export default async function Page({ params }: pageProps) {
+  const session = await auth();
+  return <MangaDetailsNew mangaID={params.id} session={session} />;
 }

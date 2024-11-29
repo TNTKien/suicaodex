@@ -6,7 +6,7 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 export const metadata: Metadata = {
   keywords: siteConfig.keywords,

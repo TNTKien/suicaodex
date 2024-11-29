@@ -7,7 +7,7 @@ import {
   DropdownTrigger,
   Link,
 } from "@nextui-org/react";
-import { Bug, History, Link2, LogOut, ScanSearch } from "lucide-react";
+import { Bug, History, Library, Link2, LogOut, ScanSearch } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 export function UserNav() {
@@ -53,6 +53,13 @@ export function UserNav() {
           textValue="Advanced Search"
         >
           Tìm kiếm nâng cao
+        </DropdownItem>
+        <DropdownItem
+          key="library"
+          href="/my-library"
+          startContent={<Library />}
+        >
+          Thư viện
         </DropdownItem>
         <DropdownItem
           key="history"

@@ -39,12 +39,18 @@ export default function MangaDetailSkeleton() {
       <div className="flex flex-col md:flex-row gap-2">
         <Card radius="sm" shadow="sm" className="w-full basis-1/3">
           <CardBody className="flex flex-col gap-2">
+            <div className="h-10">
+              <Skeleton className="grow h-10 w-full rounded-md" />
+            </div>
+
             <div className="flex flex-row gap-1">
               <Skeleton className="h-10 w-1/2 rounded-md" />
               <Skeleton className="h-10 w-1/2 rounded-md" />
             </div>
-            <Skeleton className="h-10 w-full rounded-md" />
-            <Skeleton className="h-full w-full rounded-md" />
+            <div className="flex flex-col h-full gap-2">
+              <Skeleton className="h-10 w-full rounded-md" />
+              <Skeleton className="grow w-full rounded-md" />
+            </div>
           </CardBody>
         </Card>
         <Card radius="sm" shadow="sm" className="w-full basis-2/3">

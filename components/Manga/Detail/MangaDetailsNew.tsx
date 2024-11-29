@@ -14,8 +14,6 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Progress,
-  Spinner,
 } from "@nextui-org/react";
 import {
   getChapters,
@@ -29,17 +27,18 @@ import { Archive, BookOpenCheck, BookOpenText, LibraryBig } from "lucide-react";
 import NextImage from "next/image";
 import { MangaRating } from "./MangaRating";
 import { ChapterVolumeNew } from "@/components/Chapter/ChapterTable/ChapterVolumeNew";
-import MangaSkeleton from "./MangaSkeleton";
 import { NotFound } from "@/components/notFound";
 import MangaTags from "./MangaTags/TagsChip";
 import MangaDesc from "./MangaDesc";
 import MangaDetailSkeleton from "./MangaDetailSkeleton";
+import { LibModal } from "./AddToLib/LibModal";
 
 interface MangaDetailsProps {
   mangaID: string;
+  session?: any;
 }
 
-const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
+const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
   const [info, setInfo] = useState<Manga | null>(null);
   const [lists, setLists] = useState<Chapter[]>([]);
   const [rating, setRating] = useState<MangaStats | null>(null);
@@ -122,6 +121,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
             height={230}
             className="absolute w-full object-cover z-0 max-h-[230] blur-sm brightness-50"
             radius="none"
+            priority
           />
           <CardHeader>
             <div className="items-start flex flex-col sm:flex-row gap-4">
@@ -170,6 +170,12 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
         <div className="flex flex-col md:flex-row gap-2">
           <div className="w-full md:w-1/2 max-h-fit rounded-lg shadow-small bg-content1">
             <div className="flex flex-col gap-2 p-3">
+              <LibModal
+                manga={info}
+                session={session}
+                latestChapter={lists[0]}
+              />
+
               {lists[0]?.id && (
                 <ButtonGroup
                   variant="faded"
@@ -177,6 +183,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID }) => {
                   size="md"
                   fullWidth
                   radius="sm"
+                  className="-mt-2"
                 >
                   <Button
                     as={Link}
