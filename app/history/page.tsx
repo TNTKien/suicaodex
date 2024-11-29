@@ -1,6 +1,7 @@
+import { Metadata } from "next";
+
 import { HistoryPage } from "@/components/History/HistoryPage";
 import { siteConfig } from "@/config/site";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: `Lịch sử đọc - SuicaoDex`,

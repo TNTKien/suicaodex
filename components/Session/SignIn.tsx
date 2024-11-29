@@ -1,9 +1,7 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-
 import { Bug, History, Link2, LogIn, ScanSearch } from "lucide-react";
-import { UserNav } from "./UserNav";
 import {
   Avatar,
   Dropdown,
@@ -12,6 +10,9 @@ import {
   DropdownTrigger,
   Link,
 } from "@nextui-org/react";
+
+import { UserNav } from "./UserNav";
+
 import { siteConfig } from "@/config/site";
 
 export function SignIn() {
@@ -59,26 +60,26 @@ export function SignIn() {
             </DropdownItem>
             <DropdownItem
               key="github"
+              showDivider
               startContent={<Bug />}
               textValue="Github"
-              showDivider
             >
               <Link
-                href={siteConfig.links.issues}
                 isExternal
-                color="foreground"
                 className="text-small"
+                color="foreground"
+                href={siteConfig.links.issues}
               >
                 Góp ý/Phản hồi
               </Link>
             </DropdownItem>
             <DropdownItem
               key="signin"
-              startContent={<LogIn />}
-              color="primary"
               className="text-primary"
-              onPress={() => signIn("discord")}
+              color="primary"
+              startContent={<LogIn />}
               textValue="Signin"
+              onPress={() => signIn("discord")}
             >
               Đăng nhập bằng Discord
             </DropdownItem>

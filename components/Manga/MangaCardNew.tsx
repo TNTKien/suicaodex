@@ -1,10 +1,11 @@
 "use client";
 
-import { siteConfig } from "@/config/site";
-import { Chapter, Manga } from "@/types";
 import { Card, CardBody, Image } from "@nextui-org/react";
 import Link from "next/link";
 import NextImage from "next/image";
+
+import { Chapter, Manga } from "@/types";
+import { siteConfig } from "@/config/site";
 
 interface MangaCardProps {
   manga: Manga;
@@ -16,26 +17,26 @@ const MangaCardNew = ({ manga, chapter }: MangaCardProps) => {
     <Card
       isHoverable
       className="border-none bg-background/60 dark:bg-default-100/50"
-      shadow="sm"
       radius="sm"
+      shadow="sm"
     >
       <CardBody>
         <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-start justify-center">
           <Link
-            href={`/manga/${manga.id}`}
             className="relative col-span-6 md:col-span-4"
+            href={`/manga/${manga.id}`}
           >
             <Image
-              as={NextImage}
+              isZoomed
               alt={manga.title}
+              as={NextImage}
               className="object-cover"
               height={200}
-              width={640}
               priority={true}
+              radius="sm"
               shadow="md"
               src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
-              isZoomed
-              radius="sm"
+              width={640}
             />
           </Link>
 
@@ -60,8 +61,8 @@ const MangaCardNew = ({ manga, chapter }: MangaCardProps) => {
               {chapter.map((c) => (
                 <Link
                   key={c.id}
-                  href={`/chapter/${c.id}`}
                   className="flex p-1 hover:underline w-full"
+                  href={`/chapter/${c.id}`}
                 >
                   <div className="flex items-center">
                     <p className="shrink-0">

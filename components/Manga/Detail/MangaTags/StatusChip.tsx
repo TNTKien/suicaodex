@@ -32,12 +32,10 @@ const StatusChip = ({ status }: StatusChipProps) => {
         base: `bg-default ${statusBorder}`,
         content: `uppercase ${statusTextColor}`,
       }}
-      size="sm"
       radius="sm"
+      size="sm"
+      startContent={<span className={`${statusBg} rounded-full w-2 h-2`} />}
       variant="bordered"
-      startContent={
-        <span className={`${statusBg} rounded-full w-2 h-2`}></span>
-      }
     >
       {status}
     </Chip>

@@ -1,15 +1,17 @@
 "use client";
 
-import { getPopularMangas } from "@/lib/data";
-import { Manga } from "@/types";
 import { FC, useEffect, useState } from "react";
-import PopularMangaCard from "../PopularMangaCard";
-import MangaCarouselSkeleton from "./MangaCarouselSkeleton";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { Divider } from "@nextui-org/react";
-import Maintenance from "@/components/maintenance";
 
+import PopularMangaCard from "../PopularMangaCard";
+
+import MangaCarouselSkeleton from "./MangaCarouselSkeleton";
+
+import { Manga } from "@/types";
+import { getPopularMangas } from "@/lib/data";
+import Maintenance from "@/components/maintenance";
 import Incomming from "@/components/incoming";
 
 const MangaCarousel: FC = () => {
@@ -26,6 +28,7 @@ const MangaCarousel: FC = () => {
     const fetchData = async () => {
       try {
         const popularMangas = await getPopularMangas();
+
         setMangas(popularMangas);
       } catch (error: any) {
         if (error.status === 503) {
@@ -76,10 +79,10 @@ const MangaCarousel: FC = () => {
         <h1 className="text-2xl font-extrabold uppercase">Tiêu điểm</h1>
       </div>
 
-      <div className="embla p-1" ref={emblaRef}>
+      <div ref={emblaRef} className="embla p-1">
         <div className="embla__container">
           {mangas.map((manga) => (
-            <div className="embla__slide" key={manga.id}>
+            <div key={manga.id} className="embla__slide">
               <PopularMangaCard key={manga.id} manga={manga} priority={true} />
             </div>
           ))}

@@ -1,6 +1,5 @@
 "use client";
 
-import { Manga } from "@/types";
 import {
   Card,
   CardBody,
@@ -11,11 +10,15 @@ import {
 } from "@nextui-org/react";
 import { Album, BookmarkCheck, ListCheck, NotebookPen } from "lucide-react";
 import { useEffect, useState } from "react";
+
+import { MangaCard } from "../Search/Results/MangaCard";
+
 import SignInAlert from "./SignInAlert";
 import NoTitle from "./NoTitle";
+
 import { getUserLibrary } from "@/lib/db";
 import { getMangaByIDs } from "@/lib/data";
-import { MangaCard } from "../Search/Results/MangaCard";
+import { Manga } from "@/types";
 
 interface LibraryProps {
   session?: any;
@@ -37,9 +40,9 @@ export const Library = ({ session }: LibraryProps) => {
   const [planManga, setPlanManga] = useState<Manga[]>([]);
   const [completedManga, setCompletedManga] = useState<Manga[]>([]);
 
-  if (!session) return <SignInAlert />;
-
   useEffect(() => {
+    if (!session) return;
+
     const fetchLib = async () => {
       setIsLoading(true);
       try {
@@ -60,8 +63,11 @@ export const Library = ({ session }: LibraryProps) => {
         setIsLoading(false);
       }
     };
+
     fetchLib();
-  }, [session.user.id]);
+  }, [session]);
+
+  if (!session) return <SignInAlert />;
 
   return (
     <div className="flex flex-col gap-3">
@@ -74,19 +80,19 @@ export const Library = ({ session }: LibraryProps) => {
       <div className="flex w-full flex-col">
         <Tabs
           aria-label="Options"
+          className="px-1"
           classNames={{
             tabList: "rounded-md",
             cursor: "rounded-md",
             tab: "p-2",
             panel: "w-full",
           }}
-          className="px-1"
           selectedKey={selected}
           onSelectionChange={(key) => setSelected(key.toString())}
         >
           <Tab key="follow" title={<BookmarkCheck />}>
             {isLoading ? (
-              <Card shadow="sm" radius="none" className="rounded-md w-full">
+              <Card className="rounded-md w-full" radius="none" shadow="sm">
                 <CardBody className="flex flex-row gap-3 p-2">
                   <Skeleton className="h-[200px] w-[233px] md:w-[143px] rounded-md" />
                   <div className="flex flex-col gap-2 w-full">

@@ -17,7 +17,6 @@ const MangaDesc = ({ desc }: MangaDescProps) => {
     <div className="mb-4">
       <ReactMarkdown
         className="text-sm"
-        remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
         components={{
           a: ({ href, children }) => (
             <a href={href} style={{ textDecoration: "underline" }}>
@@ -25,13 +24,14 @@ const MangaDesc = ({ desc }: MangaDescProps) => {
             </a>
           ),
         }}
+        remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
       >
         {displayLines.join("\n")}
       </ReactMarkdown>
       {lines.length > maxLines && (
         <button
-          onClick={() => setShowMore(!showMore)}
           className="text-sm text-[#f31260] cursor-pointer"
+          onClick={() => setShowMore(!showMore)}
         >
           {showMore ? "Thu gọn" : " Xem thêm..."}
         </button>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import useReadingHistory from "../hook/useReadingHistory";
 import {
   Button,
   Card,
@@ -12,9 +11,13 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 import NextImage from "next/image";
-import { siteConfig } from "@/config/site";
 import { BookOpenText, Trash2 } from "lucide-react";
+
+import useReadingHistory from "../hook/useReadingHistory";
+
 import HistorySkeleton from "./HistorySkeleton";
+
+import { siteConfig } from "@/config/site";
 
 export const HistoryPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -75,25 +78,26 @@ export const HistoryPage = () => {
             const readingText = history[mangaId].chapterTitle
               ? `${chapterIndex} - ${history[mangaId].chapterTitle}`
               : chapterIndex;
+
             return (
               <Card
-                className="rounded-md"
-                shadow="sm"
-                radius="none"
                 key={mangaId}
+                className="rounded-md"
+                radius="none"
+                shadow="sm"
               >
                 <CardBody className="flex flex-row gap-3 p-2">
                   <Link href={`/manga/${mangaId}`}>
                     <Image
                       removeWrapper
-                      as={NextImage}
-                      src={`${siteConfig.mangadexAPI.coverURL}/${mangaId}/${history[mangaId].cover}.256.jpg`}
                       alt={history[mangaId].mangaTitle}
+                      as={NextImage}
                       className="object-cover max-h-[200px] max-w-[133px] rounded-md"
                       height={364}
-                      width={256}
-                      quality={100}
                       priority={true}
+                      quality={100}
+                      src={`${siteConfig.mangadexAPI.coverURL}/${mangaId}/${history[mangaId].cover}.256.jpg`}
+                      width={256}
                     />
                   </Link>
 
@@ -113,19 +117,19 @@ export const HistoryPage = () => {
                 </CardBody>
                 <CardFooter className="flex flex-row gap-2 p-2">
                   <Button
-                    className="rounded-md font-semibold"
                     fullWidth
+                    className="rounded-md font-semibold"
                     startContent={<Trash2 />}
                     onPress={() => removeHistory(mangaId)}
                   >
                     Xoá
                   </Button>
                   <Button
-                    as={Link}
-                    href={`/chapter/${history[mangaId].chapterId}`}
-                    className="rounded-md font-semibold"
                     fullWidth
+                    as={Link}
+                    className="rounded-md font-semibold"
                     color="danger"
+                    href={`/chapter/${history[mangaId].chapterId}`}
                     startContent={<BookOpenText />}
                   >
                     Đọc tiếp

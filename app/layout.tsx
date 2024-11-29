@@ -1,7 +1,9 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
+
 import { Providers } from "./providers";
+
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
@@ -28,19 +30,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning={true} lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="og:image" href="/favicon.ico" />
+        <link href="/favicon.ico" rel="icon" sizes="any" />
+        <link href="/favicon.ico" rel="og:image" />
         <meta
-          name="google-site-verification"
           content="22zmW8vLmhPSRHgJo2Yg_J0w09A-1ZlmJjFG6ldXdjA"
+          name="google-site-verification"
         />
       </head>
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
         )}
         suppressHydrationWarning={true}
       >

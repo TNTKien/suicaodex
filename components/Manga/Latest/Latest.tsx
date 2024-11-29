@@ -1,14 +1,16 @@
 "use client";
 
-import { getLatestMangas } from "@/lib/data";
-import { LastestManga } from "@/types";
 import { useEffect, useState } from "react";
 import { Divider, Pagination, Tab, Tabs } from "@nextui-org/react";
 import { LayoutGrid, StretchHorizontal } from "lucide-react";
+import { useRouter } from "next/navigation";
+
 import { GridCover } from "../MangaTab/GridCover";
 import TabSkeleton from "../MangaTab/TabSkeleton";
-import { useRouter } from "next/navigation";
 import MangaTabCard from "../MangaTab/MangaTabCard";
+
+import { LastestManga } from "@/types";
+import { getLatestMangas } from "@/lib/data";
 
 interface LatestProps {
   page: number;
@@ -28,6 +30,7 @@ export default function Latest({ page, limit }: LatestProps) {
       setIsLoading(true);
       try {
         const latestMangas = await getLatestMangas(limit, offset);
+
         setMangas(latestMangas);
       } catch (error) {
         setFetchFailed(true);
@@ -50,16 +53,16 @@ export default function Latest({ page, limit }: LatestProps) {
           <div className="flex flex-col place-items-end -mt-10">
             <Tabs
               aria-label="Options"
+              className="px-1"
               classNames={{
                 tabList: "rounded-md",
                 tab: "px-1.5 py-2",
                 cursor: "rounded-md",
                 panel: "w-full",
               }}
-              className="px-1"
             >
-              <Tab key="grid-card" title={<StretchHorizontal />}></Tab>
-              <Tab key="grid-cover" title={<LayoutGrid />}></Tab>
+              <Tab key="grid-card" title={<StretchHorizontal />} />
+              <Tab key="grid-cover" title={<LayoutGrid />} />
             </Tabs>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-3 px-1">
@@ -94,13 +97,13 @@ export default function Latest({ page, limit }: LatestProps) {
         <div className="flex flex-col place-items-end -mt-10">
           <Tabs
             aria-label="Options"
+            className="px-1"
             classNames={{
               tabList: "rounded-md",
               tab: "px-1.5 py-2",
               cursor: "rounded-md",
               panel: "w-full",
             }}
-            className="px-1"
           >
             <Tab key="grid-card" title={<StretchHorizontal />}>
               <MangaTabCard mangas={mangas} />
@@ -116,12 +119,12 @@ export default function Latest({ page, limit }: LatestProps) {
       <div className="self-center">
         {!!mangas[0].total && (
           <Pagination
-            total={Math.ceil(mangas[0].total / limit)}
-            initialPage={page}
-            color="danger"
             showControls
-            radius="sm"
             showShadow
+            color="danger"
+            initialPage={page}
+            radius="sm"
+            total={Math.ceil(mangas[0].total / limit)}
             onChange={(p) => {
               router.push(`/latest?page=${p}`);
             }}

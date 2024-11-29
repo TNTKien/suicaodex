@@ -13,11 +13,14 @@ import {
   ListboxItem,
   Link,
 } from "@nextui-org/react";
-import { SearchIcon } from "../icons";
 import { useState } from "react";
+
+import { SearchIcon } from "../icons";
+
+import SearchResCard from "./SearchResCard";
+
 import { Manga } from "@/types";
 import { SearchManga } from "@/lib/data";
-import SearchResCard from "./SearchResCard";
 
 const SearchMobile = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -27,33 +30,36 @@ const SearchMobile = () => {
   const handleSearch = (e: { target: { value: string } }) => {
     if (e.target.value == "") {
       setActiveSearch([]);
+
       return false;
     }
     const r18 = isR18 ? true : false;
+
     SearchManga(e.target.value, r18).then((data) => {
       return setActiveSearch(data);
     });
   };
+
   return (
     <>
       <Button
-        onPress={onOpen}
+        className="bg-default-200 text-foreground-500 justify-start w-full"
         startContent={
           <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
         }
-        className="bg-default-200 text-foreground-500 justify-start w-full"
+        onPress={onOpen}
       >
         Tìm kiếm...
       </Button>
 
       <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        placement="top"
         backdrop="blur"
-        size="5xl"
         className="max-w-full max-h-[95%] w-full"
+        isOpen={isOpen}
+        placement="top"
         scrollBehavior="inside"
+        size="5xl"
+        onOpenChange={onOpenChange}
       >
         <ModalContent>
           {(onClose) => (
@@ -80,12 +86,12 @@ const SearchMobile = () => {
                   <div className="flex items-center">
                     <Button
                       as={Link}
-                      href="/advanced-search"
+                      className="underline"
                       color="primary"
+                      href="/advanced-search"
                       size="md"
                       variant="light"
                       onPress={onClose}
-                      className="underline"
                     >
                       Tìm kiếm nâng cao
                     </Button>
@@ -105,16 +111,16 @@ const SearchMobile = () => {
               <ModalBody>
                 <div className="grid grid-cols-1 gap-4 max-h-full mb-1">
                   <Listbox
-                    items={activeSearch}
                     aria-label="Search Results"
                     emptyContent="Không có kết quả."
+                    items={activeSearch}
                   >
                     {(item) => (
                       <ListboxItem
                         key={item.id}
+                        className="hover:rounded-xl"
                         href={`/manga/${item.id}`}
                         textValue="Manga"
-                        className="hover:rounded-xl"
                       >
                         <SearchResCard manga={item} />
                       </ListboxItem>

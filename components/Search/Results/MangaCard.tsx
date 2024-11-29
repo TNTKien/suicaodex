@@ -1,13 +1,14 @@
 "use client";
 
-import MangaTags from "@/components/Manga/Detail/MangaTags/TagsChip";
-import { siteConfig } from "@/config/site";
-import { Manga } from "@/types";
 import { Card, CardBody, Image } from "@nextui-org/react";
 import NextImage from "next/image";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+
+import { Manga } from "@/types";
+import { siteConfig } from "@/config/site";
+import MangaTags from "@/components/Manga/Detail/MangaTags/TagsChip";
 
 interface MangaCardProps {
   manga: Manga;
@@ -20,13 +21,13 @@ export const MangaCard = ({ manga }: MangaCardProps) => {
         <Link href={`/manga/${manga.id}`}>
           <Image
             removeWrapper
-            as={NextImage}
-            src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.256.jpg`}
             alt={manga.title}
+            as={NextImage}
             className="object-cover max-h-[200px] max-w-[133px] rounded-sm"
             height={364}
-            width={256}
             quality={100}
+            src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.256.jpg`}
+            width={256}
           />
         </Link>
         <div className="flex flex-col gap-1">
@@ -41,16 +42,15 @@ export const MangaCard = ({ manga }: MangaCardProps) => {
           </p>
           <div className="hidden sm:flex flex-wrap gap-1 mt-1">
             <MangaTags
-              tags={manga.tags}
               contentRating={manga.contentRating}
               status={manga.status}
+              tags={manga.tags}
             />
           </div>
 
           {manga.description && (
             <ReactMarkdown
               className="line-clamp-3 md:line-clamp-5 text-muted-foreground text-sm"
-              remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
               components={{
                 a: ({ href, children }) => (
                   <a href={href} style={{ textDecoration: "underline" }}>
@@ -58,6 +58,7 @@ export const MangaCard = ({ manga }: MangaCardProps) => {
                   </a>
                 ),
               }}
+              remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
             >
               {manga.description}
             </ReactMarkdown>

@@ -1,6 +1,6 @@
 import { Image, Slider } from "@nextui-org/react";
 import NextImage from "next/image";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 interface LongStripProps {
   pages: string[];
@@ -27,17 +27,20 @@ export const LongStrip = ({
       const scrolled = (scrollTop + windowHeight) / totalHeight;
       const newPage = Math.min(
         pages.length - 1,
-        Math.floor(scrolled * pages.length)
+        Math.floor(scrolled * pages.length),
       );
+
       setCurrentPage(newPage);
     };
 
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pages]);
 
   useEffect(() => {
     const pageElement = document.getElementById(`page-${currentPage}`);
+
     if (pageElement) {
       pageElement.scrollIntoView({ behavior: "auto" });
     }
@@ -46,6 +49,7 @@ export const LongStrip = ({
   const handleSliderChange = (value: number | number[]) => {
     const pageIndex = Array.isArray(value) ? value[0] : value;
     const pageElement = document.getElementById(`page-${pageIndex - 1}`);
+
     if (pageElement) {
       pageElement.scrollIntoView({ behavior: "auto" });
     }
@@ -56,31 +60,31 @@ export const LongStrip = ({
       <div className="flex flex-col gap-2 items-center justify-center">
         {pages?.map((page, index) => (
           <Image
-            removeWrapper
-            as={NextImage}
             key={index}
-            id={`page-${index}`}
-            src={page}
-            alt={`Trang ${index + 1}`}
-            className={`${fitMode === "width" ? "w-full h-auto" : "max-h-screen w-auto mx-auto"}`}
-            width={1500}
-            height={0}
-            radius="none"
-            quality={100}
             priority
+            removeWrapper
+            alt={`Trang ${index + 1}`}
+            as={NextImage}
+            className={`${fitMode === "width" ? "w-full h-auto" : "max-h-screen w-auto mx-auto"}`}
+            height={0}
+            id={`page-${index}`}
+            quality={100}
+            radius="none"
+            src={page}
+            width={1500}
           />
         ))}
       </div>
 
       <Slider
-        aria-label="reading progress slider"
-        hideThumb={true}
-        minValue={1}
-        maxValue={pages.length - 1}
-        className="fixed left-1 bottom-0 z-10 opacity-25 hover:opacity-100"
-        size="sm"
-        color="danger"
         disableAnimation
+        aria-label="reading progress slider"
+        className="fixed left-1 bottom-0 z-10 opacity-25 hover:opacity-100"
+        color="danger"
+        hideThumb={true}
+        maxValue={pages.length - 1}
+        minValue={1}
+        size="sm"
         value={currentPage}
         onChange={handleSliderChange}
       />

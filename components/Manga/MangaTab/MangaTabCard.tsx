@@ -1,9 +1,10 @@
 "use client";
-import { siteConfig } from "@/config/site";
-import { LastestManga } from "@/types";
 import { Card, CardBody, Image } from "@nextui-org/react";
 import NextImage from "next/image";
 import Link from "next/link";
+
+import { LastestManga } from "@/types";
+import { siteConfig } from "@/config/site";
 
 interface MangaTabCardProps {
   mangas: LastestManga[];
@@ -14,24 +15,24 @@ const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
       {mangas.map((manga) => (
         <Card
-          className="rounded-md"
-          shadow="sm"
-          isHoverable
-          radius="none"
           key={manga.info.id}
+          isHoverable
+          className="rounded-md"
+          radius="none"
+          shadow="sm"
         >
           <CardBody className="flex flex-row gap-3 p-2">
             <Link href={`/manga/${manga.info.id}`}>
               <Image
                 removeWrapper
-                as={NextImage}
-                src={`${siteConfig.mangadexAPI.coverURL}/${manga.info.id}/${manga.info.cover}.256.jpg`}
                 alt={manga.info.title}
+                as={NextImage}
                 className="object-cover max-h-[200px] max-w-[133px] rounded-md"
                 height={364}
-                width={256}
-                quality={85}
                 priority={true}
+                quality={85}
+                src={`${siteConfig.mangadexAPI.coverURL}/${manga.info.id}/${manga.info.cover}.256.jpg`}
+                width={256}
               />
             </Link>
 
@@ -50,9 +51,9 @@ const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
               <div className="flex flex-col gap-2 mt-4">
                 {manga.lastestChap.map((c) => (
                   <Link
-                    href={`/chapter/${c.id}`}
-                    className="flex hover:underline"
                     key={c.id}
+                    className="flex hover:underline"
+                    href={`/chapter/${c.id}`}
                   >
                     <p className="shrink-0">
                       {c.chapter ? `Ch.${c.chapter}` : "Oneshot"}

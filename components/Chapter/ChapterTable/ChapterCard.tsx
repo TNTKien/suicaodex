@@ -1,9 +1,10 @@
 "use client";
 
-import { formatTimeToNow } from "@/lib/utils";
-import { ChapterGroup } from "@/types";
 import { Listbox, ListboxItem, ListboxSection } from "@nextui-org/react";
 import { CornerDownRight, ExternalLink, Users } from "lucide-react";
+
+import { formatTimeToNow } from "@/lib/utils";
+import { ChapterGroup } from "@/types";
 
 interface ChapterCardProps {
   chapters: ChapterGroup;
@@ -15,18 +16,17 @@ export const ChapterCard = ({ chapters, finalChapter }: ChapterCardProps) => {
     return (
       <Listbox aria-label="Volume">
         <ListboxSection
-          title={chapters.chapter ? `Chapter ${chapters.chapter}` : "Oneshot"}
           classNames={{
             heading: "text-md font-semibold",
             group: "pl-4",
           }}
+          title={chapters.chapter ? `Chapter ${chapters.chapter}` : "Oneshot"}
         >
           {chapters.group.map((c) => (
             <ListboxItem
-              className="bg-default/30 mb-2"
               key={c.id}
-              href={c.externalUrl ? c.externalUrl : `/chapter/${c.id}`}
-              target={c.externalUrl ? "_blank" : "_self"}
+              aria-label="Volume"
+              className="bg-default/30 mb-2"
               description={
                 <div className="flex flex-row items-center gap-1">
                   <Users size={20} />
@@ -35,17 +35,18 @@ export const ChapterCard = ({ chapters, finalChapter }: ChapterCardProps) => {
                   </p>
                 </div>
               }
-              textValue="Volume"
-              aria-label="Volume"
-              startContent={<CornerDownRight size={20} />}
               endContent={
                 <time
-                  dateTime={new Date(c.updatedAt).toDateString()}
                   className="text-sm font-light w-1/3 text-end line-clamp-2"
+                  dateTime={new Date(c.updatedAt).toDateString()}
                 >
                   {formatTimeToNow(new Date(c.updatedAt))}
                 </time>
               }
+              href={c.externalUrl ? c.externalUrl : `/chapter/${c.id}`}
+              startContent={<CornerDownRight size={20} />}
+              target={c.externalUrl ? "_blank" : "_self"}
+              textValue="Volume"
             >
               <div className="flex flex-row gap-1 items-center">
                 <p className="font-semibold text-sm md:text-base">
@@ -70,16 +71,9 @@ export const ChapterCard = ({ chapters, finalChapter }: ChapterCardProps) => {
   return (
     <Listbox aria-label="Volume">
       <ListboxItem
-        className="bg-default/30"
-        href={
-          chapters.group[0].externalUrl
-            ? chapters.group[0].externalUrl
-            : `/chapter/${chapters.group[0].id}`
-        }
-        target={chapters.group[0].externalUrl ? "_blank" : "_self"}
         key={chapters.group[0].id}
-        textValue="Volume"
         aria-label="Volume"
+        className="bg-default/30"
         description={
           <div className="flex flex-row gap-1 items-center">
             <Users size={20} />
@@ -92,12 +86,19 @@ export const ChapterCard = ({ chapters, finalChapter }: ChapterCardProps) => {
         }
         endContent={
           <time
-            dateTime={new Date(chapters.group[0].updatedAt).toDateString()}
             className="text-sm font-light w-1/3 text-end line-clamp-2"
+            dateTime={new Date(chapters.group[0].updatedAt).toDateString()}
           >
             {formatTimeToNow(new Date(chapters.group[0].updatedAt))}
           </time>
         }
+        href={
+          chapters.group[0].externalUrl
+            ? chapters.group[0].externalUrl
+            : `/chapter/${chapters.group[0].id}`
+        }
+        target={chapters.group[0].externalUrl ? "_blank" : "_self"}
+        textValue="Volume"
       >
         <div className="flex flex-row gap-1 items-center">
           <p className="font-semibold text-sm md:text-base line-clamp-1">

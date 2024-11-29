@@ -1,6 +1,6 @@
-import { siteConfig } from "@/config/site";
-
 import { NextRequest, NextResponse } from "next/server";
+
+import { siteConfig } from "@/config/site";
 
 export async function GET(request: NextRequest) {
   const { pathname, search } = new URL(request.url);
@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
   }
 
   const urlSearchParams = new URLSearchParams(search);
+
   urlSearchParams.forEach((_, key) => {
     if (key === "path") {
       urlSearchParams.delete(key);

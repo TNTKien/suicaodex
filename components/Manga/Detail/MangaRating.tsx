@@ -1,6 +1,7 @@
-import { MangaStats } from "@/types";
 import { Accordion, AccordionItem, Progress } from "@nextui-org/react";
 import { Bookmark, Star } from "lucide-react";
+
+import { MangaStats } from "@/types";
 
 interface MangaRatingProps {
   stats: MangaStats;
@@ -9,15 +10,16 @@ interface MangaRatingProps {
 export const MangaRating = ({ stats }: MangaRatingProps) => {
   return (
     <Accordion
-      defaultExpandedKeys={["1"]}
       disableIndicatorAnimation
-      variant="bordered"
-      selectionMode="multiple"
       isCompact
       className="rounded-lg"
+      defaultExpandedKeys={["1"]}
+      selectionMode="multiple"
+      variant="bordered"
     >
       <AccordionItem
         key="1"
+        hideIndicator
         aria-label="Đánh giá"
         title={
           <div className="flex flex-row justify-between items-center">
@@ -30,29 +32,29 @@ export const MangaRating = ({ stats }: MangaRatingProps) => {
             </div>
           </div>
         }
-        hideIndicator
       >
         {Object.keys(stats.rating.distribution)
           .sort((a, b) => Number(b) - Number(a))
           .map((key) => (
             <Progress
               key={key}
+              color="danger"
+              formatOptions={{ style: "decimal" }}
               label={key}
+              maxValue={stats.rating.max}
+              showValueLabel={true}
               size="sm"
               value={
                 stats.rating.distribution[
                   key as keyof typeof stats.rating.distribution
                 ]
               }
-              maxValue={stats.rating.max}
-              color="danger"
-              formatOptions={{ style: "decimal" }}
-              showValueLabel={true}
             />
           ))}
       </AccordionItem>
       <AccordionItem
         key="2"
+        hideIndicator
         aria-label="Lượt theo dõi"
         title={
           <div className="flex flex-row justify-between items-center">
@@ -63,7 +65,6 @@ export const MangaRating = ({ stats }: MangaRatingProps) => {
             </div>
           </div>
         }
-        hideIndicator
       />
     </Accordion>
   );

@@ -8,10 +8,12 @@ import {
   Link,
 } from "@nextui-org/react";
 import { Bug, History, Library, Link2, LogOut, ScanSearch } from "lucide-react";
+
 import { siteConfig } from "@/config/site";
 
 export function UserNav() {
   const { data: session } = useSession();
+
   if (!session) return null;
 
   return (
@@ -19,20 +21,20 @@ export function UserNav() {
       <DropdownTrigger>
         <Avatar
           isBordered
+          showFallback
           as="button"
           className="transition-transform"
           color="default"
+          name={session.user?.name ?? ""}
           size="sm"
           src={session.user?.image ?? ""}
-          name={session.user?.name ?? ""}
-          showFallback
         />
       </DropdownTrigger>
       <DropdownMenu aria-label="Profile Actions" variant="flat">
         <DropdownItem
           key="profile"
-          className="h-14 gap-2"
           showDivider
+          className="h-14 gap-2"
           textValue="Profile"
         >
           <p className="font-semibold">{session.user?.name}</p>
@@ -71,26 +73,26 @@ export function UserNav() {
         </DropdownItem>
         <DropdownItem
           key="github"
+          showDivider
           startContent={<Bug />}
           textValue="Github"
-          showDivider
         >
           <Link
-            href={siteConfig.links.issues}
             isExternal
-            color="foreground"
             className="text-small"
+            color="foreground"
+            href={siteConfig.links.issues}
           >
             Góp ý/Phản hồi
           </Link>
         </DropdownItem>
         <DropdownItem
           key="logout"
-          color="danger"
           className="text-danger"
+          color="danger"
           startContent={<LogOut />}
-          onPress={() => signOut()}
           textValue="Logout"
+          onPress={() => signOut()}
         >
           Đăng xuất
         </DropdownItem>

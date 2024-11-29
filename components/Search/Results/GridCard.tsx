@@ -1,13 +1,11 @@
 "use client";
 
-import MangaTags from "@/components/Manga/Detail/MangaTags/TagsChip";
-import { siteConfig } from "@/config/site";
-import { Manga } from "@/types";
-import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardFooter, Image } from "@nextui-org/react";
 import NextImage from "next/image";
 import Link from "next/link";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+
+import { siteConfig } from "@/config/site";
+import { Manga } from "@/types";
 
 interface GridCardProps {
   manga: Manga;
@@ -17,18 +15,18 @@ export const GridCard = ({ manga }: GridCardProps) => {
   return (
     <Card
       key={manga.id}
+      className="rounded-md dark:rounded-b-none"
       radius="none"
       shadow="sm"
-      className="rounded-md dark:rounded-b-none"
     >
       <Link href={`/manga/${manga.id}`}>
         <Image
           removeWrapper
-          as={NextImage}
-          src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
           alt={manga.title}
+          as={NextImage}
           className="z-0 object-cover w-full h-auto rounded-sm dark:rounded-b-none"
           height={300}
+          src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
           width={200}
         />
       </Link>

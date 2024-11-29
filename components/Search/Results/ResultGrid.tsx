@@ -1,8 +1,8 @@
 "use client";
 
-import { Manga } from "@/types";
-import { MangaCard } from "./MangaCard";
 import { GridCard } from "./GridCard";
+
+import { Manga } from "@/types";
 
 interface ResultGridProps {
   mangaList: Manga[];

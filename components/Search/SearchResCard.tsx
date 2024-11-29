@@ -1,12 +1,14 @@
 "use client";
 
-import { siteConfig } from "@/config/site";
-import { Manga } from "@/types";
 import { Card, CardBody, Image } from "@nextui-org/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import NextImage from "next/image";
+
 import MangaTags from "../Manga/Detail/MangaTags/TagsChip";
+
+import { Manga } from "@/types";
+import { siteConfig } from "@/config/site";
 
 interface SearchResCardProps {
   manga: Manga;
@@ -18,13 +20,13 @@ const SearchResCard = ({ manga }: SearchResCardProps) => {
       <CardBody className="flex flex-row gap-3 p-1.5">
         <Image
           removeWrapper
-          as={NextImage}
-          src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.256.jpg`}
           alt={manga.title}
+          as={NextImage}
           className="object-cover max-h-[200px] max-w-[133px] rounded-sm"
           height={364}
-          width={256}
           quality={100}
+          src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.256.jpg`}
+          width={256}
         />
 
         <div className="flex flex-col gap-1">
@@ -37,16 +39,15 @@ const SearchResCard = ({ manga }: SearchResCardProps) => {
           </p>
           <div className="hidden sm:flex flex-wrap gap-1 mt-1">
             <MangaTags
-              tags={manga.tags}
               contentRating={manga.contentRating}
               status={manga.status}
+              tags={manga.tags}
             />
           </div>
 
           {manga.description && (
             <ReactMarkdown
               className="line-clamp-3 md:line-clamp-5 text-muted-foreground text-sm"
-              remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
               components={{
                 a: ({ href, children }) => (
                   <span style={{ textDecoration: "underline" }}>
@@ -54,6 +55,7 @@ const SearchResCard = ({ manga }: SearchResCardProps) => {
                   </span>
                 ),
               }}
+              remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
             >
               {manga.description}
             </ReactMarkdown>

@@ -1,6 +1,7 @@
+import { Metadata } from "next";
+
 import { AdvancedSearch } from "@/components/Search/Advanced/AdvancedSearch";
 import { siteConfig } from "@/config/site";
-import { Metadata } from "next";
 
 interface pageProps {
   searchParams: {
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 export default function Page({ searchParams }: pageProps) {
   const { page, limit } = getSearchParams({ searchParams });
 
-  return <AdvancedSearch page={page} limit={limit} />;
+  return <AdvancedSearch limit={limit} page={page} />;
 }
 
 const getSearchParams = ({ searchParams }: pageProps) => {

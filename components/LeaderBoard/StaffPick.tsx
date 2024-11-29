@@ -1,5 +1,6 @@
-import { Manga } from "@/types";
 import PopularMangaCard from "../Manga/PopularMangaCard";
+
+import { Manga } from "@/types";
 
 interface StaffPickProps {
   manga: Manga[];

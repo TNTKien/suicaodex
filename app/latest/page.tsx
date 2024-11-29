@@ -1,6 +1,7 @@
+import { Metadata } from "next";
+
 import Latest from "@/components/Manga/Latest/Latest";
 import { siteConfig } from "@/config/site";
-import { Metadata } from "next";
 
 interface pageProps {
   searchParams: {
@@ -12,6 +13,7 @@ export async function generateMetadata({
   searchParams,
 }: pageProps): Promise<Metadata> {
   const { page } = getSearchParams({ searchParams });
+
   return {
     title:
       page === 1
@@ -27,7 +29,8 @@ export async function generateMetadata({
 
 export default function Page({ searchParams }: pageProps) {
   const { page, limit } = getSearchParams({ searchParams });
-  return <Latest page={page} limit={limit} />;
+
+  return <Latest limit={limit} page={page} />;
 }
 
 const getSearchParams = ({ searchParams }: pageProps) => {

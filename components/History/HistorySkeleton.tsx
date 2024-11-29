@@ -4,7 +4,7 @@ import { Card, CardBody, CardFooter, Skeleton } from "@nextui-org/react";
 
 export default function HistorySkeleton() {
   return (
-    <Card shadow="sm" radius="none" className="rounded-md w-full">
+    <Card className="rounded-md w-full" radius="none" shadow="sm">
       <CardBody className="flex flex-row gap-3 p-2">
         <Skeleton className="h-[200px] w-[233px] md:w-[193px] rounded-md" />
         <div className="flex flex-col gap-2 w-full">

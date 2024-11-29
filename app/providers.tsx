@@ -22,9 +22,9 @@ export function Providers({ children, themeProps }: ProvidersProps) {
         <NextThemesProvider {...themeProps}>
           {children}
           <ProgressBar
-            height="4px"
-            color="#f31260"
             shallowRouting
+            color="#f31260"
+            height="4px"
             options={{ showSpinner: false }}
           />
         </NextThemesProvider>

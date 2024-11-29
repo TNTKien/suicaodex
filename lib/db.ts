@@ -1,6 +1,7 @@
 "use server";
 
 import type { Category } from "@prisma/client";
+
 import { prisma } from "./prisma";
 
 // export async function getUserLib(id: string) {
@@ -97,7 +98,7 @@ import { prisma } from "./prisma";
 
 export async function getMangaCategory(
   userId: string,
-  mangaId: string
+  mangaId: string,
 ): Promise<string | "NONE"> {
   try {
     const result = await prisma.libraryManga.findFirst({
@@ -123,7 +124,7 @@ export async function updateMangaCategory(
   userId: string,
   mangaId: string,
   category: Category | "NONE",
-  latestChapterId: string
+  latestChapterId: string,
 ): Promise<{ message: string; status: number }> {
   try {
     // Tìm hoặc tạo thư viện của người dùng
@@ -193,6 +194,7 @@ export async function updateMangaCategory(
           where: { id: existingEntry.id },
           data: { category },
         });
+
         return {
           message: `Cập nhật thành công!`,
           status: 200,
@@ -206,6 +208,7 @@ export async function updateMangaCategory(
             category,
           },
         });
+
         return {
           message: `Cập nhật thành công!`,
           status: 201,
@@ -214,6 +217,7 @@ export async function updateMangaCategory(
     }
   } catch (error) {
     console.error("Error updating manga category:", error);
+
     return {
       message: "Có lỗi xảy ra, vui lòng thử lại sau!",
       status: 500,

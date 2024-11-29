@@ -38,6 +38,7 @@ function formatDistance(token: string, count: number, options?: any): string {
       return "Khoảng " + result;
     } else {
       if (result === "vừa xong") return result;
+
       return result + " trước";
     }
   }

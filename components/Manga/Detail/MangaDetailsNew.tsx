@@ -1,6 +1,5 @@
 "use client";
 
-import { siteConfig } from "@/config/site";
 import {
   Button,
   ButtonGroup,
@@ -15,23 +14,26 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@nextui-org/react";
+import { FC, useEffect, useState } from "react";
+import { Archive, BookOpenCheck, BookOpenText, LibraryBig } from "lucide-react";
+import NextImage from "next/image";
+
+import { MangaRating } from "./MangaRating";
+import MangaTags from "./MangaTags/TagsChip";
+import MangaDesc from "./MangaDesc";
+import MangaDetailSkeleton from "./MangaDetailSkeleton";
+import { LibModal } from "./AddToLib/LibModal";
+
+import { NotFound } from "@/components/notFound";
+import { ChapterVolumeNew } from "@/components/Chapter/ChapterTable/ChapterVolumeNew";
+import { Chapter, Manga, MangaStats } from "@/types";
 import {
   getChapters,
   getFirstChapter,
   getMangaDetails,
   getMangaRating,
 } from "@/lib/data";
-import { FC, useEffect, useState } from "react";
-import { Chapter, Manga, MangaStats } from "@/types";
-import { Archive, BookOpenCheck, BookOpenText, LibraryBig } from "lucide-react";
-import NextImage from "next/image";
-import { MangaRating } from "./MangaRating";
-import { ChapterVolumeNew } from "@/components/Chapter/ChapterTable/ChapterVolumeNew";
-import { NotFound } from "@/components/notFound";
-import MangaTags from "./MangaTags/TagsChip";
-import MangaDesc from "./MangaDesc";
-import MangaDetailSkeleton from "./MangaDetailSkeleton";
-import { LibModal } from "./AddToLib/LibModal";
+import { siteConfig } from "@/config/site";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -50,12 +52,16 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
     const fetchData = async () => {
       try {
         const mangaDetails = await getMangaDetails(mangaID);
+
         setInfo(mangaDetails);
         const chapters = await getChapters(mangaID, "vi", 1);
+
         setLists(chapters);
         const stats = await getMangaRating(mangaID);
+
         setRating(stats);
         const first = await getFirstChapter(mangaID, "vi");
+
         setFirstChapter(first);
       } catch (error) {
         console.log(error);
@@ -77,11 +83,11 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
   return (
     <div className="flex flex-col md:flex-row gap-2 mb-8">
       <Modal
-        defaultOpen={info.contentRating === "pornographic"}
+        hideCloseButton
         backdrop="blur"
+        defaultOpen={info.contentRating === "pornographic"}
         isDismissable={false}
         isKeyboardDismissDisabled={true}
-        hideCloseButton
         placement="center"
       >
         <ModalContent>
@@ -98,7 +104,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                 </p>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" as={Link} href="/">
+                <Button as={Link} color="danger" href="/" variant="light">
                   Không
                 </Button>
                 <Button color="primary" onPress={onClose}>
@@ -111,31 +117,31 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
       </Modal>
 
       <div className="w-full flex flex-col gap-2">
-        <Card radius="sm" shadow="sm" className="flex flex-col rounded-t-none ">
+        <Card className="flex flex-col rounded-t-none " radius="sm" shadow="sm">
           <Image
-            as={NextImage}
-            removeWrapper
-            src={`${coverURL}/${mangaID}/${info.cover}.512.jpg`}
-            alt={`Ảnh bìa ${info.title}`}
-            width={134}
-            height={230}
-            className="absolute w-full object-cover z-0 max-h-[230] blur-sm brightness-50"
-            radius="none"
             priority
+            removeWrapper
+            alt={`Ảnh bìa ${info.title}`}
+            as={NextImage}
+            className="absolute w-full object-cover z-0 max-h-[230] blur-sm brightness-50"
+            height={230}
+            radius="none"
+            src={`${coverURL}/${mangaID}/${info.cover}.512.jpg`}
+            width={134}
           />
           <CardHeader>
             <div className="items-start flex flex-col sm:flex-row gap-4">
               <Image
-                as={NextImage}
-                removeWrapper
-                src={`${coverURL}/${mangaID}/${info.cover}.512.jpg`}
-                alt={`Ảnh bìa ${info.title}`}
-                height={300}
-                width={200}
-                className="object-cover z-0"
-                shadow="md"
-                radius="sm"
                 priority
+                removeWrapper
+                alt={`Ảnh bìa ${info.title}`}
+                as={NextImage}
+                className="object-cover z-0"
+                height={300}
+                radius="sm"
+                shadow="md"
+                src={`${coverURL}/${mangaID}/${info.cover}.512.jpg`}
+                width={200}
               />
 
               <div className="flex flex-col items-start gap-2 z-10 top-1 sm:text-white">
@@ -154,9 +160,9 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                 </p>
                 <div className="flex flex-wrap gap-1">
                   <MangaTags
-                    tags={info.tags}
                     contentRating={info.contentRating}
                     status={info.status}
+                    tags={info.tags}
                   />
                 </div>
               </div>
@@ -171,22 +177,23 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
           <div className="w-full md:w-1/2 max-h-fit rounded-lg shadow-small bg-content1">
             <div className="flex flex-col gap-2 p-3">
               <LibModal
+                latestChapter={lists[0]}
                 manga={info}
                 session={session}
-                latestChapter={lists[0]}
               />
 
               {lists[0]?.id && (
                 <ButtonGroup
-                  variant="faded"
-                  color="danger"
-                  size="md"
                   fullWidth
-                  radius="sm"
                   className="-mt-2"
+                  color="danger"
+                  radius="sm"
+                  size="md"
+                  variant="faded"
                 >
                   <Button
                     as={Link}
+                    className="font-semibold"
                     href={
                       lists[0]?.externalUrl
                         ? lists[0]?.externalUrl
@@ -194,20 +201,19 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                     }
                     isExternal={lists[0]?.externalUrl ? true : false}
                     startContent={<BookOpenCheck />}
-                    className="font-semibold"
                   >
                     Đọc mới nhất
                   </Button>
                   <Button
-                    startContent={<BookOpenText />}
                     as={Link}
+                    className="font-semibold"
                     href={
                       firstChapter?.externalUrl
                         ? firstChapter?.externalUrl
                         : `/chapter/${firstChapter?.id}`
                     }
                     isExternal={firstChapter?.externalUrl ? true : false}
-                    className="font-semibold"
+                    startContent={<BookOpenText />}
                   >
                     Đọc từ đầu
                   </Button>
@@ -215,27 +221,27 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
               )}
               <ButtonGroup
                 fullWidth
-                radius="sm"
-                variant="faded"
-                size="md"
                 color="danger"
+                radius="sm"
+                size="md"
+                variant="faded"
               >
                 <Button
-                  startContent={<Archive />}
                   as={Link}
-                  href={`${siteConfig.mangadexAPI.webURL}/title/${mangaID}`}
                   className="font-semibold"
+                  href={`${siteConfig.mangadexAPI.webURL}/title/${mangaID}`}
                   isExternal={true}
+                  startContent={<Archive />}
                 >
                   MangaDex
                 </Button>
                 {info.raw && (
                   <Button
-                    startContent={<LibraryBig />}
                     as={Link}
-                    href={info.raw}
                     className="font-semibold"
+                    href={info.raw}
                     isExternal={true}
+                    startContent={<LibraryBig />}
                   >
                     Raw
                   </Button>
@@ -247,10 +253,10 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
           </div>
 
           <ChapterVolumeNew
-            mangaID={mangaID}
+            finalChapter={info.finalChapter}
             language="vi"
             limit={100}
-            finalChapter={info.finalChapter}
+            mangaID={mangaID}
           />
         </div>
       </div>

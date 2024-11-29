@@ -15,17 +15,17 @@ export default function MangaSkeleton() {
           <div className="flex flex-col col-span-6 md:col-span-8 gap-2">
             <div className="flex justify-between items-start">
               <Skeleton className="w-3/4 rounded-lg">
-                <div className="h-3 w-full rounded-lg bg-default-200"></div>
+                <div className="h-3 w-full rounded-lg bg-default-200" />
               </Skeleton>
             </div>
             <div className="flex justify-between items-start">
               <Skeleton className="w-full rounded-lg">
-                <div className="h-3 w-full rounded-lg bg-default-200"></div>
+                <div className="h-3 w-full rounded-lg bg-default-200" />
               </Skeleton>
             </div>
             <div className="flex justify-between items-start">
               <Skeleton className="w-1/2 rounded-lg">
-                <div className="h-3 w-full rounded-lg bg-default-200"></div>
+                <div className="h-3 w-full rounded-lg bg-default-200" />
               </Skeleton>
             </div>
           </div>

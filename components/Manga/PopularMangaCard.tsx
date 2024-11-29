@@ -1,13 +1,15 @@
 "use client";
 
-import { siteConfig } from "@/config/site";
-import { Manga } from "@/types";
 import { Card, CardFooter, Image } from "@nextui-org/react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import NextImage from "next/image";
+
 import MangaTags from "./Detail/MangaTags/TagsChip";
+
+import { Manga } from "@/types";
+import { siteConfig } from "@/config/site";
 
 interface PopularMangaCardProps {
   manga: Manga;
@@ -17,40 +19,40 @@ interface PopularMangaCardProps {
 const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
   return (
     <Card
-      isFooterBlurred
       isBlurred
+      isFooterBlurred
       className="border-none rounded-md bg-background/60 dark:bg-default-100/50 w-ful max-w-full max-h-[324]"
-      shadow="sm"
       radius="none"
+      shadow="sm"
     >
       <Image
-        as={NextImage}
         removeWrapper
         alt={manga.title}
+        as={NextImage}
         className="z-0 object-cover w-auto"
         height={324}
-        width={512}
-        src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
         priority={priority || false}
         radius="md"
+        src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
+        width={512}
       />
       <CardFooter className="absolute z-10 !items-start bg-black/40 bottom-0 border-default-600 dark:border-default-100 text-white">
         <div className="grid grid-cols-6 md:grid-cols-12 md:gap-4 items-start">
           <Link
-            href={`/manga/${manga.id}`}
             className="relative col-span-6 md:col-span-2"
+            href={`/manga/${manga.id}`}
           >
             <Image
-              as={NextImage}
+              isZoomed
               alt={manga.title}
+              as={NextImage}
               className="hidden md:flex h-full w-full object-cover rounded-md"
               height={300}
-              width={512}
               priority={priority || false}
+              radius="sm"
               shadow="md"
               src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
-              isZoomed
-              radius="sm"
+              width={512}
             />
           </Link>
 
@@ -70,16 +72,15 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
                 </p>
                 <div className="hidden md:flex flex-wrap gap-1 mb-4">
                   <MangaTags
-                    tags={manga.tags}
                     contentRating={manga.contentRating}
                     status={manga.status}
+                    tags={manga.tags}
                   />
                 </div>
                 {/* {manga.description && <MangaDesc desc={manga.description} />} */}
                 {manga.description && (
                   <ReactMarkdown
                     className="hidden md:line-clamp-6 text-muted-foreground"
-                    remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
                     components={{
                       a: ({ href, children }) => (
                         <a href={href} style={{ textDecoration: "underline" }}>
@@ -87,6 +88,7 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
                         </a>
                       ),
                     }}
+                    remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
                   >
                     {manga.description}
                   </ReactMarkdown>

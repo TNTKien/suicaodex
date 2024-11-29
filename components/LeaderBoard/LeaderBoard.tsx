@@ -1,17 +1,18 @@
 "use client";
 
+import { Divider, Tab, Tabs } from "@nextui-org/react";
+import { useEffect, useState } from "react";
+import { Bookmark, Star, ThumbsUp } from "lucide-react";
+
+import Follow from "./Follow";
+import Rating from "./Rating";
+
+import { Manga } from "@/types";
 import {
   getStaffPickMangas,
   getTopFollowedMangas,
   getTopRatedMangas,
 } from "@/lib/data";
-import { Manga } from "@/types";
-import { Divider, Tab, Tabs } from "@nextui-org/react";
-import { useEffect, useState } from "react";
-import Follow from "./Follow";
-import Rating from "./Rating";
-import { Bookmark, BookMarked, Star, ThumbsUp } from "lucide-react";
-import MangaCarouselSkeleton from "../Manga/Carousel/MangaCarouselSkeleton";
 
 const LeaderBoard = () => {
   const [followedMangas, setFollowedMangas] = useState<Manga[]>([]);
@@ -37,10 +38,13 @@ const LeaderBoard = () => {
       setIsLoading(true);
       try {
         const followedMangas = await getTopFollowedMangas();
+
         setFollowedMangas(followedMangas);
         const ratingMangas = await getTopRatedMangas();
+
         setRatingMangas(ratingMangas);
         const staffPickMangas = await getStaffPickMangas();
+
         setStaffPickMangas(staffPickMangas);
       } catch (error) {
         console.error(error);
@@ -76,9 +80,9 @@ const LeaderBoard = () => {
               panel: "w-full",
             }}
           >
-            <Tab key="follow" title={<Bookmark />}></Tab>
-            <Tab key="rating" title={<Star />}></Tab>
-            <Tab key="staff" title={<ThumbsUp />}></Tab>
+            <Tab key="follow" title={<Bookmark />} />
+            <Tab key="rating" title={<Star />} />
+            <Tab key="staff" title={<ThumbsUp />} />
           </Tabs>
         </div>
       </>

@@ -1,6 +1,5 @@
 "use client";
 
-import { Volume } from "@/types";
 import {
   Accordion,
   AccordionItem,
@@ -11,11 +10,14 @@ import {
   Pagination,
   Spinner,
 } from "@nextui-org/react";
-import { ChapterCard } from "./ChapterCard";
 import { AlertTriangle, ListTree, ListX } from "lucide-react";
-import NotFoundImg from "@/public/404.png";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+
+import { ChapterCard } from "./ChapterCard";
+
+import NotFoundImg from "@/public/404.png";
+import { Volume } from "@/types";
 import { getChapterVolume, groupChaptersByVolume } from "@/lib/data";
 
 interface ChapterVolumeNewProps {
@@ -47,9 +49,10 @@ export const ChapterVolumeNew = ({
           mangaID,
           language,
           limit,
-          offset
+          offset,
         );
         const volumes = groupChaptersByVolume(chapters);
+
         setVolume(volumes);
         setTotalPages(Math.ceil(total / limit));
       } catch (error) {
@@ -92,19 +95,19 @@ export const ChapterVolumeNew = ({
         <CardHeader className="flex gap-3">
           <Button
             fullWidth
-            radius="sm"
-            variant="faded"
-            color="danger"
-            className="font-semibold"
-            startContent={<AlertTriangle />}
             isDisabled
+            className="font-semibold"
+            color="danger"
+            radius="sm"
+            startContent={<AlertTriangle />}
+            variant="faded"
           >
             Lỗi, vui lòng thử lại sau!
           </Button>
         </CardHeader>
 
         <CardBody className="items-center justify-center">
-          <Image src={NotFoundImg} alt="not found" />
+          <Image alt="not found" src={NotFoundImg} />
         </CardBody>
       </Card>
     );
@@ -116,19 +119,19 @@ export const ChapterVolumeNew = ({
         <CardHeader className="flex gap-3">
           <Button
             fullWidth
-            radius="sm"
-            variant="faded"
-            color="danger"
-            className="font-semibold"
-            startContent={<ListX />}
             isDisabled
+            className="font-semibold"
+            color="danger"
+            radius="sm"
+            startContent={<ListX />}
+            variant="faded"
           >
             Truyện chưa có chapter nào!
           </Button>
         </CardHeader>
 
         <CardBody className="items-center justify-center">
-          <Image src={NotFoundImg} alt="not found" />
+          <Image alt="not found" src={NotFoundImg} />
         </CardBody>
       </Card>
     );
@@ -137,23 +140,23 @@ export const ChapterVolumeNew = ({
   return (
     <div className="w-full flex flex-col gap-2">
       <Accordion
-        variant="shadow"
         isCompact
-        selectionMode="multiple"
-        defaultExpandedKeys={[...volume.map((vol, index) => index.toString())]}
         aria-label="Volume"
         className="shadow-small rounded-lg"
+        defaultExpandedKeys={[...volume.map((vol, index) => index.toString())]}
         itemClasses={{
           heading: "font-semibold",
         }}
+        selectionMode="multiple"
+        variant="shadow"
       >
         {volume.map((vol, index) => (
           <AccordionItem
-            startContent={vol.vol === null ? <ListX /> : <ListTree />}
             key={index}
-            title={vol.vol === null ? "No Volume" : `Volume ${vol.vol}`}
-            textValue="Volume"
             aria-label="Volume"
+            startContent={vol.vol === null ? <ListX /> : <ListTree />}
+            textValue="Volume"
+            title={vol.vol === null ? "No Volume" : `Volume ${vol.vol}`}
           >
             {vol.chapters.map((chapter) => (
               <ChapterCard
@@ -167,12 +170,12 @@ export const ChapterVolumeNew = ({
       </Accordion>
       {totalPages > 1 && (
         <Pagination
-          total={totalPages}
           showControls
-          color="danger"
           className="self-center"
-          radius="sm"
+          color="danger"
           page={currentPage}
+          radius="sm"
+          total={totalPages}
           onChange={setCurrentPage}
         />
       )}

@@ -13,6 +13,7 @@ export const useScrollDirection = () => {
 
       if (Math.abs(scrollY - lastScrollY) < threshold) {
         ticking = false;
+
         return;
       }
       setScrollDir(scrollY > lastScrollY ? "down" : "up");

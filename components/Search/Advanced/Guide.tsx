@@ -15,24 +15,25 @@ import { Album } from "lucide-react";
 
 export default function Guide() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   return (
     <>
       <Button
+        className="font-semibold"
         color="default"
         radius="sm"
-        variant="faded"
-        className="font-semibold"
         startContent={<Album />}
+        variant="faded"
         onPress={onOpen}
       >
         Hướng dẫn
       </Button>
       <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        radius="sm"
         hideCloseButton
         className="max-w-full"
+        isOpen={isOpen}
+        radius="sm"
+        onOpenChange={onOpenChange}
       >
         <ModalContent>
           {(onClose) => (
@@ -97,7 +98,7 @@ export default function Guide() {
                 </Accordion>
               </ModalBody>
               <ModalFooter>
-                <Button color="primary" onPress={onClose} radius="sm">
+                <Button color="primary" radius="sm" onPress={onClose}>
                   Đã hiểu
                 </Button>
               </ModalFooter>

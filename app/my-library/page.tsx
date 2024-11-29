@@ -1,6 +1,7 @@
+import { Metadata } from "next";
+
 import { auth } from "@/auth";
 import Library from "@/components/Library/Library";
-import { Metadata } from "next";
 
 export function generateMetadata(): Metadata {
   return {

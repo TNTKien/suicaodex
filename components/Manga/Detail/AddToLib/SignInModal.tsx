@@ -1,4 +1,3 @@
-import { DiscordIcon } from "@/components/icons";
 import {
   Button,
   Modal,
@@ -10,8 +9,10 @@ import {
 import { ListPlus } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { ToastContainer } from "react-toastify";
-import Guide from "@/public/guide.png";
 import Image from "next/image";
+
+import Guide from "@/public/guide.png";
+import { DiscordIcon } from "@/components/icons";
 
 export default function SignInModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -19,22 +20,22 @@ export default function SignInModal() {
   return (
     <>
       <Button
-        variant="solid"
-        color="danger"
-        size="md"
         fullWidth
-        radius="sm"
-        startContent={<ListPlus />}
         className="font-semibold"
+        color="danger"
+        radius="sm"
+        size="md"
+        startContent={<ListPlus />}
+        variant="solid"
         onPress={onOpen}
       >
         Thêm vào Thư viện
       </Button>
       <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
         hideCloseButton
+        isOpen={isOpen}
         radius="sm"
+        onOpenChange={onOpenChange}
       >
         <ModalContent>
           {(onClose) => (
@@ -43,12 +44,12 @@ export default function SignInModal() {
                 <p className=" font-semibold text-center">
                   Đăng nhập để sử dụng tính năng này nha!
                 </p>
-                <Image src={Guide} alt="đăng nhập đi cha" />
+                <Image alt="đăng nhập đi cha" src={Guide} />
               </ModalBody>
               <ModalFooter className="flex flex-col gap-2">
                 <Button
-                  color="danger"
                   className="font-semibold"
+                  color="danger"
                   radius="sm"
                   startContent={<DiscordIcon />}
                   onPress={() => signIn("discord")}
@@ -57,9 +58,9 @@ export default function SignInModal() {
                 </Button>
                 <Button
                   className="font-semibold"
-                  onPress={onClose}
-                  variant="flat"
                   radius="sm"
+                  variant="flat"
+                  onPress={onClose}
                 >
                   Từ từ đã..!!
                 </Button>

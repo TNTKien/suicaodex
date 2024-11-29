@@ -1,7 +1,8 @@
+import { Metadata } from "next";
+
 import ChapterView from "@/components/Chapter/ChapterView";
 import { siteConfig } from "@/config/site";
 import { getChapterbyID } from "@/lib/data";
-import { Metadata } from "next";
 
 interface pageProps {
   params: {

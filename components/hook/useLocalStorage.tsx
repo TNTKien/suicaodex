@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 
 export default function useLocalStorage<T>(
   key: string,
-  defaultValue: T
+  defaultValue: T,
 ): [T, Dispatch<SetStateAction<T>>] {
   const isMounted = useRef(false);
   const [value, setValue] = useState<T>(defaultValue);
@@ -10,12 +10,14 @@ export default function useLocalStorage<T>(
   useEffect(() => {
     try {
       const item = window.localStorage.getItem(key);
+
       if (item) {
         setValue(JSON.parse(item));
       }
     } catch (e) {
       console.log(e);
     }
+
     return () => {
       isMounted.current = false;
     };

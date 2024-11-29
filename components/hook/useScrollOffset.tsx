@@ -7,15 +7,17 @@ const useScrollOffset = () => {
 
   const handleScroll = () => {
     const offset = window.pageYOffset;
+
     setScrollOffset(offset);
     setIsAtTop(offset === 0);
     setIsAtBottom(
-      window.innerHeight + offset >= document.documentElement.scrollHeight
+      window.innerHeight + offset >= document.documentElement.scrollHeight,
     );
   };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };

@@ -1,4 +1,3 @@
-import { Chapter, ChapterAggregate } from "@/types";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import {
@@ -18,10 +17,12 @@ import {
   MoveRight,
   MoveVertical,
 } from "lucide-react";
-
 import { twMerge } from "tailwind-merge";
+
 import { useScrollDirection } from "../hook/useScrollDirection";
 import useScrollOffset from "../hook/useScrollOffset";
+
+import { Chapter, ChapterAggregate } from "@/types";
 
 interface ChapterNavProps {
   chapterData: Chapter;
@@ -37,7 +38,7 @@ export const ChapterNav = ({
   fitMode,
 }: ChapterNavProps) => {
   const currentVolIndex = chapterAggregate.findIndex((aggregate) =>
-    aggregate.chapters.some((chapter) => chapter.id === chapterData.id)
+    aggregate.chapters.some((chapter) => chapter.id === chapterData.id),
   );
 
   const currentChapterIndex = chapterAggregate[
@@ -67,15 +68,15 @@ export const ChapterNav = ({
 
   return (
     <Card
-      shadow="sm"
-      radius="none"
       className={twMerge(
         `fixed bottom-0 left-1/2 transform -translate-x-1/2 z-10 mx-auto flex w-full translate-y-0 items-center justify-center transition-all duration-500 sm:rounded-lg sm:w-auto sm:-translate-y-2`,
         //isAtBottom && "translate-y-full sm:translate-y-full",
         scrollDirection === "down" &&
           !isAtBottom &&
-          "translate-y-full sm:translate-y-full"
+          "translate-y-full sm:translate-y-full",
       )}
+      radius="none"
+      shadow="sm"
     >
       <CardBody className="flex flex-row gap-1 rounded-md p-1">
         {/* // change fit mode btn */}
@@ -90,9 +91,9 @@ export const ChapterNav = ({
 
         {/* // prevChapter btn */}
         <Button
-          className="rounded-md"
-          as={Link}
           isIconOnly
+          as={Link}
+          className="rounded-md"
           href={prevChapter ? `/chapter/${prevChapter}` : ``}
           isDisabled={!prevChapter}
           radius="sm"
@@ -104,39 +105,39 @@ export const ChapterNav = ({
         {/* // chapter list dropdown */}
         <div className="flex flex-row gap-0 w-full">
           <Button
+            fullWidth
             className="rounded-l-md rounded-r-none justify-start line-clamp-1 px-3"
             size="lg"
-            fullWidth
           >
             {/* {vol_label} - {chapter_label} */}
             {chapter_label}
           </Button>
-          <Dropdown radius="sm" type="listbox" isKeyboardDismissDisabled>
+          <Dropdown isKeyboardDismissDisabled radius="sm" type="listbox">
             <DropdownTrigger>
               <Button
                 isIconOnly
-                size="lg"
                 className="rounded-l-none rounded-r-md"
+                size="lg"
               >
                 <ChevronUp />
               </Button>
             </DropdownTrigger>
 
             <DropdownMenu
-              className="max-h-[300px] overflow-scroll"
               aria-label="Chapter List"
-              variant="faded"
+              className="max-h-[300px] overflow-scroll"
               defaultSelectedKeys={[chapterData.id]}
-              selectionMode="single"
               disabledKeys={[chapterData.id]}
+              selectionMode="single"
+              variant="faded"
             >
               {chapterAggregate.map((chAgg, index) => (
                 <DropdownSection
+                  key={chAgg.vol}
+                  showDivider={index !== chapterAggregate.length - 1}
                   title={
                     chAgg.vol !== "none" ? `Vol. ${chAgg.vol}` : "No Volume"
                   }
-                  key={chAgg.vol}
-                  showDivider={index !== chapterAggregate.length - 1}
                 >
                   {chAgg.chapters.map((chapter) => (
                     <DropdownItem
@@ -156,25 +157,25 @@ export const ChapterNav = ({
 
         {/* // nextChapter btn */}
         <Button
-          as={Link}
           isIconOnly
+          as={Link}
+          className="rounded-md"
           href={nextChapter ? `/chapter/${nextChapter}` : ``}
           isDisabled={!nextChapter}
-          size="lg"
           radius="sm"
-          className="rounded-md"
+          size="lg"
         >
           <MoveRight />
         </Button>
 
         {/* // back to top btn */}
         <Button
-          radius="sm"
           isIconOnly
-          onPress={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          isDisabled={isAtTop}
           className="rounded-md"
+          isDisabled={isAtTop}
+          radius="sm"
           size="lg"
+          onPress={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           <ChevronsUp />
         </Button>

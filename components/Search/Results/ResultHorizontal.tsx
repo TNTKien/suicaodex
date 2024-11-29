@@ -1,7 +1,8 @@
 "use client";
 
-import { Manga } from "@/types";
 import { MangaCard } from "./MangaCard";
+
+import { Manga } from "@/types";
 
 interface ResultHorizontalProps {
   mangaList: Manga[];

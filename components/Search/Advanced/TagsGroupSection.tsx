@@ -1,15 +1,16 @@
 "use client";
 
-import { TagsGroup } from "@/types";
 import { Chip } from "@nextui-org/react";
 import { useState, useEffect } from "react";
+
+import { TagsGroup } from "@/types";
 
 interface TagsGroupSectionProps {
   tagsGroup: TagsGroup;
   reset: boolean;
   tagStates: Record<string, "normal" | "include" | "exclude">;
   onTagStateChange: (
-    newTagStates: Record<string, "normal" | "include" | "exclude">
+    newTagStates: Record<string, "normal" | "include" | "exclude">,
   ) => void;
 }
 
@@ -24,6 +25,7 @@ export const TagsGroupSection = ({
   useEffect(() => {
     if (reset) {
       const newTagStates = { ...localTagStates };
+
       tagsGroup.tags.forEach((tag) => {
         newTagStates[tag.id] = "normal";
       });
@@ -39,6 +41,7 @@ export const TagsGroupSection = ({
   const handleTagClick = (tagId: string) => {
     setLocalTagStates((prevState) => {
       const newState = { ...prevState };
+
       if (newState[tagId] === "normal") {
         newState[tagId] = "include";
       } else if (newState[tagId] === "include") {
@@ -47,6 +50,7 @@ export const TagsGroupSection = ({
         newState[tagId] = "normal";
       }
       setTimeout(() => onTagStateChange(newState), 0); // Use setTimeout to defer the state update
+
       return newState;
     });
   };
@@ -68,10 +72,10 @@ export const TagsGroupSection = ({
                   ? "border-red-500 border-dashed text-red-500"
                   : "border-gray-300"
             }`}
-            size="sm"
             radius="sm"
-            onClick={() => handleTagClick(tag.id)}
+            size="sm"
             variant={localTagStates[tag.id] === "normal" ? "flat" : "bordered"}
+            onClick={() => handleTagClick(tag.id)}
           >
             {tag.name}
           </Chip>

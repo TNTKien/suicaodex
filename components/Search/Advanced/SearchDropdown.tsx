@@ -1,5 +1,7 @@
 "use client";
 
+import type { Selection } from "@nextui-org/react";
+
 import {
   Button,
   Dropdown,
@@ -7,7 +9,6 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/react";
-import type { Selection } from "@nextui-org/react";
 import { ChevronsUpDown } from "lucide-react";
 import { useMemo, useState } from "react";
 
@@ -30,6 +31,7 @@ export const SearchDropdown = ({
     if (selectedKeys === "all") {
       return keys.join(", ").replaceAll("_", " ");
     }
+
     return Array.from(selectedKeys).join(", ").replaceAll("_", " ");
   }, [selectedKeys, keys]);
 
@@ -46,25 +48,25 @@ export const SearchDropdown = ({
     <div className="flex flex-col gap-2">
       <p>{title}</p>
 
-      <Dropdown shadow="sm" radius="sm" placement="bottom-end">
+      <Dropdown placement="bottom-end" radius="sm" shadow="sm">
         <DropdownTrigger>
           <Button
-            variant="flat"
             className="capitalize justify-between font-semibold px-2 line-clamp-1"
-            radius="sm"
             endContent={<ChevronsUpDown size={20} />}
+            radius="sm"
+            variant="flat"
           >
             <p className="line-clamp-1">{selectedValue}</p>
           </Button>
         </DropdownTrigger>
         <DropdownMenu
           aria-label={title}
-          variant="solid"
           closeOnSelect={false}
-          selectionMode="multiple"
-          selectedKeys={selectedKeys}
-          onSelectionChange={handleSelectionChange}
           disallowEmptySelection={false}
+          selectedKeys={selectedKeys}
+          selectionMode="multiple"
+          variant="solid"
+          onSelectionChange={handleSelectionChange}
         >
           {keys.map((k) => (
             <DropdownItem key={k} className="capitalize">

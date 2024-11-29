@@ -1,12 +1,14 @@
 "use client";
 
-import { Card, CardBody, Spinner, Tab, Tabs } from "@nextui-org/react";
+import { Spinner, Tab, Tabs } from "@nextui-org/react";
 import { LayoutGrid, List, StretchHorizontal } from "lucide-react";
+import { useEffect, useState } from "react";
+
 import { ResultList } from "./ResultList";
-import { Manga } from "@/types";
 import { ResultHorizontal } from "./ResultHorizontal";
 import { ResultGrid } from "./ResultGrid";
-import { useEffect, useState } from "react";
+
+import { Manga } from "@/types";
 import { AdvancedSearchManga } from "@/lib/data";
 
 interface ResultTabProps {
@@ -51,8 +53,9 @@ export default function ResultTab({
         include,
         exclude,
         author,
-        graphic
+        graphic,
       );
+
       setSearchResults(mangas);
     } catch (error) {
       console.error(error);
@@ -61,6 +64,7 @@ export default function ResultTab({
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, [trigger]); // Update this line
@@ -69,11 +73,11 @@ export default function ResultTab({
     <div className="flex flex-col">
       <Tabs
         aria-label="Options"
+        className="justify-end"
         classNames={{
           tabList: "rounded-md",
           cursor: "rounded-md",
         }}
-        className="justify-end"
       >
         <Tab key="list" title={<List />}>
           <ResultList mangaList={searchResults} />

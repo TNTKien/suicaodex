@@ -1,14 +1,17 @@
 "use client";
 
-import { getChapterAggregate, getChapterbyID, getCoverArt } from "@/lib/data";
-import { Chapter, ChapterAggregate } from "@/types";
 import { Spinner } from "@nextui-org/react";
 import { useEffect, useState } from "react";
+
 import { NotFound } from "../notFound";
+import useReadingHistory from "../hook/useReadingHistory";
+
 import { ChapterNav } from "./ChapterNav";
 import { ChapterInfo } from "./ChapterInfo";
 import { LongStrip } from "./Reader/LongStrip";
-import useReadingHistory from "../hook/useReadingHistory";
+
+import { Chapter, ChapterAggregate } from "@/types";
+import { getChapterAggregate, getChapterbyID, getCoverArt } from "@/lib/data";
 
 interface ChapterViewProps {
   chapterID: string;
@@ -27,6 +30,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
   const toggleFitMode = () => {
     setFitMode((prevMode) => {
       const newMode = prevMode === "width" ? "height" : "width";
+
       return newMode;
     });
   };
@@ -35,16 +39,19 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
     const fetchData = async () => {
       try {
         const data = await getChapterbyID(chapterID);
+
         setChapterData(data);
 
         if (data.manga && data.language) {
           const list = await getChapterAggregate(
             data.manga.id,
             data.language,
-            data.group.id
+            data.group.id,
           );
+
           setChapterAggregate(list);
           const coverArt = await getCoverArt(data.manga.id);
+
           setCover(coverArt);
         } else {
           throw new Error("Manga data is undefined");
@@ -79,7 +86,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
   if (!chapterData) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <Spinner size="lg" color="danger" />
+        <Spinner color="danger" size="lg" />
       </div>
     );
   }
@@ -90,19 +97,19 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
 
       {!!chapterData.pages && (
         <LongStrip
-          pages={chapterData.pages}
-          fitMode={fitMode}
           currentPage={currentPage}
+          fitMode={fitMode}
+          pages={chapterData.pages}
           setCurrentPage={setCurrentPage}
         />
       )}
 
       {chapterAggregate && (
         <ChapterNav
-          chapterData={chapterData}
           chapterAggregate={chapterAggregate}
-          toggleFitMode={toggleFitMode}
+          chapterData={chapterData}
           fitMode={fitMode}
+          toggleFitMode={toggleFitMode}
         />
       )}
     </div>

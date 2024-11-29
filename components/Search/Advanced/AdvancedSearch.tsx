@@ -2,14 +2,16 @@
 
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
-import { Album, Eraser, EyeOff, Eye, Search, Sparkles } from "lucide-react";
+import { EyeOff, Eye, Search } from "lucide-react";
+import { useState } from "react";
+import { Divider } from "@nextui-org/react";
+
+import ResultTab from "../Results/ResultTab";
+
 import { SearchDropdown } from "./SearchDropdown";
 import AuthorSearch from "./AuthorSearch";
-import { useState } from "react";
-import ResultTab from "../Results/ResultTab";
 import { TagsDropdown } from "./TagsDropdown";
 import Guide from "./Guide";
-import { Divider } from "@nextui-org/react";
 
 interface AdvancedSearchProps {
   page: number;
@@ -19,7 +21,7 @@ interface AdvancedSearchProps {
 export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
   const [selectedContentLimits, setSelectedContentLimits] = useState<string[]>(
-    []
+    [],
   );
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
   const [selectedFor, setSelectedFor] = useState<string[]>([]);
@@ -58,19 +60,19 @@ export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
       <div className="flex gap-2">
         <Input
           placeholder="Nhập tên truyện..."
-          variant="faded"
-          startContent={<Search color="gray" />}
           radius="sm"
+          startContent={<Search color="gray" />}
           value={query}
+          variant="faded"
           onValueChange={setQuery}
         />
         <Button
+          isIconOnly
+          className="font-semibold"
           color="secondary"
           radius="sm"
           variant="solid"
-          className="font-semibold"
           onClick={toggleFilters}
-          isIconOnly
         >
           {showFilters ? <EyeOff /> : <Eye />}
         </Button>
@@ -83,18 +85,18 @@ export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 3xl:grid-cols-5 gap-8">
             <AuthorSearch onSelectionChange={handleAuthorSelectionChange} />
             <SearchDropdown
-              title="Giới hạn nội dung"
               keys={["safe", "suggestive", "erotica", "pornographic"]}
+              title="Giới hạn nội dung"
               onSelectionChange={setSelectedContentLimits}
             />
             <SearchDropdown
-              title="Tình trạng"
               keys={["ongoing", "completed", "hiatus", "cancelled"]}
+              title="Tình trạng"
               onSelectionChange={setSelectedStatuses}
             />
             <SearchDropdown
-              title="Dành cho"
               keys={["shounen", "shoujo", "seinen", "jousei", "none"]}
+              title="Dành cho"
               onSelectionChange={setSelectedFor}
             />
           </div>
@@ -116,11 +118,11 @@ export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
         <Guide />
 
         <Button
-          startContent={<Search />}
+          className="font-semibold"
           color="danger"
           radius="sm"
+          startContent={<Search />}
           variant="solid"
-          className="font-semibold"
           onClick={handleSearch}
         >
           Tìm kiếm
@@ -130,15 +132,15 @@ export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
       {/* Result */}
       <ResultTab
         key={searchTrigger}
-        title={query}
+        author={selectedAuthors}
+        content={selectedContentLimits}
+        exclude={excludeTags}
+        graphic={selectedFor}
+        include={includeTags}
         limit={limit}
         page={page}
-        content={selectedContentLimits}
-        author={selectedAuthors}
-        graphic={selectedFor}
         status={selectedStatuses}
-        include={includeTags}
-        exclude={excludeTags}
+        title={query}
         trigger={searchTrigger}
       />
     </div>

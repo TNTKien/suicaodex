@@ -11,17 +11,19 @@ import {
 } from "@nextui-org/navbar";
 import { Link } from "@nextui-org/link";
 import NextLink from "next/link";
-import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
-import { DiscordIcon, FacebookIcon, GithubIcon } from "@/components/icons";
 import Image from "next/image";
-import SuicaoDexDark from "@/public/SuicaoDex-Dark.png";
-import SearchSection from "./Search/SearchSection";
 import { useState } from "react";
-import SearchMobile from "./Search/SearchMobile";
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
 import { Link2, ScanSearch } from "lucide-react";
+
+import SearchMobile from "./Search/SearchMobile";
+import SearchSection from "./Search/SearchSection";
 import { SignIn } from "./Session/SignIn";
+
+import SuicaoDexDark from "@/public/SuicaoDex-Dark.png";
+import { DiscordIcon, FacebookIcon, GithubIcon } from "@/components/icons";
+import { ThemeSwitch } from "@/components/theme-switch";
+import { siteConfig } from "@/config/site";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,10 +56,10 @@ export const Navbar = () => {
 
   return (
     <NextUINavbar
-      onMenuOpenChange={setIsMenuOpen}
-      maxWidth="full"
       isBlurred
       shouldHideOnScroll
+      maxWidth="full"
+      onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarMenuToggle
@@ -67,11 +69,11 @@ export const Navbar = () => {
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
             <Image
-              src={SuicaoDexDark}
+              priority
               alt="SuicaoDex"
               className="max-w-40 h-auto"
-              priority
               quality={100}
+              src={SuicaoDexDark}
             />
 
             {/* <p className="font-bold text-inherit text-lg">SuicaoDex</p> */}
@@ -87,7 +89,7 @@ export const Navbar = () => {
           <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
             <DiscordIcon className="text-default-500" />
           </Link>
-          <Link href={siteConfig.links.github} isExternal aria-label="Github">
+          <Link isExternal aria-label="Github" href={siteConfig.links.github}>
             <GithubIcon className="text-default-500" />
           </Link>
           <Link
@@ -113,12 +115,12 @@ export const Navbar = () => {
       <NavbarMenu>
         <NavbarMenuItem>
           <SearchMobile />
-          <Listbox items={items} aria-label="Find me">
+          <Listbox aria-label="Find me" items={items}>
             {(item) => (
               <ListboxItem
                 key={item.key}
-                href={item.href}
                 showDivider
+                href={item.href}
                 startContent={
                   <item.icon className="w-6 h-6 text-default-500" />
                 }

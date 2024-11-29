@@ -1,7 +1,7 @@
 "use client";
 
 import { siteConfig } from "@/config/site";
-import { Chapter, Manga } from "@/types";
+
 import { Button } from "@nextui-org/button";
 import {
   Dropdown,
@@ -18,7 +18,6 @@ import {
   Spinner,
   useDisclosure,
 } from "@nextui-org/react";
-
 import {
   Album,
   BellOff,
@@ -31,11 +30,14 @@ import {
 } from "lucide-react";
 import NextImage from "next/image";
 import { useMemo, useState, useEffect } from "react";
-import SignInModal from "./SignInModal";
-import { getMangaCategory, updateMangaCategory } from "@/lib/db";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "next-themes";
+
+import SignInModal from "./SignInModal";
+
+import { getMangaCategory, updateMangaCategory } from "@/lib/db";
+import { Chapter, Manga } from "@/types";
 
 interface LibModalProps {
   manga: Manga;
@@ -51,20 +53,6 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
   const [originalKeys, setOriginalKeys] = useState<Selection>(new Set());
   const [isLoading, setIsLoading] = useState(false);
-
-  if (!session) return <SignInModal />;
-
-  useEffect(() => {
-    const fetchDefaultType = async () => {
-      //onst defaultType = await getLibType(session.user.id, manga.id);
-      const defaultCategory = await getMangaCategory(session.user.id, manga.id);
-
-      setSelectedKeys(new Set([defaultCategory]));
-      setOriginalKeys(new Set([defaultCategory]));
-    };
-    fetchDefaultType();
-  }, [session.user.id, manga.id]);
-
   const dropdownItems = [
     { key: "NONE", value: "Không" },
     { key: "FOLLOWING", value: "Theo dõi" },
@@ -86,13 +74,27 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
     () =>
       dropdownItems.find((item) => item.key === Array.from(selectedKeys)[0])
         ?.value || "",
-    [selectedKeys]
+    [selectedKeys],
   );
 
   const selectedBtnVariant =
     BtnVariants.find(
-      (variant) => variant.key === Array.from(selectedKeys)[0]
+      (variant) => variant.key === Array.from(selectedKeys)[0],
     ) || BtnVariants[0];
+
+  useEffect(() => {
+    if (!session) return;
+    const fetchDefaultType = async () => {
+      const defaultCategory = await getMangaCategory(session.user.id, manga.id);
+
+      setSelectedKeys(new Set([defaultCategory]));
+      setOriginalKeys(new Set([defaultCategory]));
+    };
+
+    fetchDefaultType();
+  }, [session.user.id, manga.id]);
+
+  if (!session) return <SignInModal />;
 
   const handleLib = async (onClose: () => void) => {
     setIsLoading(true);
@@ -108,7 +110,7 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
         session.user.id,
         manga.id,
         type,
-        latestChapter?.id || "none"
+        latestChapter?.id || "none",
       );
 
       if (res.status === 200 || res.status === 201) {
@@ -121,6 +123,7 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
       toast.error("Có lỗi xảy ra, vui lòng thử lại sau!");
     } finally {
       setIsLoading(false);
+
       return onClose();
     }
   };
@@ -129,30 +132,30 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
     <>
       {/* open btn */}
       <Button
-        variant="solid"
-        color="danger"
-        size="md"
         fullWidth
-        radius="sm"
-        startContent={selectedBtnVariant.icon}
         className="font-semibold"
+        color="danger"
+        radius="sm"
+        size="md"
+        startContent={selectedBtnVariant.icon}
+        variant="solid"
         onPress={onOpen}
       >
         {selectedBtnVariant.value}
       </Button>
 
       <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        radius="sm"
-        size={isMobile ? "full" : "3xl"}
+        hideCloseButton
         classNames={{
           backdrop:
             "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-5",
         }}
         isDismissable={false}
         isKeyboardDismissDisabled={true}
-        hideCloseButton
+        isOpen={isOpen}
+        radius="sm"
+        size={isMobile ? "full" : "3xl"}
+        onOpenChange={onOpenChange}
       >
         <ModalContent>
           {(onClose) => (
@@ -163,16 +166,16 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
               <ModalBody>
                 <div className="flex flex-row gap-4">
                   <Image
-                    as={NextImage}
-                    removeWrapper
-                    src={`${coverURL}/${manga.id}/${manga.cover}.512.jpg`}
-                    alt={`Ảnh bìa ${manga.title}`}
-                    height={300}
-                    width={200}
-                    className="object-cover max-h-[200px] max-w-[133px] sm:max-w-full sm:max-h-full rounded-md"
-                    shadow="md"
-                    radius="sm"
                     priority
+                    removeWrapper
+                    alt={`Ảnh bìa ${manga.title}`}
+                    as={NextImage}
+                    className="object-cover max-h-[200px] max-w-[133px] sm:max-w-full sm:max-h-full rounded-md"
+                    height={300}
+                    radius="sm"
+                    shadow="md"
+                    src={`${coverURL}/${manga.id}/${manga.cover}.512.jpg`}
+                    width={200}
                   />
                   <div className="flex flex-col gap-4 w-full">
                     <h4 className="font-bold text-2xl">{manga.title}</h4>
@@ -180,21 +183,21 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
                       <Dropdown placement="bottom-end" radius="sm">
                         <DropdownTrigger>
                           <Button
-                            variant="flat"
                             className="justify-between w-2/3 font-semibold"
-                            radius="sm"
                             endContent={<ChevronsUpDown size={20} />}
+                            radius="sm"
+                            variant="flat"
                           >
                             {selectedValue}
                           </Button>
                         </DropdownTrigger>
                         <DropdownMenu
+                          disallowEmptySelection
                           aria-label="Single selection example"
                           className="w-full"
-                          variant="flat"
-                          disallowEmptySelection
-                          selectionMode="single"
                           selectedKeys={selectedKeys}
+                          selectionMode="single"
+                          variant="flat"
                           onSelectionChange={setSelectedKeys}
                         >
                           {dropdownItems.map((item) => (
@@ -208,13 +211,13 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
                       {/* get noitification btn */}
                       <Button
                         isIconOnly
-                        radius="sm"
-                        isDisabled={Array.from(selectedKeys)[0] !== "FOLLOWING"}
                         color={
                           Array.from(selectedKeys)[0] === "FOLLOWING"
                             ? "danger"
                             : "default"
                         }
+                        isDisabled={Array.from(selectedKeys)[0] !== "FOLLOWING"}
+                        radius="sm"
                       >
                         {Array.from(selectedKeys)[0] === "FOLLOWING" ? (
                           <BellRing />
@@ -251,22 +254,22 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
                   <Dropdown placement="bottom-end" radius="sm">
                     <DropdownTrigger>
                       <Button
-                        variant="flat"
-                        className="justify-between font-semibold"
-                        radius="sm"
                         fullWidth
+                        className="justify-between font-semibold"
                         endContent={<ChevronsUpDown size={20} />}
+                        radius="sm"
+                        variant="flat"
                       >
                         {selectedValue}
                       </Button>
                     </DropdownTrigger>
                     <DropdownMenu
+                      disallowEmptySelection
                       aria-label="Single selection example"
                       className="w-full"
-                      variant="flat"
-                      disallowEmptySelection
-                      selectionMode="single"
                       selectedKeys={selectedKeys}
+                      selectionMode="single"
+                      variant="flat"
                       onSelectionChange={setSelectedKeys}
                     >
                       {dropdownItems.map((item) => (
@@ -278,13 +281,13 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
                   {/* get noitification btn */}
                   <Button
                     isIconOnly
-                    radius="sm"
-                    isDisabled={Array.from(selectedKeys)[0] !== "FOLLOWING"}
                     color={
                       Array.from(selectedKeys)[0] === "FOLLOWING"
                         ? "danger"
                         : "default"
                     }
+                    isDisabled={Array.from(selectedKeys)[0] !== "FOLLOWING"}
+                    radius="sm"
                   >
                     {Array.from(selectedKeys)[0] === "FOLLOWING" ? (
                       <BellRing />
@@ -316,22 +319,22 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
               </ModalBody>
               <ModalFooter className="flex flex-col gap-2">
                 <Button
-                  color="danger"
                   className="font-semibold"
-                  onPress={() => handleLib(onClose)}
-                  radius="sm"
+                  color="danger"
                   isLoading={isLoading}
+                  radius="sm"
+                  onPress={() => handleLib(onClose)}
                 >
                   Cập nhật
                 </Button>
                 <Button
-                  variant="flat"
                   className="font-semibold"
+                  radius="sm"
+                  variant="flat"
                   onPress={() => {
                     setSelectedKeys(originalKeys);
                     onClose();
                   }}
-                  radius="sm"
                 >
                   Huỷ
                 </Button>
