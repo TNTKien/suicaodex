@@ -25,6 +25,7 @@ import { Link2, ScanSearch } from "lucide-react";
 import { SignIn } from "./Session/SignIn";
 import { useTheme } from "next-themes";
 import { useIsSSR } from "@react-aria/ssr";
+import NotifyBtn from "./Notify/NotifyBtn";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -105,14 +106,16 @@ export const Navbar = () => {
           </Link>
           <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem className="hidden sm:flex gap-2 place-items-center">
+        <NavbarItem className="hidden sm:flex gap-3 place-items-center">
           <SearchSection />
+          {/* <NotifyBtn /> */}
           <SignIn />
         </NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <ThemeSwitch />
+        {/* <NotifyBtn /> */}
         <SignIn />
       </NavbarContent>
 
