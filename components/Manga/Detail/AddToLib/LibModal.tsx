@@ -45,15 +45,14 @@ interface LibModalProps {
 
 export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
   const { theme } = useTheme();
-  if (!session) return <SignInModal />;
-
   const coverURL = siteConfig.mangadexAPI.coverURL;
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const isMobile = window.innerWidth < 640;
-
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
   const [originalKeys, setOriginalKeys] = useState<Selection>(new Set());
   const [isLoading, setIsLoading] = useState(false);
+
+  if (!session) return <SignInModal />;
 
   useEffect(() => {
     const fetchDefaultType = async () => {

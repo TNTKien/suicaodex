@@ -10,7 +10,7 @@ import {
   Tabs,
 } from "@nextui-org/react";
 import { Album, BookmarkCheck, ListCheck, NotebookPen } from "lucide-react";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SignInAlert from "./SignInAlert";
 import NoTitle from "./NoTitle";
 import { getUserLibrary } from "@/lib/db";
@@ -22,8 +22,6 @@ interface LibraryProps {
 }
 
 export const Library = ({ session }: LibraryProps) => {
-  if (!session) return <SignInAlert />;
-
   const tabItems = [
     { key: "follow", value: "Đang theo dõi" },
     { key: "reading", value: "Đang đọc" },
@@ -38,6 +36,8 @@ export const Library = ({ session }: LibraryProps) => {
   const [readingManga, setReadingManga] = useState<Manga[]>([]);
   const [planManga, setPlanManga] = useState<Manga[]>([]);
   const [completedManga, setCompletedManga] = useState<Manga[]>([]);
+
+  if (!session) return <SignInAlert />;
 
   useEffect(() => {
     const fetchLib = async () => {

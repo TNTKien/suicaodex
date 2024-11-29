@@ -12,5 +12,6 @@ export function generateMetadata(): Metadata {
 
 export default async function MyLibrary() {
   const session = await auth();
+
   return <Library session={session} />;
 }
