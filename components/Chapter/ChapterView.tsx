@@ -46,7 +46,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
           const list = await getChapterAggregate(
             data.manga.id,
             data.language,
-            data.group.id,
+            data.group.id
           );
 
           setChapterAggregate(list);
@@ -75,6 +75,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
         chapter: chapterData.chapter,
         chapterTitle: chapterData.title,
         cover: cover,
+        updatedAt: new Date().toISOString(),
       });
     }
   }, [chapterData, addHistory, cover]);

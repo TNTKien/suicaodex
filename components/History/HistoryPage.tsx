@@ -11,13 +11,14 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 import NextImage from "next/image";
-import { BookOpenText, Trash2 } from "lucide-react";
+import { BookOpenText, Clock, Trash2 } from "lucide-react";
 
 import useReadingHistory from "../hook/useReadingHistory";
 
 import HistorySkeleton from "./HistorySkeleton";
 
 import { siteConfig } from "@/config/site";
+import { formatHistory, formatTimeToNow } from "@/lib/utils";
 
 export const HistoryPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -61,6 +62,7 @@ export const HistoryPage = () => {
       </div>
     );
   }
+  const sorted = formatHistory(history);
 
   return (
     <div className="flex flex-col gap-3">
@@ -69,75 +71,90 @@ export const HistoryPage = () => {
         <h1 className="text-2xl font-extrabold uppercase">Lịch sử đọc</h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-        {Object.keys(history)
-          .reverse()
-          .map((mangaId) => {
-            const chapterIndex = history[mangaId].chapter
-              ? `Chương ${history[mangaId].chapter}`
-              : "Oneshot";
-            const readingText = history[mangaId].chapterTitle
-              ? `${chapterIndex} - ${history[mangaId].chapterTitle}`
-              : chapterIndex;
+        {Object.keys(sorted).map((mangaId) => {
+          const chapterIndex = history[mangaId].chapter
+            ? `Chương ${history[mangaId].chapter}`
+            : "Oneshot";
+          const readingText = history[mangaId].chapterTitle
+            ? `${chapterIndex} - ${history[mangaId].chapterTitle}`
+            : chapterIndex;
 
-            return (
-              <Card
-                key={mangaId}
-                className="rounded-md"
-                radius="none"
-                shadow="sm"
-              >
-                <CardBody className="flex flex-row gap-3 p-2">
-                  <Link href={`/manga/${mangaId}`}>
-                    <Image
-                      removeWrapper
-                      alt={history[mangaId].mangaTitle}
-                      as={NextImage}
-                      className="object-cover max-h-[200px] max-w-[133px] rounded-md"
-                      height={364}
-                      priority={true}
-                      quality={100}
-                      src={`${siteConfig.mangadexAPI.coverURL}/${mangaId}/${history[mangaId].cover}.256.jpg`}
-                      width={256}
-                    />
-                  </Link>
+          return (
+            <Card
+              key={mangaId}
+              className="rounded-md"
+              radius="none"
+              shadow="sm"
+            >
+              <CardBody className="flex flex-row gap-3 p-2">
+                <Link href={`/manga/${mangaId}`}>
+                  <Image
+                    removeWrapper
+                    alt={history[mangaId].mangaTitle}
+                    as={NextImage}
+                    className="object-cover max-h-[200px] max-w-[133px] rounded-md"
+                    height={364}
+                    priority={true}
+                    quality={100}
+                    src={`${siteConfig.mangadexAPI.coverURL}/${mangaId}/${history[mangaId].cover}.256.jpg`}
+                    width={256}
+                  />
+                </Link>
 
-                  <div className="grid grid-rows-3 gap-1">
-                    <div className="flex flex-col gap-1 row-span-1">
-                      <Link href={`/manga/${mangaId}`}>
-                        <h2 className="font-semibold text-2xl line-clamp-2">
-                          {history[mangaId].mangaTitle}
-                        </h2>
-                      </Link>
-                    </div>
-                    <div className="flex flex-col gap-1 row-span-2">
-                      <p className="font-semibold">Đang đọc:</p>
-                      <p className="line-clamp-3">{readingText}</p>
-                    </div>
+                <div className="grid grid-rows-3 gap-1">
+                  <div className="flex flex-col gap-1 row-span-1">
+                    <Link href={`/manga/${mangaId}`}>
+                      <h2 className="font-semibold text-2xl line-clamp-2">
+                        {history[mangaId].mangaTitle}
+                      </h2>
+                    </Link>
                   </div>
-                </CardBody>
-                <CardFooter className="flex flex-row gap-2 p-2">
-                  <Button
-                    fullWidth
-                    className="rounded-md font-semibold"
-                    startContent={<Trash2 />}
-                    onPress={() => removeHistory(mangaId)}
-                  >
-                    Xoá
-                  </Button>
-                  <Button
-                    fullWidth
-                    as={Link}
-                    className="rounded-md font-semibold"
-                    color="danger"
-                    href={`/chapter/${history[mangaId].chapterId}`}
-                    startContent={<BookOpenText />}
-                  >
-                    Đọc tiếp
-                  </Button>
-                </CardFooter>
-              </Card>
-            );
-          })}
+                  <div className="flex flex-col gap-1 row-span-2">
+                    {history[mangaId].updatedAt ? (
+                      <div className="flex gap-1 items-center">
+                        <Clock />
+                        <time
+                          className="font-semibold"
+                          dateTime={new Date(
+                            sorted[mangaId].updatedAt
+                          ).toDateString()}
+                        >
+                          {formatTimeToNow(new Date(sorted[mangaId].updatedAt))}
+                        </time>
+                      </div>
+                    ) : (
+                      <p className="font-semibold">Đang đọc:</p>
+                    )}
+                    <p className="line-clamp-3">
+                      {/* <span className="font-semibold">Đang đọc: </span> */}
+                      {readingText}
+                    </p>
+                  </div>
+                </div>
+              </CardBody>
+              <CardFooter className="flex flex-row gap-2 p-2">
+                <Button
+                  fullWidth
+                  className="rounded-md font-semibold"
+                  startContent={<Trash2 />}
+                  onPress={() => removeHistory(mangaId)}
+                >
+                  Xoá
+                </Button>
+                <Button
+                  fullWidth
+                  as={Link}
+                  className="rounded-md font-semibold"
+                  color="danger"
+                  href={`/chapter/${history[mangaId].chapterId}`}
+                  startContent={<BookOpenText />}
+                >
+                  Đọc tiếp
+                </Button>
+              </CardFooter>
+            </Card>
+          );
+        })}
       </div>
     </div>
   );

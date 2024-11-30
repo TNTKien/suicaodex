@@ -60,7 +60,7 @@ export const LongStrip = ({
     <>
       <div className="flex flex-col gap-2 items-center justify-center">
         {pages?.map((page, index) => (
-          <div className="relative mt_placeholder">
+          <div className="relative mt_placeholder" key={index}>
             <NextImage
               key={index}
               //loading="eager"

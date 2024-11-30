@@ -109,4 +109,7 @@ export type ReadingHistory = {
   chapter: string;
   chapterTitle: string;
   cover: string;
+  updatedAt: string;
 };
+
+export type UserReadingHistory = Record<string, ReadingHistory>;

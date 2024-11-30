@@ -1,3 +1,4 @@
+import { ReadingHistory, UserReadingHistory } from "@/types";
 import { clsx, type ClassValue } from "clsx";
 import { formatDistanceToNowStrict } from "date-fns";
 import { vi as locale } from "date-fns/locale";
@@ -54,4 +55,19 @@ export function formatTimeToNow(date: Date | number): string {
       formatDistance,
     },
   });
+}
+
+export function formatHistory(data: UserReadingHistory): UserReadingHistory {
+  // Chuyển đổi thành mảng các mục
+  const entries = Object.entries(data);
+
+  // Sắp xếp theo `updatedAt`
+  entries.sort(([, a], [, b]) => {
+    if (!a.updatedAt) return 1; // Đẩy xuống cuối nếu không có `updatedAt`
+    if (!b.updatedAt) return -1;
+    return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+  });
+
+  // Chuyển đổi ngược lại thành đối tượng
+  return Object.fromEntries(entries);
 }
