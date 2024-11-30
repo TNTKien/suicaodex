@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Image, Slider } from "@nextui-org/react";
 import NextImage from "next/image";
 import { useEffect } from "react";
@@ -27,7 +28,7 @@ export const LongStrip = ({
       const scrolled = (scrollTop + windowHeight) / totalHeight;
       const newPage = Math.min(
         pages.length - 1,
-        Math.floor(scrolled * pages.length),
+        Math.floor(scrolled * pages.length)
       );
 
       setCurrentPage(newPage);
@@ -59,20 +60,26 @@ export const LongStrip = ({
     <>
       <div className="flex flex-col gap-2 items-center justify-center">
         {pages?.map((page, index) => (
-          <Image
-            key={index}
-            priority
-            removeWrapper
-            alt={`Trang ${index + 1}`}
-            as={NextImage}
-            className={`${fitMode === "width" ? "w-full h-auto" : "max-h-screen w-auto mx-auto"}`}
-            height={0}
-            id={`page-${index}`}
-            quality={100}
-            radius="none"
-            src={page}
-            width={1500}
-          />
+          <div className="relative mt_placeholder">
+            <NextImage
+              key={index}
+              //loading="eager"
+              priority
+              alt={`Trang ${index + 1}`}
+              className={cn(
+                "mx-auto",
+                fitMode === "width"
+                  ? "w-auto h-auto "
+                  : "max-h-screen w-auto mx-auto"
+              )}
+              id={`page-${index}`}
+              quality={100}
+              src={page}
+              height={0}
+              width={1500}
+              placeholder="empty"
+            />
+          </div>
         ))}
       </div>
 
@@ -88,17 +95,6 @@ export const LongStrip = ({
         value={currentPage}
         onChange={handleSliderChange}
       />
-
-      {/* <Progress
-        aria-label="reading progress"
-        value={currentPage + 1}
-        maxValue={pages.length}
-        className="fixed bottom-0 z-10 opacity-35 w-full py-1"
-        size="sm"
-        radius="none"
-        color="danger"
-        disableAnimation
-      /> */}
     </>
   );
 };

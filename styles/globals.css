@@ -144,3 +144,7 @@
 .embla__dot--selected:after {
   box-shadow: inset 0 0 0 0.2rem var(--text-body);
 }
+
+.mt_placeholder {
+  background: url("/spin.svg") center center no-repeat !important;
+}
