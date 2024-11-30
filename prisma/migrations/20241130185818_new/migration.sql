@@ -22,6 +22,7 @@ CREATE TABLE `Library` (
     `updatedAt` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `Library_userId_key`(`userId`),
+    INDEX `Library_userId_idx`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -32,6 +33,7 @@ CREATE TABLE `Manga` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    INDEX `Manga_mangadexId_idx`(`mangadexId`),
     PRIMARY KEY (`mangadexId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -44,6 +46,8 @@ CREATE TABLE `LibraryManga` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    INDEX `LibraryManga_libraryId_mangaId_idx`(`libraryId`(100), `mangaId`(100)),
+    INDEX `LibraryManga_libraryId_category_idx`(`libraryId`(100), `category`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
