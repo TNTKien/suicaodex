@@ -111,7 +111,18 @@ export const HistoryPage = () => {
                     </Link>
                   </div>
                   <div className="flex flex-col gap-1 row-span-2">
-                    {sorted[mangaId].updatedAt ? (
+                    <div className="flex gap-1 items-center">
+                      <Clock />
+                      <time
+                        className="font-semibold"
+                        dateTime={new Date(
+                          sorted[mangaId].updatedAt
+                        ).toDateString()}
+                      >
+                        {formatTimeToNow(new Date(sorted[mangaId].updatedAt))}
+                      </time>
+                    </div>
+                    {/* {sorted[mangaId].updatedAt ? (
                       <div className="flex gap-1 items-center">
                         <Clock />
                         <time
@@ -125,7 +136,7 @@ export const HistoryPage = () => {
                       </div>
                     ) : (
                       <p className="font-semibold">Đang đọc:</p>
-                    )}
+                    )} */}
                     <p className="line-clamp-3">
                       {/* <span className="font-semibold">Đang đọc: </span> */}
                       {readingText}

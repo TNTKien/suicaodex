@@ -6,8 +6,8 @@ import { ReadingHistory } from "@/types";
 
 export default function useReadingHistory() {
   const [history, setHistory] = useLocalStorage<Record<string, ReadingHistory>>(
-    "suicaodex-history",
-    {},
+    "demosuicaodex-history",
+    {}
   );
 
   const addHistory = useCallback(
@@ -23,7 +23,7 @@ export default function useReadingHistory() {
         return newHistory;
       });
     },
-    [setHistory],
+    [setHistory]
   );
 
   const removeHistory = (mangaId: string) => {

@@ -1,33 +1,38 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 export default function useLocalStorage<T>(
   key: string,
-  defaultValue: T,
+  defaultValue: T
 ): [T, Dispatch<SetStateAction<T>>] {
-  const isMounted = useRef(false);
-  const [value, setValue] = useState<T>(defaultValue);
+  const [value, setValue] = useState<T>(() => {
+    // Kiểm tra nếu đang chạy trên client
+    if (typeof window !== "undefined") {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : defaultValue;
+    }
+    return defaultValue; // Giá trị mặc định khi SSR
+  });
 
   useEffect(() => {
-    try {
-      const item = window.localStorage.getItem(key);
-
-      if (item) {
-        setValue(JSON.parse(item));
+    if (typeof window !== "undefined") {
+      try {
+        const item = window.localStorage.getItem(key);
+        if (item) {
+          setValue(JSON.parse(item));
+        }
+      } catch (e) {
+        console.error(e);
       }
-    } catch (e) {
-      console.log(e);
     }
-
-    return () => {
-      isMounted.current = false;
-    };
   }, [key]);
 
   useEffect(() => {
-    if (isMounted.current) {
-      window.localStorage.setItem(key, JSON.stringify(value));
-    } else {
-      isMounted.current = true;
+    if (typeof window !== "undefined") {
+      try {
+        window.localStorage.setItem(key, JSON.stringify(value));
+      } catch (e) {
+        console.error(e);
+      }
     }
   }, [key, value]);
 
