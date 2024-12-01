@@ -72,11 +72,12 @@ export const HistoryPage = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         {Object.keys(sorted).map((mangaId) => {
-          const chapterIndex = history[mangaId].chapter
-            ? `Chương ${history[mangaId].chapter}`
+          //console.log(sorted[mangaId].updatedAt);
+          const chapterIndex = sorted[mangaId].chapter
+            ? `Chương ${sorted[mangaId].chapter}`
             : "Oneshot";
-          const readingText = history[mangaId].chapterTitle
-            ? `${chapterIndex} - ${history[mangaId].chapterTitle}`
+          const readingText = sorted[mangaId].chapterTitle
+            ? `${chapterIndex} - ${sorted[mangaId].chapterTitle}`
             : chapterIndex;
 
           return (
@@ -90,13 +91,13 @@ export const HistoryPage = () => {
                 <Link href={`/manga/${mangaId}`}>
                   <Image
                     removeWrapper
-                    alt={history[mangaId].mangaTitle}
+                    alt={sorted[mangaId].mangaTitle}
                     as={NextImage}
                     className="object-cover max-h-[200px] max-w-[133px] rounded-md"
                     height={364}
                     priority={true}
                     quality={100}
-                    src={`${siteConfig.mangadexAPI.coverURL}/${mangaId}/${history[mangaId].cover}.256.jpg`}
+                    src={`${siteConfig.mangadexAPI.coverURL}/${mangaId}/${sorted[mangaId].cover}.256.jpg`}
                     width={256}
                   />
                 </Link>
@@ -105,12 +106,12 @@ export const HistoryPage = () => {
                   <div className="flex flex-col gap-1 row-span-1">
                     <Link href={`/manga/${mangaId}`}>
                       <h2 className="font-semibold text-2xl line-clamp-2">
-                        {history[mangaId].mangaTitle}
+                        {sorted[mangaId].mangaTitle}
                       </h2>
                     </Link>
                   </div>
                   <div className="flex flex-col gap-1 row-span-2">
-                    {history[mangaId].updatedAt ? (
+                    {sorted[mangaId].updatedAt ? (
                       <div className="flex gap-1 items-center">
                         <Clock />
                         <time
@@ -146,7 +147,7 @@ export const HistoryPage = () => {
                   as={Link}
                   className="rounded-md font-semibold"
                   color="danger"
-                  href={`/chapter/${history[mangaId].chapterId}`}
+                  href={`/chapter/${sorted[mangaId].chapterId}`}
                   startContent={<BookOpenText />}
                 >
                   Đọc tiếp
