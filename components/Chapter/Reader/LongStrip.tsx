@@ -60,26 +60,30 @@ export const LongStrip = ({
     <>
       <div className="flex flex-col gap-2 items-center justify-center">
         {pages?.map((page, index) => (
-          <div className="relative mt_placeholder" key={index}>
-            <NextImage
-              key={index}
-              //loading="eager"
-              priority
-              alt={`Trang ${index + 1}`}
-              className={cn(
-                "mx-auto",
-                fitMode === "width"
-                  ? "w-auto h-auto "
-                  : "max-h-screen w-auto mx-auto"
-              )}
-              id={`page-${index}`}
-              quality={100}
-              src={page}
-              height={0}
-              width={1500}
-              placeholder="empty"
-            />
-          </div>
+          <Image
+            key={index}
+            alt={`Trang ${index + 1}`}
+            className={cn(
+              "mx-auto",
+              fitMode === "width"
+                ? "w-auto h-auto "
+                : "max-h-screen w-auto mx-auto"
+            )}
+            classNames={{
+              wrapper: "bg-repeat-y bg-center",
+            }}
+            id={`page-${index}`}
+            src={page}
+            loading="eager"
+            radius="none"
+            fallbackSrc="/spin.svg"
+            // disableSkeleton
+            //priority
+            //quality={100}
+            // height={0}
+            // width={1500}
+            //placeholder="empty"
+          />
         ))}
       </div>
 
