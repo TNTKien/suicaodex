@@ -24,15 +24,19 @@ const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
           <CardBody className="flex flex-row gap-3 p-2">
             <Link href={`/manga/${manga.info.id}`}>
               <Image
-                removeWrapper
+                //removeWrapper
                 alt={manga.info.title}
                 as={NextImage}
                 className="object-cover max-h-[200px] max-w-[133px] rounded-md"
+                classNames={{
+                  wrapper: "bg-no-repeat bg-cover",
+                }}
                 height={364}
                 priority={true}
                 quality={85}
                 src={`${siteConfig.mangadexAPI.coverURL}/${manga.info.id}/${manga.info.cover}.256.jpg`}
                 width={256}
+                fallbackSrc="/SuicaoHan.webp"
               />
             </Link>
 

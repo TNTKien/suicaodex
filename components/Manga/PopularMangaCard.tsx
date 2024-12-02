@@ -47,6 +47,10 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
               alt={manga.title}
               as={NextImage}
               className="hidden md:flex h-full w-full object-cover rounded-md"
+              classNames={{
+                wrapper: "bg-no-repeat bg-cover",
+              }}
+              fallbackSrc="/SuicaoHan.webp"
               height={300}
               priority={priority || false}
               radius="sm"
