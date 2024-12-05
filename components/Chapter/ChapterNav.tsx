@@ -1,5 +1,5 @@
 import { Button } from "@nextui-org/button";
-import { Link } from "@nextui-org/link";
+import Link from "next/link";
 import {
   Card,
   CardBody,
@@ -38,7 +38,7 @@ export const ChapterNav = ({
   fitMode,
 }: ChapterNavProps) => {
   const currentVolIndex = chapterAggregate.findIndex((aggregate) =>
-    aggregate.chapters.some((chapter) => chapter.id === chapterData.id),
+    aggregate.chapters.some((chapter) => chapter.id === chapterData.id)
   );
 
   const currentChapterIndex = chapterAggregate[
@@ -73,7 +73,7 @@ export const ChapterNav = ({
         //isAtBottom && "translate-y-full sm:translate-y-full",
         scrollDirection === "down" &&
           !isAtBottom &&
-          "translate-y-full sm:translate-y-full",
+          "translate-y-full sm:translate-y-full"
       )}
       radius="none"
       shadow="sm"
@@ -93,6 +93,7 @@ export const ChapterNav = ({
         <Button
           isIconOnly
           as={Link}
+          prefetch={true}
           className="rounded-md"
           href={prevChapter ? `/chapter/${prevChapter}` : ``}
           isDisabled={!prevChapter}
@@ -159,6 +160,7 @@ export const ChapterNav = ({
         <Button
           isIconOnly
           as={Link}
+          prefetch={true}
           className="rounded-md"
           href={nextChapter ? `/chapter/${nextChapter}` : ``}
           isDisabled={!nextChapter}
