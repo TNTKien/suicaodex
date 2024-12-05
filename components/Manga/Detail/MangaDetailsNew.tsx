@@ -190,7 +190,6 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
               {lists[0]?.id && (
                 <ButtonGroup
                   fullWidth
-                  className="-mt-2"
                   color="danger"
                   radius="sm"
                   size="md"

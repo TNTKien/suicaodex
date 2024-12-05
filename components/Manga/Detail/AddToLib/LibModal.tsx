@@ -30,9 +30,7 @@ import {
 } from "lucide-react";
 
 import { useMemo, useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useTheme } from "next-themes";
+import { toast } from "react-toastify";
 import SignInModal from "./SignInModal";
 import { getMangaCategory, updateMangaCategory } from "@/lib/db";
 import { Chapter, Manga } from "@/types";
@@ -44,7 +42,6 @@ interface LibModalProps {
 }
 
 export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
-  const { theme } = useTheme();
   const coverURL = siteConfig.suicaodex.apiURL + "/covers";
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const isMobile = window.innerWidth < 640;
@@ -343,7 +340,6 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
           )}
         </ModalContent>
       </Modal>
-      <ToastContainer theme={theme} />
     </>
   );
 };
