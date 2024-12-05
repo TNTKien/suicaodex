@@ -16,14 +16,11 @@ import {
 } from "@nextui-org/react";
 import { FC, useEffect, useState } from "react";
 import { Archive, BookOpenCheck, BookOpenText, LibraryBig } from "lucide-react";
-import NextImage from "next/image";
-
 import { MangaRating } from "./MangaRating";
 import MangaTags from "./MangaTags/TagsChip";
 import MangaDesc from "./MangaDesc";
 import MangaDetailSkeleton from "./MangaDetailSkeleton";
 import { LibModal } from "./AddToLib/LibModal";
-
 import { NotFound } from "@/components/notFound";
 import { ChapterVolumeNew } from "@/components/Chapter/ChapterTable/ChapterVolumeNew";
 import { Chapter, Manga, MangaStats } from "@/types";

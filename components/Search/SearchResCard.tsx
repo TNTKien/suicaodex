@@ -3,7 +3,6 @@
 import { Card, CardBody, Image } from "@nextui-org/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import NextImage from "next/image";
 
 import MangaTags from "../Manga/Detail/MangaTags/TagsChip";
 
@@ -19,14 +18,15 @@ const SearchResCard = ({ manga }: SearchResCardProps) => {
     <Card key={manga.id} radius="sm" shadow="sm">
       <CardBody className="flex flex-row gap-3 p-1.5">
         <Image
-          removeWrapper
           alt={manga.title}
-          as={NextImage}
           className="object-cover max-h-[200px] max-w-[133px] rounded-sm"
+          classNames={{
+            wrapper: "bg-no-repeat bg-cover bg-center rounded-sm",
+          }}
           height={364}
-          quality={100}
-          src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.256.jpg`}
+          src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.256.jpg`}
           width={256}
+          fallbackSrc="/hanabi_holder.webp"
         />
 
         <div className="flex flex-col gap-1">

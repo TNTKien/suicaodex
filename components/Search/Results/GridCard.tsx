@@ -1,7 +1,6 @@
 "use client";
 
 import { Card, CardFooter, Image } from "@nextui-org/react";
-import NextImage from "next/image";
 import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
@@ -21,19 +20,22 @@ export const GridCard = ({ manga }: GridCardProps) => {
     >
       <Link href={`/manga/${manga.id}`}>
         <Image
-          removeWrapper
+          //removeWrapper
           alt={manga.title}
-          as={NextImage}
           className="z-0 object-cover w-full h-auto rounded-sm dark:rounded-b-none"
+          classNames={{
+            wrapper: "bg-no-repeat bg-cover bg-center rounded-sm",
+          }}
           height={300}
-          src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
-          width={200}
+          src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.512.jpg`}
+          width="100%"
+          fallbackSrc="/hanabi_holder.webp"
         />
       </Link>
 
       <CardFooter className="absolute z-10 bottom-0 bg-gradient-to-t from-black">
         <Link href={`/manga/${manga.id}`}>
-          <h4 className="font-bold text-base text-white line-clamp-2">
+          <h4 className="font-bold text-lg text-white line-clamp-2">
             {manga.title}
           </h4>
         </Link>

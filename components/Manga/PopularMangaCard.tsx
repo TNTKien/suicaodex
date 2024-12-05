@@ -4,7 +4,6 @@ import { Card, CardFooter, Image } from "@nextui-org/react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import NextImage from "next/image";
 
 import MangaTags from "./Detail/MangaTags/TagsChip";
 
@@ -21,19 +20,19 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
     <Card
       isBlurred
       isFooterBlurred
-      className="border-none rounded-md bg-background/60 dark:bg-default-100/50 w-ful max-w-full max-h-[324]"
+      className="border-none rounded-md bg-background/60 dark:bg-default-100/50 w-full max-w-full max-h-[324]"
       radius="none"
       shadow="sm"
     >
       <Image
+        //as={NextImage}
+        //priority={priority || false}
         removeWrapper
         alt={manga.title}
-        as={NextImage}
-        className="z-0 object-cover w-auto"
+        className="z-0 object-cover w-full h-auto"
         height={324}
-        priority={priority || false}
         radius="md"
-        src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
+        src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.512.jpg`}
         width={512}
       />
       <CardFooter className="absolute z-10 !items-start bg-black/40 bottom-0 border-default-600 dark:border-default-100 text-white">
@@ -43,19 +42,19 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
             href={`/manga/${manga.id}`}
           >
             <Image
-              isZoomed
+              //isZoomed
+              //as={NextImage}
+              //priority={priority || false}
               alt={manga.title}
-              as={NextImage}
               className="hidden md:flex h-full w-full object-cover rounded-md"
               classNames={{
-                wrapper: "bg-no-repeat bg-cover",
+                wrapper: "bg-no-repeat bg-cover bg-center",
               }}
               fallbackSrc="/hanabi_holder.webp"
               height={300}
-              priority={priority || false}
               radius="sm"
               shadow="md"
-              src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.512.jpg`}
+              src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.512.jpg`}
               width={512}
             />
           </Link>

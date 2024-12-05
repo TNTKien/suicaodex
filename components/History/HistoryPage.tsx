@@ -10,7 +10,7 @@ import {
   Image,
 } from "@nextui-org/react";
 import Link from "next/link";
-import NextImage from "next/image";
+
 import { BookOpenText, Clock, Trash2 } from "lucide-react";
 
 import useReadingHistory from "../hook/useReadingHistory";
@@ -90,15 +90,15 @@ export const HistoryPage = () => {
               <CardBody className="flex flex-row gap-3 p-2">
                 <Link href={`/manga/${mangaId}`}>
                   <Image
-                    removeWrapper
                     alt={sorted[mangaId].mangaTitle}
-                    as={NextImage}
                     className="object-cover max-h-[200px] max-w-[133px] rounded-md"
+                    classNames={{
+                      wrapper: "bg-no-repeat bg-cover bg-center rounded-md",
+                    }}
                     height={364}
-                    priority={true}
-                    quality={100}
-                    src={`${siteConfig.mangadexAPI.coverURL}/${mangaId}/${sorted[mangaId].cover}.256.jpg`}
+                    src={`${siteConfig.suicaodex.apiURL}/covers/${mangaId}/${sorted[mangaId].cover}.256.jpg`}
                     width={256}
+                    fallbackSrc="/hanabi_holder.webp"
                   />
                 </Link>
 

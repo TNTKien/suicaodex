@@ -1,6 +1,5 @@
 "use client";
 import { Card, CardBody, Image } from "@nextui-org/react";
-import NextImage from "next/image";
 import Link from "next/link";
 
 import { LastestManga } from "@/types";
@@ -25,17 +24,18 @@ const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
             <Link href={`/manga/${manga.info.id}`}>
               <Image
                 //removeWrapper
+                //as={NextImage}
+                //priority={true}
+                //quality={85}
                 alt={manga.info.title}
-                as={NextImage}
                 className="object-cover max-h-[200px] max-w-[133px] rounded-md"
                 classNames={{
-                  wrapper: "bg-no-repeat bg-cover rounded-md",
+                  wrapper: "bg-no-repeat bg-cover bg-center rounded-md",
                 }}
+                loading="eager"
                 height={364}
-                priority={true}
-                quality={85}
-                src={`${siteConfig.mangadexAPI.coverURL}/${manga.info.id}/${manga.info.cover}.256.jpg`}
                 width={256}
+                src={`${siteConfig.suicaodex.apiURL}/covers/${manga.info.id}/${manga.info.cover}.256.jpg`}
                 fallbackSrc="/hanabi_holder.webp"
               />
             </Link>

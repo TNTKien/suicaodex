@@ -28,14 +28,12 @@ import {
   ListPlus,
   NotebookPen,
 } from "lucide-react";
-import NextImage from "next/image";
+
 import { useMemo, useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "next-themes";
-
 import SignInModal from "./SignInModal";
-
 import { getMangaCategory, updateMangaCategory } from "@/lib/db";
 import { Chapter, Manga } from "@/types";
 
@@ -47,7 +45,7 @@ interface LibModalProps {
 
 export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
   const { theme } = useTheme();
-  const coverURL = siteConfig.mangadexAPI.coverURL;
+  const coverURL = siteConfig.suicaodex.apiURL + "/covers";
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const isMobile = window.innerWidth < 640;
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
@@ -166,16 +164,18 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
               <ModalBody>
                 <div className="flex flex-row gap-4">
                   <Image
-                    priority
-                    removeWrapper
+                    //removeWrapper
                     alt={`Ảnh bìa ${manga.title}`}
-                    as={NextImage}
-                    className="object-cover max-h-[200px] max-w-[133px] sm:max-w-full sm:max-h-full rounded-md"
+                    className="object-cover max-h-[300px] max-w-[200px] rounded-md"
+                    classNames={{
+                      wrapper: "bg-no-repeat bg-cover bg-center rounded-md",
+                    }}
                     height={300}
+                    width={200}
                     radius="sm"
                     shadow="md"
                     src={`${coverURL}/${manga.id}/${manga.cover}.512.jpg`}
-                    width={200}
+                    fallbackSrc="/hanabi_holder.webp"
                   />
                   <div className="flex flex-col gap-4 w-full">
                     <h4 className="font-bold text-2xl">{manga.title}</h4>

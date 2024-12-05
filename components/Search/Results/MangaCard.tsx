@@ -1,7 +1,6 @@
 "use client";
 
 import { Card, CardBody, Image } from "@nextui-org/react";
-import NextImage from "next/image";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -20,14 +19,15 @@ export const MangaCard = ({ manga }: MangaCardProps) => {
       <CardBody className="flex flex-row gap-3 p-1.5">
         <Link href={`/manga/${manga.id}`}>
           <Image
-            removeWrapper
             alt={manga.title}
-            as={NextImage}
             className="object-cover max-h-[200px] max-w-[133px] rounded-sm"
+            classNames={{
+              wrapper: "bg-no-repeat bg-cover bg-center rounded-sm",
+            }}
             height={364}
-            quality={100}
-            src={`${siteConfig.mangadexAPI.coverURL}/${manga.id}/${manga.cover}.256.jpg`}
+            src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.256.jpg`}
             width={256}
+            fallbackSrc="/hanabi_holder.webp"
           />
         </Link>
         <div className="flex flex-col gap-1">

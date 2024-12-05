@@ -1,7 +1,6 @@
 "use client";
 
 import { Card, CardFooter, Image } from "@nextui-org/react";
-import NextImage from "next/image";
 import Link from "next/link";
 
 import { LastestManga } from "@/types";
@@ -13,7 +12,7 @@ interface GridCoverProps {
 
 export const GridCover = ({ manga }: GridCoverProps) => {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
       {manga.map((manga) => (
         <div key={manga.info.id} className="flex flex-col gap-1">
           <Card
@@ -24,14 +23,18 @@ export const GridCover = ({ manga }: GridCoverProps) => {
           >
             <Link href={`/manga/${manga.info.id}`}>
               <Image
-                removeWrapper
+                //as={NextImage}
+                //priority={true}
+                //removeWrapper
                 alt={manga.info.title}
-                as={NextImage}
                 className="z-0 object-cover w-full h-auto rounded-md dark:rounded-b-none"
-                height={320}
-                priority={true}
-                src={`${siteConfig.mangadexAPI.coverURL}/${manga.info.id}/${manga.info.cover}.512.jpg`}
-                width={200}
+                classNames={{
+                  wrapper: "bg-no-repeat bg-cover bg-center rounded-sm",
+                }}
+                height={330}
+                src={`${siteConfig.suicaodex.apiURL}/covers/${manga.info.id}/${manga.info.cover}.512.jpg`}
+                width="100%"
+                fallbackSrc="/hanabi_holder.webp"
               />
             </Link>
 

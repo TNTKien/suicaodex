@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import { Image, Slider } from "@nextui-org/react";
-import NextImage from "next/image";
 import { useEffect } from "react";
 
 interface LongStripProps {
