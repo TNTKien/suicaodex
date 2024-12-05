@@ -120,7 +120,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
         <Card className="flex flex-col rounded-t-none " radius="sm" shadow="sm">
           <Image
             alt={`Ảnh bìa ${info.title}`}
-            className="absolute w-full object-cover z-0 max-h-[230] blur-sm brightness-50"
+            className="absolute w-full object-cover z-0 max-h-[230px] blur-sm brightness-50"
             radius="none"
             src={`${coverURL}/${mangaID}/${info.cover}.512.jpg`}
             width="100%"
