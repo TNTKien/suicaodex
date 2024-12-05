@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Lịch sử đọc truyện của bạn",
   keywords: siteConfig.keywords,
   openGraph: {
-    images: `${siteConfig.suicaodex.domain}/SuicaoHan.webp`,
+    images: `${siteConfig.suicaodex.domain}/hanabi_holder.webp`,
   },
 };
 

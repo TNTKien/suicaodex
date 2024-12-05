@@ -46,7 +46,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
   const [rating, setRating] = useState<MangaStats | null>(null);
   const [firstChapter, setFirstChapter] = useState<Chapter | null>(null);
   const [fetchFailed, setFetchFailed] = useState(false);
-  const coverURL = siteConfig.mangadexAPI.coverURL;
+  const coverURL = siteConfig.suicaodex.apiURL + "/covers";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,10 +104,10 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                 </p>
               </ModalBody>
               <ModalFooter>
-                <Button as={Link} color="danger" href="/" variant="light">
+                <Button as={Link} href="/" variant="faded" radius="sm">
                   Không
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button color="danger" onPress={onClose} radius="sm">
                   Chắc chắn
                 </Button>
               </ModalFooter>
@@ -119,29 +119,37 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
       <div className="w-full flex flex-col gap-2">
         <Card className="flex flex-col rounded-t-none " radius="sm" shadow="sm">
           <Image
-            priority
-            removeWrapper
             alt={`Ảnh bìa ${info.title}`}
-            as={NextImage}
             className="absolute w-full object-cover z-0 max-h-[230] blur-sm brightness-50"
-            height={230}
             radius="none"
             src={`${coverURL}/${mangaID}/${info.cover}.512.jpg`}
-            width={134}
+            width="100%"
+            fallbackSrc="/hanabi_holder.webp"
+            loading="eager"
+            // as={NextImage}
+            // width={134}
+            // height={230}
+            // priority
+            // removeWrapper
           />
           <CardHeader>
             <div className="items-start flex flex-col sm:flex-row gap-4">
               <Image
-                priority
-                removeWrapper
+                //removeWrapper
+                //loading="eager"
+                // as={NextImage}
+                // priority
                 alt={`Ảnh bìa ${info.title}`}
-                as={NextImage}
-                className="object-cover z-0"
-                height={300}
+                className="object-cover z-0 max-w-[200px] h-auto"
+                classNames={{
+                  wrapper: "bg-norepeat bg-cover bg-center",
+                }}
                 radius="sm"
                 shadow="md"
                 src={`${coverURL}/${mangaID}/${info.cover}.512.jpg`}
+                height={300}
                 width={200}
+                fallbackSrc="/hanabi_holder.webp"
               />
 
               <div className="flex flex-col items-start gap-2 z-10 top-1 sm:text-white">

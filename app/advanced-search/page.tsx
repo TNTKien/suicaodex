@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: "Công cụ tìm kiếm nâng cao",
   keywords: ["Tìm kiếm nâng cao", "Nâng cao", "Tìm kiếm", "Manga", "SuicaoDex"],
   openGraph: {
-    images: `${siteConfig.suicaodex.domain}/SuicaoHan.webp`,
+    images: `${siteConfig.suicaodex.domain}/hanabi_holder.webp`,
   },
 };
 
