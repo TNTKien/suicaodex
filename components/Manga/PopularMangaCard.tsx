@@ -34,6 +34,7 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
         radius="md"
         src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.512.jpg`}
         width={512}
+        fetchPriority="high"
       />
       <CardFooter className="absolute z-10 !items-start bg-black/40 bottom-0 border-default-600 dark:border-default-100 text-white">
         <div className="grid grid-cols-6 md:grid-cols-12 md:gap-4 items-start">
@@ -56,6 +57,7 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
               shadow="md"
               src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.512.jpg`}
               width={512}
+              fetchPriority="high"
             />
           </Link>
 

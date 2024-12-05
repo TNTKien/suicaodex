@@ -23,10 +23,6 @@ const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
           <CardBody className="flex flex-row gap-3 p-2">
             <Link href={`/manga/${manga.info.id}`}>
               <Image
-                //removeWrapper
-                //as={NextImage}
-                //priority={true}
-                //quality={85}
                 alt={manga.info.title}
                 className="object-cover max-h-[200px] max-w-[133px] rounded-md"
                 classNames={{
@@ -37,6 +33,7 @@ const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
                 width={256}
                 src={`${siteConfig.suicaodex.apiURL}/covers/${manga.info.id}/${manga.info.cover}.256.jpg`}
                 fallbackSrc="/hanabi_holder.webp"
+                fetchPriority="high"
               />
             </Link>
 
