@@ -31,6 +31,7 @@ import {
   getMangaRating,
 } from "@/lib/data";
 import { siteConfig } from "@/config/site";
+import { ContinueReading } from "./ContinueReading";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -181,6 +182,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
         <div className="flex flex-col md:flex-row gap-2">
           <div className="w-full md:w-1/2 max-h-fit rounded-lg shadow-small bg-content1">
             <div className="flex flex-col gap-2 p-3">
+              <ContinueReading mangaId={mangaID} />
               <LibModal
                 latestChapter={lists[0]}
                 manga={info}
