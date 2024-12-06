@@ -369,24 +369,10 @@ export async function getPopularMangas(): Promise<Manga[]> {
   return data.data.map((item: any) => MangaParser(item));
 }
 
-export async function getTopFollowedMangas(): Promise<Manga[]> {
-  const { data } = await axiosInstance.get(`/manga?`, {
-    params: {
-      limit: 7,
-      includes: ["cover_art", "author", "artist"],
-      hasAvailableChapters: "true",
-      availableTranslatedLanguage: ["vi"],
-      order: {
-        followedCount: "desc",
-      },
-    },
-  });
-
-  return data.data.map((item: any) => MangaParser(item));
-}
-
-export async function getTopRatedMangas(): Promise<Manga[]> {
-  const { data } = await axiosInstance.get(`/manga?`, {
+export async function getTopRatedMangas(): Promise<
+  (Manga & { rating: number })[]
+> {
+  const { data: top } = await axiosInstance.get(`/manga?`, {
     params: {
       limit: 7,
       includes: ["cover_art", "author", "artist"],
@@ -398,7 +384,23 @@ export async function getTopRatedMangas(): Promise<Manga[]> {
     },
   });
 
-  return data.data.map((item: any) => MangaParser(item));
+  const mangas = top.data.map((item: any) => MangaParser(item));
+  const ids = mangas.map((m: Manga) => m.id);
+
+  const { data: rate } = await axiosInstance.get(`/statistics/manga?`, {
+    params: {
+      manga: ids,
+    },
+  });
+
+  const result = mangas.map((m: Manga) => {
+    return {
+      ...m,
+      rating: rate.statistics[m.id].rating.bayesian.toFixed(2),
+    };
+  });
+
+  return result;
 }
 
 export async function getStaffPickMangas(): Promise<Manga[]> {
@@ -589,6 +591,40 @@ export async function getMangaRating(mangaID: string): Promise<MangaStats> {
   return MangaStatsParser(data, mangaID);
 }
 
+export async function getTopFollowed(): Promise<
+  (Manga & { follow: number })[]
+> {
+  const { data: top } = await axiosInstance.get(`/manga?`, {
+    params: {
+      limit: 7,
+      includes: ["cover_art", "author", "artist"],
+      hasAvailableChapters: "true",
+      availableTranslatedLanguage: ["vi"],
+      order: {
+        followedCount: "desc",
+      },
+    },
+  });
+
+  const mangas = top.data.map((item: any) => MangaParser(item));
+  const ids = mangas.map((m: Manga) => m.id);
+
+  const { data: rate } = await axiosInstance.get(`/statistics/manga?`, {
+    params: {
+      manga: ids,
+    },
+  });
+
+  const result = mangas.map((m: Manga) => {
+    return {
+      ...m,
+      follow: rate.statistics[m.id].follows,
+    };
+  });
+
+  return result;
+}
+
 export async function SearchAuthor(author: string): Promise<Author[]> {
   const { data } = await axiosInstance.get(`/author?name=${author}`);
 
@@ -694,4 +730,19 @@ export async function getMangaByIDs(ids: string[]): Promise<Manga[]> {
   const mangas = responses.flatMap((response) => response.data.data);
 
   return mangas.map((item: any) => MangaParser(item));
+}
+
+export async function getRecentlyMangas(): Promise<Manga[]> {
+  const { data } = await axiosInstance.get(`/manga?`, {
+    params: {
+      limit: 10,
+      includes: ["cover_art", "author", "artist"],
+      availableTranslatedLanguage: ["vi"],
+      order: {
+        createdAt: "desc",
+      },
+    },
+  });
+
+  return data.data.map((item: any) => MangaParser(item));
 }

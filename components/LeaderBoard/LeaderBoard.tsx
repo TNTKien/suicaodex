@@ -2,50 +2,33 @@
 
 import { Divider, Tab, Tabs } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { Bookmark, Star, ThumbsUp } from "lucide-react";
-
-import Follow from "./Follow";
-import Rating from "./Rating";
-
+import { Bookmark, Star } from "lucide-react";
 import { Manga } from "@/types";
-import {
-  getStaffPickMangas,
-  getTopFollowedMangas,
-  getTopRatedMangas,
-} from "@/lib/data";
+import { getTopFollowed, getTopRatedMangas } from "@/lib/data";
+import Board from "./Board";
+import BoardSkeleton from "./BoardSkeleton";
 
 const LeaderBoard = () => {
-  const [followedMangas, setFollowedMangas] = useState<Manga[]>([]);
-  const [ratingMangas, setRatingMangas] = useState<Manga[]>([]);
-  const [staffPickMangas, setStaffPickMangas] = useState<Manga[]>([]);
+  const [followedMangas, setFollowedMangas] = useState<
+    (Manga & { follow: number })[]
+  >([]);
+  const [ratingMangas, setRatingMangas] = useState<
+    (Manga & { rating: number })[]
+  >([]);
+
   const [fetchFailed, setFetchFailed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [selected, setSelected] = useState("follow");
-
-  const getSelectedText = () => {
-    switch (selected) {
-      case "follow":
-        return "Lượt theo dõi";
-      case "rating":
-        return "Đánh giá";
-      default:
-        return "Đề cử";
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const followedMangas = await getTopFollowedMangas();
-
+        const followedMangas = await getTopFollowed();
         setFollowedMangas(followedMangas);
+
         const ratingMangas = await getTopRatedMangas();
-
         setRatingMangas(ratingMangas);
-        const staffPickMangas = await getStaffPickMangas();
-
-        setStaffPickMangas(staffPickMangas);
       } catch (error) {
         console.error(error);
         setFetchFailed(true);
@@ -63,11 +46,10 @@ const LeaderBoard = () => {
 
   if (isLoading) {
     return (
-      <>
+      <div className="w-full md:w-1/2 lg:w-1/3">
         <div className="justify-between flex flex-col px-1 pb-2 mt-3">
           <Divider className="w-9 h-1 bg-danger" />
           <h1 className="text-2xl font-extrabold uppercase">Bảng xếp hạng</h1>
-          {/* <span className="text-sm font-light -mt-1">Lượt theo dõi</span> */}
         </div>
         <div className="flex flex-col place-items-end -mt-12">
           <Tabs
@@ -79,22 +61,24 @@ const LeaderBoard = () => {
               cursor: "rounded-md",
               panel: "w-full",
             }}
+            selectedKey={selected}
+            onSelectionChange={(key) => setSelected(String(key))}
           >
-            <Tab key="follow" title={<Bookmark />} />
+            <Tab key="follow" title={<Bookmark />}>
+              <BoardSkeleton />
+            </Tab>
             <Tab key="rating" title={<Star />} />
-            <Tab key="staff" title={<ThumbsUp />} />
           </Tabs>
         </div>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div className="w-full md:w-1/2 lg:w-1/3">
       <div className="justify-between flex flex-col px-1 pb-2 mt-3">
         <Divider className="w-9 h-1 bg-danger" />
         <h1 className="text-2xl font-extrabold uppercase">Bảng xếp hạng</h1>
-        {/* <span className="text-sm font-light -mt-1">{getSelectedText()}</span> */}
       </div>
 
       <div className="flex flex-col place-items-end -mt-12">
@@ -111,17 +95,15 @@ const LeaderBoard = () => {
           onSelectionChange={(key) => setSelected(String(key))}
         >
           <Tab key="follow" title={<Bookmark />}>
-            <Follow manga={followedMangas} />
+            <Board manga={followedMangas} cate="follow" />
           </Tab>
           <Tab key="rating" title={<Star />}>
-            <Rating manga={ratingMangas} />
-          </Tab>
-          <Tab key="staff" title={<ThumbsUp />}>
-            <Follow manga={staffPickMangas} />
+            <Board manga={ratingMangas} cate="rating" />
           </Tab>
         </Tabs>
       </div>
-    </>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
+    </div>
   );
 };
 

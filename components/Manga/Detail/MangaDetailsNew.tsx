@@ -118,17 +118,15 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
         <Card className="flex flex-col rounded-t-none " radius="sm" shadow="sm">
           <Image
             alt={`Ảnh bìa ${info.title}`}
-            className="absolute w-full object-cover z-0 max-h-[230px] blur-sm brightness-50"
+            className="absolute w-full object-cover z-0 max-h-[230px] blur-sm brightness-50 "
             radius="none"
             src={`${coverURL}/${mangaID}/${info.cover}.512.jpg`}
             width="100%"
-            fallbackSrc="/hanabi_holder.webp"
             loading="eager"
-            // as={NextImage}
+            height={230}
+            fallbackSrc="/hanabi_holder.webp"
+            //isBlurred
             // width={134}
-            // height={230}
-            // priority
-            // removeWrapper
           />
           <CardHeader>
             <div className="items-start flex flex-col sm:flex-row gap-4">
@@ -143,14 +141,14 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                   wrapper: "bg-norepeat bg-cover bg-center",
                 }}
                 radius="sm"
-                shadow="md"
+                shadow="sm"
                 src={`${coverURL}/${mangaID}/${info.cover}.512.jpg`}
                 height={300}
                 width={200}
                 fallbackSrc="/hanabi_holder.webp"
               />
 
-              <div className="flex flex-col items-start gap-2 z-10 top-1 sm:text-white">
+              <div className="flex flex-col items-start gap-2 z-10 top-1 text-white">
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
                   {info.title}
                 </h1>

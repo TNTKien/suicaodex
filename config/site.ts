@@ -22,7 +22,7 @@ export const siteConfig = {
     ogURL: "https://og.mangadex.org/og-image",
   },
   suicaodex: {
-    domain: "https://suicaodex.com",
+    domain: "https://demo.suicaodex.com",
     apiURL: "https://api.suicaodex.com", //pls use your own proxy server; or use built-in proxy, see /lib/axios.ts
   },
 };
