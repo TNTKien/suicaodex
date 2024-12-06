@@ -64,6 +64,7 @@ type ChapterAggregate = {
   chapters: {
     id: string;
     chapter: string;
+    other?: string[];
   }[];
 };
 
@@ -484,8 +485,6 @@ export async function getChapterAggregate(
     },
   });
 
-  const chapterList: ChapterAggregate[] = [];
-
   const result: ChapterAggregate[] = [];
 
   for (const volumeKey in data.volumes) {
@@ -498,6 +497,7 @@ export async function getChapterAggregate(
       chaptersArray.push({
         id: chapter.id, // Lấy trường `id`
         chapter: chapter.chapter,
+        other: chapter.others,
       });
     }
 

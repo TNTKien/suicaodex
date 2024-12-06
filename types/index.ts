@@ -65,6 +65,7 @@ export type ChapterAggregate = {
   chapters: {
     id: string;
     chapter: string;
+    other?: string[];
   }[];
 };
 

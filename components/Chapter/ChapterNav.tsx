@@ -37,9 +37,17 @@ export const ChapterNav = ({
   toggleFitMode,
   fitMode,
 }: ChapterNavProps) => {
-  const currentVolIndex = chapterAggregate.findIndex((aggregate) =>
+  let currentVolIndex = chapterAggregate.findIndex((aggregate) =>
     aggregate.chapters.some((chapter) => chapter.id === chapterData.id)
   );
+
+  if (currentVolIndex === -1) {
+    currentVolIndex = chapterAggregate.findIndex((aggregate) =>
+      aggregate.chapters.some((chapter) =>
+        chapter.other?.some((id) => id === chapterData.id)
+      )
+    );
+  }
 
   const currentChapterIndex = chapterAggregate[
     currentVolIndex
