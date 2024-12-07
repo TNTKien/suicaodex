@@ -29,7 +29,7 @@ export const GridCard = ({ manga }: GridCardProps) => {
           height={300}
           src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.512.jpg`}
           width="100%"
-          fallbackSrc="/hanabi_holder.webp"
+          fallbackSrc="/doro_think.webp"
         />
       </Link>
 

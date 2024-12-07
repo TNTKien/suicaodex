@@ -51,7 +51,7 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
               classNames={{
                 wrapper: "bg-no-repeat bg-cover bg-center",
               }}
-              fallbackSrc="/hanabi_holder.webp"
+              fallbackSrc="/doro_think.webp"
               height={300}
               radius="sm"
               shadow="md"

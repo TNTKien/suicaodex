@@ -98,7 +98,7 @@ export const HistoryPage = () => {
                     height={364}
                     src={`${siteConfig.suicaodex.apiURL}/covers/${mangaId}/${sorted[mangaId].cover}.256.jpg`}
                     width={256}
-                    fallbackSrc="/hanabi_holder.webp"
+                    fallbackSrc="/doro_think.webp"
                   />
                 </Link>
 

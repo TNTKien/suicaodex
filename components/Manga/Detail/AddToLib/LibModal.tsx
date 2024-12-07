@@ -172,7 +172,7 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
                     radius="sm"
                     shadow="md"
                     src={`${coverURL}/${manga.id}/${manga.cover}.512.jpg`}
-                    fallbackSrc="/hanabi_holder.webp"
+                    fallbackSrc="/doro_think.webp"
                   />
                   <div className="flex flex-col gap-4 w-full">
                     <h4 className="font-bold text-2xl">{manga.title}</h4>

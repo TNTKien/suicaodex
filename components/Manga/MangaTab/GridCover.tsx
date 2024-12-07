@@ -34,7 +34,7 @@ export const GridCover = ({ manga }: GridCoverProps) => {
                 height={330}
                 src={`${siteConfig.suicaodex.apiURL}/covers/${manga.info.id}/${manga.info.cover}.512.jpg`}
                 width="100%"
-                fallbackSrc="/hanabi_holder.webp"
+                fallbackSrc="/doro_think.webp"
               />
             </Link>
 

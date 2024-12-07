@@ -26,7 +26,7 @@ const SearchResCard = ({ manga }: SearchResCardProps) => {
           height={364}
           src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.256.jpg`}
           width={256}
-          fallbackSrc="/hanabi_holder.webp"
+          fallbackSrc="/doro_think.webp"
         />
 
         <div className="flex flex-col gap-1">

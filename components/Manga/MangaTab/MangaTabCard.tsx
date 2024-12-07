@@ -32,7 +32,7 @@ const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
                 height={364}
                 width={256}
                 src={`${siteConfig.suicaodex.apiURL}/covers/${manga.info.id}/${manga.info.cover}.256.jpg`}
-                fallbackSrc="/hanabi_holder.webp"
+                fallbackSrc="/doro_think.webp"
                 fetchPriority="high"
               />
             </Link>

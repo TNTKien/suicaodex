@@ -55,7 +55,7 @@ const Board = ({ manga, cate }: BoardProps) => {
                     height={81}
                     width={64}
                     src={`${siteConfig.suicaodex.apiURL}/covers/${item.id}/${item.cover}.256.jpg`}
-                    fallbackSrc="/hanabi_holder.webp"
+                    fallbackSrc="/doro_think.webp"
                     fetchPriority="high"
                   />
 

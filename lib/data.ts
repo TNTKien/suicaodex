@@ -375,7 +375,7 @@ export async function getTopRatedMangas(): Promise<
 > {
   const { data: top } = await axiosInstance.get(`/manga?`, {
     params: {
-      limit: 7,
+      limit: 9,
       includes: ["cover_art", "author", "artist"],
       hasAvailableChapters: "true",
       availableTranslatedLanguage: ["vi"],
@@ -596,7 +596,7 @@ export async function getTopFollowed(): Promise<
 > {
   const { data: top } = await axiosInstance.get(`/manga?`, {
     params: {
-      limit: 7,
+      limit: 9,
       includes: ["cover_art", "author", "artist"],
       hasAvailableChapters: "true",
       availableTranslatedLanguage: ["vi"],

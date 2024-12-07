@@ -13,9 +13,18 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Tab,
+  Tabs,
 } from "@nextui-org/react";
 import { FC, useEffect, useState } from "react";
-import { Archive, BookOpenCheck, BookOpenText, LibraryBig } from "lucide-react";
+import {
+  Archive,
+  BookOpenCheck,
+  BookOpenText,
+  LibraryBig,
+  List,
+  MessageSquare,
+} from "lucide-react";
 import { MangaRating } from "./MangaRating";
 import MangaTags from "./MangaTags/TagsChip";
 import MangaDesc from "./MangaDesc";
@@ -32,6 +41,7 @@ import {
 } from "@/lib/data";
 import { siteConfig } from "@/config/site";
 import { ContinueReading } from "./ContinueReading";
+import NoComment from "@/components/Comment/NoComment";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -50,16 +60,15 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
     const fetchData = async () => {
       try {
         const mangaDetails = await getMangaDetails(mangaID);
-
         setInfo(mangaDetails);
+
         const chapters = await getChapters(mangaID, "vi", 1);
-
         setLists(chapters);
+
         const stats = await getMangaRating(mangaID);
-
         setRating(stats);
-        const first = await getFirstChapter(mangaID, "vi");
 
+        const first = await getFirstChapter(mangaID, "vi");
         setFirstChapter(first);
       } catch (error) {
         console.log(error);
@@ -124,7 +133,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
             width="100%"
             loading="eager"
             height={230}
-            fallbackSrc="/hanabi_holder.webp"
+            fallbackSrc="/doro_think.webp"
             //isBlurred
             // width={134}
           />
@@ -145,7 +154,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                 src={`${coverURL}/${mangaID}/${info.cover}.512.jpg`}
                 height={300}
                 width={200}
-                fallbackSrc="/hanabi_holder.webp"
+                fallbackSrc="/doro_think.webp"
               />
 
               <div className="flex flex-col items-start gap-2 z-10 top-1 text-white">
@@ -256,12 +265,48 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
             </div>
           </div>
 
-          <ChapterVolumeNew
-            finalChapter={info.finalChapter}
-            language="vi"
-            limit={100}
-            mangaID={mangaID}
-          />
+          {/* DS chương & Cmt */}
+          <div className="flex w-full flex-col">
+            <Tabs
+              aria-label="Options"
+              radius="sm"
+              fullWidth
+              classNames={{
+                tabList: "rounded-md",
+                //tab: "px-1.5 py-2",
+                cursor: "rounded-md",
+                panel: "w-full px-0 rounded-md py-2",
+              }}
+            >
+              <Tab
+                key="chapters"
+                title={
+                  <div className="flex flex-row gap-1 font-semibold items-center">
+                    <List />
+                    <span>Danh sách chương</span>
+                  </div>
+                }
+              >
+                <ChapterVolumeNew
+                  finalChapter={info.finalChapter}
+                  language="vi"
+                  limit={100}
+                  mangaID={mangaID}
+                />
+              </Tab>
+              <Tab
+                key="comments"
+                title={
+                  <div className="flex flex-row gap-1 font-semibold items-center">
+                    <MessageSquare />
+                    <span>Bình luận</span>
+                  </div>
+                }
+              >
+                <NoComment />
+              </Tab>
+            </Tabs>
+          </div>
         </div>
       </div>
     </div>
