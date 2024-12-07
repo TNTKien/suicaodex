@@ -12,6 +12,7 @@ import {
 import {
   ChevronsUp,
   ChevronUp,
+  MessageSquare,
   MoveHorizontal,
   MoveLeft,
   MoveRight,
@@ -177,6 +178,11 @@ export const ChapterNav = ({
         >
           <MoveRight />
         </Button>
+
+        {/* cmt btn */}
+        {/* <Button isIconOnly className="rounded-md" radius="sm" size="lg">
+          <MessageSquare />
+        </Button> */}
 
         {/* // back to top btn */}
         <Button
