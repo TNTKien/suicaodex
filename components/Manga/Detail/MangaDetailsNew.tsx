@@ -157,16 +157,16 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                 fallbackSrc="/doro_think.webp"
               />
 
-              <div className="flex flex-col items-start gap-2 z-10 top-1 text-white">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+              <div className="flex flex-col items-start gap-2 z-10 top-1 sm:text-white">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold drop-shadow-lg">
                   {info.title}
                 </h1>
                 {info.altTitle === info.title ? null : (
-                  <p className="text-xl font-medium text-muted-foreground">
+                  <p className="text-xl font-medium text-muted-foreground drop-shadow-lg">
                     {info.altTitle}
                   </p>
                 )}
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground drop-shadow-lg">
                   {info.author === info.artist
                     ? info.author
                     : `${info.author}, ${info.artist}`}
