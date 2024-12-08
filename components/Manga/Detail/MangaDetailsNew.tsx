@@ -45,6 +45,7 @@ import NoComment from "@/components/Comment/NoComment";
 import CommentSection from "@/components/Comment/CommentSection";
 import CommentCard from "@/components/Comment/CommentCard";
 import RandomCmts, { commentData } from "@/lib/mock-cmt";
+import CommentAlert from "@/components/Comment/CommentAlert";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -310,6 +311,8 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                   </div>
                 }
               >
+                <CommentAlert />
+
                 <CommentSection />
 
                 {mockComts.map((cmt, index) => (
@@ -325,16 +328,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                     updatedAt={cmt.updatedAt}
                   />
                 ))}
-                {/* <CommentCard
-                  user={{
-                    avatar: "/doro_think.webp",
-                    name: "Doro",
-                  }}
-                  content="lô con cặc"
-                  downvotes={1}
-                  upvotes={2}
-                  updatedAt="2024-12-06T08:59:29.115Z"
-                /> */}
+
                 {/* <NoComment /> */}
               </Tab>
             </Tabs>
