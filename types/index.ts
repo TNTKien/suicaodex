@@ -87,6 +87,7 @@ export type MangaStats = {
     max: number;
   };
   follows: number;
+  comments?: number;
 };
 
 export type ChapterVolume = {

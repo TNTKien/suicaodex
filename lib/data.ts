@@ -86,6 +86,7 @@ type MangaStats = {
     max: number;
   };
   follows: number;
+  comments?: number;
 };
 
 type Author = {
@@ -582,6 +583,9 @@ export function MangaStatsParser(data: any, id: string): MangaStats {
       max: max,
     },
     follows: data.statistics[id].follows,
+    comments: data.statistics[id].comments
+      ? data.statistics[id].comments.repliesCount
+      : 0,
   };
 }
 

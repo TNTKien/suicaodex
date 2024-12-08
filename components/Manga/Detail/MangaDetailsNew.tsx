@@ -42,6 +42,9 @@ import {
 import { siteConfig } from "@/config/site";
 import { ContinueReading } from "./ContinueReading";
 import NoComment from "@/components/Comment/NoComment";
+import CommentSection from "@/components/Comment/CommentSection";
+import CommentCard from "@/components/Comment/CommentCard";
+import RandomCmts, { commentData } from "@/lib/mock-cmt";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -55,6 +58,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
   const [firstChapter, setFirstChapter] = useState<Chapter | null>(null);
   const [fetchFailed, setFetchFailed] = useState(false);
   const coverURL = siteConfig.suicaodex.apiURL + "/covers";
+  const mockComts = RandomCmts(commentData, 7);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -300,10 +304,38 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                   <div className="flex flex-row gap-1 font-semibold items-center">
                     <MessageSquare />
                     <span>Bình luận</span>
+                    {!!rating?.comments && rating.comments !== 0 && (
+                      <span>({rating.comments})</span>
+                    )}
                   </div>
                 }
               >
-                <NoComment />
+                <CommentSection />
+
+                {mockComts.map((cmt, index) => (
+                  <CommentCard
+                    key={index}
+                    user={{
+                      avatar: cmt.user.avatar,
+                      name: cmt.user.name,
+                    }}
+                    content={cmt.content}
+                    downvotes={cmt.downvotes}
+                    upvotes={cmt.upvotes}
+                    updatedAt={cmt.updatedAt}
+                  />
+                ))}
+                {/* <CommentCard
+                  user={{
+                    avatar: "/doro_think.webp",
+                    name: "Doro",
+                  }}
+                  content="lô con cặc"
+                  downvotes={1}
+                  upvotes={2}
+                  updatedAt="2024-12-06T08:59:29.115Z"
+                /> */}
+                {/* <NoComment /> */}
               </Tab>
             </Tabs>
           </div>

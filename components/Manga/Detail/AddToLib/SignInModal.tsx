@@ -8,7 +8,6 @@ import {
 } from "@nextui-org/react";
 import { ListPlus } from "lucide-react";
 import { signIn } from "next-auth/react";
-import { ToastContainer } from "react-toastify";
 import Image from "next/image";
 
 import Guide from "@/public/guide.png";
@@ -69,7 +68,6 @@ export default function SignInModal() {
           )}
         </ModalContent>
       </Modal>
-      <ToastContainer />
     </>
   );
 }
