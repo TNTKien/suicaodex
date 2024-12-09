@@ -102,7 +102,6 @@ export const ChapterNav = ({
         <Button
           isIconOnly
           as={Link}
-          prefetch={!!prevChapter}
           className="rounded-md"
           href={prevChapter ? `/chapter/${prevChapter}` : ``}
           isDisabled={!prevChapter}
@@ -169,7 +168,6 @@ export const ChapterNav = ({
         <Button
           isIconOnly
           as={Link}
-          prefetch={!!nextChapter}
           className="rounded-md"
           href={nextChapter ? `/chapter/${nextChapter}` : ``}
           isDisabled={!nextChapter}
