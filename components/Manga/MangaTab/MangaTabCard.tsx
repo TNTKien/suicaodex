@@ -1,9 +1,8 @@
 "use client";
 import { Card, CardBody, Image } from "@nextui-org/react";
-import Link from "next/link";
-
 import { LastestManga } from "@/types";
 import { siteConfig } from "@/config/site";
+import NoPrefetchLink from "@/components/Custom/NoPrefetchLink";
 
 interface MangaTabCardProps {
   mangas: LastestManga[];
@@ -21,7 +20,7 @@ const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
           shadow="sm"
         >
           <CardBody className="flex flex-row gap-3 p-2">
-            <Link href={`/manga/${manga.info.id}`}>
+            <NoPrefetchLink href={`/manga/${manga.info.id}`}>
               <Image
                 alt={manga.info.title}
                 className="object-cover max-h-[200px] max-w-[133px] rounded-md"
@@ -35,14 +34,14 @@ const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
                 fallbackSrc="/doro_think.webp"
                 fetchPriority="high"
               />
-            </Link>
+            </NoPrefetchLink>
 
             <div className="flex flex-col gap-1">
-              <Link href={`/manga/${manga.info.id}`}>
+              <NoPrefetchLink href={`/manga/${manga.info.id}`}>
                 <h2 className="font-semibold text-2xl line-clamp-2">
                   {manga.info.title}
                 </h2>
-              </Link>
+              </NoPrefetchLink>
               <p className="text-small line-clamp-1 text-foreground/80">
                 {manga.info.author === manga.info.artist
                   ? manga.info.author
@@ -51,7 +50,7 @@ const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
 
               <div className="flex flex-col gap-2 mt-4">
                 {manga.lastestChap.map((c) => (
-                  <Link
+                  <NoPrefetchLink
                     key={c.id}
                     className="flex hover:underline"
                     href={`/chapter/${c.id}`}
@@ -65,7 +64,7 @@ const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
                         <p className="line-clamp-1 ml-1">{c.title}</p>
                       </>
                     )}
-                  </Link>
+                  </NoPrefetchLink>
                 ))}
               </div>
             </div>

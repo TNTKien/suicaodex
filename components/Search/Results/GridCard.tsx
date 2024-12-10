@@ -1,10 +1,9 @@
 "use client";
 
 import { Card, CardFooter, Image } from "@nextui-org/react";
-import Link from "next/link";
-
 import { siteConfig } from "@/config/site";
 import { Manga } from "@/types";
+import NoPrefetchLink from "@/components/Custom/NoPrefetchLink";
 
 interface GridCardProps {
   manga: Manga;
@@ -18,7 +17,7 @@ export const GridCard = ({ manga }: GridCardProps) => {
       radius="none"
       shadow="sm"
     >
-      <Link href={`/manga/${manga.id}`}>
+      <NoPrefetchLink href={`/manga/${manga.id}`}>
         <Image
           //removeWrapper
           alt={manga.title}
@@ -31,14 +30,14 @@ export const GridCard = ({ manga }: GridCardProps) => {
           width="100%"
           fallbackSrc="/doro_think.webp"
         />
-      </Link>
+      </NoPrefetchLink>
 
       <CardFooter className="absolute z-10 bottom-0 bg-gradient-to-t from-black">
-        <Link href={`/manga/${manga.id}`}>
+        <NoPrefetchLink href={`/manga/${manga.id}`}>
           <h4 className="font-bold text-lg text-white line-clamp-2">
             {manga.title}
           </h4>
-        </Link>
+        </NoPrefetchLink>
       </CardFooter>
     </Card>
   );

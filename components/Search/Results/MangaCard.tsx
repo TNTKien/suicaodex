@@ -1,13 +1,13 @@
 "use client";
 
 import { Card, CardBody, Image } from "@nextui-org/react";
-import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 import { Manga } from "@/types";
 import { siteConfig } from "@/config/site";
 import MangaTags from "@/components/Manga/Detail/MangaTags/TagsChip";
+import NoPrefetchLink from "@/components/Custom/NoPrefetchLink";
 
 interface MangaCardProps {
   manga: Manga;
@@ -17,7 +17,7 @@ export const MangaCard = ({ manga }: MangaCardProps) => {
   return (
     <Card key={manga.id} radius="sm" shadow="sm">
       <CardBody className="flex flex-row gap-3 p-1.5">
-        <Link href={`/manga/${manga.id}`}>
+        <NoPrefetchLink href={`/manga/${manga.id}`}>
           <Image
             alt={manga.title}
             className="object-cover max-h-[200px] max-w-[133px] rounded-sm"
@@ -29,11 +29,11 @@ export const MangaCard = ({ manga }: MangaCardProps) => {
             width={256}
             fallbackSrc="/doro_think.webp"
           />
-        </Link>
+        </NoPrefetchLink>
         <div className="flex flex-col gap-1">
-          <Link href={`/manga/${manga.id}`}>
+          <NoPrefetchLink href={`/manga/${manga.id}`}>
             <h4 className="font-bold text-xl line-clamp-2">{manga.title}</h4>
-          </Link>
+          </NoPrefetchLink>
 
           <p className="text-sm -mt-2">
             {manga.author === manga.artist

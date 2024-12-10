@@ -87,6 +87,7 @@ const SearchSection = () => {
                   <div className="flex items-center">
                     <Button
                       as={Link}
+                      prefetch={false}
                       className="underline"
                       color="primary"
                       href="/advanced-search"

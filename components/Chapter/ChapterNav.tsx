@@ -66,10 +66,10 @@ export const ChapterNav = ({
     ? chapterAggregate[currentVolIndex].chapters[currentChapterIndex - 1]?.id
     : chapterAggregate[currentVolIndex - 1]?.chapters.at(-1)?.id;
 
-  const vol_label =
-    chapterAggregate[currentVolIndex].vol !== "none"
-      ? `Vol. ${chapterAggregate[currentVolIndex].vol}`
-      : "No Volume";
+  // const vol_label =
+  //   chapterAggregate[currentVolIndex].vol !== "none"
+  //     ? `Vol. ${chapterAggregate[currentVolIndex].vol}`
+  //     : "No Volume";
   const chapter_label =
     chapterData.chapter !== null ? `Chương ${chapterData.chapter}` : "Oneshot";
   const scrollDirection = useScrollDirection();
@@ -102,6 +102,7 @@ export const ChapterNav = ({
         <Button
           isIconOnly
           as={Link}
+          prefetch={false}
           className="rounded-md"
           href={prevChapter ? `/chapter/${prevChapter}` : ``}
           isDisabled={!prevChapter}
@@ -168,6 +169,7 @@ export const ChapterNav = ({
         <Button
           isIconOnly
           as={Link}
+          prefetch={false}
           className="rounded-md"
           href={nextChapter ? `/chapter/${nextChapter}` : ``}
           isDisabled={!nextChapter}

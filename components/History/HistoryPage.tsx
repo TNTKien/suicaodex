@@ -19,6 +19,7 @@ import HistorySkeleton from "./HistorySkeleton";
 
 import { siteConfig } from "@/config/site";
 import { formatHistory, formatTimeToNow } from "@/lib/utils";
+import NoPrefetchLink from "../Custom/NoPrefetchLink";
 
 export const HistoryPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -88,7 +89,7 @@ export const HistoryPage = () => {
               shadow="sm"
             >
               <CardBody className="flex flex-row gap-3 p-2">
-                <Link href={`/manga/${mangaId}`}>
+                <NoPrefetchLink href={`/manga/${mangaId}`}>
                   <Image
                     alt={sorted[mangaId].mangaTitle}
                     className="object-cover max-h-[200px] max-w-[133px] rounded-md"
@@ -100,15 +101,15 @@ export const HistoryPage = () => {
                     width={256}
                     fallbackSrc="/doro_think.webp"
                   />
-                </Link>
+                </NoPrefetchLink>
 
                 <div className="grid grid-rows-3 gap-1">
                   <div className="flex flex-col gap-1 row-span-1">
-                    <Link href={`/manga/${mangaId}`}>
+                    <NoPrefetchLink href={`/manga/${mangaId}`}>
                       <h2 className="font-semibold text-2xl line-clamp-2">
                         {sorted[mangaId].mangaTitle}
                       </h2>
-                    </Link>
+                    </NoPrefetchLink>
                   </div>
                   <div className="flex flex-col gap-1 row-span-2">
                     <div className="flex gap-1 items-center">
@@ -122,25 +123,8 @@ export const HistoryPage = () => {
                         {formatTimeToNow(new Date(sorted[mangaId].updatedAt))}
                       </time>
                     </div>
-                    {/* {sorted[mangaId].updatedAt ? (
-                      <div className="flex gap-1 items-center">
-                        <Clock />
-                        <time
-                          className="font-semibold"
-                          dateTime={new Date(
-                            sorted[mangaId].updatedAt
-                          ).toDateString()}
-                        >
-                          {formatTimeToNow(new Date(sorted[mangaId].updatedAt))}
-                        </time>
-                      </div>
-                    ) : (
-                      <p className="font-semibold">Đang đọc:</p>
-                    )} */}
-                    <p className="line-clamp-3">
-                      {/* <span className="font-semibold">Đang đọc: </span> */}
-                      {readingText}
-                    </p>
+
+                    <p className="line-clamp-3">{readingText}</p>
                   </div>
                 </div>
               </CardBody>
@@ -156,6 +140,7 @@ export const HistoryPage = () => {
                 <Button
                   fullWidth
                   as={Link}
+                  prefetch={false}
                   className="rounded-md font-semibold"
                   color="danger"
                   href={`/chapter/${sorted[mangaId].chapterId}`}

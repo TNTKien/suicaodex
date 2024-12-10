@@ -1,10 +1,9 @@
 "use client";
 
 import { Card, CardFooter, Image } from "@nextui-org/react";
-import Link from "next/link";
-
 import { LastestManga } from "@/types";
 import { siteConfig } from "@/config/site";
+import NoPrefetchLink from "@/components/Custom/NoPrefetchLink";
 
 interface GridCoverProps {
   manga: LastestManga[];
@@ -21,7 +20,7 @@ export const GridCover = ({ manga }: GridCoverProps) => {
             radius="none"
             shadow="sm"
           >
-            <Link href={`/manga/${manga.info.id}`}>
+            <NoPrefetchLink href={`/manga/${manga.info.id}`}>
               <Image
                 //as={NextImage}
                 //priority={true}
@@ -36,20 +35,20 @@ export const GridCover = ({ manga }: GridCoverProps) => {
                 width="100%"
                 fallbackSrc="/doro_think.webp"
               />
-            </Link>
+            </NoPrefetchLink>
 
             <CardFooter className="absolute z-10 bottom-0 bg-gradient-to-t from-black p-2">
-              <Link
+              <NoPrefetchLink
                 className="font-semibold text-lg text-white line-clamp-2"
                 href={`/manga/${manga.info.id}`}
               >
                 {manga.info.title}
-              </Link>
+              </NoPrefetchLink>
             </CardFooter>
           </Card>
           <div className="flex flex-col gap-1 px-2">
             {manga.lastestChap.map((c) => (
-              <Link
+              <NoPrefetchLink
                 key={c.id}
                 className="flex text-sm md:text-base hover:underline"
                 href={`/chapter/${c.id}`}
@@ -63,7 +62,7 @@ export const GridCover = ({ manga }: GridCoverProps) => {
                     <p className="line-clamp-1 ml-1">{c.title}</p>
                   </>
                 )}
-              </Link>
+              </NoPrefetchLink>
             ))}
           </div>
         </div>
