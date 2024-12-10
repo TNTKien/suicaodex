@@ -9,7 +9,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "api.suicaodex.com",
+        hostname: "api2.suicaodex.com",
       },
     ],
   },
