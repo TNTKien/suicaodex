@@ -1,5 +1,6 @@
-import { auth } from "@/auth";
-import MangaTest from "@/components/TestComponents/MangaTest";
+// import { auth } from "@/auth";
+// import MangaTest from "@/components/TestComponents/MangaTest";
+import NewTest from "@/components/TestComponents/NewTest";
 
 interface pageProps {
   params: {
@@ -8,6 +9,8 @@ interface pageProps {
 }
 
 export default async function Page({ params }: pageProps) {
-  const session = await auth();
-  return <MangaTest mangaID={params.id} session={session} />;
+  //const session = await auth();
+  //return <MangaTest mangaID={params.id} session={session} />;
+
+  return <NewTest mangaID={params.id} />;
 }
