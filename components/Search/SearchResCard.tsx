@@ -24,7 +24,7 @@ const SearchResCard = ({ manga }: SearchResCardProps) => {
             wrapper: "bg-no-repeat bg-cover bg-center rounded-sm",
           }}
           height={364}
-          src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.256.jpg`}
+          src={`api/covers/${manga.id}/${manga.cover}.256.jpg`}
           width={256}
           fallbackSrc="/doro_think.webp"
         />

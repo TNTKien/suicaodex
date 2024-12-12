@@ -26,7 +26,7 @@ export const GridCard = ({ manga }: GridCardProps) => {
             wrapper: "bg-no-repeat bg-cover bg-center rounded-sm",
           }}
           height={300}
-          src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.512.jpg`}
+          src={`api/covers/${manga.id}/${manga.cover}.512.jpg`}
           width="100%"
           fallbackSrc="/doro_think.webp"
         />

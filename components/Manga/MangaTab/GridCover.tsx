@@ -31,7 +31,7 @@ export const GridCover = ({ manga }: GridCoverProps) => {
                   wrapper: "bg-no-repeat bg-cover bg-center rounded-sm",
                 }}
                 height={330}
-                src={`${siteConfig.suicaodex.apiURL}/covers/${manga.info.id}/${manga.info.cover}.512.jpg`}
+                src={`api/covers/${manga.info.id}/${manga.info.cover}.512.jpg`}
                 width="100%"
                 fallbackSrc="/doro_think.webp"
               />

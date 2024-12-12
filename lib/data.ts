@@ -458,18 +458,17 @@ export async function getChapterbyID(id: string): Promise<Chapter> {
     };
   };
 
-  //const { data: atHomeData } = await axiosInstance.get(`/at-home/server/${id}`);
-  //const base_url = siteConfig.mangadexAPI.imgURL;
-  // const base_url = atHomeData.baseUrl;
-  // const hash = atHomeData.chapter.hash;
-  // const pages = atHomeData.chapter.data.map(
-  //   (item: string) => `${base_url}/data/${hash}/${item}`
-  // );
-
-  const { data: atHomeData } = await axiosInstance.get(`/ch/${id}`);
-  const pages = atHomeData.images.map(
-    (item: string) => `${siteConfig.suicaodex.apiURL}/${item}`
+  const { data: atHomeData } = await axiosInstance.get(`/at-home/server/${id}`);
+  const base_url = atHomeData.baseUrl;
+  const hash = atHomeData.chapter.hash;
+  const pages = atHomeData.chapter.data.map(
+    (item: string) => `${base_url}/data/${hash}/${item}`
   );
+
+  // const { data: atHomeData } = await axiosInstance.get(`/ch/${id}`);
+  // const pages = atHomeData.images.map(
+  //   (item: string) => `api/${item}`
+  // );
 
   return { ...chapter, manga: manga(), pages };
 }

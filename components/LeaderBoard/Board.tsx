@@ -54,7 +54,7 @@ const Board = ({ manga, cate }: BoardProps) => {
                     loading="eager"
                     height={81}
                     width={64}
-                    src={`${siteConfig.suicaodex.apiURL}/covers/${item.id}/${item.cover}.256.jpg`}
+                    src={`api/covers/${item.id}/${item.cover}.256.jpg`}
                     fallbackSrc="/doro_think.webp"
                     fetchPriority="high"
                   />

@@ -97,7 +97,7 @@ export const HistoryPage = () => {
                       wrapper: "bg-no-repeat bg-cover bg-center rounded-md",
                     }}
                     height={364}
-                    src={`${siteConfig.suicaodex.apiURL}/covers/${mangaId}/${sorted[mangaId].cover}.256.jpg`}
+                    src={`api/covers/${mangaId}/${sorted[mangaId].cover}.256.jpg`}
                     width={256}
                     fallbackSrc="/doro_think.webp"
                   />

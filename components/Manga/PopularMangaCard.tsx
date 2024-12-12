@@ -32,7 +32,7 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
         className="z-0 object-cover w-full h-auto"
         height={324}
         radius="md"
-        src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.512.jpg`}
+        src={`api/covers/${manga.id}/${manga.cover}.512.jpg`}
         width={512}
         fetchPriority="high"
       />
@@ -55,7 +55,7 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
               height={300}
               radius="sm"
               shadow="md"
-              src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.512.jpg`}
+              src={`api/covers/${manga.id}/${manga.cover}.512.jpg`}
               width={512}
               fetchPriority="high"
             />
