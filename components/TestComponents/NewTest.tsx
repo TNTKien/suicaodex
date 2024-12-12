@@ -14,7 +14,13 @@ const NewTest = ({ mangaID }: NewTestProps) => {
   //const coverURL = siteConfig.suicaodex.apiURL + "/covers";
 
   const fetcher = async (url: string) => {
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    });
     return res.json();
   };
 
