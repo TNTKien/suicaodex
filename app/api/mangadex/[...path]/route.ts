@@ -46,6 +46,7 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
+    console.error(error);
     return new NextResponse(JSON.stringify({ error: "Error" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
