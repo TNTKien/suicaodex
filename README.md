@@ -22,9 +22,9 @@ This project uses [AuthJS](https://authjs.dev/) with Discord Provider, Prisma an
 
 ### CORS
 
-MangaDex API requires CORS, you can built your own proxy using [suicaodex-api](https://github.com/TNTKien/suicaodex-api).
+MangaDex API requires CORS, you can built your own proxy using [suicaodex-api](https://github.com/TNTKien/suicaodex-api). Please do not use my proxy, it only works on SuicaoDex.
 
-SuicaoDex also has a built-in proxy, but that may make the website overload (cause my pasta code). See `/lib/axios.ts` and `/config/site.ts` for more information.
+SuicaoDex also has a built-in proxy, but this could cause the website to overload (due to my pasta code). For more information, see `/lib/axios.ts` and `/config/site.ts`. You might need to adjust some image URLs if you decide to use this.
 
 ### Run the development server
 
