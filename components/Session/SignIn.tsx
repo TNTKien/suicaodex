@@ -118,7 +118,7 @@ export function SignIn() {
                         <p>
                           <b>Lưu ý:</b> Nếu các tài khoản bên dưới có email
                           giống nhau, SuicaoDex chỉ ghi nhận tài khoản đăng nhập
-                          đầu tiên, bạn sẽ không thể đăng nhập bằng 2 loại tài
+                          đầu tiên, bạn sẽ không thể đăng nhập bằng loại tài
                           khoản còn lại.
                         </p>
                       </CardBody>
@@ -133,7 +133,7 @@ export function SignIn() {
                       Đăng nhập bằng Gmail
                     </Button>
 
-                    <Button
+                    {/* <Button
                       color="danger"
                       onPress={() => signIn("github")}
                       startContent={<SiGithub size={20} />}
@@ -141,7 +141,7 @@ export function SignIn() {
                       className="font-semibold"
                     >
                       Đăng nhập bằng Github
-                    </Button>
+                    </Button> */}
 
                     <Button
                       color="danger"

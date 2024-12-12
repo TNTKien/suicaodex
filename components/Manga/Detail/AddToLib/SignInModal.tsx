@@ -63,7 +63,7 @@ export default function SignInModal() {
                     <p>
                       <b>Lưu ý:</b> Nếu các tài khoản bên dưới có email giống
                       nhau, SuicaoDex chỉ ghi nhận tài khoản đăng nhập đầu tiên,
-                      bạn sẽ không thể đăng nhập bằng 2 loại tài khoản còn lại.
+                      bạn sẽ không thể đăng nhập bằng loại tài khoản còn lại.
                     </p>
                   </CardBody>
                 </Card>
@@ -77,7 +77,7 @@ export default function SignInModal() {
                   Đăng nhập bằng Gmail
                 </Button>
 
-                <Button
+                {/* <Button
                   color="danger"
                   onPress={() => signIn("github")}
                   startContent={<SiGithub size={20} />}
@@ -85,7 +85,7 @@ export default function SignInModal() {
                   className="font-semibold"
                 >
                   Đăng nhập bằng Github
-                </Button>
+                </Button> */}
 
                 <Button
                   color="danger"
