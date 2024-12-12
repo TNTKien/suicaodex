@@ -79,9 +79,9 @@ export function SignIn() {
               color="primary"
               startContent={<LogIn />}
               textValue="Signin"
-              onPress={() => signIn("discord")}
+              onPress={() => signIn()}
             >
-              Đăng nhập bằng Discord
+              Đăng nhập
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
