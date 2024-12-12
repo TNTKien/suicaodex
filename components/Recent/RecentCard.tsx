@@ -23,7 +23,7 @@ export const RecentCard = ({ manga }: RecentCardProps) => {
               wrapper: "bg-no-repeat bg-cover bg-center rounded-md",
             }}
             height={364}
-            src={`api/covers/${manga.id}/${manga.cover}.256.jpg`}
+            src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.256.jpg`}
             width={256}
             fallbackSrc="/doro_think.webp"
             fetchPriority="high"
