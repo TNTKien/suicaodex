@@ -18,7 +18,7 @@ bun install
 
 ### Environment Variables
 
-This project uses [AuthJS](https://authjs.dev/) with Discord Provider, Prisma and MySQL for authentication and some features, please follow the instructions on the their websites to setup environment variables.
+This project uses [AuthJS](https://authjs.dev/) with Discord & Google Provider, Prisma and MySQL for authentication and some features, please follow the instructions on the their websites to setup environment variables.
 
 ### CORS
 
