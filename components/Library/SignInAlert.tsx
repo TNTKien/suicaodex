@@ -17,6 +17,7 @@ import { DiscordIcon } from "../icons";
 import Guide from "@/public/guide.png";
 import { LogOut, OctagonAlert, X } from "lucide-react";
 import { SiDiscord, SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
+import SignInButtons from "../Session/SignInButtons";
 
 export default function SignInAlert() {
   return (
@@ -77,35 +78,9 @@ export default function SignInAlert() {
                   </p>
                 </CardBody>
               </Card>
-              <Button
-                color="danger"
-                onPress={() => signIn("google")}
-                startContent={<SiGoogle size={20} />}
-                radius="sm"
-                className="font-semibold"
-              >
-                Đăng nhập bằng Gmail
-              </Button>
 
-              <Button
-                color="danger"
-                onPress={() => signIn("github")}
-                startContent={<SiGithub size={20} />}
-                radius="sm"
-                className="font-semibold"
-              >
-                Đăng nhập bằng Github
-              </Button>
+              <SignInButtons />
 
-              <Button
-                color="danger"
-                onPress={() => signIn("discord")}
-                startContent={<SiDiscord size={20} />}
-                radius="sm"
-                className="font-semibold"
-              >
-                Đăng nhập bằng Discord
-              </Button>
               <Button
                 onPress={onClose}
                 radius="sm"

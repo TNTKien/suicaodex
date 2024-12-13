@@ -38,7 +38,9 @@ export function UserNav() {
           textValue="Profile"
         >
           <p className="font-semibold">{session.user?.name}</p>
-          <p className="font-light text-sm">{session.user?.email}</p>
+          {!!session.user?.email && (
+            <p className="text-small">{session.user?.email}</p>
+          )}
         </DropdownItem>
         <DropdownItem
           key="mato"

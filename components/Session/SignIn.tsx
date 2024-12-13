@@ -19,7 +19,13 @@ import {
 } from "@nextui-org/react";
 import { UserNav } from "./UserNav";
 import { siteConfig } from "@/config/site";
-import { SiDiscord, SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
+import {
+  SiDiscord,
+  SiFacebook,
+  SiGithub,
+  SiGoogle,
+} from "@icons-pack/react-simple-icons";
+import SignInButtons from "./SignInButtons";
 
 export function SignIn() {
   const { data: session } = useSession();
@@ -123,35 +129,8 @@ export function SignIn() {
                         </p>
                       </CardBody>
                     </Card>
-                    <Button
-                      color="danger"
-                      onPress={() => signIn("google")}
-                      startContent={<SiGoogle size={20} />}
-                      radius="sm"
-                      className="font-semibold"
-                    >
-                      Đăng nhập bằng Gmail
-                    </Button>
 
-                    <Button
-                      color="danger"
-                      onPress={() => signIn("github")}
-                      startContent={<SiGithub size={20} />}
-                      radius="sm"
-                      className="font-semibold"
-                    >
-                      Đăng nhập bằng Github
-                    </Button>
-
-                    <Button
-                      color="danger"
-                      onPress={() => signIn("discord")}
-                      startContent={<SiDiscord size={20} />}
-                      radius="sm"
-                      className="font-semibold"
-                    >
-                      Đăng nhập bằng Discord
-                    </Button>
+                    <SignInButtons />
                   </ModalBody>
                 </>
               )}
