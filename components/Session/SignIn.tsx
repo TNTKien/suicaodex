@@ -26,6 +26,7 @@ import {
   SiGoogle,
 } from "@icons-pack/react-simple-icons";
 import SignInButtons from "./SignInButtons";
+import SignInMessage from "./SignInMessage";
 
 export function SignIn() {
   const { data: session } = useSession();
@@ -115,21 +116,7 @@ export function SignIn() {
                     Lưu ý: Nếu các tài khoản bên dưới có chung email,
                   </ModalHeader> */}
                   <ModalBody className="flex flex-col gap-2 p-0">
-                    <Card
-                      shadow="none"
-                      radius="sm"
-                      className="flex flex-col gap-1 bg-danger-50 dark:bg-danger-50/50"
-                    >
-                      <CardBody className="p-2 text-danger-600 dark:text-danger-500">
-                        <p>
-                          <b>Lưu ý:</b> Nếu các tài khoản bên dưới có email
-                          giống nhau, SuicaoDex chỉ ghi nhận tài khoản đăng nhập
-                          đầu tiên, bạn sẽ không thể đăng nhập bằng loại tài
-                          khoản còn lại.
-                        </p>
-                      </CardBody>
-                    </Card>
-
+                    <SignInMessage />
                     <SignInButtons />
                   </ModalBody>
                 </>

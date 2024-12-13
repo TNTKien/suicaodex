@@ -12,6 +12,7 @@ import { ListPlus, OctagonAlert } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { SiDiscord, SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
 import SignInButtons from "@/components/Session/SignInButtons";
+import SignInMessage from "@/components/Session/SignInMessage";
 
 export default function SignInModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -55,19 +56,7 @@ export default function SignInModal() {
                     <b>Đăng nhập để sử dụng chức này nha!</b>
                   </CardBody>
                 </Card>
-                <Card
-                  shadow="none"
-                  radius="sm"
-                  className="flex flex-col gap-1 bg-danger-50 dark:bg-danger-50/50"
-                >
-                  <CardBody className="p-2 text-danger-600 dark:text-danger-500">
-                    <p>
-                      <b>Lưu ý:</b> Nếu các tài khoản bên dưới có email giống
-                      nhau, SuicaoDex chỉ ghi nhận tài khoản đăng nhập đầu tiên,
-                      bạn sẽ không thể đăng nhập bằng loại tài khoản còn lại.
-                    </p>
-                  </CardBody>
-                </Card>
+                <SignInMessage />
                 <SignInButtons />
               </ModalBody>
             </>

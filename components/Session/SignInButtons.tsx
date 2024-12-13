@@ -13,11 +13,12 @@ export default function SignInButtons() {
   return (
     <div className="grid grid-cols-2 gap-2">
       <Button
-        onPress={() => signIn("facebook")}
+        //onPress={() => signIn("facebook")}
         startContent={<SiFacebook size={20} />}
         radius="sm"
         className="font-semibold text-white"
         color="primary"
+        isDisabled
       >
         Facebook
       </Button>
