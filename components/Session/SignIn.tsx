@@ -133,7 +133,7 @@ export function SignIn() {
                       Đăng nhập bằng Gmail
                     </Button>
 
-                    {/* <Button
+                    <Button
                       color="danger"
                       onPress={() => signIn("github")}
                       startContent={<SiGithub size={20} />}
@@ -141,7 +141,7 @@ export function SignIn() {
                       className="font-semibold"
                     >
                       Đăng nhập bằng Github
-                    </Button> */}
+                    </Button>
 
                     <Button
                       color="danger"

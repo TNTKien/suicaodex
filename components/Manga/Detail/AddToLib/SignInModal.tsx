@@ -77,7 +77,7 @@ export default function SignInModal() {
                   Đăng nhập bằng Gmail
                 </Button>
 
-                {/* <Button
+                <Button
                   color="danger"
                   onPress={() => signIn("github")}
                   startContent={<SiGithub size={20} />}
@@ -85,7 +85,7 @@ export default function SignInModal() {
                   className="font-semibold"
                 >
                   Đăng nhập bằng Github
-                </Button> */}
+                </Button>
 
                 <Button
                   color="danger"
