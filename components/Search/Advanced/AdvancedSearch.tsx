@@ -21,7 +21,7 @@ interface AdvancedSearchProps {
 export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
   const [selectedContentLimits, setSelectedContentLimits] = useState<string[]>(
-    [],
+    []
   );
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
   const [selectedFor, setSelectedFor] = useState<string[]>([]);
@@ -72,7 +72,7 @@ export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
           color="secondary"
           radius="sm"
           variant="solid"
-          onClick={toggleFilters}
+          onPress={toggleFilters}
         >
           {showFilters ? <EyeOff /> : <Eye />}
         </Button>
@@ -123,7 +123,7 @@ export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
           radius="sm"
           startContent={<Search />}
           variant="solid"
-          onClick={handleSearch}
+          onPress={handleSearch}
         >
           Tìm kiếm
         </Button>

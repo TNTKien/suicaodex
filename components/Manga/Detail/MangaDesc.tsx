@@ -1,3 +1,5 @@
+import { Button } from "@nextui-org/button";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -14,7 +16,7 @@ const MangaDesc = ({ desc }: MangaDescProps) => {
   const displayLines = showMore ? lines : lines.slice(0, maxLines);
 
   return (
-    <div className="mb-4">
+    <div>
       <ReactMarkdown
         className="text-sm"
         components={{
@@ -29,12 +31,17 @@ const MangaDesc = ({ desc }: MangaDescProps) => {
         {displayLines.join("\n")}
       </ReactMarkdown>
       {lines.length > maxLines && (
-        <button
-          className="text-sm text-[#f31260] cursor-pointer"
-          onClick={() => setShowMore(!showMore)}
+        <Button
+          className="text-sm text-danger cursor-pointer bg-transparent px-0 gap-0.5"
+          onPress={() => setShowMore(!showMore)}
+          startContent={
+            showMore ? <ChevronUp size={20} /> : <ChevronDown size={20} />
+          }
+          disableAnimation
+          size="sm"
         >
-          {showMore ? "Thu gọn" : " Xem thêm..."}
-        </button>
+          {showMore ? "Thu gọn" : "Xem thêm..."}
+        </Button>
       )}
     </div>
   );

@@ -4,13 +4,14 @@ import { Chip } from "@nextui-org/react";
 import { useState, useEffect } from "react";
 
 import { TagsGroup } from "@/types";
+import { CircleCheck, CircleX, Plus } from "lucide-react";
 
 interface TagsGroupSectionProps {
   tagsGroup: TagsGroup;
   reset: boolean;
   tagStates: Record<string, "normal" | "include" | "exclude">;
   onTagStateChange: (
-    newTagStates: Record<string, "normal" | "include" | "exclude">,
+    newTagStates: Record<string, "normal" | "include" | "exclude">
   ) => void;
 }
 
@@ -75,7 +76,16 @@ export const TagsGroupSection = ({
             radius="sm"
             size="sm"
             variant={localTagStates[tag.id] === "normal" ? "flat" : "bordered"}
-            onClick={() => handleTagClick(tag.id)}
+            endContent={
+              localTagStates[tag.id] === "include" ? (
+                <CircleCheck size={16} />
+              ) : localTagStates[tag.id] === "exclude" ? (
+                <CircleX size={16} />
+              ) : (
+                <Plus size={16} />
+              )
+            }
+            onClose={() => handleTagClick(tag.id)}
           >
             {tag.name}
           </Chip>

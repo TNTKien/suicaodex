@@ -30,23 +30,25 @@ export default function Guide() {
       </Button>
       <Modal
         hideCloseButton
-        className="max-w-full"
+        //className="max-w-full"
         isOpen={isOpen}
         radius="sm"
+        placement="center"
         onOpenChange={onOpenChange}
       >
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 px-4">
                 Hướng dẫn
               </ModalHeader>
-              <ModalBody>
-                <Accordion>
+              <ModalBody className="p-2">
+                <Accordion isCompact>
                   <AccordionItem
                     key="1"
                     aria-label="Accordion 1"
                     title="Thể loại"
+                    subtitle="Mặc định: Tất cả"
                   >
                     <p>
                       Click 1 lần để thêm{" "}
@@ -66,39 +68,37 @@ export default function Guide() {
                     key="2"
                     aria-label="Accordion 2"
                     title="Giới hạn nội dung"
+                    subtitle="Mặc định: Safe → Erotica"
                   >
-                    <p>
-                      4 Mức{" "}
-                      <span className="text-danger">&quot;sếch&quot;</span> của
-                      truyện:{" "}
-                      <span className="text-success">&quot;0 (Safe)&quot;</span>
-                      {" - "}
-                      <span className="text-warning">
-                        &quot;Hơi hơi (Suggestive)&quot;
-                      </span>
-                      {" - "}
-                      <span className="text-red-400">
-                        &quot;Suýt nổ (Erotica)&quot;
-                      </span>
-                      {" - "}
-                      <span className="text-red-600">
-                        &quot;Bùng lổ (Pornographic)&quot;
-                      </span>
-                    </p>
-                    <p>Mặc định: Safe → Erotica</p>
+                    <ol>
+                      <li>
+                        <span className="text-success">Safe</span> - Không
+                      </li>
+                      <li>
+                        <span className="text-warning">Suggestive</span> - Hơi
+                        sếch
+                      </li>
+                      <li>
+                        <span className="text-red-400">Erotica</span> - Suýt nổ
+                      </li>
+                      <li>
+                        <span className="text-red-600">Pornographic</span> -
+                        Bùng lổ
+                      </li>
+                    </ol>
                   </AccordionItem>
                   <AccordionItem
                     key="3"
                     aria-label="Accordion 3"
                     title="Tình trạng & Dành cho"
+                    subtitle="Mặc địch: Tất cả"
                   >
-                    <p>Mấy cái này thì cứ bấm vào tự khắc hiểu</p>
-                    <p>Mặc địch: Tất cả</p>
+                    Mấy cái này thì cứ bấm vào tự khắc hiểu
                   </AccordionItem>
                 </Accordion>
               </ModalBody>
-              <ModalFooter>
-                <Button color="primary" radius="sm" onPress={onClose}>
+              <ModalFooter className="p-2">
+                <Button color="danger" radius="sm" size="sm" onPress={onClose}>
                   Đã hiểu
                 </Button>
               </ModalFooter>
