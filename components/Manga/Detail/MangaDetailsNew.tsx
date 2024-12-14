@@ -320,7 +320,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                       id="comments"
                       repo="TNTKien/suicaodex"
                       repoId={process.env.REPO_ID as string}
-                      category="General"
+                      category="Manga"
                       categoryId={process.env.CATEGORY_ID as string}
                       mapping="title"
                       reactionsEnabled="0"
