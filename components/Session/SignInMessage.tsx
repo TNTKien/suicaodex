@@ -20,7 +20,7 @@ export default function SignInMessage() {
         </CardBody>
       </Card>
 
-      <Card
+      {/* <Card
         shadow="none"
         radius="sm"
         className="flex flex-col gap-1 bg-danger-50 dark:bg-danger-50/50"
@@ -29,7 +29,7 @@ export default function SignInMessage() {
           <OctagonAlert />
           <p>Tạm chưa thể đăng nhập bằng Facebook!</p>
         </CardBody>
-      </Card>
+      </Card> */}
     </>
   );
 }
