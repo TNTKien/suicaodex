@@ -14,6 +14,7 @@ export default function CommentAlert() {
       shadow="sm"
       radius="sm"
       className="mb-2 bg-danger-50 dark:bg-danger-50/50"
+      fullWidth
     >
       <CardBody className="flex flex-row gap-2 p-2 items-center justify-between">
         <div className="flex flex-row gap-1 items-center">

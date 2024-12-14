@@ -25,7 +25,7 @@ export const CommentCard = ({
   downvotes,
 }: CommentCardProps) => {
   return (
-    <Card shadow="sm" radius="sm" className="mt-2">
+    <Card shadow="sm" radius="sm" className="mt-2" fullWidth>
       <CardBody className="flex flex-row gap-2 p-2">
         <Avatar
           //className="basis-10"

@@ -24,7 +24,7 @@ export default function CommentSection() {
   const { data: session } = useSession();
 
   return (
-    <Card shadow="sm" radius="sm">
+    <Card shadow="sm" radius="sm" fullWidth>
       <CardBody className="p-2">
         <Textarea
           placeholder="Viết bình luận..."

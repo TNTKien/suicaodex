@@ -280,7 +280,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                 tabList: "rounded-md",
                 //tab: "px-1.5 py-2",
                 cursor: "rounded-md",
-                panel: "w-full px-0 rounded-md py-2",
+                panel: "px-0 rounded-md py-2",
               }}
             >
               <Tab
