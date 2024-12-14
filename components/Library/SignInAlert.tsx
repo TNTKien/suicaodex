@@ -7,16 +7,8 @@ import {
   Modal,
   ModalBody,
   ModalContent,
-  useDisclosure,
 } from "@nextui-org/react";
-import { signIn } from "next-auth/react";
-import Image from "next/image";
-
-import { DiscordIcon } from "../icons";
-
-import Guide from "@/public/guide.png";
-import { LogOut, OctagonAlert, X } from "lucide-react";
-import { SiDiscord, SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
+import { OctagonAlert, X } from "lucide-react";
 import SignInButtons from "../Session/SignInButtons";
 import SignInMessage from "../Session/SignInMessage";
 

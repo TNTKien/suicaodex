@@ -13,9 +13,7 @@ import {
 import { AlertTriangle, ListTree, ListX } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
 import { ChapterCard } from "./ChapterCard";
-
 import NotFoundImg from "@/public/404.png";
 import { Volume } from "@/types";
 import { getChapterVolume, groupChaptersByVolume } from "@/lib/data";
@@ -49,7 +47,7 @@ export const ChapterVolumeNew = ({
           mangaID,
           language,
           limit,
-          offset,
+          offset
         );
         const volumes = groupChaptersByVolume(chapters);
 

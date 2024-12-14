@@ -1,6 +1,5 @@
 import { Accordion, AccordionItem, Progress } from "@nextui-org/react";
 import { Bookmark, Star } from "lucide-react";
-
 import { MangaStats } from "@/types";
 
 interface MangaRatingProps {

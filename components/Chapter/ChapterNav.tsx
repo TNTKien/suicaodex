@@ -12,17 +12,14 @@ import {
 import {
   ChevronsUp,
   ChevronUp,
-  MessageSquare,
   MoveHorizontal,
   MoveLeft,
   MoveRight,
   MoveVertical,
 } from "lucide-react";
 import { twMerge } from "tailwind-merge";
-
 import { useScrollDirection } from "../hook/useScrollDirection";
 import useScrollOffset from "../hook/useScrollOffset";
-
 import { Chapter, ChapterAggregate } from "@/types";
 
 interface ChapterNavProps {

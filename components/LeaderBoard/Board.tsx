@@ -1,11 +1,9 @@
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
-import PopularMangaCard from "../Manga/PopularMangaCard";
-
 import { Manga } from "@/types";
 import { Card, CardBody, Image } from "@nextui-org/react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { Bookmark, Star, ThumbsUp } from "lucide-react";
+import { Bookmark, Star } from "lucide-react";
 
 interface BoardProps {
   manga: (Manga & { follow?: number; rating?: number })[];

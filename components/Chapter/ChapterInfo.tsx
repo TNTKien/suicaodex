@@ -1,6 +1,5 @@
 import { Link } from "@nextui-org/link";
 import { Users } from "lucide-react";
-
 import { Chapter } from "@/types";
 
 interface ChapterInfoProps {

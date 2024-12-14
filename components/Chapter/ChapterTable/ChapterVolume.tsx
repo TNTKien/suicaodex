@@ -10,9 +10,7 @@ import {
 } from "@nextui-org/react";
 import { ListTree, ListX } from "lucide-react";
 import Image from "next/image";
-
 import { ChapterCard } from "./ChapterCard";
-
 import NotFoundImg from "@/public/404.png";
 import { Volume } from "@/types";
 

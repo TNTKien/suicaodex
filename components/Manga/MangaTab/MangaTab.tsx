@@ -3,11 +3,9 @@
 import { FC, useEffect, useState } from "react";
 import { ChevronsRight, LayoutGrid, StretchHorizontal } from "lucide-react";
 import { Divider, Tab, Tabs } from "@nextui-org/react";
-
 import { GridCover } from "./GridCover";
 import MangaTabCard from "./MangaTabCard";
 import TabSkeleton from "./TabSkeleton";
-
 import { LastestManga } from "@/types";
 import { getLastestMangas } from "@/lib/data";
 

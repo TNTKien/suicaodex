@@ -4,6 +4,7 @@ import {
   Button,
   ButtonGroup,
   Card,
+  CardBody,
   CardFooter,
   CardHeader,
   Image,
@@ -41,11 +42,13 @@ import {
 } from "@/lib/data";
 import { siteConfig } from "@/config/site";
 import { ContinueReading } from "./ContinueReading";
-import NoComment from "@/components/Comment/NoComment";
-import CommentSection from "@/components/Comment/CommentSection";
-import CommentCard from "@/components/Comment/CommentCard";
-import RandomCmts, { commentData } from "@/lib/mock-cmt";
-import CommentAlert from "@/components/Comment/CommentAlert";
+// import NoComment from "@/components/Comment/NoComment";
+// import CommentSection from "@/components/Comment/CommentSection";
+// import CommentCard from "@/components/Comment/CommentCard";
+// import RandomCmts, { commentData } from "@/lib/mock-cmt";
+// import CommentAlert from "@/components/Comment/CommentAlert";
+import Giscus from "@giscus/react";
+import { useTheme } from "next-themes";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -59,7 +62,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
   const [firstChapter, setFirstChapter] = useState<Chapter | null>(null);
   const [fetchFailed, setFetchFailed] = useState(false);
   const coverURL = siteConfig.suicaodex.apiURL + "/covers";
-  const mockComts = RandomCmts(commentData, 7);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -277,9 +280,9 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
               radius="sm"
               fullWidth
               classNames={{
-                tabList: "rounded-md",
+                tabList: "rounded-lg",
                 //tab: "px-1.5 py-2",
-                cursor: "rounded-md",
+                cursor: "rounded-lg",
                 panel: "px-0 rounded-md py-2",
               }}
             >
@@ -305,13 +308,32 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                   <div className="flex flex-row gap-1 font-semibold items-center">
                     <MessageSquare />
                     <span>Bình luận</span>
-                    {!!rating?.comments && rating.comments !== 0 && (
+                    {/* {!!rating?.comments && rating.comments !== 0 && (
                       <span>({rating.comments})</span>
-                    )}
+                    )} */}
                   </div>
                 }
               >
-                <CommentAlert />
+                <Card shadow="sm" radius="sm" fullWidth>
+                  <CardBody className="p-2">
+                    <Giscus
+                      id="comments"
+                      repo="TNTKien/suicaodex"
+                      repoId={process.env.REPO_ID as string}
+                      category="General"
+                      categoryId={process.env.CATEGORY_ID as string}
+                      mapping="title"
+                      reactionsEnabled="0"
+                      emitMetadata="0"
+                      inputPosition="top"
+                      theme={theme}
+                      lang="vi"
+                      loading="lazy"
+                    />
+                  </CardBody>
+                </Card>
+
+                {/* <CommentAlert />
 
                 <CommentSection />
 
@@ -327,7 +349,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                     upvotes={cmt.upvotes}
                     updatedAt={cmt.updatedAt}
                   />
-                ))}
+                ))} */}
 
                 {/* <NoComment /> */}
               </Tab>

@@ -10,12 +10,9 @@ import {
 } from "@nextui-org/react";
 import { Album, BookmarkCheck, ListCheck, NotebookPen } from "lucide-react";
 import { useEffect, useState } from "react";
-
 import { MangaCard } from "../Search/Results/MangaCard";
-
 import SignInAlert from "./SignInAlert";
 import NoTitle from "./NoTitle";
-
 import { getUserLibrary } from "@/lib/db";
 import { getMangaByIDs } from "@/lib/data";
 import { Manga } from "@/types";
