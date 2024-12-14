@@ -8,7 +8,7 @@ import {
 } from "@icons-pack/react-simple-icons";
 import { Button } from "@nextui-org/button";
 import { Tooltip } from "@nextui-org/react";
-import { CircleAlert, OctagonAlert, TriangleAlert } from "lucide-react";
+import { CircleAlert } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 

@@ -21,9 +21,9 @@ export const GridCard = ({ manga }: GridCardProps) => {
         <Image
           //removeWrapper
           alt={manga.title}
-          className="z-0 object-cover w-full h-auto rounded-sm dark:rounded-b-none"
+          className="z-0 object-cover w-full h-auto rounded-md dark:rounded-b-none"
           classNames={{
-            wrapper: "bg-no-repeat bg-cover bg-center rounded-sm",
+            wrapper: "bg-no-repeat bg-cover bg-center rounded-md",
           }}
           height={300}
           src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.512.jpg`}

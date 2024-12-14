@@ -28,7 +28,7 @@ export const GridCover = ({ manga }: GridCoverProps) => {
                 alt={manga.info.title}
                 className="z-0 object-cover w-full h-auto rounded-md dark:rounded-b-none"
                 classNames={{
-                  wrapper: "bg-no-repeat bg-cover bg-center rounded-sm",
+                  wrapper: "bg-no-repeat bg-cover bg-center rounded-md",
                 }}
                 height={330}
                 src={`${siteConfig.suicaodex.apiURL}/covers/${manga.info.id}/${manga.info.cover}.512.jpg`}

@@ -4,9 +4,6 @@ import { signIn, useSession } from "next-auth/react";
 import { Bug, History, Link2, LogIn, Mail, ScanSearch } from "lucide-react";
 import {
   Avatar,
-  Button,
-  Card,
-  CardBody,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -19,12 +16,6 @@ import {
 } from "@nextui-org/react";
 import { UserNav } from "./UserNav";
 import { siteConfig } from "@/config/site";
-import {
-  SiDiscord,
-  SiFacebook,
-  SiGithub,
-  SiGoogle,
-} from "@icons-pack/react-simple-icons";
 import SignInButtons from "./SignInButtons";
 import SignInMessage from "./SignInMessage";
 

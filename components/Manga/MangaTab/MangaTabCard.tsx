@@ -19,7 +19,7 @@ const MangaTabCard = ({ mangas }: MangaTabCardProps) => {
           radius="none"
           shadow="sm"
         >
-          <CardBody className="flex flex-row gap-3 p-2">
+          <CardBody className="flex flex-row gap-3 p-1.5">
             <NoPrefetchLink href={`/manga/${manga.info.id}`}>
               <Image
                 alt={manga.info.title}

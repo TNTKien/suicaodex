@@ -51,7 +51,7 @@ const MangaDesc = ({ desc }: MangaDescProps) => {
     >
       <AccordionItem
         key="1"
-        aria-label="Accordion 1"
+        aria-label="Manga Description"
         title={
           !!Array.from(selectedKeys)[0] ? null : (
             <ReactMarkdown

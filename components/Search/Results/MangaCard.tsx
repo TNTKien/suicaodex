@@ -20,9 +20,9 @@ export const MangaCard = ({ manga }: MangaCardProps) => {
         <NoPrefetchLink href={`/manga/${manga.id}`}>
           <Image
             alt={manga.title}
-            className="object-cover max-h-[200px] max-w-[133px] rounded-sm"
+            className="object-cover max-h-[200px] max-w-[133px] rounded-md"
             classNames={{
-              wrapper: "bg-no-repeat bg-cover bg-center rounded-sm",
+              wrapper: "bg-no-repeat bg-cover bg-center rounded-md",
             }}
             height={364}
             src={`${siteConfig.suicaodex.apiURL}/covers/${manga.id}/${manga.cover}.256.jpg`}

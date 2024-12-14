@@ -55,6 +55,12 @@ export const Navbar = () => {
       href: siteConfig.links.discord,
       icon: DiscordIcon,
     },
+    {
+      key: "github",
+      label: "Github",
+      href: siteConfig.links.github,
+      icon: GithubIcon,
+    },
   ];
   const { theme } = useTheme();
 

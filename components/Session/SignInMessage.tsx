@@ -1,7 +1,6 @@
 "use client";
 
 import { Card, CardBody } from "@nextui-org/react";
-import { OctagonAlert } from "lucide-react";
 
 export default function SignInMessage() {
   return (
@@ -19,17 +18,6 @@ export default function SignInMessage() {
           </p>
         </CardBody>
       </Card>
-
-      {/* <Card
-        shadow="none"
-        radius="sm"
-        className="flex flex-col gap-1 bg-danger-50 dark:bg-danger-50/50"
-      >
-        <CardBody className="flex flex-row items-center gap-1 p-2 text-danger-600 dark:text-danger-500">
-          <OctagonAlert />
-          <p>Tạm chưa thể đăng nhập bằng Facebook!</p>
-        </CardBody>
-      </Card> */}
     </>
   );
 }
