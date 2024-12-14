@@ -319,9 +319,9 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                     <Giscus
                       id="comments"
                       repo="TNTKien/suicaodex"
-                      repoId={process.env.REPO_ID as string}
+                      repoId="R_kgDOM8XBHw"
                       category="Manga"
-                      categoryId={process.env.CATEGORY_ID as string}
+                      categoryId="DIC_kwDOM8XBH84ClOmP"
                       mapping="title"
                       reactionsEnabled="0"
                       emitMetadata="0"

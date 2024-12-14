@@ -9,8 +9,8 @@ import { ChapterInfo } from "./ChapterInfo";
 import { LongStrip } from "./Reader/LongStrip";
 import { Chapter, ChapterAggregate } from "@/types";
 import { getChapterAggregate, getChapterbyID, getCoverArt } from "@/lib/data";
-//import Giscus from "@giscus/react";
-//import { useTheme } from "next-themes";
+// import Giscus from "@giscus/react";
+// import { useTheme } from "next-themes";
 
 interface ChapterViewProps {
   chapterID: string;
@@ -25,7 +25,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
   const [fitMode, setFitMode] = useState<"width" | "height">("width");
   const [currentPage, setCurrentPage] = useState(0);
   const [cover, setCover] = useState<string | null>(null);
-  //const { theme } = useTheme();
+  // const { theme } = useTheme();
 
   const toggleFitMode = () => {
     setFitMode((prevMode) => {
@@ -113,13 +113,14 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
       )}
 
       {/* <Card shadow="sm" radius="sm" fullWidth>
+        <CardHeader>Bình luận</CardHeader>
         <CardBody className="p-2">
           <Giscus
             id="comments"
             repo="TNTKien/suicaodex"
-            repoId={process.env.REPO_ID as string}
-            category="General"
-            categoryId={process.env.CATEGORY_ID as string}
+            repoId="R_kgDOM8XBHw"
+            category="Chapter"
+            categoryId="DIC_kwDOM8XBH84ClOne"
             mapping="title"
             reactionsEnabled="0"
             emitMetadata="0"
