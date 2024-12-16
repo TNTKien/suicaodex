@@ -11,16 +11,13 @@ import {
   Checkbox,
   Listbox,
   ListboxItem,
-  Link,
 } from "@nextui-org/react";
 import { useState } from "react";
-
-import { SearchIcon } from "../icons";
-
 import SearchResCard from "./SearchResCard";
-
 import { Manga } from "@/types";
 import { SearchManga } from "@/lib/data";
+import { Search } from "lucide-react";
+import Link from "next/link";
 
 const SearchMobile = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -43,22 +40,20 @@ const SearchMobile = () => {
   return (
     <>
       <Button
-        className="bg-default-200 text-foreground-500 justify-start w-full"
-        startContent={
-          <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-        }
+        className="bg-transparent"
+        disableAnimation
         onPress={onOpen}
+        isIconOnly
       >
-        Tìm kiếm...
+        <Search size={22} color="gray" />
       </Button>
 
       <Modal
         backdrop="blur"
-        className="max-w-full max-h-[95%] w-full"
         isOpen={isOpen}
         placement="top"
+        radius="sm"
         scrollBehavior="inside"
-        size="5xl"
         onOpenChange={onOpenChange}
       >
         <ModalContent>
@@ -121,6 +116,7 @@ const SearchMobile = () => {
                         className="hover:rounded-xl"
                         href={`/manga/${item.id}`}
                         textValue="Manga"
+                        onPress={onClose}
                       >
                         <SearchResCard manga={item} />
                       </ListboxItem>

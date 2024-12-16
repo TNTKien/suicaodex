@@ -14,12 +14,9 @@ import NextLink from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
-import { Link2, ScanSearch } from "lucide-react";
-
 import SearchMobile from "./Search/SearchMobile";
 import SearchSection from "./Search/SearchSection";
 import { SignIn } from "./Session/SignIn";
-
 import SuicaoDexDark from "@/public/SuicaoDex-Dark.png";
 import { DiscordIcon, FacebookIcon, GithubIcon } from "@/components/icons";
 import { ThemeSwitch } from "@/components/theme-switch";
@@ -27,22 +24,16 @@ import { siteConfig } from "@/config/site";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "next-themes";
+import { ArrowLeftRight } from "lucide-react";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  const onChange = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
   const items = [
-    {
-      key: "advanced-search",
-      label: "Tìm kiếm nâng cao",
-      href: "/advanced-search",
-      icon: ScanSearch,
-    },
-    {
-      key: "matoseihei",
-      label: "Mato Seihei no Slave",
-      href: `/manga/${siteConfig.mato.id}`,
-      icon: Link2,
-    },
     {
       key: "facebook",
       label: "Facebook",
@@ -61,8 +52,14 @@ export const Navbar = () => {
       href: siteConfig.links.github,
       icon: GithubIcon,
     },
+    {
+      key: "theme",
+      label: theme === "light" ? "Dark mode" : "Light mode",
+      href: "",
+      icon: ArrowLeftRight,
+      press: onChange,
+    },
   ];
-  const { theme } = useTheme();
 
   return (
     <>
@@ -126,13 +123,13 @@ export const Navbar = () => {
         </NavbarContent>
 
         <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-          <ThemeSwitch />
+          {/* <ThemeSwitch /> */}
+          <SearchMobile />
           <SignIn />
         </NavbarContent>
 
         <NavbarMenu>
           <NavbarMenuItem>
-            <SearchMobile />
             <Listbox aria-label="Find me" items={items}>
               {(item) => (
                 <ListboxItem
@@ -142,6 +139,7 @@ export const Navbar = () => {
                   startContent={
                     <item.icon className="w-6 h-6 text-default-500" />
                   }
+                  onPress={item.press ? item.press : undefined}
                 >
                   {item.label}
                 </ListboxItem>

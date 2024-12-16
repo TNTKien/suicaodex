@@ -8,7 +8,6 @@ import {
   CardFooter,
   CardHeader,
   Image,
-  Link,
   Modal,
   ModalBody,
   ModalContent,
@@ -49,6 +48,7 @@ import { ContinueReading } from "./ContinueReading";
 // import CommentAlert from "@/components/Comment/CommentAlert";
 import Giscus from "@giscus/react";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -220,7 +220,8 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                         ? lists[0]?.externalUrl
                         : `/chapter/${lists[0]?.id}`
                     }
-                    isExternal={lists[0]?.externalUrl ? true : false}
+                    //isExternal={lists[0]?.externalUrl ? true : false}
+                    target={lists[0]?.externalUrl ? "_blank" : "_self"}
                     startContent={<BookOpenCheck />}
                   >
                     Đọc mới nhất
@@ -233,7 +234,8 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                         ? firstChapter?.externalUrl
                         : `/chapter/${firstChapter?.id}`
                     }
-                    isExternal={firstChapter?.externalUrl ? true : false}
+                    //isExternal={firstChapter?.externalUrl ? true : false}
+                    target={firstChapter?.externalUrl ? "_blank" : "_self"}
                     startContent={<BookOpenText />}
                   >
                     Đọc từ đầu
@@ -250,9 +252,10 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                 <Button
                   as={Link}
                   className="font-semibold"
-                  href={`${siteConfig.mangadexAPI.webURL}/title/${mangaID}`}
-                  isExternal={true}
                   startContent={<Archive />}
+                  href={`${siteConfig.mangadexAPI.webURL}/title/${mangaID}`}
+                  target="_blank"
+                  //isExternal={true}
                 >
                   MangaDex
                 </Button>
@@ -261,8 +264,9 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                     as={Link}
                     className="font-semibold"
                     href={info.raw}
-                    isExternal={true}
                     startContent={<LibraryBig />}
+                    target="_blank"
+                    //isExternal={true}
                   >
                     Raw
                   </Button>

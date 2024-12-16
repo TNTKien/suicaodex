@@ -14,11 +14,8 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 import Link from "next/link";
-
 import { SearchIcon } from "../icons";
-
 import SearchResCard from "./SearchResCard";
-
 import { Manga } from "@/types";
 import { SearchManga } from "@/lib/data";
 
@@ -124,6 +121,7 @@ const SearchSection = () => {
                         className="hover:rounded-xl"
                         href={`/manga/${item.id}`}
                         textValue="Manga"
+                        onPress={onClose}
                       >
                         <SearchResCard manga={item} />
                       </ListboxItem>
