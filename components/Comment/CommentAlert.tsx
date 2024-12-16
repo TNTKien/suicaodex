@@ -1,54 +1,38 @@
 "use client";
 
-import { Button, Card, CardBody } from "@nextui-org/react";
-import { OctagonAlert } from "lucide-react";
+import { Alert, Button, Card, CardBody } from "@nextui-org/react";
+import { OctagonAlert, X } from "lucide-react";
 import { useState } from "react";
 
 export default function CommentAlert() {
-  const [visible, setVisible] = useState(true);
-
-  if (!visible) return null;
+  const [isVisible, setIsVisible] = useState(true);
 
   return (
-    <Card
-      shadow="sm"
-      radius="sm"
-      className="mb-2 bg-danger-50 dark:bg-danger-50/50"
-      fullWidth
-    >
-      <CardBody className="flex flex-row gap-2 p-2 items-center justify-between">
-        <div className="flex flex-row gap-1 items-center">
+    <div className="mb-4 px-1">
+      <Alert
+        color="success"
+        isVisible={isVisible}
+        title="Hiện tại đã có thể Bình luận!"
+        description="Nhanh tay chém gió ngay nào!"
+        variant="flat"
+        radius="sm"
+        classNames={{
+          base: "p-2 items-center",
+          title: "font-semibold",
+          mainWrapper: "ms-0.5",
+        }}
+        endContent={
           <Button
-            isIconOnly
-            disableAnimation
-            disabled
-            className="bg-transparent"
+            size="sm"
+            variant="flat"
+            color="success"
+            onPress={() => setIsVisible(false)}
+            className="font-semibold"
           >
-            <OctagonAlert color="#f31260" />
+            Đóng
           </Button>
-          {/* <OctagonAlert color="#f31260" className="ml-2" /> */}
-          <div className="flex flex-col text-danger-600 dark:text-danger-500">
-            <p>
-              Tính năng Bình luận vẫn đang trong quá trình phát triển nên chưa
-              thể sử dụng được!
-            </p>
-            <p className="text-sm">
-              Tất cả các bình luận bên dưới cũng như số liệu liên quan đều được
-              tạo ngẫu nhiên!
-            </p>
-          </div>
-        </div>
-
-        <Button
-          size="sm"
-          radius="sm"
-          variant="faded"
-          color="danger"
-          onPress={() => setVisible(false)}
-        >
-          Đã hiểu
-        </Button>
-      </CardBody>
-    </Card>
+        }
+      />
+    </div>
   );
 }

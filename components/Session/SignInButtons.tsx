@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 
 export default function SignInButtons() {
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className="grid grid-cols-2 gap-2 w-full">
       <Tooltip
         content={
           <div className="flex flex-row items-center gap-1">
@@ -32,6 +32,7 @@ export default function SignInButtons() {
           radius="sm"
           className="font-semibold text-white"
           color="primary"
+          fullWidth
           //isDisabled
         >
           Facebook
@@ -43,6 +44,7 @@ export default function SignInButtons() {
         startContent={<SiDiscord size={20} />}
         radius="sm"
         className="font-semibold bg-[#5865F2] text-white"
+        fullWidth
       >
         Discord
       </Button>
@@ -52,6 +54,7 @@ export default function SignInButtons() {
         startContent={<SiGoogle size={20} />}
         radius="sm"
         className="font-semibold text-white bg-stone-800 dark:bg-stone-700"
+        fullWidth
       >
         Google
       </Button>
@@ -61,6 +64,7 @@ export default function SignInButtons() {
         startContent={<SiGithub size={20} />}
         radius="sm"
         className="font-semibold bg-slate-950 dark:bg-slate-800 text-white"
+        fullWidth
       >
         Github
       </Button>

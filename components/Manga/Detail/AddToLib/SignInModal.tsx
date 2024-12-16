@@ -1,16 +1,12 @@
 import {
+  Alert,
   Button,
-  Card,
-  CardBody,
   Modal,
   ModalBody,
   ModalContent,
-  ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import { ListPlus, OctagonAlert } from "lucide-react";
-import { signIn } from "next-auth/react";
-import { SiDiscord, SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
+import { ListPlus } from "lucide-react";
 import SignInButtons from "@/components/Session/SignInButtons";
 import SignInMessage from "@/components/Session/SignInMessage";
 
@@ -42,20 +38,19 @@ export default function SignInModal() {
         <ModalContent>
           {(onClose) => (
             <>
-              {/* <ModalHeader className="justify-center text-center pt-0">
-                Đăng nhập để sử dụng chức năng này!
-              </ModalHeader> */}
-              <ModalBody className="flex flex-col gap-2 p-0">
-                <Card
-                  shadow="none"
+              <ModalBody className="flex flex-col gap-2 p-0 items-center">
+                <Alert
+                  hideIconWrapper
+                  title="Đăng nhập để sử dụng chức năng này nha!"
+                  color="primary"
                   radius="sm"
-                  className="flex flex-col gap-1 bg-primary-50 dark:bg-primary-50/50"
-                >
-                  <CardBody className="flex flex-row items-center gap-1 p-2 text-primary-600 dark:text-primary-500">
-                    <OctagonAlert />
-                    <b>Đăng nhập để sử dụng chức này nha!</b>
-                  </CardBody>
-                </Card>
+                  classNames={{
+                    base: "p-0 items-center",
+                    title: "font-semibold",
+                    mainWrapper: "-ms-0.5",
+                    iconWrapper: "border-none",
+                  }}
+                />
                 <SignInMessage />
                 <SignInButtons />
               </ModalBody>

@@ -48,6 +48,7 @@ import { ContinueReading } from "./ContinueReading";
 // import CommentAlert from "@/components/Comment/CommentAlert";
 import Link from "next/link";
 import { GiscusCmt } from "@/components/Comment/GiscusCmt";
+import { getTotalCmts } from "@/lib/giscus";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -59,6 +60,7 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
   const [lists, setLists] = useState<Chapter[]>([]);
   const [rating, setRating] = useState<MangaStats | null>(null);
   const [firstChapter, setFirstChapter] = useState<Chapter | null>(null);
+  const [totalCmts, setTotalCmts] = useState<number>(0);
   const [fetchFailed, setFetchFailed] = useState(false);
   const coverURL = siteConfig.suicaodex.apiURL + "/covers";
 
@@ -67,6 +69,10 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
       try {
         const mangaDetails = await getMangaDetails(mangaID);
         setInfo(mangaDetails);
+
+        const tite = mangaDetails.title + " - " + "SuicaoDex";
+        const cmts = await getTotalCmts("TNTKien/suicaodex", tite);
+        setTotalCmts(cmts);
 
         const chapters = await getChapters(mangaID, "vi", 1);
         setLists(chapters);
@@ -310,9 +316,9 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                   <div className="flex flex-row gap-1 font-semibold items-center">
                     <MessageSquare />
                     <span>Bình luận</span>
-                    {/* {!!rating?.comments && rating.comments !== 0 && (
-                      <span>({rating.comments})</span>
-                    )} */}
+                    {!!totalCmts && totalCmts !== 0 && (
+                      <span>({totalCmts})</span>
+                    )}
                   </div>
                 }
               >
