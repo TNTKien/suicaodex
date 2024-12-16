@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardBody, CardHeader, Spinner } from "@nextui-org/react";
+import { Button, Card, CardBody, Spinner } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { NotFound } from "../notFound";
 import useReadingHistory from "../hook/useReadingHistory";
@@ -9,10 +9,10 @@ import { ChapterInfo } from "./ChapterInfo";
 import { LongStrip } from "./Reader/LongStrip";
 import { Chapter, ChapterAggregate } from "@/types";
 import { getChapterAggregate, getChapterbyID, getCoverArt } from "@/lib/data";
-import Giscus from "@giscus/react";
-import { useTheme } from "next-themes";
-// import Giscus from "@giscus/react";
-// import { useTheme } from "next-themes";
+import { ChevronsUp } from "lucide-react";
+import useScrollOffset from "../hook/useScrollOffset";
+import { useScrollDirection } from "../hook/useScrollDirection";
+import { cn } from "@/lib/utils";
 
 interface ChapterViewProps {
   chapterID: string;
@@ -27,12 +27,10 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
   const [fitMode, setFitMode] = useState<"width" | "height">("width");
   const [currentPage, setCurrentPage] = useState(0);
   const [cover, setCover] = useState<string | null>(null);
-  const { theme } = useTheme();
 
   const toggleFitMode = () => {
     setFitMode((prevMode) => {
       const newMode = prevMode === "width" ? "height" : "width";
-
       return newMode;
     });
   };
@@ -66,6 +64,8 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
   }, []);
 
   const { addHistory } = useReadingHistory();
+  const { isAtBottom, isAtTop } = useScrollOffset();
+  const scrollDirection = useScrollDirection();
 
   useEffect(() => {
     if (chapterData && chapterData.manga && cover) {
@@ -113,6 +113,32 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
           toggleFitMode={toggleFitMode}
         />
       )}
+
+      <Card
+        radius="sm"
+        shadow="none"
+        className={cn(
+          "fixed bottom-0 z-10 translate-y-0 transition-all duration-500 sm:-translate-y-2",
+          "mb-16 right-0 sm:mb-0 sm:right-6",
+          "opacity-65 hover:opacity-100",
+
+          scrollDirection === "down" &&
+            !isAtBottom &&
+            "translate-x-full sm:translate-x-full right-0 sm:right-0"
+        )}
+      >
+        <CardBody className="rounded-md p-1">
+          <Button
+            isIconOnly
+            size="lg"
+            radius="sm"
+            isDisabled={isAtTop}
+            onPress={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <ChevronsUp size={26} />
+          </Button>
+        </CardBody>
+      </Card>
     </div>
   );
 };

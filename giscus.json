@@ -1,4 +1,5 @@
 {
   "defaultCommentOrder": "newest",
-  "origins": ["https://suicaodex.com", "http://localhost:3000"]
+  "origins": ["https://suicaodex.com"],
+  "originsRegex": ["http://localhost:[0-9]+"]
 }

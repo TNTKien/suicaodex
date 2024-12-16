@@ -46,9 +46,8 @@ import { ContinueReading } from "./ContinueReading";
 // import CommentCard from "@/components/Comment/CommentCard";
 // import RandomCmts, { commentData } from "@/lib/mock-cmt";
 // import CommentAlert from "@/components/Comment/CommentAlert";
-import Giscus from "@giscus/react";
-import { useTheme } from "next-themes";
 import Link from "next/link";
+import { GiscusCmt } from "@/components/Comment/GiscusCmt";
 
 interface MangaDetailsProps {
   mangaID: string;
@@ -62,7 +61,6 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
   const [firstChapter, setFirstChapter] = useState<Chapter | null>(null);
   const [fetchFailed, setFetchFailed] = useState(false);
   const coverURL = siteConfig.suicaodex.apiURL + "/covers";
-  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -320,19 +318,14 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
               >
                 <Card shadow="sm" radius="sm" fullWidth>
                   <CardBody className="p-2">
-                    <Giscus
-                      id="comments"
+                    <GiscusCmt
                       repo="TNTKien/suicaodex"
-                      repoId="R_kgDOM8XBHw"
+                      repoID="R_kgDOM8XBHw"
                       category="Manga"
-                      categoryId="DIC_kwDOM8XBH84ClOmP"
-                      mapping="title"
+                      categoryID="DIC_kwDOM8XBH84ClOmP"
                       reactionsEnabled="0"
-                      emitMetadata="0"
-                      inputPosition="top"
-                      theme={theme}
-                      lang="vi"
-                      loading="lazy"
+                      strictMode="0"
+                      position="top"
                     />
                   </CardBody>
                 </Card>
