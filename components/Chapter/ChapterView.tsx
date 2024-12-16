@@ -1,6 +1,6 @@
 "use client";
 
-import { Spinner } from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Spinner } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { NotFound } from "../notFound";
 import useReadingHistory from "../hook/useReadingHistory";
@@ -9,6 +9,8 @@ import { ChapterInfo } from "./ChapterInfo";
 import { LongStrip } from "./Reader/LongStrip";
 import { Chapter, ChapterAggregate } from "@/types";
 import { getChapterAggregate, getChapterbyID, getCoverArt } from "@/lib/data";
+import Giscus from "@giscus/react";
+import { useTheme } from "next-themes";
 // import Giscus from "@giscus/react";
 // import { useTheme } from "next-themes";
 
@@ -25,7 +27,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
   const [fitMode, setFitMode] = useState<"width" | "height">("width");
   const [currentPage, setCurrentPage] = useState(0);
   const [cover, setCover] = useState<string | null>(null);
-  // const { theme } = useTheme();
+  const { theme } = useTheme();
 
   const toggleFitMode = () => {
     setFitMode((prevMode) => {
@@ -111,26 +113,6 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
           toggleFitMode={toggleFitMode}
         />
       )}
-
-      {/* <Card shadow="sm" radius="sm" fullWidth>
-        <CardHeader>Bình luận</CardHeader>
-        <CardBody className="p-2">
-          <Giscus
-            id="comments"
-            repo="TNTKien/suicaodex"
-            repoId="R_kgDOM8XBHw"
-            category="Chapter"
-            categoryId="DIC_kwDOM8XBH84ClOne"
-            mapping="title"
-            reactionsEnabled="0"
-            emitMetadata="0"
-            inputPosition="top"
-            theme={theme}
-            lang="vi"
-            loading="lazy"
-          />
-        </CardBody>
-      </Card> */}
     </div>
   );
 };

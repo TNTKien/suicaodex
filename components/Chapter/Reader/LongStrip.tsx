@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Image, Slider } from "@nextui-org/react";
+import { Image } from "@nextui-org/react";
 import { useEffect } from "react";
 
 interface LongStripProps {
@@ -86,7 +86,7 @@ export const LongStrip = ({
         ))}
       </div>
 
-      <Slider
+      {/* <Slider
         disableAnimation
         aria-label="reading progress slider"
         className="fixed left-1 bottom-0 z-10 opacity-25 hover:opacity-100"
@@ -97,7 +97,7 @@ export const LongStrip = ({
         size="sm"
         value={currentPage}
         onChange={handleSliderChange}
-      />
+      /> */}
     </>
   );
 };

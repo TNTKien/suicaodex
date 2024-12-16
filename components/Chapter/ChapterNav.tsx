@@ -12,6 +12,7 @@ import {
 import {
   ChevronsUp,
   ChevronUp,
+  MessageSquare,
   MoveHorizontal,
   MoveLeft,
   MoveRight,
@@ -35,6 +36,7 @@ export const ChapterNav = ({
   toggleFitMode,
   fitMode,
 }: ChapterNavProps) => {
+  //const { isOpen, onOpen, onOpenChange } = useDisclosure();
   let currentVolIndex = chapterAggregate.findIndex((aggregate) =>
     aggregate.chapters.some((chapter) => chapter.id === chapterData.id)
   );
@@ -178,8 +180,8 @@ export const ChapterNav = ({
 
         {/* cmt btn */}
         {/* <Button isIconOnly className="rounded-md" radius="sm" size="lg">
-          <MessageSquare />
-        </Button> */}
+            <MessageSquare />
+          </Button> */}
 
         {/* // back to top btn */}
         <Button
