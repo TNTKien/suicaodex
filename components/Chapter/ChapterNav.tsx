@@ -105,7 +105,7 @@ export const ChapterNav = ({
           <Button
             isIconOnly
             className="rounded-md"
-            size="lg"
+            size="md"
             onPress={toggleFitMode}
           >
             {fitMode === "width" ? <MoveHorizontal /> : <MoveVertical />}
@@ -120,7 +120,7 @@ export const ChapterNav = ({
             href={prevChapter ? `/chapter/${prevChapter}` : ``}
             isDisabled={!prevChapter}
             radius="sm"
-            size="lg"
+            size="md"
           >
             <MoveLeft />
           </Button>
@@ -130,7 +130,7 @@ export const ChapterNav = ({
             <Button
               fullWidth
               className="rounded-l-md rounded-r-none justify-start line-clamp-1 px-3"
-              size="lg"
+              size="md"
             >
               {/* {vol_label} - {chapter_label} */}
               {chapter_label}
@@ -140,7 +140,7 @@ export const ChapterNav = ({
                 <Button
                   isIconOnly
                   className="rounded-l-none rounded-r-md"
-                  size="lg"
+                  size="md"
                 >
                   <ChevronUp />
                 </Button>
@@ -187,7 +187,7 @@ export const ChapterNav = ({
             href={nextChapter ? `/chapter/${nextChapter}` : ``}
             isDisabled={!nextChapter}
             radius="sm"
-            size="lg"
+            size="md"
           >
             <MoveRight />
           </Button>
@@ -196,13 +196,10 @@ export const ChapterNav = ({
           <Button
             isIconOnly
             className="rounded-md"
-            //isDisabled={isAtTop}
             radius="sm"
-            size="lg"
-            //onPress={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            size="md"
             onPress={onOpen}
           >
-            {/* <ChevronsUp /> */}
             <MessageSquare />
           </Button>
         </CardBody>

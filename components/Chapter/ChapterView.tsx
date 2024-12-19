@@ -130,7 +130,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
         <CardBody className="rounded-md p-1">
           <Button
             isIconOnly
-            size="lg"
+            size="md"
             radius="sm"
             isDisabled={isAtTop}
             onPress={() => window.scrollTo({ top: 0, behavior: "smooth" })}
