@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Alert,
   Button,
   ButtonGroup,
   Card,
@@ -322,19 +323,33 @@ const MangaDetailsNew: FC<MangaDetailsProps> = ({ mangaID, session }) => {
                   </div>
                 }
               >
-                <Card shadow="sm" radius="sm" fullWidth>
-                  <CardBody className="p-2">
-                    <GiscusCmt
-                      repo="TNTKien/suicaodex"
-                      repoID="R_kgDOM8XBHw"
-                      category="Manga"
-                      categoryID="DIC_kwDOM8XBH84ClOmP"
-                      reactionsEnabled="0"
-                      strictMode="0"
-                      position="top"
-                    />
-                  </CardBody>
-                </Card>
+                <div className="flex flex-col gap-2">
+                  <Alert
+                    color="primary"
+                    title="Bạn chỉ cần đăng nhập bằng Github tại đây để bình luận!"
+                    description="Đăng nhập SuicaoDex bằng các loại tài khoản khác không ảnh hưởng gì cả!!"
+                    variant="faded"
+                    radius="sm"
+                    classNames={{
+                      base: "p-2 items-center",
+                      title: "font-semibold",
+                      mainWrapper: "ms-0.5",
+                    }}
+                  />
+                  <Card shadow="sm" radius="sm" fullWidth>
+                    <CardBody className="p-2">
+                      <GiscusCmt
+                        repo="TNTKien/suicaodex"
+                        repoID="R_kgDOM8XBHw"
+                        category="Manga"
+                        categoryID="DIC_kwDOM8XBH84ClOmP"
+                        reactionsEnabled="0"
+                        strictMode="0"
+                        position="top"
+                      />
+                    </CardBody>
+                  </Card>
+                </div>
 
                 {/* <CommentAlert />
 
