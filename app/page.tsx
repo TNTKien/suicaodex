@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import LeaderBoard from "@/components/LeaderBoard/LeaderBoard";
 import MangaCarousel from "@/components/Manga/Carousel/MangaCarousel";
 import { siteConfig } from "@/config/site";
-import MangaTab from "@/components/Manga/MangaTab/MangaTab";
 import RecentTab from "@/components/Recent/RecentTab";
 import CommentAlert from "@/components/Comment/CommentAlert";
+import MangaTabNew from "@/components/Manga/MangaTab/MangaTabNew";
 
 export const metadata: Metadata = {
   title: {
@@ -23,7 +23,7 @@ export default async function Home() {
     <>
       <CommentAlert />
       <MangaCarousel />
-      <MangaTab />
+      <MangaTabNew />
       <section className="flex flex-col justify-between md:flex-row">
         <RecentTab />
         <LeaderBoard />

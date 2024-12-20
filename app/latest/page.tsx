@@ -2,6 +2,7 @@ import { Metadata } from "next";
 
 import Latest from "@/components/Manga/Latest/Latest";
 import { siteConfig } from "@/config/site";
+import LatestNew from "@/components/Manga/Latest/LatestNew";
 
 interface pageProps {
   searchParams: {
@@ -30,12 +31,12 @@ export async function generateMetadata({
 export default function Page({ searchParams }: pageProps) {
   const { page, limit } = getSearchParams({ searchParams });
 
-  return <Latest limit={limit} page={page} />;
+  return <LatestNew limit={limit} page={page} />;
 }
 
 const getSearchParams = ({ searchParams }: pageProps) => {
   const pageParams = searchParams["page"] ?? "1";
-  const limitParams = searchParams["limit"] ?? "24";
+  const limitParams = searchParams["limit"] ?? "64";
 
   const page = pageParams
     ? typeof pageParams === "string"

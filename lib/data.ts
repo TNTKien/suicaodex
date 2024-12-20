@@ -17,7 +17,8 @@ type Chapter = {
   pages?: string[];
   manga?: {
     id: string;
-    title: string;
+    title?: string;
+    cover?: string;
   };
 };
 
@@ -104,6 +105,9 @@ export function ChaptersParser(data: any[]): Chapter[] {
     const groupData = item.relationships.find(
       (item: any) => item.type === "scanlation_group"
     );
+    const mangaData = item.relationships.find(
+      (item: any) => item.type === "manga"
+    );
 
     return {
       id: item.id,
@@ -119,6 +123,7 @@ export function ChaptersParser(data: any[]): Chapter[] {
             name: groupData.attributes.name,
           }
         : { id: null, name: null },
+      manga: mangaData ? { id: mangaData.id } : undefined,
     };
   });
 }

@@ -40,7 +40,8 @@ export type Chapter = {
   pages?: string[];
   manga?: {
     id: string;
-    title: string;
+    title?: string;
+    cover?: string;
   };
 };
 

@@ -68,7 +68,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
   const scrollDirection = useScrollDirection();
 
   useEffect(() => {
-    if (chapterData && chapterData.manga && cover) {
+    if (chapterData && chapterData.manga && chapterData.manga.title && cover) {
       addHistory(chapterData.manga.id, {
         mangaTitle: chapterData.manga.title,
         chapterId: chapterData.id,
