@@ -3,7 +3,6 @@ import LeaderBoard from "@/components/LeaderBoard/LeaderBoard";
 import MangaCarousel from "@/components/Manga/Carousel/MangaCarousel";
 import { siteConfig } from "@/config/site";
 import RecentTab from "@/components/Recent/RecentTab";
-import CommentAlert from "@/components/Comment/CommentAlert";
 import MangaTabNew from "@/components/Manga/MangaTab/MangaTabNew";
 
 export const metadata: Metadata = {
@@ -21,7 +20,7 @@ export const metadata: Metadata = {
 export default async function Home() {
   return (
     <>
-      <CommentAlert />
+      {/* <CommentAlert /> */}
       <MangaCarousel />
       <MangaTabNew />
       <section className="flex flex-col justify-between md:flex-row">
