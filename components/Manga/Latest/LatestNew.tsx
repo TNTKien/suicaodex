@@ -9,6 +9,7 @@ import { LastestManga } from "@/types";
 import { latestMangas } from "@/lib/mangadex/latest";
 import LatestCard from "./LatestCard";
 import { LatestCover } from "./LatestCover";
+import LatestSkeleton from "./LatestSkeleton";
 
 interface LatestNewProps {
   page: number;
@@ -62,16 +63,10 @@ export default function LatestNew({ page, limit }: LatestNewProps) {
               <Tab key="grid-cover" title={<LayoutGrid />} />
             </Tabs>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-3 px-1">
-            <TabSkeleton />
-            <TabSkeleton />
-            <TabSkeleton />
-            <TabSkeleton />
-            <TabSkeleton />
-            <TabSkeleton />
-            <TabSkeleton />
-            <TabSkeleton />
-            <TabSkeleton />
+          <div className="grid grid-cols-1 gap-2 mt-3 px-1">
+            <LatestSkeleton />
+            <LatestSkeleton />
+            <LatestSkeleton />
           </div>
         </div>
       </div>
@@ -83,7 +78,7 @@ export default function LatestNew({ page, limit }: LatestNewProps) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen justify-between">
+    <div className="flex flex-col">
       <div>
         <div className="flex flex-col px-1 mt-3">
           <Divider className="w-9 h-1 bg-danger" />

@@ -4,7 +4,6 @@ import { getRecentlyMangas } from "@/lib/data";
 import { Manga } from "@/types";
 import { Divider } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { MangaCard } from "../Search/Results/MangaCard";
 import { RecentCard } from "./RecentCard";
 import TabSkeleton from "../Manga/MangaTab/TabSkeleton";
 

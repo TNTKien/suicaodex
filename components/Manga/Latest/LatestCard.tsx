@@ -12,7 +12,7 @@ interface LatestCardProps {
 
 const LatestCard = ({ mangas }: LatestCardProps) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+    <div className="grid grid-cols-1 gap-2">
       {mangas.map((manga) => (
         <Card
           key={manga.info.id}
@@ -39,7 +39,7 @@ const LatestCard = ({ mangas }: LatestCardProps) => {
 
             <div className="flex-grow flex flex-col gap-1">
               <NoPrefetchLink href={`/manga/${manga.info.id}`}>
-                <h2 className="font-semibold text-xl line-clamp-2">
+                <h2 className="font-semibold text-2xl line-clamp-2">
                   {manga.info.title}
                 </h2>
               </NoPrefetchLink>

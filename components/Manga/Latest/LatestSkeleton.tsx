@@ -2,34 +2,15 @@ import { Card, CardBody, Skeleton } from "@nextui-org/react";
 
 export default function LatestSkeleton() {
   return (
-    <Card
-      isBlurred
-      className="bg-background/60 dark:bg-default-100/50 max-w-[610px]"
-      radius="sm"
-      shadow="sm"
-    >
-      <CardBody>
-        <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-start justify-center">
-          <div className="relative col-span-6 md:col-span-4">
-            <Skeleton className="h-[200px] rounded-lg bg-default-300" />
-          </div>
-          <div className="flex flex-col col-span-6 md:col-span-8 gap-2">
-            <div className="flex justify-between items-start">
-              <Skeleton className="w-3/4 rounded-lg">
-                <div className="h-3 w-full rounded-lg bg-default-200" />
-              </Skeleton>
-            </div>
-            <div className="flex justify-between items-start">
-              <Skeleton className="w-full rounded-lg">
-                <div className="h-3 w-full rounded-lg bg-default-200" />
-              </Skeleton>
-            </div>
-            <div className="flex justify-between items-start">
-              <Skeleton className="w-1/2 rounded-lg">
-                <div className="h-3 w-full rounded-lg bg-default-200" />
-              </Skeleton>
-            </div>
-          </div>
+    <Card className="rounded-md w-full" radius="none" shadow="sm">
+      <CardBody className="flex flex-row gap-3 p-1.5">
+        <Skeleton className="h-[200px] w-[233px] md:w-[150px] rounded-md" />
+        <div className="flex flex-col gap-2 w-full">
+          <Skeleton className="h-8 w-full rounded-md" />
+          <Skeleton className="h-2 w-1/2 rounded-md" />
+          <Skeleton className="h-4 w-4/5 rounded-md mt-8" />
+          <Skeleton className="h-4 w-3/5 rounded-md mt-2" />
+          <Skeleton className="h-4 w-2/3 rounded-md mt-2" />
         </div>
       </CardBody>
     </Card>

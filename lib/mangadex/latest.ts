@@ -68,6 +68,10 @@ export async function latestMangas(
   offset: number
 ): Promise<LastestManga[]> {
   const max_mangas = 18;
+  const total = 10000;
+  if (limit + offset > total) {
+    limit = total - offset;
+  }
   const { data: chaptersData } = await axiosInstance.get("/chapter?", {
     params: {
       limit: limit,
@@ -80,7 +84,8 @@ export async function latestMangas(
       },
     },
   });
-  const total = chaptersData.total;
+  // const total = chaptersData.total;
+
   const chapters = ChaptersParser(chaptersData.data);
   const mangaIDs = chapters.map((chapter) => chapter.manga?.id);
 

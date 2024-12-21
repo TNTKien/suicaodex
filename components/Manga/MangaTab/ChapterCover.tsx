@@ -28,6 +28,8 @@ export const ChapterCover = ({ chapter }: ChapterCoverProps) => {
             src={`${siteConfig.suicaodex.apiURL}/covers/${chapter.manga?.id}/${chapter.manga?.cover}.512.jpg`}
             width="100%"
             fallbackSrc="/doro_think.webp"
+            isZoomed
+            radius="none"
           />
         </NoPrefetchLink>
 
