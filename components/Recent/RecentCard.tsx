@@ -36,7 +36,7 @@ export const RecentCard = ({ manga }: RecentCardProps) => {
             </h4>
           </NoPrefetchLink>
 
-          <p className="text-sm ">
+          <p className="text-sm line-clamp-1">
             {manga.author === manga.artist
               ? manga.author
               : `${manga.author}, ${manga.artist}`}
@@ -54,7 +54,7 @@ export const RecentCard = ({ manga }: RecentCardProps) => {
               }}
               remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
             >
-              {manga.description}
+              {manga.description.replace(/   /g, "")}
             </ReactMarkdown>
           )}
         </div>

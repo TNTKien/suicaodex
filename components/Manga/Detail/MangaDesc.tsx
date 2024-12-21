@@ -30,7 +30,7 @@ const MangaDesc = ({ desc }: MangaDescProps) => {
         }}
         remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
       >
-        {desc}
+        {desc.replace(/   /g, "")}
       </ReactMarkdown>
     );
 
@@ -64,7 +64,7 @@ const MangaDesc = ({ desc }: MangaDescProps) => {
               }}
               remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
             >
-              {displayLines}
+              {displayLines.replace(/   /g, "")}
             </ReactMarkdown>
           )
         }
@@ -92,7 +92,7 @@ const MangaDesc = ({ desc }: MangaDescProps) => {
           }}
           remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
         >
-          {desc}
+          {desc.replace(/   /g, "")}
         </ReactMarkdown>
       </AccordionItem>
     </Accordion>

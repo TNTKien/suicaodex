@@ -60,7 +60,7 @@ export const MangaCard = ({ manga }: MangaCardProps) => {
               }}
               remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
             >
-              {manga.description}
+              {manga.description.replace(/   /g, "")}
             </ReactMarkdown>
           )}
         </div>

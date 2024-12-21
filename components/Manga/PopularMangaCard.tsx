@@ -95,7 +95,7 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
                     }}
                     remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
                   >
-                    {manga.description}
+                    {manga.description.replace(/   /g, "")}
                   </ReactMarkdown>
                 )}
               </div>

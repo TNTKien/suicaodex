@@ -54,7 +54,7 @@ export const CommentCard = ({
             className="text-gray-600 dark:text-gray-500"
             remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
           >
-            {content}
+            {content.replace(/   /g, "")}
           </ReactMarkdown>
 
           <div className="flex mt-1 justify-between">
