@@ -43,7 +43,7 @@ export const TagsDropdown = ({ onTagsSelected }: TagsDropdownProps) => {
 
           return acc;
         },
-        {} as Record<string, "normal" | "include" | "exclude">,
+        {} as Record<string, "normal" | "include" | "exclude">
       );
 
       setTagStates(initialTagStates);
@@ -70,7 +70,7 @@ export const TagsDropdown = ({ onTagsSelected }: TagsDropdownProps) => {
   };
 
   const updateCounts = (
-    states: Record<string, "normal" | "include" | "exclude">,
+    states: Record<string, "normal" | "include" | "exclude">
   ) => {
     let include = 0;
     let exclude = 0;
@@ -83,17 +83,17 @@ export const TagsDropdown = ({ onTagsSelected }: TagsDropdownProps) => {
   };
 
   const handleTagStateChange = (
-    newTagStates: Record<string, "normal" | "include" | "exclude">,
+    newTagStates: Record<string, "normal" | "include" | "exclude">
   ) => {
     setTagStates(newTagStates);
   };
 
   const handleDone = () => {
     const include = Object.keys(tagStates).filter(
-      (key) => tagStates[key] === "include",
+      (key) => tagStates[key] === "include"
     );
     const exclude = Object.keys(tagStates).filter(
-      (key) => tagStates[key] === "exclude",
+      (key) => tagStates[key] === "exclude"
     );
 
     onTagsSelected(include, exclude);
@@ -108,6 +108,7 @@ export const TagsDropdown = ({ onTagsSelected }: TagsDropdownProps) => {
         radius="sm"
         variant="flat"
         onPress={onOpen}
+        disableAnimation
       >
         <p className="line-clamp-1">{buttonText}</p>
       </Button>

@@ -28,16 +28,16 @@ const getSearchParams = ({ searchParams }: pageProps) => {
   const pageParams = searchParams["page"] ?? "1";
   const limitParams = searchParams["limit"] ?? "30";
 
-  // const page = pageParams
-  //   ? typeof pageParams === "string"
-  //     ? pageParams
-  //     : pageParams[0]
-  //   : "1";
-  // const limit = limitParams
-  //   ? typeof limitParams === "string"
-  //     ? limitParams
-  //     : limitParams[0]
-  //   : "10";
+  const page = pageParams
+    ? typeof pageParams === "string"
+      ? pageParams
+      : pageParams[0]
+    : "1";
+  const limit = limitParams
+    ? typeof limitParams === "string"
+      ? limitParams
+      : limitParams[0]
+    : "30";
 
   return {
     page: parseInt(pageParams),

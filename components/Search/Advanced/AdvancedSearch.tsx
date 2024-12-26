@@ -5,9 +5,7 @@ import { Input } from "@nextui-org/input";
 import { EyeOff, Eye, Search } from "lucide-react";
 import { useState } from "react";
 import { Divider } from "@nextui-org/react";
-
 import ResultTab from "../Results/ResultTab";
-
 import { SearchDropdown } from "./SearchDropdown";
 import AuthorSearch from "./AuthorSearch";
 import { TagsDropdown } from "./TagsDropdown";
@@ -27,9 +25,9 @@ export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
   const [selectedFor, setSelectedFor] = useState<string[]>([]);
   const [query, setQuery] = useState<string>("");
   const [searchTrigger, setSearchTrigger] = useState<number>(0);
-  const [showFilters, setShowFilters] = useState<boolean>(true);
   const [includeTags, setIncludeTags] = useState<string[]>([]);
   const [excludeTags, setExcludeTags] = useState<string[]>([]);
+  const [isVisible, setIsVisible] = useState(true);
 
   const handleSearch = () => {
     setSearchTrigger((prev) => prev + 1);
@@ -37,10 +35,6 @@ export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
 
   const handleAuthorSelectionChange = (selected: string[]) => {
     setSelectedAuthors(selected);
-  };
-
-  const toggleFilters = () => {
-    setShowFilters((prev) => !prev);
   };
 
   const handleTagsSelected = (include: string[], exclude: string[]) => {
@@ -72,14 +66,15 @@ export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
           color="secondary"
           radius="sm"
           variant="solid"
-          onPress={toggleFilters}
+          onPress={() => setIsVisible(!isVisible)}
         >
-          {showFilters ? <EyeOff /> : <Eye />}
+          {isVisible ? <EyeOff /> : <Eye />}
         </Button>
       </div>
 
       {/* filter */}
-      {showFilters && (
+
+      {isVisible && (
         <div className="flex flex-col gap-8">
           <TagsDropdown onTagsSelected={handleTagsSelected} />
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 3xl:grid-cols-5 gap-8">
