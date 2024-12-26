@@ -10,28 +10,56 @@ import { SearchDropdown } from "./SearchDropdown";
 import AuthorSearch from "./AuthorSearch";
 import { TagsDropdown } from "./TagsDropdown";
 import Guide from "./Guide";
+import { SearchAuthorByIds } from "@/lib/mangadex/author";
+import useSWRImmutable from "swr/immutable";
+import { useRouter } from "next/navigation";
 
 interface AdvancedSearchProps {
   page: number;
   limit: number;
+  q: string;
+  author: string;
+  content: string;
+  status: string;
+  demos: string;
+  include: string;
+  exclude: string;
 }
 
-export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
-  const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
-  const [selectedContentLimits, setSelectedContentLimits] = useState<string[]>(
-    []
-  );
-  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
-  const [selectedFor, setSelectedFor] = useState<string[]>([]);
-  const [query, setQuery] = useState<string>("");
-  const [searchTrigger, setSearchTrigger] = useState<number>(0);
-  const [includeTags, setIncludeTags] = useState<string[]>([]);
-  const [excludeTags, setExcludeTags] = useState<string[]>([]);
-  const [isVisible, setIsVisible] = useState(true);
+export const AdvancedSearch = ({
+  page,
+  limit,
+  q,
+  author,
+  content,
+  status,
+  demos,
+  include,
+  exclude,
+}: AdvancedSearchProps) => {
+  const router = useRouter();
+  const initAuthor = author === "" ? [] : author.split(",");
+  const initContent = content === "" ? [] : content.split(",");
+  const initStatus = status === "" ? [] : status.split(",");
+  const initDemos = demos === "" ? [] : demos.split(",");
+  const initInclude = include === "" ? [] : include.split(",");
+  const initExclude = exclude === "" ? [] : exclude.split(",");
 
-  const handleSearch = () => {
-    setSearchTrigger((prev) => prev + 1);
-  };
+  const [selectedAuthors, setSelectedAuthors] = useState<string[]>(initAuthor);
+  const [selectedContentLimits, setSelectedContentLimits] =
+    useState<string[]>(initContent);
+  const [selectedStatuses, setSelectedStatuses] =
+    useState<string[]>(initStatus);
+  const [selectedFor, setSelectedFor] = useState<string[]>(initDemos);
+  const [query, setQuery] = useState<string>(q);
+  const [searchTrigger, setSearchTrigger] = useState<number>(0);
+  const [includeTags, setIncludeTags] = useState<string[]>(initInclude);
+  const [excludeTags, setExcludeTags] = useState<string[]>(initExclude);
+  const [isVisible, setIsVisible] = useState(true);
+  const { data: defaultAuthors, isLoading } = useSWRImmutable(
+    initAuthor.length > 0 ? [initAuthor] : null,
+    ([ids]) => SearchAuthorByIds(ids)
+  );
 
   const handleAuthorSelectionChange = (selected: string[]) => {
     setSelectedAuthors(selected);
@@ -42,6 +70,34 @@ export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
     setExcludeTags(exclude);
   };
 
+  const searchParams = new URLSearchParams();
+  if (query !== "") searchParams.append("q", query);
+
+  if (selectedAuthors.length > 0)
+    searchParams.append("author", selectedAuthors.join(","));
+
+  if (selectedContentLimits.length > 0)
+    searchParams.append("content", selectedContentLimits.join(","));
+
+  if (selectedStatuses.length > 0)
+    searchParams.append("status", selectedStatuses.join(","));
+
+  if (selectedFor.length > 0)
+    searchParams.append("demos", selectedFor.join(","));
+
+  if (includeTags.length > 0)
+    searchParams.append("include", includeTags.join(","));
+
+  if (excludeTags.length > 0)
+    searchParams.append("exclude", excludeTags.join(","));
+  // searchParams.append("limit", limit.toString());
+  // searchParams.append("page", page.toString());
+
+  const searchURL = `/advanced-search?${searchParams.toString()}`;
+  const handleSearch = () => {
+    router.push(searchURL);
+    setSearchTrigger((prev) => prev + 1);
+  };
   return (
     <div className="flex flex-col gap-8 px-1">
       {/* <h1 className="text-2xl font-semibold ">Tìm kiếm nâng cao</h1> */}
@@ -59,6 +115,7 @@ export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
           value={query}
           variant="faded"
           onValueChange={setQuery}
+          isClearable
         />
         <Button
           isIconOnly
@@ -78,21 +135,36 @@ export const AdvancedSearch = ({ page, limit }: AdvancedSearchProps) => {
         <div className="flex flex-col gap-8">
           <TagsDropdown onTagsSelected={handleTagsSelected} />
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 3xl:grid-cols-5 gap-8">
-            <AuthorSearch onSelectionChange={handleAuthorSelectionChange} />
+            {(initAuthor.length === 0 || isLoading) && (
+              <AuthorSearch
+                onSelectionChange={handleAuthorSelectionChange}
+                defaultSelection={[]}
+              />
+            )}
+            {!!defaultAuthors && (
+              <AuthorSearch
+                onSelectionChange={handleAuthorSelectionChange}
+                defaultSelection={defaultAuthors}
+              />
+            )}
+
             <SearchDropdown
               keys={["safe", "suggestive", "erotica", "pornographic"]}
               title="Giới hạn nội dung"
               onSelectionChange={setSelectedContentLimits}
+              defaultSelection={initContent}
             />
             <SearchDropdown
               keys={["ongoing", "completed", "hiatus", "cancelled"]}
               title="Tình trạng"
               onSelectionChange={setSelectedStatuses}
+              defaultSelection={initStatus}
             />
             <SearchDropdown
               keys={["shounen", "shoujo", "seinen", "jousei", "none"]}
               title="Dành cho"
               onSelectionChange={setSelectedFor}
+              defaultSelection={initDemos}
             />
           </div>
         </div>

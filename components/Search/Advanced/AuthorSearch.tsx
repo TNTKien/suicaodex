@@ -13,21 +13,25 @@ import {
   PopoverTrigger,
 } from "@nextui-org/react";
 import { ChevronsUpDown, Search } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 import { SearchAuthor } from "@/lib/data";
 import { Author } from "@/types";
+import { SearchAuthorByIds } from "@/lib/mangadex/author";
 
 interface AuthorSearchProps {
   onSelectionChange: (selected: string[]) => void;
+  defaultSelection: Author[];
 }
 
-export default function AuthorSearch({ onSelectionChange }: AuthorSearchProps) {
+export default function AuthorSearch({
+  onSelectionChange,
+  defaultSelection,
+}: AuthorSearchProps) {
   const [activeSearch, setActiveSearch] = useState<Author[]>([]);
   const handleSearch = async (e: { target: { value: string } }) => {
     if (e.target.value == "") {
       setActiveSearch([]);
-
       return false;
     }
 
@@ -36,18 +40,20 @@ export default function AuthorSearch({ onSelectionChange }: AuthorSearchProps) {
     });
   };
 
-  const [selectedItems, setSelectedItems] = useState<Author[]>([]);
+  const [selectedItems, setSelectedItems] =
+    useState<Author[]>(defaultSelection);
+
   const selectedValue = useMemo(() => selectedItems, [selectedItems]);
 
   const handleSelectionChange = (keys: Selection) => {
     const selected = Array.from(keys as Set<string>).map((key) =>
-      activeSearch.find((item) => item.id === key),
+      activeSearch.find((item) => item.id === key)
     );
     const newSelectedItems = selected.filter(
-      (item) => item !== undefined,
+      (item) => item !== undefined
     ) as Author[];
     const mergedSelectedItems = [...selectedItems, ...newSelectedItems].filter(
-      (item, index, self) => index === self.findIndex((t) => t.id === item.id),
+      (item, index, self) => index === self.findIndex((t) => t.id === item.id)
     );
 
     setSelectedItems(mergedSelectedItems);

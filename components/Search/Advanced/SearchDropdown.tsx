@@ -16,14 +16,18 @@ interface SearchDropdownProps {
   title: string;
   keys: string[];
   onSelectionChange: (selected: string[]) => void;
+  defaultSelection?: string[];
 }
 
 export const SearchDropdown = ({
   title,
   keys,
   onSelectionChange,
+  defaultSelection,
 }: SearchDropdownProps) => {
-  const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
+  const [selectedKeys, setSelectedKeys] = useState<Selection>(
+    new Set(defaultSelection)
+  );
   const selectedValue = useMemo(() => {
     if (selectedKeys instanceof Set && selectedKeys.size === 0) {
       return "mặc định";

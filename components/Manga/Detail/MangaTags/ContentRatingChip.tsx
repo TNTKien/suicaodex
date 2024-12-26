@@ -20,7 +20,12 @@ const ContentRatingChip = ({ rating }: ContentRatingChipProps) => {
       radius="sm"
       size="sm"
     >
-      {rating}
+      <a
+        href={`/advanced-search?content=${rating}`}
+        className="text-xs hover:underline"
+      >
+        {rating}
+      </a>
     </Chip>
   );
 };

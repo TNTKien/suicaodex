@@ -19,28 +19,46 @@ export const metadata: Metadata = {
 };
 
 export default function Page({ searchParams }: pageProps) {
-  const { page, limit } = getSearchParams({ searchParams });
+  const { page, limit, author, q, content, status, demos, include, exclude } =
+    getSearchParams({
+      searchParams,
+    });
 
-  return <AdvancedSearch limit={limit} page={page} />;
+  return (
+    <AdvancedSearch
+      limit={limit}
+      page={page}
+      q={q}
+      author={author}
+      content={content}
+      status={status}
+      demos={demos}
+      include={include}
+      exclude={exclude}
+    />
+  );
 }
 
 const getSearchParams = ({ searchParams }: pageProps) => {
-  const pageParams = searchParams["page"] ?? "1";
-  const limitParams = searchParams["limit"] ?? "30";
-
-  const page = pageParams
-    ? typeof pageParams === "string"
-      ? pageParams
-      : pageParams[0]
-    : "1";
-  const limit = limitParams
-    ? typeof limitParams === "string"
-      ? limitParams
-      : limitParams[0]
-    : "30";
+  const page = parseInt(String(searchParams["page"] ?? "1"));
+  const limit = parseInt(String(searchParams["limit"] ?? "30"));
+  const author = String(searchParams["author"] ?? "");
+  const q = String(searchParams["q"] ?? "");
+  const content = String(searchParams["content"] ?? "");
+  const status = String(searchParams["status"] ?? "");
+  const demos = String(searchParams["demos"] ?? "");
+  const include = String(searchParams["include"] ?? "");
+  const exclude = String(searchParams["exclude"] ?? "");
 
   return {
-    page: parseInt(pageParams),
-    limit: parseInt(limitParams),
+    page,
+    limit,
+    q,
+    author,
+    content,
+    status,
+    demos,
+    include,
+    exclude,
   };
 };

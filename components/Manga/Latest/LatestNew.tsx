@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Divider, Pagination, Tab, Tabs } from "@nextui-org/react";
 import { LayoutGrid, StretchHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
-import TabSkeleton from "../MangaTab/TabSkeleton";
 import { LastestManga } from "@/types";
 import { latestMangas } from "@/lib/mangadex/latest";
 import LatestCard from "./LatestCard";

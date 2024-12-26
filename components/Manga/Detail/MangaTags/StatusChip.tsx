@@ -37,7 +37,12 @@ const StatusChip = ({ status }: StatusChipProps) => {
       startContent={<span className={`${statusBg} rounded-full w-2 h-2`} />}
       variant="bordered"
     >
-      {status}
+      <a
+        href={`/advanced-search?status=${status}`}
+        className="text-xs hover:underline"
+      >
+        {status}
+      </a>
     </Chip>
   );
 };
