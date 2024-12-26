@@ -177,7 +177,7 @@ export const LibModal = ({ manga, session, latestChapter }: LibModalProps) => {
                   <div className="flex flex-col gap-4 w-full">
                     <h4 className="font-bold text-2xl">{manga.title}</h4>
                     <div className="hidden sm:flex flex-row gap-2">
-                      <Dropdown placement="bottom-end" radius="sm">
+                      <Dropdown placement="bottom-end" radius="sm" shadow="sm">
                         <DropdownTrigger>
                           <Button
                             className="justify-between w-2/3 font-semibold"
