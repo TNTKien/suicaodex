@@ -11,7 +11,7 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import { Album } from "lucide-react";
+import { Album, CircleHelp, FileQuestion } from "lucide-react";
 
 export default function Guide() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -21,12 +21,13 @@ export default function Guide() {
       <Button
         className="font-semibold"
         color="default"
-        radius="sm"
-        startContent={<Album />}
-        variant="faded"
+        radius="full"
+        //startContent={<Album />}
+        variant="flat"
         onPress={onOpen}
+        isIconOnly
       >
-        Hướng dẫn
+        <CircleHelp />
       </Button>
       <Modal
         hideCloseButton
@@ -39,7 +40,7 @@ export default function Guide() {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1 px-4">
+              <ModalHeader className="flex flex-col gap-1 px-4 pb-0">
                 Hướng dẫn
               </ModalHeader>
               <ModalBody className="p-2">
@@ -97,11 +98,11 @@ export default function Guide() {
                   </AccordionItem>
                 </Accordion>
               </ModalBody>
-              <ModalFooter className="p-2">
+              {/* <ModalFooter className="p-2">
                 <Button color="danger" radius="sm" size="sm" onPress={onClose}>
                   Đã hiểu
                 </Button>
-              </ModalFooter>
+              </ModalFooter> */}
             </>
           )}
         </ModalContent>

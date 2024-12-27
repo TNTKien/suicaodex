@@ -2,7 +2,7 @@
 
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
-import { EyeOff, Eye, Search } from "lucide-react";
+import { EyeOff, Eye, Search, Eraser } from "lucide-react";
 import { useState } from "react";
 import { Divider } from "@nextui-org/react";
 import ResultTab from "../Results/ResultTab";
@@ -45,6 +45,8 @@ export const AdvancedSearch = ({
   const initInclude = include === "" ? [] : include.split(",");
   const initExclude = exclude === "" ? [] : exclude.split(",");
 
+  // TODO: Tags & Pagination
+
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>(initAuthor);
   const [selectedContentLimits, setSelectedContentLimits] =
     useState<string[]>(initContent);
@@ -68,6 +70,16 @@ export const AdvancedSearch = ({
   const handleTagsSelected = (include: string[], exclude: string[]) => {
     setIncludeTags(include);
     setExcludeTags(exclude);
+  };
+
+  const resetFilters = () => {
+    setSelectedAuthors([]);
+    setSelectedContentLimits([]);
+    setSelectedStatuses([]);
+    setSelectedFor([]);
+    setQuery("");
+    setIncludeTags([]);
+    setExcludeTags([]);
   };
 
   const searchParams = new URLSearchParams();
@@ -172,18 +184,21 @@ export const AdvancedSearch = ({
 
       {/* button group */}
       <div className="flex flex-row gap-2 justify-end">
-        {/* <Button
+        <Guide />
+        <Button
           color="warning"
           radius="sm"
           variant="flat"
           startContent={<Eraser />}
           className="font-semibold"
+          onPress={() => {
+            resetFilters();
+            router.push("/advanced-search");
+            setSearchTrigger((prev) => prev + 1);
+          }}
         >
           Đặt lại
-        </Button> */}
-
-        <Guide />
-
+        </Button>
         <Button
           className="font-semibold"
           color="danger"
