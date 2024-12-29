@@ -113,7 +113,7 @@ const SearchSection = () => {
                     aria-label="Search Results"
                     emptyContent="Không có kết quả."
                     items={activeSearch}
-                    variant="shadow"
+                    //variant="shadow"
                   >
                     {(item) => (
                       <ListboxItem

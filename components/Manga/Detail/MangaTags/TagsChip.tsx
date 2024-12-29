@@ -2,6 +2,7 @@ import { Chip } from "@nextui-org/react";
 import StatusChip from "./StatusChip";
 import ContentRatingChip from "./ContentRatingChip";
 import { Tag } from "@/types";
+import MyChip from "@/components/Custom/MyChip";
 
 interface MangaTagsProps {
   tags: Tag[];
@@ -15,14 +16,14 @@ const MangaTags = ({ tags, contentRating, status }: MangaTagsProps) => {
       <StatusChip status={status} />
       <ContentRatingChip rating={contentRating} />
       {tags.map((tag) => (
-        <Chip key={tag.id} className="uppercase text-xs" radius="sm" size="sm">
+        <MyChip key={tag.id} className="uppercase text-xs">
           <a
             href={`/advanced-search?include=${tag.id}`}
-            className="text-xs hover:underline"
+            className="text-xs hover:underline text-black dark:text-white"
           >
             {tag.name}
           </a>
-        </Chip>
+        </MyChip>
       ))}
     </>
   );

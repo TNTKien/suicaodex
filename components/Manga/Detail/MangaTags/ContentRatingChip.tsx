@@ -1,4 +1,4 @@
-import { Chip } from "@nextui-org/react";
+import MyChip from "@/components/Custom/MyChip";
 
 interface ContentRatingChipProps {
   rating: string;
@@ -15,18 +15,14 @@ const ContentRatingChip = ({ rating }: ContentRatingChipProps) => {
   }[rating];
 
   return (
-    <Chip
-      className={`uppercase text-white ${ratingColor}`}
-      radius="sm"
-      size="sm"
-    >
+    <MyChip className={`uppercase text-white ${ratingColor}`}>
       <a
         href={`/advanced-search?content=${rating}`}
         className="text-xs hover:underline"
       >
         {rating}
       </a>
-    </Chip>
+    </MyChip>
   );
 };
 

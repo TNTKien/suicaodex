@@ -1,4 +1,4 @@
-import { Chip } from "@nextui-org/react";
+import MyChip from "@/components/Custom/MyChip";
 
 interface StatusChipProps {
   status: string;
@@ -27,23 +27,17 @@ const StatusChip = ({ status }: StatusChipProps) => {
   }[status];
 
   return (
-    <Chip
-      classNames={{
-        base: `bg-default ${statusBorder}`,
-        content: `uppercase ${statusTextColor}`,
-      }}
-      radius="sm"
-      size="sm"
-      startContent={<span className={`${statusBg} rounded-full w-2 h-2`} />}
-      variant="bordered"
+    <MyChip
+      className={`uppercase bg-default ${statusTextColor} border-2 ${statusBorder}`}
     >
+      <span className={`${statusBg} rounded-full w-2 h-2`} />
       <a
         href={`/advanced-search?status=${status}`}
         className="text-xs hover:underline"
       >
         {status}
       </a>
-    </Chip>
+    </MyChip>
   );
 };
 
