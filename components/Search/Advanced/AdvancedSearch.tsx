@@ -224,6 +224,7 @@ export const AdvancedSearch = ({
         status={selectedStatuses}
         title={query}
         trigger={searchTrigger}
+        searchUrl={searchURL}
       />
     </div>
   );

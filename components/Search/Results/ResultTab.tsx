@@ -1,15 +1,15 @@
 "use client";
 
-import { Spinner, Tab, Tabs } from "@nextui-org/react";
+import { Pagination, Spinner, Tab, Tabs } from "@nextui-org/react";
 import { LayoutGrid, List, StretchHorizontal } from "lucide-react";
 import { useEffect, useState } from "react";
-
 import { ResultList } from "./ResultList";
 import { ResultHorizontal } from "./ResultHorizontal";
 import { ResultGrid } from "./ResultGrid";
-
 import { Manga } from "@/types";
-import { AdvancedSearchManga } from "@/lib/data";
+import { AdvancedSearch } from "@/lib/mangadex/advanced-search";
+import { useRouter } from "next/navigation";
+import LatestSkeleton from "@/components/Manga/Latest/LatestSkeleton";
 
 interface ResultTabProps {
   title: string;
@@ -21,7 +21,8 @@ interface ResultTabProps {
   exclude: string[];
   author: string[];
   graphic: string[];
-  trigger: number; // Add this line
+  trigger: number;
+  searchUrl: string;
 }
 
 export default function ResultTab({
@@ -34,9 +35,14 @@ export default function ResultTab({
   exclude,
   author,
   graphic,
-  trigger, // Add this line
+  trigger,
+  searchUrl,
 }: ResultTabProps) {
-  const [searchResults, setSearchResults] = useState<Manga[]>([]);
+  const router = useRouter();
+  const [searchResults, setSearchResults] = useState<{
+    mangas: Manga[];
+    total: number;
+  }>({ mangas: [], total: 0 });
   const [fetchFailed, setFetchFailed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -44,7 +50,7 @@ export default function ResultTab({
     setIsLoading(true);
     try {
       const offset = (page - 1) * limit;
-      const mangas = await AdvancedSearchManga(
+      const mangas = await AdvancedSearch(
         title,
         offset,
         limit,
@@ -53,9 +59,8 @@ export default function ResultTab({
         include,
         exclude,
         author,
-        graphic,
+        graphic
       );
-
       setSearchResults(mangas);
     } catch (error) {
       console.error(error);
@@ -67,7 +72,32 @@ export default function ResultTab({
 
   useEffect(() => {
     fetchData();
-  }, [trigger]); // Update this line
+  }, [page || trigger]); // Update this line
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col">
+        <Tabs
+          aria-label="Options"
+          className="justify-end"
+          classNames={{
+            tabList: "rounded-md",
+            cursor: "rounded-md",
+            panel: "w-full px-0",
+          }}
+        >
+          <Tab key="list" title={<List />}></Tab>
+          <Tab key="horizontal" title={<StretchHorizontal />}></Tab>
+          <Tab key="grid" title={<LayoutGrid />}></Tab>
+        </Tabs>
+        <div className="grid grid-cols-1 gap-2 mt-3 px-1">
+          <LatestSkeleton />
+          <LatestSkeleton />
+          <LatestSkeleton />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col">
@@ -77,21 +107,35 @@ export default function ResultTab({
         classNames={{
           tabList: "rounded-md",
           cursor: "rounded-md",
+          panel: "w-full px-0",
         }}
       >
         <Tab key="list" title={<List />}>
-          <ResultList mangaList={searchResults} />
+          <ResultList mangaList={searchResults.mangas} />
         </Tab>
         <Tab key="horizontal" title={<StretchHorizontal />}>
-          <ResultHorizontal mangaList={searchResults} />
+          <ResultHorizontal mangaList={searchResults.mangas} />
         </Tab>
         <Tab key="grid" title={<LayoutGrid />}>
-          <ResultGrid mangaList={searchResults} />
+          <ResultGrid mangaList={searchResults.mangas} />
         </Tab>
       </Tabs>
-      {isLoading && (
-        <Spinner className="self-center mt-8" color="danger" size="lg" />
-      )}
+
+      <div className="self-center">
+        {!!searchResults.total && (
+          <Pagination
+            showControls
+            showShadow
+            color="danger"
+            initialPage={page}
+            radius="sm"
+            total={Math.ceil(searchResults.total / limit)}
+            onChange={(p) => {
+              router.push(`${searchUrl}&page=${p}`);
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 }
