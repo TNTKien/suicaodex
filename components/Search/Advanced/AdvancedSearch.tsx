@@ -45,7 +45,7 @@ export const AdvancedSearch = ({
   const initInclude = include === "" ? [] : include.split(",");
   const initExclude = exclude === "" ? [] : exclude.split(",");
 
-  // TODO: Tags & Pagination
+  // TODO: Tags
 
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>(initAuthor);
   const [selectedContentLimits, setSelectedContentLimits] =
