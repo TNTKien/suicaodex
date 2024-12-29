@@ -9,14 +9,29 @@ interface pageProps {
   };
 }
 
-export const metadata: Metadata = {
-  title: "Tìm kiếm nâng cao - SuicaoDex",
-  description: "Công cụ tìm kiếm nâng cao",
-  keywords: ["Tìm kiếm nâng cao", "Nâng cao", "Tìm kiếm", "Manga", "SuicaoDex"],
-  openGraph: {
-    images: `${siteConfig.suicaodex.domain}/hanabi_holder.webp`,
-  },
-};
+export async function generateMetadata({
+  searchParams,
+}: pageProps): Promise<Metadata> {
+  const { page } = getSearchParams({ searchParams });
+
+  return {
+    title:
+      page === 1
+        ? "Tìm kiếm nâng cao - SuicaoDex"
+        : `Trang ${page} - Tìm kiếm nâng cao - SuicaoDex`,
+    description: "Công cụ tìm kiếm nâng cao",
+    keywords: [
+      "Tìm kiếm nâng cao",
+      "Nâng cao",
+      "Tìm kiếm",
+      "Manga",
+      "SuicaoDex",
+    ],
+    openGraph: {
+      images: `${siteConfig.suicaodex.domain}/hanabi_holder.webp`,
+    },
+  };
+}
 
 export default function Page({ searchParams }: pageProps) {
   const { page, limit, author, q, content, status, demos, include, exclude } =

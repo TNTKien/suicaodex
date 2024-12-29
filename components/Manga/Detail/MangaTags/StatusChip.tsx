@@ -12,11 +12,11 @@ const StatusChip = ({ status }: StatusChipProps) => {
     cancelled: "text-red-500 dark:text-red-400",
   }[status];
 
-  const statusBorder = {
-    ongoing: "border-blue-500 dark:border-blue-400",
-    completed: "border-green-500 dark:border-green-400",
-    hiatus: "border-gray-500 dark:border-gray-400",
-    cancelled: "border-red-500 dark:border-red-400",
+  const statusOutline = {
+    ongoing: "outline-blue-500 dark:outline-blue-400",
+    completed: "outline-green-500 dark:outline-green-400",
+    hiatus: "outline-gray-500 dark:outline-gray-400",
+    cancelled: "outline-red-500 dark:outline-red-400",
   }[status];
 
   const statusBg = {
@@ -28,7 +28,7 @@ const StatusChip = ({ status }: StatusChipProps) => {
 
   return (
     <MyChip
-      className={`uppercase bg-default ${statusTextColor} border-2 ${statusBorder}`}
+      className={`uppercase bg-default ${statusTextColor} outline outline-2 -outline-offset-2 ${statusOutline}`}
     >
       <span className={`${statusBg} rounded-full w-2 h-2`} />
       <a
