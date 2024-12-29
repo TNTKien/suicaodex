@@ -19,7 +19,7 @@ const MangaTags = ({ tags, contentRating, status }: MangaTagsProps) => {
         <MyChip key={tag.id} className="uppercase text-xs">
           <a
             href={`/advanced-search?include=${tag.id}`}
-            className="text-xs hover:underline text-black dark:text-white"
+            className="text-xs hover:underline text-gray-700 dark:text-white"
           >
             {tag.name}
           </a>
