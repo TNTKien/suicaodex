@@ -7,6 +7,7 @@ export default function SignInMessage() {
     <Alert
       hideIcon
       title="Nếu các tài khoản bên dưới có email giống nhau, SuicaoDex chỉ ghi nhận tài khoản đăng nhập đầu tiên, bạn sẽ không thể đăng nhập bằng loại tài khoản còn lại."
+      description
       color="danger"
       radius="sm"
       classNames={{

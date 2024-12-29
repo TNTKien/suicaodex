@@ -16,6 +16,7 @@
     "@auth/prisma-adapter": "^2.7.4",
     "@giscus/react": "^3.0.0",
     "@icons-pack/react-simple-icons": "^10.2.0",
+    "@nextui-org/alert": "^2.2.8",
     "@nextui-org/button": "2.2.8",
     "@nextui-org/code": "2.2.5",
     "@nextui-org/input": "2.4.7",
