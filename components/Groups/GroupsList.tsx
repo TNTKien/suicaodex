@@ -111,6 +111,7 @@ export default function GroupsList({ page, limit, q }: GroupsListProps) {
               <CardBody className="flex flex-row gap-2 p-2 items-center">
                 <img
                   src="/hanabi_holder.webp"
+                  alt="Gr Avt"
                   className="rounded-full w-9 h-9 border-2 border-danger"
                 />
                 <p className="text-lg line-clamp-1 font-semibold">

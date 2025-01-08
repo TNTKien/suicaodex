@@ -137,6 +137,7 @@ const GroupInfo = ({ groupID, page, tab }: GroupInfoProps) => {
                   <CardBody className="p-2 flex flex-row gap-2 items-center">
                     <img
                       src="/hanabi_holder.webp"
+                      alt="Leader Avt"
                       className="rounded-full w-10 h-10 border-2 border-danger"
                     />
                     <p className="text-lg line-clamp-1 font-semibold">
