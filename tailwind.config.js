@@ -13,6 +13,10 @@ module.exports = {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
       },
+      backgroundPosition: {
+        "center-25": "center 25%",
+        "center-50": "center 50%",
+      },
     },
   },
   darkMode: "class",

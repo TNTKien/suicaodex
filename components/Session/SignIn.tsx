@@ -1,7 +1,15 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-import { Bug, History, Link2, LogIn, Mail, ScanSearch } from "lucide-react";
+import {
+  Bug,
+  History,
+  Link2,
+  LogIn,
+  Mail,
+  ScanSearch,
+  Users2,
+} from "lucide-react";
 import {
   Avatar,
   Dropdown,
@@ -63,6 +71,14 @@ export function SignIn() {
                 textValue="History"
               >
                 Lịch sử đọc truyện
+              </DropdownItem>
+              <DropdownItem
+                key="groups"
+                href="/groups"
+                startContent={<Users2 />}
+                textValue="Groups"
+              >
+                Nhóm dịch
               </DropdownItem>
               <DropdownItem
                 key="github"

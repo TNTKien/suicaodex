@@ -7,7 +7,15 @@ import {
   DropdownTrigger,
   Link,
 } from "@nextui-org/react";
-import { Bug, History, Library, Link2, LogOut, ScanSearch } from "lucide-react";
+import {
+  Bug,
+  History,
+  Library,
+  Link2,
+  LogOut,
+  ScanSearch,
+  Users2,
+} from "lucide-react";
 
 import { siteConfig } from "@/config/site";
 
@@ -72,6 +80,14 @@ export function UserNav() {
           textValue="History"
         >
           Lịch sử đọc truyện
+        </DropdownItem>
+        <DropdownItem
+          key="groups"
+          href="/groups"
+          startContent={<Users2 />}
+          textValue="Groups"
+        >
+          Nhóm dịch
         </DropdownItem>
         <DropdownItem
           key="github"

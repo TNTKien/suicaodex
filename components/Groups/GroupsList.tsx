@@ -12,6 +12,7 @@ import {
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import NoPrefetchLink from "../Custom/NoPrefetchLink";
 
 interface GroupsListProps {
   page: number;
@@ -98,24 +99,26 @@ export default function GroupsList({ page, limit, q }: GroupsListProps) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-1">
         {groups.map((group) => (
-          <Card
-            key={group.id}
-            radius="none"
-            shadow="sm"
-            isHoverable
-            className="rounded-md"
-            isPressable
-            fullWidth
-            onPress={() => router.push(`/groups/${group.id}`)}
-          >
-            <CardBody className="flex flex-row gap-2 p-2 items-center">
-              <img
-                src="/hanabi_holder.webp"
-                className="rounded-full w-9 h-9 border-2 border-danger"
-              />
-              <p className="text-lg line-clamp-1 font-semibold">{group.name}</p>
-            </CardBody>
-          </Card>
+          <NoPrefetchLink href={`/groups/${group.id}`} key={group.id}>
+            <Card
+              radius="none"
+              shadow="sm"
+              isHoverable
+              className="rounded-md"
+              isPressable
+              fullWidth
+            >
+              <CardBody className="flex flex-row gap-2 p-2 items-center">
+                <img
+                  src="/hanabi_holder.webp"
+                  className="rounded-full w-9 h-9 border-2 border-danger"
+                />
+                <p className="text-lg line-clamp-1 font-semibold">
+                  {group.name}
+                </p>
+              </CardBody>
+            </Card>
+          </NoPrefetchLink>
         ))}
       </div>
       {total !== 0 && (

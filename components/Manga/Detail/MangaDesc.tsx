@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Selection } from "@nextui-org/react";
 import remarkGfm from "remark-gfm";
+import { cn } from "@/lib/utils";
 
 interface MangaDescProps {
   desc: string;
@@ -20,7 +21,7 @@ const MangaDesc = ({ desc }: MangaDescProps) => {
   if (desc.length <= MAX_LENGTH)
     return (
       <ReactMarkdown
-        className="text-sm"
+        className={cn("text-sm")}
         components={{
           a: ({ href, children }) => (
             <a href={href} style={{ textDecoration: "underline" }}>
