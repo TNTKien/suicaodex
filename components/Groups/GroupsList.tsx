@@ -1,10 +1,7 @@
 "use client";
 import { Group, searchGroups } from "@/lib/mangadex/groups";
 import {
-  Avatar,
   Button,
-  Card,
-  CardBody,
   Divider,
   Input,
   Link,
@@ -14,7 +11,6 @@ import {
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import NoPrefetchLink from "../Custom/NoPrefetchLink";
 
 interface GroupsListProps {
   page: number;
@@ -158,23 +154,6 @@ export default function GroupsList({ page, limit, q }: GroupsListProps) {
           // isCompact
         />
       )}
-      {/* <div className="self-center">
-        {total !== 0 && (
-          <Pagination
-            showControls
-            showShadow
-            color="danger"
-            initialPage={page}
-            radius="sm"
-            total={Math.ceil(total / limit)}
-            onChange={(p) => {
-              router.push(`/groups?page=${p}`);
-            }}
-
-            // isCompact
-          />
-        )}
-      </div> */}
     </div>
   );
 }

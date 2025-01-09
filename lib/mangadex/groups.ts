@@ -1,6 +1,6 @@
-import { Manga } from "@/types";
+import { Chapter, LastestManga, Manga } from "@/types";
 import axiosInstance from "../axios";
-import { MangaParser } from "../data";
+import { ChaptersParser, MangaParser } from "../data";
 
 export type Group = {
   id: string;
@@ -104,14 +104,66 @@ export async function getGroupById(id: string): Promise<Group> {
   return group;
 }
 
-export async function getGroupFeeds(id: string): Promise<Manga[]> {
-  const { data } = await axiosInstance.get(`/manga?`, {
+export async function getGroupFeeds(
+  limit: number,
+  offset: number,
+  id: string
+): Promise<LastestManga[]> {
+  const max_mangas = 18;
+  const max_total = 10000;
+  if (limit + offset > max_total) {
+    limit = max_total - offset;
+  }
+  const { data: chaptersData } = await axiosInstance.get("/chapter?", {
     params: {
-      limit: 32,
-      group: id,
+      limit: limit,
+      offset: offset,
+      includes: ["scanlation_group"],
+      groups: [id],
       contentRating: ["safe", "suggestive", "erotica", "pornographic"],
+      translatedLanguage: ["vi"],
+      order: {
+        readableAt: "desc",
+      },
+    },
+  });
+  const total = chaptersData.total > max_total ? max_total : chaptersData.total;
+
+  const chapters = ChaptersParser(chaptersData.data);
+  const mangaIDs = chapters.map((chapter) => chapter.manga?.id);
+
+  //filter out the chapters that have same manga id
+  let uniqueMangaIDs = Array.from(new Set(mangaIDs));
+  if (uniqueMangaIDs.length > max_mangas) {
+    uniqueMangaIDs = uniqueMangaIDs.slice(0, max_mangas);
+  }
+
+  const latestChapters = uniqueMangaIDs
+    .map((mangaID) =>
+      chapters.filter((chapter) => chapter.manga?.id === mangaID).slice(0, 3)
+    )
+    .flat()
+    .filter((chapter): chapter is Chapter => chapter !== undefined);
+
+  const { data: mangasData } = await axiosInstance.get("/manga?", {
+    params: {
+      limit: 20,
+      ids: uniqueMangaIDs,
       includes: ["cover_art", "author", "artist"],
     },
   });
-  return data.data.map((item: any) => MangaParser(item));
+
+  const mangas = mangasData.data.map((m: any) => MangaParser(m));
+  const result = mangas.map((manga: Manga) => {
+    const lastestChap = latestChapters.filter(
+      (chapter) => chapter.manga?.id === manga.id
+    );
+    return {
+      info: manga,
+      lastestChap,
+      total,
+    };
+  });
+
+  return result;
 }

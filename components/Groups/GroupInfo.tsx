@@ -2,23 +2,11 @@
 
 import { getGroupById, Group } from "@/lib/mangadex/groups";
 import { cn } from "@/lib/utils";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Divider,
-  Image,
-  Tab,
-  Tabs,
-  User,
-} from "@nextui-org/react";
+import { Button, Card, CardBody, Tab, Tabs } from "@nextui-org/react";
 import { Globe, Mail, MessageSquare, Upload } from "lucide-react";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import MangaDesc from "../Manga/Detail/MangaDesc";
 import Link from "next/link";
 import { SiDiscord, SiX } from "@icons-pack/react-simple-icons";
 import GroupFeeds from "./GroupFeeds";
@@ -26,7 +14,7 @@ import { useRouter } from "next/navigation";
 
 interface GroupInfoProps {
   groupID: string;
-  page?: number;
+  page: number;
   tab: string;
 }
 
@@ -58,7 +46,7 @@ const GroupInfo = ({ groupID, page, tab }: GroupInfoProps) => {
   }
 
   return (
-    <>
+    <div className="md:px-8">
       <div className="absolute h-[12rem] z-0 w-auto left-0 right-0 top-[4rem] block">
         <div
           className={cn(
@@ -119,7 +107,7 @@ const GroupInfo = ({ groupID, page, tab }: GroupInfoProps) => {
           aria-label="Options"
           classNames={{
             tabList: "rounded-md",
-            tab: "px-1.5 py-2",
+            // tab: "px-3 py-2",
             cursor: "rounded-md",
             panel: "w-full p-0",
             tabContent: "font-semibold",
@@ -228,11 +216,11 @@ const GroupInfo = ({ groupID, page, tab }: GroupInfoProps) => {
             )}
           </Tab>
           <Tab key="feed" title="Truyện đã đăng">
-            <GroupFeeds id={groupID} />
+            <GroupFeeds id={groupID} page={page} />
           </Tab>
         </Tabs>
       </div>
-    </>
+    </div>
   );
 };
 

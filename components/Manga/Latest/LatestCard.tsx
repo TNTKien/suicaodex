@@ -12,7 +12,7 @@ interface LatestCardProps {
 
 const LatestCard = ({ mangas }: LatestCardProps) => {
   return (
-    <div className="grid grid-cols-1 gap-2">
+    <div className="grid grid-cols-1 gap-2 w-full">
       {mangas.map((manga) => (
         <Card
           key={manga.info.id}
