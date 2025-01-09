@@ -48,12 +48,15 @@ export const ChapterTabCard = ({ chapter }: ChapterTabCardProps) => {
             )}
           </NoPrefetchLink>
           <div className="flex justify-between items-center">
-            <div className="flex flex-row gap-1 items-center">
+            <NoPrefetchLink
+              href={chapter.group.id ? `/groups/${chapter.group.id}` : `#`}
+              className="flex flex-row gap-1 items-center hover:underline"
+            >
               <Users size={16} />
               <p className="text-sm line-clamp-1 text-foreground/80">
                 {chapter.group.name ? chapter.group.name : "No Group"}
               </p>
-            </div>
+            </NoPrefetchLink>
             <time
               className="italic text-xs line-clamp-1 px-1"
               dateTime={new Date(chapter.updatedAt).toDateString()}

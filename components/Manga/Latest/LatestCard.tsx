@@ -63,12 +63,15 @@ const LatestCard = ({ mangas }: LatestCardProps) => {
                       )}
                     </div>
                     <div className="flex justify-between items-center">
-                      <div className="flex flex-row gap-1 items-center">
+                      <NoPrefetchLink
+                        href={c.group.id ? `/groups/${c.group.id}` : "#"}
+                        className="flex flex-row gap-1 items-center hover:underline"
+                      >
                         <Users size={16} />
                         <p className="text-sm line-clamp-1 text-foreground/80">
                           {c.group.name ? c.group.name : "No Group"}
                         </p>
-                      </div>
+                      </NoPrefetchLink>
                       <time
                         className="italic text-xs line-clamp-1 px-1"
                         dateTime={new Date(c.updatedAt).toDateString()}
