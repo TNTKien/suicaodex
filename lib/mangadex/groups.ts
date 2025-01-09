@@ -150,6 +150,7 @@ export async function getGroupFeeds(
       limit: 20,
       ids: uniqueMangaIDs,
       includes: ["cover_art", "author", "artist"],
+      contentRating: ["safe", "suggestive", "erotica", "pornographic"],
     },
   });
 
