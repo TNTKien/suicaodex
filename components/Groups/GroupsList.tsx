@@ -2,10 +2,12 @@
 import { Group, searchGroups } from "@/lib/mangadex/groups";
 import {
   Avatar,
+  Button,
   Card,
   CardBody,
   Divider,
   Input,
+  Link,
   Pagination,
   Spinner,
 } from "@nextui-org/react";
@@ -99,27 +101,46 @@ export default function GroupsList({ page, limit, q }: GroupsListProps) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-1">
         {groups.map((group) => (
-          <NoPrefetchLink href={`/groups/${group.id}`} key={group.id}>
-            <Card
-              radius="none"
-              shadow="sm"
-              isHoverable
-              className="rounded-md"
-              isPressable
-              fullWidth
-            >
-              <CardBody className="flex flex-row gap-2 p-2 items-center">
-                <img
-                  src="/hanabi_holder.webp"
-                  alt="Gr Avt"
-                  className="rounded-full w-9 h-9 border-2 border-danger"
-                />
-                <p className="text-lg line-clamp-1 font-semibold">
-                  {group.name}
-                </p>
-              </CardBody>
-            </Card>
-          </NoPrefetchLink>
+          // <NoPrefetchLink href={`/groups/${group.id}`} key={group.id}>
+          //   <Card
+          //     radius="none"
+          //     shadow="sm"
+          //     isHoverable
+          //     className="rounded-md"
+          //     // isPressable
+          //     fullWidth
+          //   >
+          //     <CardBody className="flex flex-row gap-2 p-2 items-center">
+          // <img
+          //   src="/hanabi_holder.webp"
+          //   alt="Gr Avt"
+          //   className="rounded-full w-9 h-9 border-2 border-danger"
+          // />
+          // <p className="text-lg line-clamp-1 font-semibold">
+          //   {group.name}
+          // </p>
+          //     </CardBody>
+          //   </Card>
+          // </NoPrefetchLink>
+          <Button
+            fullWidth
+            as={Link}
+            href={`/groups/${group.id}`}
+            radius="sm"
+            key={group.id}
+            size="lg"
+            startContent={
+              <img
+                src="/hanabi_holder.webp"
+                alt="Gr Avt"
+                className="rounded-full w-9 h-9 border-2 border-danger"
+              />
+            }
+            className="justify-start px-2 line-clamp-1"
+            variant="flat"
+          >
+            <p className="text-lg line-clamp-1 font-semibold">{group.name}</p>
+          </Button>
         ))}
       </div>
       {total !== 0 && (
