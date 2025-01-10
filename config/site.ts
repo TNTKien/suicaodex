@@ -25,4 +25,8 @@ export const siteConfig = {
     domain: "https://suicaodex.com",
     apiURL: "https://api.suicaodex.com", //pls use your own proxy server; or use built-in proxy, see /lib/axios.ts
   },
+  copyright: {
+    manga: ["d36bea9f-853f-4908-9957-5514b1903e36"],
+    chapter: ["640c1a22-243e-4944-9f65-5ef5b1496581"],
+  },
 };

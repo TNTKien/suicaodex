@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import ChapterView from "@/components/Chapter/ChapterView";
 import { siteConfig } from "@/config/site";
 import { getChapterbyID } from "@/lib/data";
+import Copyright from "@/components/copyright";
 
 interface pageProps {
   params: {
@@ -13,6 +14,17 @@ interface pageProps {
 export async function generateMetadata({
   params,
 }: pageProps): Promise<Metadata> {
+  if (siteConfig.copyright.chapter.includes(params.id)) {
+    return {
+      title: `SuicaoDex`,
+      keywords: [`Manga`, "SuicaoDex"],
+      openGraph: {
+        title: `SuicaoDex`,
+        siteName: "SuicaoDex",
+        images: `${siteConfig.mangadexAPI.ogURL}/chapter/${params.id}`,
+      },
+    };
+  }
   try {
     const chapterData = await getChapterbyID(params.id);
     const chapterInx = chapterData.chapter
@@ -46,5 +58,8 @@ export async function generateMetadata({
 }
 
 export default function Page({ params }: pageProps) {
+  if (siteConfig.copyright.chapter.includes(params.id)) {
+    return <Copyright id={params.id} type="chapter" />;
+  }
   return <ChapterView chapterID={params.id} />;
 }

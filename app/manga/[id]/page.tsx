@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import MangaDetailsNew from "@/components/Manga/Detail/MangaDetailsNew";
 import { siteConfig } from "@/config/site";
 import { getMangaDetails } from "@/lib/data";
+import Copyright from "@/components/copyright";
 
 interface pageProps {
   params: {
@@ -13,6 +14,17 @@ interface pageProps {
 export async function generateMetadata({
   params,
 }: pageProps): Promise<Metadata> {
+  if (siteConfig.copyright.manga.includes(params.id)) {
+    return {
+      title: `SuicaoDex`,
+      keywords: [`Manga`, "SuicaoDex"],
+      openGraph: {
+        title: `SuicaoDex`,
+        siteName: "SuicaoDex",
+        images: `${siteConfig.mangadexAPI.ogURL}/manga/${params.id}`,
+      },
+    };
+  }
   try {
     const mangaDetails = await getMangaDetails(params.id);
 
@@ -46,5 +58,9 @@ export async function generateMetadata({
 
 export default async function Page({ params }: pageProps) {
   const session = await auth();
+
+  if (siteConfig.copyright.manga.includes(params.id)) {
+    return <Copyright id={params.id} type="title" />;
+  }
   return <MangaDetailsNew mangaID={params.id} session={session} />;
 }
