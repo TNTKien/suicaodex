@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
 import {
@@ -35,6 +37,9 @@ import useScrollOffset from "../hook/useScrollOffset";
 import { Chapter, ChapterAggregate } from "@/types";
 import { GiscusCmt } from "../Comment/GiscusCmt";
 import { siteConfig } from "@/config/site";
+import { useRouter } from "next/navigation";
+import useKeyDown from "../hook/useKeyDown";
+import { toast } from "react-toastify";
 
 interface ChapterNavProps {
   chapterData: Chapter;
@@ -86,6 +91,20 @@ export const ChapterNav = ({
   const scrollDirection = useScrollDirection();
   const { isAtBottom, isAtTop } = useScrollOffset();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const router = useRouter();
+
+  const goNextChapter = () => {
+    if (nextChapter) return router.push(`/chapter/${nextChapter}`);
+    return toast("Đây là chương mới nhất rồi nha!");
+  };
+
+  const goPrevChapter = () => {
+    if (prevChapter) return router.push(`/chapter/${prevChapter}`);
+  };
+
+  // Use the custom hook to listen for the "Enter" key press
+  useKeyDown("ArrowLeft", goPrevChapter);
+  useKeyDown("ArrowRight", goNextChapter);
 
   return (
     <>
