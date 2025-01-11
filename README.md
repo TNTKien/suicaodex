@@ -4,8 +4,7 @@ Please note that all data belongs to MangaDex, this project is for entertainment
 
 I know my code sucks, but it works btw.
 
-Feel free to blame me as much as you want, you can find me on [Facebook](https://www.facebook.com/suicaodex) or create an issue [here](https://github.com/TNTKien/suicaodex/issues/new).
-
+Feel free to blame me as much as you want, you can find me on [Facebook](https://www.facebook.com/suicaodex), [create an issue](https://github.com/TNTKien/suicaodex/issues/new) or [start a discussion](https://github.com/TNTKien/suicaodex/discussions)
 ## How to Use
 
 ### Install dependencies
