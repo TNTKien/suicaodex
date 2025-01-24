@@ -1,7 +1,7 @@
 "use client";
 
 import useReadingHistory from "@/components/hook/useReadingHistory";
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 import { SquarePlay } from "lucide-react";
 import Link from "next/link";
 

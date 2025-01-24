@@ -8,7 +8,7 @@ import {
   CardFooter,
   Divider,
   Image,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import Link from "next/link";
 
 import { BookOpenText, Clock, Trash2 } from "lucide-react";

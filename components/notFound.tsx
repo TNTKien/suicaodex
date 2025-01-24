@@ -1,6 +1,6 @@
 "use client";
 
-import { Link } from "@nextui-org/link";
+import { Link } from "@heroui/link";
 import Image from "next/image";
 
 import NotFoundImg from "@/public/404.png";

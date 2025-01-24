@@ -7,7 +7,7 @@ import {
   Skeleton,
   Tab,
   Tabs,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { Album, BookmarkCheck, ListCheck, NotebookPen } from "lucide-react";
 import { useEffect, useState } from "react";
 import { MangaCard } from "../Search/Results/MangaCard";

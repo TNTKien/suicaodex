@@ -3,7 +3,7 @@ import NoPrefetchLink from "@/components/Custom/NoPrefetchLink";
 import { siteConfig } from "@/config/site";
 import { formatTimeToNow } from "@/lib/utils";
 import { Chapter } from "@/types";
-import { Card, CardBody, Image } from "@nextui-org/react";
+import { Card, CardBody, Image } from "@heroui/react";
 import { Users } from "lucide-react";
 
 interface ChapterTabCardProps {

@@ -1,4 +1,4 @@
-import { Chip } from "@nextui-org/react";
+import { Chip } from "@heroui/react";
 import StatusChip from "./StatusChip";
 import ContentRatingChip from "./ContentRatingChip";
 import { Tag } from "@/types";

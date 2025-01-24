@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
+import { Button } from "@heroui/button";
+import { Input } from "@heroui/input";
 import { EyeOff, Eye, Search, Eraser } from "lucide-react";
 import { useState } from "react";
-import { Divider } from "@nextui-org/react";
+import { Divider } from "@heroui/react";
 import ResultTab from "../Results/ResultTab";
 import { SearchDropdown } from "./SearchDropdown";
 import AuthorSearch from "./AuthorSearch";

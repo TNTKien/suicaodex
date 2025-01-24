@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardFooter, Image } from "@heroui/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -17,7 +17,7 @@ interface PopularMangaCardProps {
 
 const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
   return (
-    <Card
+    (<Card
       isBlurred
       isFooterBlurred
       className="border-none rounded-md bg-background/60 dark:bg-default-100/50 w-full max-w-full max-h-[324]"
@@ -103,7 +103,7 @@ const PopularMangaCard = ({ manga, priority }: PopularMangaCardProps) => {
           </div>
         </div>
       </CardFooter>
-    </Card>
+    </Card>)
   );
 };
 

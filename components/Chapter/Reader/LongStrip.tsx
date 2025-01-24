@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Image } from "@nextui-org/react";
+import { Image } from "@heroui/react";
 import { useEffect } from "react";
 
 interface LongStripProps {

@@ -2,7 +2,7 @@
 
 import { getRecentlyMangas } from "@/lib/data";
 import { Manga } from "@/types";
-import { Divider } from "@nextui-org/react";
+import { Divider } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { RecentCard } from "./RecentCard";
 import TabSkeleton from "../Manga/MangaTab/TabSkeleton";

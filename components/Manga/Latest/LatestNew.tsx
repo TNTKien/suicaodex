@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Divider, Pagination, Tab, Tabs } from "@nextui-org/react";
+import { Divider, Pagination, Tab, Tabs } from "@heroui/react";
 import { LayoutGrid, StretchHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { LastestManga } from "@/types";

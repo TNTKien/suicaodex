@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardFooter, Image } from "@heroui/react";
 import { LastestManga } from "@/types";
 import { siteConfig } from "@/config/site";
 import NoPrefetchLink from "@/components/Custom/NoPrefetchLink";

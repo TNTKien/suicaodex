@@ -3,7 +3,7 @@
 import { getGroupFeeds } from "@/lib/mangadex/groups";
 import { LastestManga } from "@/types";
 import { useEffect, useState } from "react";
-import { Pagination, Spinner } from "@nextui-org/react";
+import { Pagination, Spinner } from "@heroui/react";
 import LatestCard from "../Manga/Latest/LatestCard";
 import { useRouter } from "next/navigation";
 

@@ -2,7 +2,7 @@
 
 import { getGroupById, Group } from "@/lib/mangadex/groups";
 import { cn } from "@/lib/utils";
-import { Button, Card, CardBody, Tab, Tabs } from "@nextui-org/react";
+import { Button, Card, CardBody, Tab, Tabs } from "@heroui/react";
 import { Globe, Mail, MessageSquare, Upload } from "lucide-react";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
@@ -46,7 +46,7 @@ const GroupInfo = ({ groupID, page, tab }: GroupInfoProps) => {
   }
 
   return (
-    <div className="md:px-8">
+    (<div className="md:px-8">
       <div className="absolute h-[12rem] z-0 w-auto left-0 right-0 top-[4rem] block">
         <div
           className={cn(
@@ -74,7 +74,6 @@ const GroupInfo = ({ groupID, page, tab }: GroupInfoProps) => {
           }}
         ></div>
       </div>
-
       <div className="flex flex-col gap-4 mt-[6rem] z-10 ">
         <div className="flex flex-col sm:flex-row gap-4">
           <img
@@ -220,7 +219,7 @@ const GroupInfo = ({ groupID, page, tab }: GroupInfoProps) => {
           </Tab>
         </Tabs>
       </div>
-    </div>
+    </div>)
   );
 };
 

@@ -9,7 +9,7 @@ import {
   CardHeader,
   Pagination,
   Spinner,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { AlertTriangle, ListTree, ListX } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";

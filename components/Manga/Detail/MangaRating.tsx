@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem, Progress } from "@nextui-org/react";
+import { Accordion, AccordionItem, Progress } from "@heroui/react";
 import { Bookmark, Star } from "lucide-react";
 import { MangaStats } from "@/types";
 

@@ -21,7 +21,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { siteConfig } from "@/config/site";
 import MangaTags from "../Manga/Detail/MangaTags/TagsChip";
 import MangaDesc from "../Manga/Detail/MangaDesc";

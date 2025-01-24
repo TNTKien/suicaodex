@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardBody, Image } from "@nextui-org/react";
+import { Card, CardBody, Image } from "@heroui/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -15,7 +15,7 @@ interface SearchResCardProps {
 
 const SearchResCard = ({ manga }: SearchResCardProps) => {
   return (
-    <Card key={manga.id} radius="sm" shadow="sm">
+    (<Card key={manga.id} radius="sm" shadow="sm">
       <CardBody className="flex flex-row gap-3 p-1.5">
         <Image
           alt={manga.title}
@@ -62,7 +62,7 @@ const SearchResCard = ({ manga }: SearchResCardProps) => {
           )}
         </div>
       </CardBody>
-    </Card>
+    </Card>)
   );
 };
 

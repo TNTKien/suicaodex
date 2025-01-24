@@ -1,7 +1,7 @@
 "use client";
 
 import { formatTimeToNow } from "@/lib/utils";
-import { Avatar, Button, ButtonGroup, Card, CardBody } from "@nextui-org/react";
+import { Avatar, Button, ButtonGroup, Card, CardBody } from "@heroui/react";
 import { ArrowBigDown, ArrowBigUp, Dot, Reply } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -25,7 +25,7 @@ export const CommentCard = ({
   downvotes,
 }: CommentCardProps) => {
   return (
-    <Card shadow="sm" radius="sm" className="mt-2" fullWidth>
+    (<Card shadow="sm" radius="sm" className="mt-2" fullWidth>
       <CardBody className="flex flex-row gap-2 p-2">
         <Avatar
           //className="basis-10"
@@ -86,7 +86,7 @@ export const CommentCard = ({
           </div>
         </div>
       </CardBody>
-    </Card>
+    </Card>)
   );
 };
 

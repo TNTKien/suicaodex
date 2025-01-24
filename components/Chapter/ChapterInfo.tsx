@@ -1,10 +1,10 @@
 "use client";
 
-import { Link } from "@nextui-org/link";
+import { Link } from "@heroui/link";
 import { Users } from "lucide-react";
 import { Chapter } from "@/types";
 import NoPrefetchLink from "../Custom/NoPrefetchLink";
-import { Button } from "@nextui-org/button";
+// import { Button } from "@heroui/button";
 
 interface ChapterInfoProps {
   chapterData: Chapter;

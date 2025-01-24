@@ -8,12 +8,12 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-} from "@nextui-org/navbar";
-import { Link } from "@nextui-org/link";
+} from "@heroui/navbar";
+import { Link } from "@heroui/link";
 import NextLink from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Listbox, ListboxItem } from "@nextui-org/listbox";
+import { Listbox, ListboxItem } from "@heroui/listbox";
 import SearchMobile from "./Search/SearchMobile";
 import SearchSection from "./Search/SearchSection";
 import { SignIn } from "./Session/SignIn";

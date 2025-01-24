@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 import Link from "next/link";
 import {
   Card,
@@ -17,7 +17,7 @@ import {
   DropdownTrigger,
   Tooltip,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import {
   ArrowLeft,
   ArrowRight,

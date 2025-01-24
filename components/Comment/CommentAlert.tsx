@@ -1,6 +1,6 @@
 "use client";
 
-import { Alert, Button, Card, CardBody } from "@nextui-org/react";
+import { Alert, Button, Card, CardBody } from "@heroui/react";
 import { OctagonAlert, X } from "lucide-react";
 import { useState } from "react";
 

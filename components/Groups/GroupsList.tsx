@@ -7,7 +7,7 @@ import {
   Link,
   Pagination,
   Spinner,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -76,12 +76,11 @@ export default function GroupsList({ page, limit, q }: GroupsListProps) {
   if (fetchFailed) return null;
 
   return (
-    <div className="flex flex-col gap-4 justify-between">
+    (<div className="flex flex-col gap-4 justify-between">
       <div className="flex flex-col px-1 mt-3">
         <Divider className="w-9 h-1 bg-danger" />
         <h1 className="text-2xl font-extrabold uppercase">Nhóm dịch</h1>
       </div>
-
       <Input
         radius="sm"
         startContent={<Search size={20} />}
@@ -94,7 +93,6 @@ export default function GroupsList({ page, limit, q }: GroupsListProps) {
         }}
         isClearable
       />
-
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-1">
         {groups.map((group) => (
           // <NoPrefetchLink href={`/groups/${group.id}`} key={group.id}>
@@ -118,7 +116,7 @@ export default function GroupsList({ page, limit, q }: GroupsListProps) {
           //     </CardBody>
           //   </Card>
           // </NoPrefetchLink>
-          <Button
+          (<Button
             fullWidth
             as={Link}
             href={`/groups/${group.id}`}
@@ -136,7 +134,7 @@ export default function GroupsList({ page, limit, q }: GroupsListProps) {
             variant="flat"
           >
             <p className="text-lg line-clamp-1 font-semibold">{group.name}</p>
-          </Button>
+          </Button>)
         ))}
       </div>
       {total !== 0 && (
@@ -154,6 +152,6 @@ export default function GroupsList({ page, limit, q }: GroupsListProps) {
           // isCompact
         />
       )}
-    </div>
+    </div>)
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardBody, CardFooter, Skeleton } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, Skeleton } from "@heroui/react";
 
 export default function HistorySkeleton() {
   return (

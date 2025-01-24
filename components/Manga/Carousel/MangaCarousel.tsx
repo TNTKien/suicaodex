@@ -3,7 +3,7 @@
 import { FC, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { Divider } from "@nextui-org/react";
+import { Divider } from "@heroui/react";
 
 import PopularMangaCard from "../PopularMangaCard";
 

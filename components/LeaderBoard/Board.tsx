@@ -1,6 +1,6 @@
-import { Listbox, ListboxItem } from "@nextui-org/listbox";
+import { Listbox, ListboxItem } from "@heroui/listbox";
 import { Manga } from "@/types";
-import { Card, CardBody, Image } from "@nextui-org/react";
+import { Card, CardBody, Image } from "@heroui/react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { Bookmark, Star } from "lucide-react";

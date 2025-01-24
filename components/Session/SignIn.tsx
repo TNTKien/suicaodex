@@ -21,7 +21,7 @@ import {
   ModalBody,
   ModalContent,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { UserNav } from "./UserNav";
 import { siteConfig } from "@/config/site";
 import SignInButtons from "./SignInButtons";

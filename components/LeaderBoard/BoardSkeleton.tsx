@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, Listbox, ListboxItem, Skeleton } from "@nextui-org/react";
+import { Card, Listbox, ListboxItem, Skeleton } from "@heroui/react";
 
 export default function BoardSkeleton() {
   return (

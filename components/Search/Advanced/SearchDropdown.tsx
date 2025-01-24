@@ -1,6 +1,6 @@
 "use client";
 
-import type { Selection } from "@nextui-org/react";
+import type { Selection } from "@heroui/react";
 
 import {
   Button,
@@ -8,7 +8,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { ChevronsUpDown } from "lucide-react";
 import { useMemo, useState } from "react";
 

@@ -11,7 +11,7 @@ import {
   Checkbox,
   Listbox,
   ListboxItem,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useState } from "react";
 import SearchResCard from "./SearchResCard";
 import { Manga } from "@/types";

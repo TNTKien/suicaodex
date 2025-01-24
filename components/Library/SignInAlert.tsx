@@ -7,7 +7,7 @@ import {
   Modal,
   ModalBody,
   ModalContent,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { OctagonAlert, X } from "lucide-react";
 import SignInButtons from "../Session/SignInButtons";
 import SignInMessage from "../Session/SignInMessage";
@@ -31,7 +31,7 @@ export default function SignInAlert() {
     //   </Button>
     // </div>
 
-    <Modal
+    (<Modal
       placement="center"
       hideCloseButton
       className="p-3"
@@ -77,6 +77,6 @@ export default function SignInAlert() {
           </>
         )}
       </ModalContent>
-    </Modal>
+    </Modal>)
   );
 }

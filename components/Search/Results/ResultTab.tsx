@@ -1,6 +1,6 @@
 "use client";
 
-import { Pagination, Spinner, Tab, Tabs } from "@nextui-org/react";
+import { Pagination, Spinner, Tab, Tabs } from "@heroui/react";
 import { LayoutGrid, List, StretchHorizontal } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ResultList } from "./ResultList";

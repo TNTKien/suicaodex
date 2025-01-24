@@ -7,7 +7,7 @@ import {
   Card,
   CardBody,
   CardHeader,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { ListTree, ListX } from "lucide-react";
 import Image from "next/image";
 import { ChapterCard } from "./ChapterCard";

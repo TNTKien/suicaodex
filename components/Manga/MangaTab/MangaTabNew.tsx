@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import { ChevronsRight, LayoutGrid, StretchHorizontal } from "lucide-react";
-import { Divider, Tab, Tabs } from "@nextui-org/react";
+import { Divider, Tab, Tabs } from "@heroui/react";
 import useSWR from "swr";
 import { latestChapters } from "@/lib/mangadex/latest";
 import { ChapterTabCard } from "./ChapterTabCard";

@@ -1,6 +1,6 @@
 "use client";
 
-import { Divider, Tab, Tabs } from "@nextui-org/react";
+import { Divider, Tab, Tabs } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { Bookmark, Star } from "lucide-react";
 import { Manga } from "@/types";

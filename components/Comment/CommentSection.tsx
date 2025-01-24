@@ -1,13 +1,13 @@
 "use client";
 
-import { Textarea } from "@nextui-org/input";
+import { Textarea } from "@heroui/input";
 import {
   Button,
   ButtonGroup,
   Card,
   CardBody,
   CardFooter,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import {
   Bold,
   Italic,

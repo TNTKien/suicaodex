@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardBody, Image } from "@nextui-org/react";
+import { Card, CardBody, Image } from "@heroui/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -15,7 +15,7 @@ interface MangaCardProps {
 
 export const MangaCard = ({ manga }: MangaCardProps) => {
   return (
-    <Card key={manga.id} radius="sm" shadow="sm">
+    (<Card key={manga.id} radius="sm" shadow="sm">
       <CardBody className="flex flex-row gap-3 p-1.5">
         <NoPrefetchLink href={`/manga/${manga.id}`}>
           <Image
@@ -65,6 +65,6 @@ export const MangaCard = ({ manga }: MangaCardProps) => {
           )}
         </div>
       </CardBody>
-    </Card>
+    </Card>)
   );
 };

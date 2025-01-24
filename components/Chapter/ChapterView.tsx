@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Card, CardBody, Spinner } from "@nextui-org/react";
+import { Button, Card, CardBody, Spinner } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { NotFound } from "../notFound";
 import useReadingHistory from "../hook/useReadingHistory";

@@ -6,8 +6,8 @@ import {
   ModalBody,
   ModalContent,
   useDisclosure,
-} from "@nextui-org/react";
-import { Alert } from "@nextui-org/alert";
+} from "@heroui/react";
+import { Alert } from "@heroui/alert";
 import { ListPlus, OctagonAlert } from "lucide-react";
 import SignInButtons from "@/components/Session/SignInButtons";
 import SignInMessage from "@/components/Session/SignInMessage";

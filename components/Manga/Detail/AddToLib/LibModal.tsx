@@ -2,7 +2,7 @@
 
 import { siteConfig } from "@/config/site";
 
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 import {
   Dropdown,
   DropdownItem,
@@ -17,7 +17,7 @@ import {
   Selection,
   Spinner,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import {
   Album,
   BellOff,

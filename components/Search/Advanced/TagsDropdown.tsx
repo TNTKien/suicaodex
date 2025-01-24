@@ -7,7 +7,7 @@ import {
   ModalContent,
   ModalFooter,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { ChevronsUpDown } from "lucide-react";
 import { useEffect, useState } from "react";
 

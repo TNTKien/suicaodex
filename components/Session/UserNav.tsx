@@ -6,7 +6,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
   Link,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import {
   Bug,
   History,

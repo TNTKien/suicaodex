@@ -1,7 +1,7 @@
 "use client";
 
 import { siteConfig } from "@/config/site";
-import { Image, Link } from "@nextui-org/react";
+import { Image, Link } from "@heroui/react";
 
 interface Props {
   id: string;

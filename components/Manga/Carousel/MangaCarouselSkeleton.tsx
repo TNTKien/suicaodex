@@ -1,4 +1,4 @@
-import { Card, CardBody, Skeleton } from "@nextui-org/react";
+import { Card, CardBody, Skeleton } from "@heroui/react";
 
 export default function MangaCarouselSkeleton() {
   return (

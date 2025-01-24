@@ -1,9 +1,9 @@
 "use client";
-import { Accordion, AccordionItem } from "@nextui-org/react";
+import { Accordion, AccordionItem } from "@heroui/react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { Selection } from "@nextui-org/react";
+import { Selection } from "@heroui/react";
 import remarkGfm from "remark-gfm";
 import { cn } from "@/lib/utils";
 
@@ -20,7 +20,7 @@ const MangaDesc = ({ desc }: MangaDescProps) => {
 
   if (desc.length <= MAX_LENGTH)
     return (
-      <ReactMarkdown
+      (<ReactMarkdown
         className={cn("text-sm")}
         components={{
           a: ({ href, children }) => (
@@ -32,11 +32,11 @@ const MangaDesc = ({ desc }: MangaDescProps) => {
         remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
       >
         {desc.replace(/   /g, "")}
-      </ReactMarkdown>
+      </ReactMarkdown>)
     );
 
   return (
-    <Accordion
+    (<Accordion
       isCompact
       isDisabled={desc.length <= MAX_LENGTH}
       itemClasses={{
@@ -96,7 +96,7 @@ const MangaDesc = ({ desc }: MangaDescProps) => {
           {desc.replace(/   /g, "")}
         </ReactMarkdown>
       </AccordionItem>
-    </Accordion>
+    </Accordion>)
   );
 };
 
