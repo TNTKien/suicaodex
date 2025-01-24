@@ -19,6 +19,8 @@ bun install
 
 This project uses [AuthJS](https://authjs.dev/) with Discord & Google Provider, Prisma and MySQL for authentication and some features, please follow the instructions on the their websites to setup environment variables.
 
+(It still can run without envs i said above, remove anything related and here we go)
+
 ### CORS
 
 MangaDex API requires CORS, you can built your own proxy using [suicaodex-api](https://github.com/TNTKien/suicaodex-api). Please do not use my proxy, it only works on SuicaoDex.
