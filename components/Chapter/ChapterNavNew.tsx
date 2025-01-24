@@ -1,6 +1,6 @@
 "use client";
-//DO NOT DELETE
-import { Button } from "@heroui/button";
+
+import { Button, ButtonGroup } from "@heroui/button";
 import Link from "next/link";
 import {
   Card,
@@ -10,13 +10,9 @@ import {
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownSection,
-  DropdownTrigger,
   Select,
   SelectItem,
+  SelectSection,
   Tooltip,
   useDisclosure,
 } from "@heroui/react";
@@ -25,38 +21,30 @@ import {
   ArrowRight,
   ChevronsRight,
   ChevronsUp,
-  ChevronUp,
   MessageSquare,
-  MessagesSquare,
-  MoveHorizontal,
-  MoveLeft,
-  MoveRight,
-  MoveVertical,
 } from "lucide-react";
-import { twMerge } from "tailwind-merge";
 import { useScrollDirection } from "../hook/useScrollDirection";
 import useScrollOffset from "../hook/useScrollOffset";
 import { Chapter, ChapterAggregate } from "@/types";
 import { GiscusCmt } from "../Comment/GiscusCmt";
-import { siteConfig } from "@/config/site";
 import { useRouter } from "next/navigation";
 import useKeyDown from "../hook/useKeyDown";
 import { toast } from "react-toastify";
-import { ChevronDownIcon } from "../icons";
+import { cn } from "@/lib/utils";
 
-interface ChapterNavProps {
+interface ChapterNavNewProps {
   chapterData: Chapter;
   chapterAggregate: ChapterAggregate[];
   toggleFitMode: () => void;
   fitMode: "width" | "height";
 }
 
-export const ChapterNav = ({
+export const ChapterNavNew = ({
   chapterData,
   chapterAggregate,
   toggleFitMode,
   fitMode,
-}: ChapterNavProps) => {
+}: ChapterNavNewProps) => {
   let currentVolIndex = chapterAggregate.findIndex((aggregate) =>
     aggregate.chapters.some((chapter) => chapter.id === chapterData.id)
   );
@@ -89,8 +77,9 @@ export const ChapterNav = ({
   //   chapterAggregate[currentVolIndex].vol !== "none"
   //     ? `Vol. ${chapterAggregate[currentVolIndex].vol}`
   //     : "No Volume";
-  const chapter_label =
-    chapterData.chapter !== null ? `Ch. ${chapterData.chapter}` : "Oneshot";
+  //   const chapter_label =
+  //     chapterData.chapter !== null ? `Ch. ${chapterData.chapter}` : "Oneshot";
+
   const scrollDirection = useScrollDirection();
   const { isAtBottom, isAtTop } = useScrollOffset();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -112,108 +101,18 @@ export const ChapterNav = ({
   return (
     <>
       <Card
-        className={twMerge(
-          `fixed bottom-0 left-1/2 transform -translate-x-1/2 z-10 mx-auto flex w-full translate-y-0 items-center justify-center transition-all duration-500 sm:rounded-lg sm:w-auto sm:-translate-y-2`,
-          //isAtBottom && "translate-y-full sm:translate-y-full",
+        className={cn(
+          "fixed bottom-0 z-10 translate-y-0 transition-all duration-500 sm:-translate-y-2",
+          "mb-16 right-0 sm:mb-0 sm:right-6",
+          "opacity-65 hover:opacity-100",
           scrollDirection === "down" &&
             !isAtBottom &&
-            "translate-y-full sm:translate-y-full"
+            "translate-x-full sm:translate-x-full right-0 sm:right-0"
         )}
-        radius="none"
+        radius="sm"
         shadow="sm"
-        fullWidth
       >
-        <CardBody className="flex flex-row gap-1 rounded-md p-1 w-full">
-          {/* // change fit mode btn */}
-          <Button
-            isIconOnly
-            className="rounded-md"
-            size="md"
-            onPress={toggleFitMode}
-          >
-            {fitMode === "width" ? <MoveHorizontal /> : <MoveVertical />}
-          </Button>
-
-          {/* // prevChapter btn */}
-          <Button
-            isIconOnly
-            className="rounded-md"
-            as={Link}
-            prefetch={false}
-            href={prevChapter ? `/chapter/${prevChapter}` : ``}
-            isDisabled={!prevChapter}
-            radius="sm"
-            size="md"
-          >
-            <MoveLeft />
-          </Button>
-
-          {/* // chapter list dropdown */}
-          <div className="flex flex-row gap-0 w-full">
-            <Button
-              fullWidth
-              className="rounded-l-md rounded-r-none justify-start line-clamp-1 px-3"
-              size="md"
-            >
-              {chapter_label}
-            </Button>
-            <Dropdown isKeyboardDismissDisabled radius="sm" type="listbox">
-              <DropdownTrigger>
-                <Button
-                  isIconOnly
-                  className="rounded-l-none rounded-r-md"
-                  size="md"
-                >
-                  <ChevronDownIcon className="rotate-180" />
-                </Button>
-              </DropdownTrigger>
-
-              <DropdownMenu
-                aria-label="Chapter List"
-                className="max-h-[300px] overflow-scroll"
-                defaultSelectedKeys={[chapterData.id]}
-                disabledKeys={[chapterData.id]}
-                selectionMode="single"
-                variant="faded"
-              >
-                {chapterAggregate.map((chAgg, index) => (
-                  <DropdownSection
-                    key={chAgg.vol}
-                    showDivider={index !== chapterAggregate.length - 1}
-                    title={
-                      chAgg.vol !== "none" ? `Vol. ${chAgg.vol}` : "No Volume"
-                    }
-                  >
-                    {chAgg.chapters.map((chapter) => (
-                      <DropdownItem
-                        key={chapter.id}
-                        href={`/chapter/${chapter.id}`}
-                      >
-                        {chapter.chapter !== "none"
-                          ? `Ch. ${chapter.chapter}`
-                          : "Oneshot"}
-                      </DropdownItem>
-                    ))}
-                  </DropdownSection>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-
-          {/* // nextChapter btn */}
-          <Button
-            isIconOnly
-            className="rounded-md"
-            as={Link}
-            prefetch={false}
-            href={nextChapter ? `/chapter/${nextChapter}` : ``}
-            isDisabled={!nextChapter}
-            radius="sm"
-            size="md"
-          >
-            <MoveRight />
-          </Button>
-
+        <CardBody className="flex flex-col gap-1 rounded-md p-1 w-full">
           {/* // cmt btn */}
           <Button
             isIconOnly
@@ -261,18 +160,45 @@ export const ChapterNav = ({
                   </Button>
                 </Tooltip>
                 <div className="w-full flex justify-start gap-2">
-                  <Button
-                    className="font-medium text-small text-default-500"
-                    startContent={<MessagesSquare size={18} />}
+                  <Select
+                    // className="max-w-xs"
                     size="sm"
-                    variant="flat"
-                    as={Link}
-                    prefetch={false}
-                    href={`${siteConfig.links.github}/discussions/categories/chapter`}
-                    target="_blank"
+                    radius="sm"
+                    defaultSelectedKeys={[chapterData.id]}
+                    disabledKeys={[chapterData.id]}
+                    selectionMode="single"
+                    aria-label="Chapter"
+                    isVirtualized
+                    classNames={{
+                      popoverContent: "rounded-lg",
+                    }}
+                    hideEmptyContent
+                    isDisabled={CalculateTotalChapters(chapterAggregate) < 2}
+                    maxListboxHeight={300}
                   >
-                    Github Discussions
-                  </Button>
+                    {chapterAggregate.map((chAgg, index) => (
+                      <SelectSection
+                        key={chAgg.vol}
+                        title={
+                          chAgg.vol !== "none"
+                            ? `Vol. ${chAgg.vol}`
+                            : "No Volume"
+                        }
+                        // showDivider={index !== chapterAggregate.length - 1}
+                      >
+                        {chAgg.chapters.map((chapter) => (
+                          <SelectItem
+                            key={chapter.id}
+                            href={`/chapter/${chapter.id}`}
+                          >
+                            {chapter.chapter !== "none"
+                              ? `Ch. ${chapter.chapter}`
+                              : "Oneshot"}
+                          </SelectItem>
+                        ))}
+                      </SelectSection>
+                    ))}
+                  </Select>
                 </div>
                 <div className="flex gap-1 items-center">
                   <Tooltip content="Chương trước">
@@ -286,7 +212,7 @@ export const ChapterNav = ({
                       href={prevChapter ? `/chapter/${prevChapter}` : ``}
                       isDisabled={!prevChapter}
                     >
-                      <ArrowLeft />
+                      <ArrowLeft size={20} />
                     </Button>
                   </Tooltip>
                   <Tooltip content="Chương sau">
@@ -300,7 +226,7 @@ export const ChapterNav = ({
                       href={nextChapter ? `/chapter/${nextChapter}` : ``}
                       isDisabled={!nextChapter}
                     >
-                      <ArrowRight />
+                      <ArrowRight size={20} />
                     </Button>
                   </Tooltip>
                 </div>
@@ -332,6 +258,42 @@ export const ChapterNav = ({
           )}
         </DrawerContent>
       </Drawer>
+
+      <div className="flex flex-row gap-2 -mb-4">
+        {!!prevChapter && (
+          <Button
+            as={Link}
+            fullWidth
+            href={prevChapter}
+            className={cn("uppercase font-semibold")}
+            color="danger"
+            radius="none"
+            startContent={<ArrowLeft />}
+          >
+            Chương trước
+          </Button>
+        )}
+
+        {!!nextChapter && (
+          <Button
+            as={Link}
+            fullWidth
+            href={nextChapter}
+            className={cn("uppercase font-semibold")}
+            color="danger"
+            radius="none"
+            endContent={<ArrowRight />}
+          >
+            Chương sau
+          </Button>
+        )}
+      </div>
     </>
   );
 };
+
+function CalculateTotalChapters(chapterAggregate: ChapterAggregate[]) {
+  return chapterAggregate.reduce((acc, curr) => {
+    return acc + curr.chapters.length;
+  }, 0);
+}

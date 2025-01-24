@@ -11,6 +11,7 @@ interface ChapterInfoProps {
 }
 
 export const ChapterInfo = ({ chapterData }: ChapterInfoProps) => {
+  const chapterTitle = ChapterTitle(chapterData);
   return (
     <div className="flex flex-col items-start">
       <Link
@@ -20,7 +21,8 @@ export const ChapterInfo = ({ chapterData }: ChapterInfoProps) => {
       >
         {chapterData?.manga?.title}
       </Link>
-      <p>{chapterData?.title}</p>
+
+      {!!chapterTitle && <p>{chapterTitle}</p>}
       <NoPrefetchLink
         href={chapterData?.group.id ? `/groups/${chapterData?.group.id}` : `#`}
         className="flex flex-row gap-1 hover:underline"
@@ -41,3 +43,12 @@ export const ChapterInfo = ({ chapterData }: ChapterInfoProps) => {
     </div>
   );
 };
+
+function ChapterTitle(chapterData: Chapter) {
+  if (!chapterData.chapter) {
+    return undefined;
+  }
+  return chapterData.title
+    ? `Ch. ${chapterData.chapter} - ${chapterData.title}`
+    : `Ch. ${chapterData.chapter}`;
+}

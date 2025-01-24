@@ -13,6 +13,7 @@ import { ChevronsUp } from "lucide-react";
 import useScrollOffset from "../hook/useScrollOffset";
 import { useScrollDirection } from "../hook/useScrollDirection";
 import { cn } from "@/lib/utils";
+import { ChapterNavNew } from "./ChapterNavNew";
 
 interface ChapterViewProps {
   chapterID: string;
@@ -105,8 +106,8 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
         />
       )}
 
-      {chapterAggregate && (
-        <ChapterNav
+      {!!chapterAggregate && (
+        <ChapterNavNew
           chapterAggregate={chapterAggregate}
           chapterData={chapterData}
           fitMode={fitMode}
