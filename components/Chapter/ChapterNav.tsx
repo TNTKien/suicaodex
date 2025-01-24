@@ -15,6 +15,8 @@ import {
   DropdownMenu,
   DropdownSection,
   DropdownTrigger,
+  Select,
+  SelectItem,
   Tooltip,
   useDisclosure,
 } from "@heroui/react";
@@ -40,6 +42,7 @@ import { siteConfig } from "@/config/site";
 import { useRouter } from "next/navigation";
 import useKeyDown from "../hook/useKeyDown";
 import { toast } from "react-toastify";
+import { ChevronDownIcon } from "../icons";
 
 interface ChapterNavProps {
   chapterData: Chapter;
@@ -87,7 +90,7 @@ export const ChapterNav = ({
   //     ? `Vol. ${chapterAggregate[currentVolIndex].vol}`
   //     : "No Volume";
   const chapter_label =
-    chapterData.chapter !== null ? `Chương ${chapterData.chapter}` : "Oneshot";
+    chapterData.chapter !== null ? `Ch. ${chapterData.chapter}` : "Oneshot";
   const scrollDirection = useScrollDirection();
   const { isAtBottom, isAtTop } = useScrollOffset();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -118,8 +121,9 @@ export const ChapterNav = ({
         )}
         radius="none"
         shadow="sm"
+        fullWidth
       >
-        <CardBody className="flex flex-row gap-1 rounded-md p-1">
+        <CardBody className="flex flex-row gap-1 rounded-md p-1 w-full">
           {/* // change fit mode btn */}
           <Button
             isIconOnly
@@ -151,7 +155,6 @@ export const ChapterNav = ({
               className="rounded-l-md rounded-r-none justify-start line-clamp-1 px-3"
               size="md"
             >
-              {/* {vol_label} - {chapter_label} */}
               {chapter_label}
             </Button>
             <Dropdown isKeyboardDismissDisabled radius="sm" type="listbox">
@@ -161,7 +164,7 @@ export const ChapterNav = ({
                   className="rounded-l-none rounded-r-md"
                   size="md"
                 >
-                  <ChevronUp />
+                  <ChevronDownIcon className="rotate-180" />
                 </Button>
               </DropdownTrigger>
 
@@ -220,6 +223,16 @@ export const ChapterNav = ({
             onPress={onOpen}
           >
             <MessageSquare />
+          </Button>
+
+          <Button
+            isIconOnly
+            size="md"
+            radius="sm"
+            isDisabled={isAtTop}
+            onPress={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <ChevronsUp size={26} />
           </Button>
         </CardBody>
       </Card>

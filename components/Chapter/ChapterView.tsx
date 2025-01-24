@@ -114,7 +114,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
         />
       )}
 
-      <Card
+      {/* <Card
         radius="sm"
         shadow="none"
         className={cn(
@@ -138,7 +138,7 @@ const ChapterView = ({ chapterID }: ChapterViewProps) => {
             <ChevronsUp size={26} />
           </Button>
         </CardBody>
-      </Card>
+      </Card> */}
     </div>
   );
 };
