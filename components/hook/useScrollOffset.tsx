@@ -6,12 +6,12 @@ const useScrollOffset = () => {
   const [isAtBottom, setIsAtBottom] = useState(false);
 
   const handleScroll = () => {
-    const offset = window.pageYOffset;
+    const offset = window.scrollY || window.pageYOffset;
 
     setScrollOffset(offset);
     setIsAtTop(offset === 0);
     setIsAtBottom(
-      window.innerHeight + offset >= document.documentElement.scrollHeight,
+      window.innerHeight + offset >= document.documentElement.scrollHeight
     );
   };
 

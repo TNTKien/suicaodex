@@ -5,11 +5,11 @@ export const useScrollDirection = () => {
 
   useEffect(() => {
     const threshold = 0;
-    let lastScrollY = window.pageYOffset;
+    let lastScrollY = window.screenY || window.pageYOffset;
     let ticking = false;
 
     const updateScrollDir = () => {
-      const scrollY = window.pageYOffset;
+      const scrollY = window.screenY || window.pageYOffset;
 
       if (Math.abs(scrollY - lastScrollY) < threshold) {
         ticking = false;

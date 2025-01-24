@@ -76,6 +76,7 @@ export const LongStrip = ({
             loading="eager"
             radius="none"
             fallbackSrc="/spin.svg"
+            fetchPriority="high"
             // disableSkeleton
             //priority
             //quality={100}
