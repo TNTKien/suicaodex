@@ -168,7 +168,7 @@ export const ChapterNavNew = ({
                     disabledKeys={[chapterData.id]}
                     selectionMode="single"
                     aria-label="Chapter"
-                    isVirtualized
+                    // isVirtualized
                     classNames={{
                       popoverContent: "rounded-lg",
                     }}
