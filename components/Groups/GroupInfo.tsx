@@ -46,7 +46,7 @@ const GroupInfo = ({ groupID, page, tab }: GroupInfoProps) => {
   }
 
   return (
-    (<div className="md:px-8">
+    <div className="md:px-8">
       <div className="absolute h-[12rem] z-0 w-auto left-0 right-0 top-[4rem] block">
         <div
           className={cn(
@@ -219,7 +219,7 @@ const GroupInfo = ({ groupID, page, tab }: GroupInfoProps) => {
           </Tab>
         </Tabs>
       </div>
-    </div>)
+    </div>
   );
 };
 
