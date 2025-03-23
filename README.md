@@ -1,3 +1,5 @@
+> This repo may be deprecated and no longer maintained in the future, pls see [better-suicaodex](https://github.com/TNTKien/better-suicaodex) instead.
+
 # A Website using [MangaDex API](https://api.mangadex.org/docs/).
 
 Please note that all data belongs to MangaDex, this project is for entertainment purposes only.
