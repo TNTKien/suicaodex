@@ -394,20 +394,31 @@ export async function getTopRatedMangas(): Promise<
   const mangas = top.data.map((item: any) => MangaParser(item));
   const ids = mangas.map((m: Manga) => m.id);
 
-  const { data: rate } = await axiosInstance.get(`/statistics/manga?`, {
-    params: {
-      manga: ids,
-    },
-  });
+  try {
+    const { data: rate } = await axiosInstance.get(`/statistics/manga?`, {
+      params: {
+        manga: ids,
+      },
+    });
 
-  const result = mangas.map((m: Manga) => {
-    return {
-      ...m,
-      rating: rate.statistics[m.id].rating.bayesian.toFixed(2),
-    };
-  });
+    const result = mangas.map((m: Manga) => {
+      return {
+        ...m,
+        rating: rate.statistics[m.id].rating.bayesian.toFixed(2),
+      };
+    });
 
-  return result;
+    return result;
+  } catch (error) {
+    console.error("Error fetching manga ratings:", error);
+    // Return mangas with zero ratings if there's an error
+    return mangas.map((m: Manga) => {
+      return {
+        ...m,
+        rating: "0",
+      };
+    });
+  }
 }
 
 export async function getStaffPickMangas(): Promise<Manga[]> {
@@ -594,9 +605,32 @@ export function MangaStatsParser(data: any, id: string): MangaStats {
 }
 
 export async function getMangaRating(mangaID: string): Promise<MangaStats> {
-  const { data } = await axiosInstance.get(`/statistics/manga/${mangaID}`);
-
-  return MangaStatsParser(data, mangaID);
+  try {
+    const { data } = await axiosInstance.get(`/statistics/manga/${mangaID}`);
+    return MangaStatsParser(data, mangaID);
+  } catch (error) {
+    console.error("Error fetching manga rating:", error);
+    return {
+      rating: {
+        bayesian: 0,
+        distribution: {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0,
+          "6": 0,
+          "7": 0,
+          "8": 0,
+          "9": 0,
+          "10": 0,
+        },
+        max: 0,
+      },
+      follows: 0,
+      comments: 0,
+    };
+  }
 }
 
 export async function getTopFollowed(): Promise<
@@ -617,20 +651,31 @@ export async function getTopFollowed(): Promise<
   const mangas = top.data.map((item: any) => MangaParser(item));
   const ids = mangas.map((m: Manga) => m.id);
 
-  const { data: rate } = await axiosInstance.get(`/statistics/manga?`, {
-    params: {
-      manga: ids,
-    },
-  });
+  try {
+    const { data: rate } = await axiosInstance.get(`/statistics/manga?`, {
+      params: {
+        manga: ids,
+      },
+    });
 
-  const result = mangas.map((m: Manga) => {
-    return {
-      ...m,
-      follow: rate.statistics[m.id].follows,
-    };
-  });
+    const result = mangas.map((m: Manga) => {
+      return {
+        ...m,
+        follow: rate.statistics[m.id].follows,
+      };
+    });
 
-  return result;
+    return result;
+  } catch (error) {
+    console.error("Error fetching manga follows:", error);
+    // Return mangas with zero follows if there's an error
+    return mangas.map((m: Manga) => {
+      return {
+        ...m,
+        follow: 0,
+      };
+    });
+  }
 }
 
 export async function SearchAuthor(author: string): Promise<Author[]> {
