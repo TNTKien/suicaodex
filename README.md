@@ -1,4 +1,4 @@
-> This repo is deprecated and no longer maintained, pls see [better-suicaodex](https://github.com/TNTKien/better-suicaodex) instead.
+> # This repo is deprecated and no longer maintained, pls see [better-suicaodex](https://github.com/TNTKien/better-suicaodex) instead.
 
 # A Website using [MangaDex API](https://api.mangadex.org/docs/).
 
